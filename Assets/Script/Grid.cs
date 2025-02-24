@@ -53,39 +53,6 @@ public class Grid
                 break;
         }
     }
-
-    /*public Grid CreateGrid(string type,int stat) {
-        switch (type) {
-            case "B":
-                this.type = GridType.BOTTLE;
-                this.stat = stat;
-                return this;
-            case "X":
-                this.type = GridType.BARRIER;
-                return this;
-            case "D":
-                this.type = GridType.DOOR;
-                this.stat = stat;
-                return this;
-            case "M":
-                this.type = GridType.MONSTER;
-                GridMonster monster = new GridMonster(stat);
-                return monster;
-            case "N":
-                this.type = GridType.NPC;
-                return this;
-            case "G":
-                this.type = GridType.GEM;
-                this.stat = stat;
-                return this;
-            case "S":
-                this.type = GridType.SHOP;
-                return this;
-            default:
-                this.type = GridType.BARRIER;
-                return this;
-        }
-    }*/
     public virtual Grid AsEnter() {
         return this;
     }
