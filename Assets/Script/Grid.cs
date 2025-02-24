@@ -17,6 +17,14 @@ public class Grid
 
     public int stat;
     public GridType type { get; set; }
+    public Grid(int stat,GridType type) {
+        this.stat = stat;
+        this.type = type;
+    }
+
+    public Grid() {
+
+    }
 
     //M怪物 X封锁 D门 G宝石 B血瓶 K钥匙 N NPC S商人
     public Grid(string type,int stat) {
@@ -30,9 +38,6 @@ public class Grid
                 break;
             case "D":
                 this.type = GridType.DOOR;
-                break;
-            case "M":
-                this.type = GridType.MONSTER;
                 break;
             case "N":
                 this.type = GridType.NPC;
@@ -48,6 +53,39 @@ public class Grid
                 break;
         }
     }
+
+    /*public Grid CreateGrid(string type,int stat) {
+        switch (type) {
+            case "B":
+                this.type = GridType.BOTTLE;
+                this.stat = stat;
+                return this;
+            case "X":
+                this.type = GridType.BARRIER;
+                return this;
+            case "D":
+                this.type = GridType.DOOR;
+                this.stat = stat;
+                return this;
+            case "M":
+                this.type = GridType.MONSTER;
+                GridMonster monster = new GridMonster(stat);
+                return monster;
+            case "N":
+                this.type = GridType.NPC;
+                return this;
+            case "G":
+                this.type = GridType.GEM;
+                this.stat = stat;
+                return this;
+            case "S":
+                this.type = GridType.SHOP;
+                return this;
+            default:
+                this.type = GridType.BARRIER;
+                return this;
+        }
+    }*/
     public virtual Grid AsEnter() {
         return this;
     }
