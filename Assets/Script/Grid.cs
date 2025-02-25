@@ -17,6 +17,7 @@ public class Grid
 
     public int stat;
     public GridType type { get; set; }
+    public string GridTypeToWord;
     public Grid(int stat,GridType type) {
         this.stat = stat;
         this.type = type;
@@ -28,6 +29,7 @@ public class Grid
 
     //M怪物 X封锁 D门 G宝石 B血瓶 K钥匙 N NPC S商人
     public Grid(string type,int stat) {
+        GridTypeToWord = type;
         this.stat = stat;
         switch (type) {
             case "B":

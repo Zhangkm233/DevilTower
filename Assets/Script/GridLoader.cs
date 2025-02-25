@@ -11,6 +11,7 @@ public class GridLoader : MonoBehaviour
     void Start() {
         LoadMapFromTxt();
         printGrid();
+        this.gameObject.GetComponent<GridDrawer>().DrawThreeGrid();
     }
     //M怪物 X封锁 D门 G宝石 B血瓶 K钥匙 N NPC S商人
     void LoadMapFromTxt() { 
