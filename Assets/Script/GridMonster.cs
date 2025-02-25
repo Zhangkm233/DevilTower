@@ -28,6 +28,7 @@ public class GridMonster : Grid
         BOSS,
     }
     public GridMonster(int stat){
+        this.stat = stat;
         this.type = GridType.MONSTER;
         txtFilePath = "Assets/Resources/monster" + GameData.layer + ".txt";
         string[] lines = File.ReadAllLines(txtFilePath);

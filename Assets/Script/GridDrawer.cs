@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GridDrawer : MonoBehaviour
 {
+    public Grid[,] map = new Grid[GameData.gridWidth,3];
     public Sprite gridSprite;
     void Start() {
         DrawThreeGrid();
@@ -16,5 +17,9 @@ public class GridDrawer : MonoBehaviour
                 grid.GetComponent<SpriteRenderer>().sprite = gridSprite;
             }
         }
+    }
+
+    public void FillGrid() {
+
     }
 }

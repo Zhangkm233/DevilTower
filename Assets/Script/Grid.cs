@@ -11,7 +11,7 @@ public class Grid
         NPC = 4,//可能会有对话或者交易
         EVENT = 5,//事件
         SHOP = 6,//商店
-
+        KEY = 7,//钥匙
         BARRIER = 999,//屏障，不让走
     };
 
@@ -47,6 +47,9 @@ public class Grid
                 break;
             case "S":
                 this.type = GridType.SHOP;
+                break;
+            case "K":
+                this.type = GridType.KEY;
                 break;
             default:
                 this.type = GridType.BARRIER;
