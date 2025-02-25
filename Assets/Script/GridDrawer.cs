@@ -14,8 +14,12 @@ public class GridDrawer : MonoBehaviour
                 GameObject grid = Instantiate(gridPrefab);
                 grid.name = "Grid" + i + j;
                 grid.transform.position = new Vector3((i*2)-5,(j*2)-1,0);
-                TMP_Text gridtext = grid.GetComponentInChildren<Canvas>().GetComponentInChildren<TMP_Text>();
-                gridtext.text = GameData.map[i,GameData.gridHeight-j-1].GridTypeToWord;
+                Canvas gridCanvas = grid.GetComponentInChildren<Canvas>();
+
+                TMP_Text gridtext = gridCanvas.transform.GetChild(0).GetComponent<TMP_Text>();
+                gridtext.text = GameData.map[i,GameData.gridHeight - j - 1].GridTypeToWord;
+                gridtext = gridCanvas.transform.GetChild(1).GetComponent<TMP_Text>();
+                gridtext.text = GameData.map[i,GameData.gridHeight - j - 1].stat.ToString();
             }
         }
     }

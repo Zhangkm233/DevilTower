@@ -20,12 +20,12 @@ public class GridMonster : Grid
         corrpution 腐蚀X 在开战前使玩家的血量降低X*10%
         boss 头目 被击败后出现可以离开区域的传送门
          */
-        LOSTMIND,
-        CRACK,
-        FIRMNESS,
-        STALK,
-        CORRPUTION,
-        BOSS,
+        LOSTMIND = 1,
+        CRACK = 2,
+        FIRMNESS = 3,
+        STALK = 4,
+        CORRPUTION = 5,
+        BOSS = 6,
     }
     public GridMonster(int stat){
         GridTypeToWord = "M";
@@ -41,15 +41,22 @@ public class GridMonster : Grid
         gold = int.Parse(monsterStat[4]);
 
         if (monsterStat.Length > 5) {
-            abilityType = new ability[monsterStat.Length - 5];
+            abilityType = new ability[6];
             for (int i = 5;i < monsterStat.Length;i++) {
                 abilityType[i - 5] = (ability)System.Enum.Parse(typeof(ability),monsterStat[i]);
             }
         }
 
-        Debug.Log("name:"+ name + " atk:" + atk + " def:" + def + " hp:" + hp + " gold:" + gold);
+        
+    }
+
+    public void introduceSelf() {
+        Debug.Log("name:" + name + " atk:" + atk + " def:" + def + " hp:" + hp + " gold:" + gold);
         if (abilityType != null) {
             for (int i = 0;i < abilityType.Length;i++) {
+                if (abilityType[i] == 0) {
+                    return;
+                }
                 Debug.Log("ability:" + abilityType[i]);
             }
         }
