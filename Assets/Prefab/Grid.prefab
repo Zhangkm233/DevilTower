@@ -249,6 +249,8 @@ GameObject:
   m_Component:
   - component: {fileID: 803809289369055880}
   - component: {fileID: 7875518842741390604}
+  - component: {fileID: 9082982204871815858}
+  - component: {fileID: 4143470630366157282}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -327,6 +329,40 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9082982204871815858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7707907723936339345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c880fa7a7ddcea409636d6b3b01c735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gridType: 0
+--- !u!65 &4143470630366157282
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7707907723936339345}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8234475050718573158
 GameObject:
   m_ObjectHideFlags: 0

@@ -351,6 +351,7 @@ GameObject:
   - component: {fileID: 1211369219}
   - component: {fileID: 1211369218}
   - component: {fileID: 1211369220}
+  - component: {fileID: 1211369221}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -402,6 +403,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridPrefab: {fileID: 7707907723936339345, guid: 4cd8a4279ba677543a02003ee0e33cb5, type: 3}
   gridSprite: {fileID: 21300000, guid: 3e68839b574db8c47acec5392934065e, type: 3}
+--- !u!114 &1211369221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211369217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46cded4ee9b93a45903ded57e64407b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 519420031}
+  objectClick: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

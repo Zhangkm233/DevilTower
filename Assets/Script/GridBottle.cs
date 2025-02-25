@@ -11,9 +11,9 @@ public class GridBottle : Grid
     
 
     public enum BottleSizeType{
-        SMALL,
-        MIDDLE,
-        BIG
+        SMALL = 1,
+        MIDDLE = 2,
+        BIG = 3
     }
 
     public BottleSizeType bottleSize;

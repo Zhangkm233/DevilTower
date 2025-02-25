@@ -32,29 +32,16 @@ public class Grid
         GridTypeToWord = type;
         this.stat = stat;
         switch (type) {
-            case "B":
-                this.type = GridType.BOTTLE;
-                break;
             case "X":
                 this.type = GridType.BARRIER;
-                break;
-            case "D":
-                this.type = GridType.DOOR;
                 break;
             case "N":
                 this.type = GridType.NPC;
                 break;
-            case "G":
-                this.type = GridType.GEM;
-                break;
             case "S":
                 this.type = GridType.SHOP;
                 break;
-            case "K":
-                this.type = GridType.KEY;
-                break;
             default:
-                this.type = GridType.BARRIER;
                 break;
         }
     }

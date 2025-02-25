@@ -47,10 +47,20 @@ public class GridLoader : MonoBehaviour
             case "M":
                 g = new GridMonster(gridStat);
                 break;
+            case "G":
+                g = new GridGem(gridStat);
+                break;
+            case "D":
+                g = new GridDoor(gridStat);
+                break;
+            case "K":
+                g = new GridKey(gridStat);
+                break;
             default:
                 g = new Grid(gridType,gridStat);
                 break;
         }
+        g.GridTypeToWord = gridType;
         GameData.map[x,y] = g;
     }
 }
