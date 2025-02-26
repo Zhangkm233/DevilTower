@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     void MapClickEvent() {
         GridTileManager gridTileManager = objectClick.GetComponent<GridTileManager>();
         Grid GridInMap = GameData.map[gridTileManager.mapX,gridTileManager.mapY];
+        if (gridTileManager.mapY != GameData.gridHeight-1) return;
         //遭遇怪物
         if (gridTileManager.gridType == Grid.GridType.MONSTER) {
             int battleDamage = caculateDamage((GridMonster)GridInMap);
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
             }
             Debug.Log("战斗伤害：" + battleDamage);
             GameData.playerHp -= battleDamage;
+            clearGridInMap(gridTileManager);
             return;
         }
         //捡钥匙
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
                     Debug.Log("捡到了黄金钥匙"); 
                     break;
             }
+            clearGridInMap(gridTileManager);
             return;
         }
         //捡宝石
@@ -65,13 +68,14 @@ public class GameManager : MonoBehaviour
                 GameData.playerDef += ((GridGem)gridTileManager.mapGrid).AddSum;
                 Debug.Log("捡到了防御宝石，防御力+" + ((GridGem)gridTileManager.mapGrid).AddSum);
             }
+            clearGridInMap(gridTileManager);
             return;
         }
         //捡血瓶
         if (gridTileManager.gridType == Grid.GridType.BOTTLE) {
             GameData.playerHp += ((GridBottle)gridTileManager.mapGrid).healingPoints;
             Debug.Log("捡到了血瓶，血量+" + ((GridBottle)gridTileManager.mapGrid).healingPoints);
-            //clearGridInMap(gridTileManager);
+            clearGridInMap(gridTileManager);
 
             //有bug，过会改
             return;
@@ -83,6 +87,7 @@ public class GameManager : MonoBehaviour
                 if(GameData.key1 > 0) {
                     GameData.key1--;
                     Debug.Log("打开了" + door.doorStat + "门");
+                    clearGridInMap(gridTileManager);
                 } else {
                     Debug.Log("青铜钥匙不足！");
                 }
@@ -91,6 +96,7 @@ public class GameManager : MonoBehaviour
                 if (GameData.key2 > 0) {
                     GameData.key2--;
                     Debug.Log("打开了" + door.doorStat + "门");
+                    clearGridInMap(gridTileManager);
                 } else {
                     Debug.Log("白银钥匙不足！");
                 }
@@ -99,21 +105,32 @@ public class GameManager : MonoBehaviour
                 if (GameData.key3 > 0) {
                     GameData.key3--;
                     Debug.Log("打开了" + door.doorStat + "门");
+                    clearGridInMap(gridTileManager);
                 } else {
                     Debug.Log("黄金钥匙不足！");
                 }
             }
+        }
+        if (gridTileManager.gridType == Grid.GridType.NPC) {
+            clearGridInMap(gridTileManager);
+        }
+        if (gridTileManager.gridType == Grid.GridType.SHOP) {
+            clearGridInMap(gridTileManager);
         }
     }
     public void clearGridInMap(GridTileManager gridTileManager) {
         clearGridInMap(gridTileManager.mapX,gridTileManager.mapY);
     }
     public void clearGridInMap(int mapX,int mapY) {
-        for (int i = mapY;i < GameData.gridHeight - 2;i++) {
-            print("更改" + mapX + "," + i);
-            GameData.map[mapX,i] = GameData.map[mapX,i+1];
+        int i;
+        for (i = mapY; i > 0; i--) {
+            if (GameData.map[mapX,i - 1] == null) break;
+            GameData.map[mapX,i] = GameData.map[mapX,i-1];
         }
-        GameData.map[mapX,GameData.gridHeight - 1] = null;
+        GameData.map[mapX,i] = null;
+        updateEachGrid();
+    }
+    public void updateEachGrid() {
         GameObject[] grids = GameObject.FindGameObjectsWithTag("gridGameObject");
         foreach (GameObject grid in grids) {
             grid.GetComponent<GridTileManager>().UpdateData();
