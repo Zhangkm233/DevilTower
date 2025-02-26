@@ -9,9 +9,14 @@ public class GameManager : MonoBehaviour
     void Update() {
         objectClick = ObjectClick();
         if (Input.GetMouseButtonDown(0)) {
-            if (objectClick.GetComponent<GridTileManager>().gridType == Grid.GridType.MONSTER) {
+            GridTileManager gridTileManager = objectClick.GetComponent<GridTileManager>();
+
+            if (gridTileManager.gridType == Grid.GridType.MONSTER) {
                 GridMonster monster = (GridMonster)GameData.map[objectClick.GetComponent<GridTileManager>().mapX,objectClick.GetComponent<GridTileManager>().mapY];
                 Debug.Log("’Ω∂∑…À∫¶£∫"+caculateDamage(monster));
+            }
+            if (gridTileManager.gridType == Grid.GridType.KEY || gridTileManager.gridType == Grid.GridType.DOOR) {
+
             }
         }
     }
