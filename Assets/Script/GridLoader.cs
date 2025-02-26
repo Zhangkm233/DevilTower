@@ -56,6 +56,9 @@ public class GridLoader : MonoBehaviour
             case "K":
                 g = new GridKey(gridStat);
                 break;
+            case "B":
+                g = new GridBottle(gridStat);
+                break;
             default:
                 g = new Grid(gridType,gridStat);
                 break;

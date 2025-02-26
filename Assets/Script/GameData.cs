@@ -4,8 +4,6 @@ using UnityEngine;
 public static class GameData
 {
     public static int layer = 1;
-    public static int hp = 0;
-    public static int def = 0;
     public static int key1 = 0;
     public static int key2 = 0;
     public static int key3 = 0;

@@ -4,31 +4,133 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    //用于显示gamedata的变量
+    public int gamelayer;
+    public int gamekey1;
+    public int gamekey2;
+    public int gamekey3;
+    public int gameplayerHp;
+    public int gameplayerAtk;
+    public int gameplayerDef;
+
     public Camera mainCamera;
     public GameObject objectClick;
     void Update() {
         objectClick = ObjectClick();
         if (Input.GetMouseButtonDown(0)) {
-            GridTileManager gridTileManager = objectClick.GetComponent<GridTileManager>();
+            MapClickEvent();
+        }
+        UpdateGameDataToPublic();
+    }
 
-            if (gridTileManager.gridType == Grid.GridType.MONSTER) {
-                GridMonster monster = (GridMonster)GameData.map[objectClick.GetComponent<GridTileManager>().mapX,objectClick.GetComponent<GridTileManager>().mapY];
-                Debug.Log("战斗伤害："+caculateDamage(monster));
+    void MapClickEvent() {
+        GridTileManager gridTileManager = objectClick.GetComponent<GridTileManager>();
+        Grid GridInMap = GameData.map[gridTileManager.mapX,gridTileManager.mapY];
+        //遭遇怪物
+        if (gridTileManager.gridType == Grid.GridType.MONSTER) {
+            int battleDamage = caculateDamage((GridMonster)GridInMap);
+            if (battleDamage == -1) {
+                Debug.Log("战斗伤害：???");
+                return;
             }
-            if (gridTileManager.gridType == Grid.GridType.KEY || gridTileManager.gridType == Grid.GridType.DOOR) {
+            Debug.Log("战斗伤害：" + battleDamage);
+            GameData.playerHp -= battleDamage;
+            return;
+        }
+        //捡钥匙
+        if (gridTileManager.gridType == Grid.GridType.KEY) {
+            switch (gridTileManager.mapGrid.stat) {
+                case 1: 
+                    GameData.key1++;
+                    Debug.Log("捡到了青铜钥匙"); 
+                    break;
+                case 2: 
+                    GameData.key2++;
+                    Debug.Log("捡到了白银钥匙");
+                    break;
+                case 3: 
+                    GameData.key3++;
+                    Debug.Log("捡到了黄金钥匙"); 
+                    break;
+            }
+            return;
+        }
+        //捡宝石
+        if (gridTileManager.gridType == Grid.GridType.GEM) {
+            if(((GridGem)gridTileManager.mapGrid).gemType == GridGem.GemType.ATK) {
+                GameData.playerAtk += ((GridGem)gridTileManager.mapGrid).AddSum;
+                Debug.Log("捡到了攻击宝石，攻击力+" + ((GridGem)gridTileManager.mapGrid).AddSum);
+            }
+            if (((GridGem)gridTileManager.mapGrid).gemType == GridGem.GemType.DEF) {
+                GameData.playerDef += ((GridGem)gridTileManager.mapGrid).AddSum;
+                Debug.Log("捡到了防御宝石，防御力+" + ((GridGem)gridTileManager.mapGrid).AddSum);
+            }
+            return;
+        }
+        //捡血瓶
+        if (gridTileManager.gridType == Grid.GridType.BOTTLE) {
+            GameData.playerHp += ((GridBottle)gridTileManager.mapGrid).healingPoints;
+            Debug.Log("捡到了血瓶，血量+" + ((GridBottle)gridTileManager.mapGrid).healingPoints);
+            //clearGridInMap(gridTileManager);
 
+            //有bug，过会改
+            return;
+        }
+        //开门
+        if (gridTileManager.gridType == Grid.GridType.DOOR) {
+            GridDoor door = ((GridDoor)gridTileManager.mapGrid);
+            if (door.doorStat == GridDoor.DoorType.BRONZE) {
+                if(GameData.key1 > 0) {
+                    GameData.key1--;
+                    Debug.Log("打开了" + door.doorStat + "门");
+                } else {
+                    Debug.Log("青铜钥匙不足！");
+                }
             }
+            if (door.doorStat == GridDoor.DoorType.SILVER) {
+                if (GameData.key2 > 0) {
+                    GameData.key2--;
+                    Debug.Log("打开了" + door.doorStat + "门");
+                } else {
+                    Debug.Log("白银钥匙不足！");
+                }
+            }
+            if (door.doorStat == GridDoor.DoorType.GOLD) {
+                if (GameData.key3 > 0) {
+                    GameData.key3--;
+                    Debug.Log("打开了" + door.doorStat + "门");
+                } else {
+                    Debug.Log("黄金钥匙不足！");
+                }
+            }
+        }
+    }
+    public void clearGridInMap(GridTileManager gridTileManager) {
+        clearGridInMap(gridTileManager.mapX,gridTileManager.mapY);
+    }
+    public void clearGridInMap(int mapX,int mapY) {
+        for (int i = mapY;i < GameData.gridHeight - 2;i++) {
+            print("更改" + mapX + "," + i);
+            GameData.map[mapX,i] = GameData.map[mapX,i+1];
+        }
+        GameData.map[mapX,GameData.gridHeight - 1] = null;
+        GameObject[] grids = GameObject.FindGameObjectsWithTag("gridGameObject");
+        foreach (GameObject grid in grids) {
+            grid.GetComponent<GridTileManager>().UpdateData();
         }
     }
     public int caculateDamage(GridMonster monster) {
         if(GameData.playerAtk - (monster.def + monster.hp) >= 0 ) {
+            Debug.Log("攻杀");
             //如果攻击力大于怪物防御力 + 生命值，那么是攻杀
             if (GameData.playerDef > monster.atk) {
+                Debug.Log("防杀");
                 return 0;//如果同时玩家防御力大于怪物攻击力，那么也是防杀
             }
             return 0;
         }
         if(GameData.playerDef >= monster.atk && GameData.playerAtk > monster.def) {
+            Debug.Log("防杀");
             return 0;//如果防御大于怪物攻击力，且玩家攻击力大于怪物防御力，那么是防杀
         }
         if (GameData.playerAtk - monster.def <= 0) {
@@ -38,6 +140,15 @@ public class GameManager : MonoBehaviour
             return (monster.hp / (GameData.playerAtk - monster.def)) * (monster.atk - GameData.playerDef);
         }//正常显示伤害
         return -2;//errrrror
+    }
+    public void UpdateGameDataToPublic() {
+        gamelayer = GameData.layer;
+        gamekey1 = GameData.key1;
+        gamekey2 = GameData.key2;
+        gamekey3 = GameData.key3;
+        gameplayerAtk = GameData.playerAtk;
+        gameplayerDef = GameData.playerDef;
+        gameplayerHp = GameData.playerHp;
     }
 
     public GameObject ObjectClick() {

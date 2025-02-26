@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 4143470630366157282}
   m_Layer: 0
   m_Name: Grid
-  m_TagString: Untagged
+  m_TagString: Grid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -342,6 +342,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridType: 0
+  mapX: 0
+  mapY: 0
 --- !u!65 &4143470630366157282
 BoxCollider:
   m_ObjectHideFlags: 0

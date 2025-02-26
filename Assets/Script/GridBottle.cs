@@ -8,8 +8,6 @@ public class GridBottle : Grid
         { 200, 400, 600, 1000 }
     };
 
-    
-
     public enum BottleSizeType{
         SMALL = 1,
         MIDDLE = 2,
@@ -19,13 +17,23 @@ public class GridBottle : Grid
     public BottleSizeType bottleSize;
     public int healingPoints;
 
-    public GridBottle(int stat, int layer){
+    public GridBottle(int stat) {
+        this.type = GridType.BOTTLE;
+        this.stat = stat;
         bottleSize = (BottleSizeType)stat;
-        healingPoints = healingPointsTable[(int)bottleSize, layer];
+        healingPoints = healingPointsTable[(int)bottleSize - 1,GameData.layer - 1];
+    }
+    public GridBottle(int stat, int layer) {
+        this.type = GridType.BOTTLE;
+        this.stat = stat;
+        bottleSize = (BottleSizeType)stat;
+        healingPoints = healingPointsTable[(int)bottleSize - 1, layer - 1];
     }
 
-    public GridBottle(BottleSizeType size, int layer){
+    public GridBottle(BottleSizeType size, int layer) {
+        this.type = GridType.BOTTLE;
+        this.stat = stat;
         bottleSize = size;
-        healingPoints = healingPointsTable[(int)size, layer];
+        healingPoints = healingPointsTable[(int)size - 1, layer - 1];
     }
 }
