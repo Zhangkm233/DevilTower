@@ -10,6 +10,13 @@ public class TarotCard : MonoBehaviour
     void Start()
     {
         originPos = transform.position;
+
+        TarotsDataObject tarots = TarotManager.instance.tarotsDataObject;
+        GetComponent<SpriteRenderer>().sprite = tarots.tarotsData[cardIndex].sprite;
+
+        var collider = GetComponent<BoxCollider2D>();
+        var sprite = GetComponent<SpriteRenderer>();
+        collider.size = sprite.bounds.size;
     }
 
     // Update is called once per frame

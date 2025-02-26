@@ -13,9 +13,69 @@ MonoBehaviour:
   m_Name: TarotsDataObject
   m_EditorClassIdentifier: 
   tarotsData:
-  - cardName: The Fool
+  - cardName: Fool
     description: i am fool
-    sprite: {fileID: 0}
-  - cardName: The Magician
+    sprite: {fileID: -6682744762430114866, guid: cbbd60f617d2303419dd006c732ff4a9, type: 3}
+  - cardName: Magician
     description: i am magician
-    sprite: {fileID: 0}
+    sprite: {fileID: 9161935325122749129, guid: 1efc228400f438847a8255d5a19e3df5, type: 3}
+  - cardName: High Priestess
+    description: i am magician
+    sprite: {fileID: -1391698445481629555, guid: 1f8e6c20fff8200458e52ccf40dcbb77, type: 3}
+  - cardName: empress
+    description: i am magician
+    sprite: {fileID: 2134878861349702175, guid: aae053eec78f8104fad0e8cb892f15eb, type: 3}
+  - cardName: emperor
+    description: i am magician
+    sprite: {fileID: 8385584617520228119, guid: 034dd750bb94fa045955211ffad4ace6, type: 3}
+  - cardName: pope
+    description: i am magician
+    sprite: {fileID: -826025077468323545, guid: d611912f7b93d2a4f97c8bb17baf1082, type: 3}
+  - cardName: lovers
+    description: i am magician
+    sprite: {fileID: -8721429980907763177, guid: 2a8d7c287dffbe7458d69119f398d797, type: 3}
+  - cardName: chariot
+    description: i am magician
+    sprite: {fileID: 7605121969695853714, guid: 1f106fa17d31a324396eab5e4de8acc1, type: 3}
+  - cardName: justice
+    description: i am magician
+    sprite: {fileID: -7201624119766976070, guid: e02a6c0ae1ad73b4695639ed44181158, type: 3}
+  - cardName: hermit
+    description: i am magician
+    sprite: {fileID: 4064284013594149234, guid: 26c634e8a538bb740a665275d8532bcf, type: 3}
+  - cardName: wheel of fortune
+    description: i am magician
+    sprite: {fileID: 6512646141590230514, guid: 7890df306b677264ab3415aa4627ff88, type: 3}
+  - cardName: strength
+    description: i am magician
+    sprite: {fileID: 6964257170247351951, guid: 3a72443254eea474eb9a5f5df1fea0e0, type: 3}
+  - cardName: hanged man
+    description: i am magician
+    sprite: {fileID: -4127451361129954941, guid: afa83ce6063ff7942abadcf8857caff3, type: 3}
+  - cardName: death
+    description: i am magician
+    sprite: {fileID: 5074338579839013100, guid: f197663ad13cb4d41807c9de22fb4456, type: 3}
+  - cardName: temperance
+    description: i am magician
+    sprite: {fileID: -292526783001261222, guid: 86293c81fd1b34b49ada1e3afb534306, type: 3}
+  - cardName: devil
+    description: i am magician
+    sprite: {fileID: -1935561286319929584, guid: 38e5849044168bb4da9945be4b20224d, type: 3}
+  - cardName: tower
+    description: i am magician
+    sprite: {fileID: -7991576227917041956, guid: d305cb27b3494a849841bfb1b42541d1, type: 3}
+  - cardName: star
+    description: i am magician
+    sprite: {fileID: -5136612702803252847, guid: 5de1fa6e043b7a0408619e2346f5bba4, type: 3}
+  - cardName: moon
+    description: i am magician
+    sprite: {fileID: 4538191114827030698, guid: 25cdfdb58922ba144a02652cb243ecd7, type: 3}
+  - cardName: sun
+    description: i am magician
+    sprite: {fileID: 9138298438030876161, guid: f7bf8c3955a304c47b6e962723f6b27a, type: 3}
+  - cardName: judgment
+    description: i am magician
+    sprite: {fileID: 3802000781681616770, guid: 58e8456a0ef2b114481c26f2568979c5, type: 3}
+  - cardName: world
+    description: i am magician
+    sprite: {fileID: 6593573233399807446, guid: 8e7995bf53af9ed4b9125cd496bc0341, type: 3}
