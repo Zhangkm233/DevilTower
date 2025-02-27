@@ -17,6 +17,7 @@ public class GridDrawer : MonoBehaviour
                 newgrid.GetComponent<GridTileManager>().mapX = i;
                 newgrid.GetComponent<GridTileManager>().mapY = GameData.gridHeight - j - 1;
                 newgrid.GetComponent<GridTileManager>().gridType = mapGrid.type;
+                newgrid.GetComponent<GridTileManager>().gameManagerObject = this.gameObject;
                 newgrid.name = mapGrid.GridTypeToWord + " " +  i + " " + j;
                 newgrid.transform.position = new Vector3((i*2)-5,(j*2)-1,0);
                 newgrid.GetComponent<GridTileManager>().UpdateData();

@@ -15,8 +15,15 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCamera;
     public GameObject objectClick;
+    public GridTileManager gridTileManager;
+    public Grid GridInMap;
+
     void Update() {
         objectClick = ObjectClick();
+        if (objectClick != null) {
+            gridTileManager = objectClick.GetComponent<GridTileManager>();
+            GridInMap = GameData.map[gridTileManager.mapX,gridTileManager.mapY];
+        }
         if (Input.GetMouseButtonDown(0)) {
             MapClickEvent();
         }
@@ -24,8 +31,6 @@ public class GameManager : MonoBehaviour
     }
 
     void MapClickEvent() {
-        GridTileManager gridTileManager = objectClick.GetComponent<GridTileManager>();
-        Grid GridInMap = GameData.map[gridTileManager.mapX,gridTileManager.mapY];
         if (gridTileManager.mapY != GameData.gridHeight-1) return;
         //‘‚”ˆπ÷ŒÔ
         if (gridTileManager.gridType == Grid.GridType.MONSTER) {
