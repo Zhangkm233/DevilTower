@@ -9,8 +9,8 @@ public class GridDrawer : MonoBehaviour
     public Sprite gridSprite;
 
     public void DrawThreeGrid() {
-        for (int i = 0;i < GameData.gridWidth;i++) {
-            for (int j = 0;j < 3;j++) {
+        for (int j = 0;j < 3;j++) {
+            for (int i = 0;i < GameData.gridWidth;i++) {
                 GameObject newgrid = Instantiate(gridPrefab);
                 Grid mapGrid = GameData.map[i,GameData.gridHeight - j - 1];
                 newgrid.GetComponent<GridTileManager>().mapGrid = mapGrid;
@@ -18,7 +18,7 @@ public class GridDrawer : MonoBehaviour
                 newgrid.GetComponent<GridTileManager>().mapY = GameData.gridHeight - j - 1;
                 newgrid.GetComponent<GridTileManager>().gridType = mapGrid.type;
                 newgrid.GetComponent<GridTileManager>().gameManagerObject = this.gameObject;
-                newgrid.name = mapGrid.GridTypeToWord + " " +  i + " " + j;
+                newgrid.name = mapGrid.GridTypeToWord + " " +  i + " " + (GameData.gridHeight - j - 1);
                 newgrid.transform.position = new Vector3((i*2)-5,(j*2)-1,0);
                 newgrid.GetComponent<GridTileManager>().UpdateData();
             }

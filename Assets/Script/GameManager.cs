@@ -123,6 +123,17 @@ public class GameManager : MonoBehaviour
             clearGridInMap(gridTileManager);
         }
     }
+
+    public void monsterMovement() {
+        for (int i = 0;i < GameData.gridWidth - 1;i++) {
+            Grid grid = GameData.map[GameData.gridHeight - 1,i];
+            if (grid.type == Grid.GridType.MONSTER) {
+                if (((GridMonster)grid).isFirmness) return;
+                
+            }
+        }
+    }
+
     public void clearGridInMap(GridTileManager gridTileManager) {
         clearGridInMap(gridTileManager.mapX,gridTileManager.mapY);
     }

@@ -45,6 +45,7 @@ public class GridTileManager : MonoBehaviour
         }
     }
     public void UpdateText() {
+        transform.name = mapGrid.GridTypeToWord + " " + mapX + " " + mapY;
         Canvas gridCanvas = this.GetComponentInChildren<Canvas>();
         TMP_Text gridtext = gridCanvas.transform.GetChild(0).GetComponent<TMP_Text>();
         gridtext.text = mapGrid.GridTypeToWord;

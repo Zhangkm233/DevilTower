@@ -10,7 +10,7 @@ public class GridLoader : MonoBehaviour
     public int gridHeight = GameData.gridHeight; // 地图高度
     void Start() {
         LoadMapFromTxt();
-        printGrid();
+        PrintGrid();
         this.gameObject.GetComponent<GridDrawer>().DrawThreeGrid();
     }
     //M怪物 X封锁 D门 G宝石 B血瓶 K钥匙 N NPC S商人
@@ -29,13 +29,19 @@ public class GridLoader : MonoBehaviour
         }
     }
 
-    void printGrid() {
+    void PrintGrid() {
         for (int y = 0;y < gridHeight;y++) {
             for (int x = 0;x < gridWidth;x++) {
                 print("x:" + x + " y:" + y + " gridType:" + GameData.map[x,y].type + " gridStat:" + GameData.map[x,y].stat);
                 if (GameData.map[x,y].type == GridType.MONSTER) {
                     GridMonster gm = (GridMonster)GameData.map[x,y];
                     print("name:" + gm.name + "atk:" + gm.atk + " def:" + gm.def + " hp:" + gm.hp + " gold:" + gm.gold);
+                    if (gm.isLostmind) print("魔心");
+                    if (gm.isCrack) print("破碎");
+                    if (gm.isFirmness) print("坚定");
+                    if (gm.isStalk) print("追猎");
+                    if (gm.isCorruption) print("腐坏");
+                    if (gm.isBoss) print("头目");
                 }
             }
         }

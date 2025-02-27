@@ -8,25 +8,25 @@ public class GridMonster : Grid
     public int def;
     public int hp;
     public int gold;
-    public ability[] abilityType;
+    //public ability[] abilityType;
     public string txtFilePath;
     public string name;
+    public bool isLostmind;
+    public bool isCrack;
+    public bool isFirmness;
+    public bool isStalk;
+    public bool isCorruption;
+    public int corruptionLevel;
+    public bool isBoss;
+    /*
     public enum ability {
-        /*
-        lostmind 魔心 这个怪物如果已经到达最左侧的格子，就会前进到最右侧的格子 
-        crack 碎裂 这个怪物会摧毁自己经过的宝石，药水和钥匙，而不是将它们扔到身后
-        firmness 坚定 这个怪物不会移动
-        stalk 追猎 从这个怪物进入前排起，每三个回合会进行一次攻击并对玩家造成伤害
-        corrpution 腐蚀X 在开战前使玩家的血量降低X*10%
-        boss 头目 被击败后出现可以离开区域的传送门
-         */
         LOSTMIND = 1,
         CRACK = 2,
         FIRMNESS = 3,
         STALK = 4,
         CORRPUTION = 5,
         BOSS = 6,
-    }
+    }*/
     public GridMonster(int stat){
         GridTypeToWord = "M";
         this.stat = stat;
@@ -40,26 +40,36 @@ public class GridMonster : Grid
         hp = int.Parse(monsterStat[3]);
         gold = int.Parse(monsterStat[4]);
 
-        if (monsterStat.Length > 5) {
-            abilityType = new ability[6];
-            for (int i = 5;i < monsterStat.Length;i++) {
-                abilityType[i - 5] = (ability)System.Enum.Parse(typeof(ability),monsterStat[i]);
-            }
+        if (monsterStat.Length == 6) {
+            GainAbility(monsterStat[5]);
         }
+        if (monsterStat.Length == 7) {
+            GainAbility(monsterStat[5]);
+            corruptionLevel = int.Parse(monsterStat[6]);
+        }
+    }
 
-        
+    void GainAbility(string ability) {
+        switch (ability) {
+            case "LOSTMIND":
+                isLostmind = true; break;
+            case "CRACK":
+                isCrack = true; break;
+            case "FIRMNESS":
+                isFirmness = true; break;
+            case "STALK":
+                isStalk = true; break;
+            case "CORRUPTION":
+                isCorruption = true; break;
+            case "BOSS":
+                isBoss = true; break;
+            default:
+                break;
+        }
     }
 
     public void introduceSelf() {
         Debug.Log("name:" + name + " atk:" + atk + " def:" + def + " hp:" + hp + " gold:" + gold);
-        if (abilityType != null) {
-            for (int i = 0;i < abilityType.Length;i++) {
-                if (abilityType[i] == 0) {
-                    return;
-                }
-                Debug.Log("ability:" + abilityType[i]);
-            }
-        }
     }
 
     public override Grid AsEnter() {
