@@ -45,7 +45,7 @@ Shader "Custom/WhiteFlash"
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
                 // 将原色与白色按比例混合
-                col.rgb = lerp(col.rgb, fixed3(1,1,1), _WhiteAmount);
+                col.rgb = lerp(col.rgb, fixed3(2,2,2), _WhiteAmount);
                 return col;
             }
             ENDCG

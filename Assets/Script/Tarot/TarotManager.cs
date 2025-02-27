@@ -25,48 +25,17 @@ public class TarotManager : MonoBehaviour
 
         //进行动画效果
         if(selectedCard != null){
-            StartCoroutine(MoveCardOutSlot(selectedCard, animationDuration));
+            selectedCard.MoveOutSlot();
         }
         selectedCard = card;
-        StartCoroutine(MoveCardIntoSlot(targetSlot.transform, card, animationDuration));
+        card.MoveIntoSlot(targetSlot);
     }
 
-    IEnumerator MoveCardIntoSlot(Transform slot, TarotCard card, float duration){
-        Vector3 startPos = card.transform.position;
-        Vector3 targetPos = slot.position;
-
-        float elapsed = 0;
-
-        card.playParticle();
-        while (elapsed < duration) {
-            card.transform.position = Vector3.Lerp(startPos, targetPos, elapsed/duration);
-            
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-        card.stopParticle();
-        card.OnCardPutIn();
-        targetSlot.OnCardPutIn();
-        StartCoroutine(ShakeAllItems(0.2f));
+    public void ShakeAll(){
+        StartCoroutine(ShakeAllCoroutine(0.2f));
     }
 
-    IEnumerator MoveCardOutSlot(TarotCard card, float duration){
-        Vector3 startPos = card.transform.position;
-        Vector3 targetPos = card.originPos;
-        
-        float elapsed = 0;
-
-        card.playParticle();
-        while (elapsed < duration) {
-            card.transform.position = Vector3.Lerp(startPos, targetPos, elapsed/duration);
-            
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-        card.stopParticle();
-    }
-
-    IEnumerator ShakeAllItems(float duration){
+    IEnumerator ShakeAllCoroutine(float duration){
         float elapsed = 0;
         while (elapsed < duration) {
             transform.position = new Vector3(Mathf.Sin(100 * elapsed + 20), Mathf.Sin(100 * elapsed), 0) * 0.03f;
@@ -76,15 +45,5 @@ public class TarotManager : MonoBehaviour
         transform.position = Vector3.zero;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+ 
 }

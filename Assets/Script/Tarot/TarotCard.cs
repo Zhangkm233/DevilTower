@@ -66,11 +66,28 @@ public class TarotCard : MonoBehaviour
         GetComponent<ParticleSystem>().Stop();
     }
 
-    public void OnCardPutIn(){
+    public void ClearParticle(){
+        GetComponent<ParticleSystem>().Clear();
+    }
+
+    public void OnCardPutIn(Slot slot){
         StartCoroutine(HighlightCoroutine(0.5f));
+        playParticle();
+        TarotManager.instance.ShakeAll();
+        slot.ExpandHalo();
+    }
+
+    public void MoveIntoSlot(Slot slot){
+        StartCoroutine(MoveIntoSlotCoroutine(slot));
+    }
+
+    public void MoveOutSlot(){
+        stopParticle();
+        StartCoroutine(MoveOutSlotCoroutine());
     }
 
     IEnumerator HighlightCoroutine(float duration)
+
     {
 
         Material material = GetComponent<SpriteRenderer>().material;
@@ -85,5 +102,45 @@ public class TarotCard : MonoBehaviour
             yield return null;
         }
         material.SetFloat("_WhiteAmount", 0);
+    }
+
+    IEnumerator MoveIntoSlotCoroutine(Slot slot){
+        Vector3 startPos = transform.position;
+        Vector3 targetPos = slot.transform.position;
+
+        float elapsed = 0;
+        float speed = 30f;
+        float distance = Vector3.Distance(startPos, targetPos);
+
+        GetComponent<BoxCollider2D>().enabled = false;
+
+        while (elapsed < distance / speed) {
+            transform.position = Vector3.Lerp(startPos, targetPos, elapsed/(distance/speed));
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPos;
+
+        GetComponent<BoxCollider2D>().enabled = true;
+
+        OnCardPutIn(slot);
+    }
+
+    IEnumerator MoveOutSlotCoroutine(){
+        Vector3 startPos = transform.position;
+        Vector3 targetPos = originPos;
+
+        float elapsed = 0;
+        float speed = 40f;
+        float distance = Vector3.Distance(startPos, targetPos);
+
+        while (elapsed < distance / speed) {
+            transform.position = Vector3.Lerp(startPos, targetPos, elapsed/(distance/speed));
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = targetPos;
     }
 }
