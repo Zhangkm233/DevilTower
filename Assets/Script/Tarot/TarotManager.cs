@@ -9,8 +9,8 @@ public class TarotManager : MonoBehaviour
 
     public float animationDuration = 0.13f;
 
-    public List<Transform> slots = new List<Transform>();
-    public Transform targetSlot;
+    public List<Slot> slots = new List<Slot>();
+    public Slot targetSlot;
     public TarotCard selectedCard;
 
     void Awake()
@@ -28,7 +28,7 @@ public class TarotManager : MonoBehaviour
             StartCoroutine(MoveCardOutSlot(selectedCard, animationDuration));
         }
         selectedCard = card;
-        StartCoroutine(MoveCardIntoSlot(targetSlot, card, animationDuration));
+        StartCoroutine(MoveCardIntoSlot(targetSlot.transform, card, animationDuration));
     }
 
     IEnumerator MoveCardIntoSlot(Transform slot, TarotCard card, float duration){
@@ -45,6 +45,8 @@ public class TarotManager : MonoBehaviour
             yield return null;
         }
         card.stopParticle();
+        card.OnCardPutIn();
+        targetSlot.OnCardPutIn();
         StartCoroutine(ShakeAllItems(0.2f));
     }
 

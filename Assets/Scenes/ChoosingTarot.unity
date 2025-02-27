@@ -136,6 +136,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -201,6 +205,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 18
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -429,6 +437,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -499,6 +511,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -564,6 +580,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -822,6 +842,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -892,6 +916,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -957,6 +985,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -1022,6 +1054,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 21
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -1087,6 +1123,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -1153,14 +1193,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2138374745}
     m_Modifications:
-    - target: {fileID: 1373238694796716139, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
-      propertyPath: cardIndex
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
-      propertyPath: m_PreviewTimeScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8704463412419700148, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.07
@@ -1222,6 +1254,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 19
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -1287,6 +1323,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -1511,6 +1551,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -1576,6 +1620,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -1646,6 +1694,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -1708,6 +1760,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1494442595}
+  - component: {fileID: 1494442598}
   m_Layer: 0
   m_Name: slot
   m_TagString: Untagged
@@ -1724,12 +1777,24 @@ Transform:
   m_GameObject: {fileID: 1494442594}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.81, y: -4.17, z: -0.058381263}
+  m_LocalPosition: {x: -7.47, y: -3.81, z: -0.058381263}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2138374745}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1494442598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494442594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f8f5632e1bc7fc4ba4af5651d1e3d1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1499023331 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8704463412419700148, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
@@ -1752,6 +1817,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -1827,6 +1896,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -1892,6 +1965,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -2036,6 +2113,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -2101,6 +2182,10 @@ PrefabInstance:
       propertyPath: cardIndex
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1
@@ -2201,8 +2286,8 @@ MonoBehaviour:
   tarotsDataObject: {fileID: 11400000, guid: 6bb3eed9deaa6424cb3b0b238b27533a, type: 2}
   animationDuration: 0.3
   slots:
-  - {fileID: 1494442595}
-  targetSlot: {fileID: 0}
+  - {fileID: 1494442598}
+  targetSlot: {fileID: 1494442598}
   selectedCard: {fileID: 0}
 --- !u!4 &2138374745
 Transform:
@@ -2256,6 +2341,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2138374745}
     m_Modifications:
+    - target: {fileID: 4086740118428387339, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d073dd2d33982f449da3726db813db9, type: 2}
     - target: {fileID: 4193357888954489632, guid: 23b123caf24fd7c4c87e571ab3532efd, type: 3}
       propertyPath: m_PreviewTimeScale
       value: 1

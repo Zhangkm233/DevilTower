@@ -65,4 +65,25 @@ public class TarotCard : MonoBehaviour
     public void stopParticle(){
         GetComponent<ParticleSystem>().Stop();
     }
+
+    public void OnCardPutIn(){
+        StartCoroutine(HighlightCoroutine(0.5f));
+    }
+
+    IEnumerator HighlightCoroutine(float duration)
+    {
+
+        Material material = GetComponent<SpriteRenderer>().material;
+        float _whiteAmount = 0f;
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            _whiteAmount = Mathf.Lerp(1, 0, elapsed / duration);
+            material.SetFloat("_WhiteAmount", _whiteAmount);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        material.SetFloat("_WhiteAmount", 0);
+    }
 }
