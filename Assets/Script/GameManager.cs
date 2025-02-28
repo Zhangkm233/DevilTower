@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0)) {
             MapClickEvent();
+            MonsterMovement();
         }
         UpdateGameDataToPublic();
     }
@@ -34,14 +35,14 @@ public class GameManager : MonoBehaviour
         if (gridTileManager.mapY != GameData.gridHeight-1) return;
         //遭遇怪物
         if (gridTileManager.gridType == Grid.GridType.MONSTER) {
-            int battleDamage = caculateDamage((GridMonster)GridInMap);
+            int battleDamage = CaculateDamage((GridMonster)GridInMap);
             if (battleDamage == -1) {
                 Debug.Log("战斗伤害：???");
                 return;
             }
             Debug.Log("战斗伤害：" + battleDamage);
             GameData.playerHp -= battleDamage;
-            clearGridInMap(gridTileManager);
+            ClearGridInMap(gridTileManager);
             return;
         }
         //捡钥匙
@@ -60,7 +61,7 @@ public class GameManager : MonoBehaviour
                     Debug.Log("捡到了黄金钥匙"); 
                     break;
             }
-            clearGridInMap(gridTileManager);
+            ClearGridInMap(gridTileManager);
             return;
         }
         //捡宝石
@@ -73,14 +74,14 @@ public class GameManager : MonoBehaviour
                 GameData.playerDef += ((GridGem)gridTileManager.mapGrid).AddSum;
                 Debug.Log("捡到了防御宝石，防御力+" + ((GridGem)gridTileManager.mapGrid).AddSum);
             }
-            clearGridInMap(gridTileManager);
+            ClearGridInMap(gridTileManager);
             return;
         }
         //捡血瓶
         if (gridTileManager.gridType == Grid.GridType.BOTTLE) {
             GameData.playerHp += ((GridBottle)gridTileManager.mapGrid).healingPoints;
             Debug.Log("捡到了血瓶，血量+" + ((GridBottle)gridTileManager.mapGrid).healingPoints);
-            clearGridInMap(gridTileManager);
+            ClearGridInMap(gridTileManager);
 
             //有bug，过会改
             return;
@@ -92,7 +93,7 @@ public class GameManager : MonoBehaviour
                 if(GameData.key1 > 0) {
                     GameData.key1--;
                     Debug.Log("打开了" + door.doorStat + "门");
-                    clearGridInMap(gridTileManager);
+                    ClearGridInMap(gridTileManager);
                 } else {
                     Debug.Log("青铜钥匙不足！");
                 }
@@ -101,7 +102,7 @@ public class GameManager : MonoBehaviour
                 if (GameData.key2 > 0) {
                     GameData.key2--;
                     Debug.Log("打开了" + door.doorStat + "门");
-                    clearGridInMap(gridTileManager);
+                    ClearGridInMap(gridTileManager);
                 } else {
                     Debug.Log("白银钥匙不足！");
                 }
@@ -110,49 +111,62 @@ public class GameManager : MonoBehaviour
                 if (GameData.key3 > 0) {
                     GameData.key3--;
                     Debug.Log("打开了" + door.doorStat + "门");
-                    clearGridInMap(gridTileManager);
+                    ClearGridInMap(gridTileManager);
                 } else {
                     Debug.Log("黄金钥匙不足！");
                 }
             }
         }
         if (gridTileManager.gridType == Grid.GridType.NPC) {
-            clearGridInMap(gridTileManager);
+            ClearGridInMap(gridTileManager);
         }
         if (gridTileManager.gridType == Grid.GridType.SHOP) {
-            clearGridInMap(gridTileManager);
+            ClearGridInMap(gridTileManager);
         }
     }
 
-    public void monsterMovement() {
-        for (int i = 0;i < GameData.gridWidth - 1;i++) {
-            Grid grid = GameData.map[GameData.gridHeight - 1,i];
+    public void MonsterMovement() {
+        //处理最地下一层怪物的移动逻辑
+        for (int i = 0;i < GameData.gridWidth;i++) {
+            Debug.Log("判断" + i + " " + (GameData.gridHeight - 1));
+            Grid grid = GameData.map[i,GameData.gridHeight - 1];
             if (grid.type == Grid.GridType.MONSTER) {
-                if (((GridMonster)grid).isFirmness) return;
-                
+                if (((GridMonster)grid).isFirmness) continue;
+                if (i == 0 && !((GridMonster)grid).isLostmind) continue;
+                if (i == 0 && ((GridMonster)grid).isLostmind) {
+                    //回头再写
+                }
+                Grid leftGrid = GameData.map[i - 1,GameData.gridHeight - 1];
+                if (leftGrid.type != Grid.GridType.MONSTER &&
+                     leftGrid.type != Grid.GridType.DOOR) {
+                    //与左边的格子交换
+                    GameData.map[i - 1,GameData.gridHeight - 1] = grid;
+                    GameData.map[i,GameData.gridHeight - 1] = leftGrid;
+                    UpdateEachGrid();
+                }
             }
         }
     }
-
-    public void clearGridInMap(GridTileManager gridTileManager) {
-        clearGridInMap(gridTileManager.mapX,gridTileManager.mapY);
+        
+    public void ClearGridInMap(GridTileManager gridTileManager) {
+        ClearGridInMap(gridTileManager.mapX,gridTileManager.mapY);
     }
-    public void clearGridInMap(int mapX,int mapY) {
+    public void ClearGridInMap(int mapX,int mapY) {
         int i;
         for (i = mapY; i > 0; i--) {
             if (GameData.map[mapX,i - 1] == null) break;
             GameData.map[mapX,i] = GameData.map[mapX,i-1];
         }
         GameData.map[mapX,i] = null;
-        updateEachGrid();
+        UpdateEachGrid();
     }
-    public void updateEachGrid() {
+    public void UpdateEachGrid() {
         GameObject[] grids = GameObject.FindGameObjectsWithTag("gridGameObject");
         foreach (GameObject grid in grids) {
             grid.GetComponent<GridTileManager>().UpdateData();
         }
     }
-    public int caculateDamage(GridMonster monster) {
+    public int CaculateDamage(GridMonster monster) {
         if(GameData.playerAtk - (monster.def + monster.hp) >= 0 ) {
             Debug.Log("攻杀");
             //如果攻击力大于怪物防御力 + 生命值，那么是攻杀

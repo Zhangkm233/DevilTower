@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
             if (GetComponent<GameManager>().GridInMap == null) return;
             Grid gridInMaped = GetComponent<GameManager>().GridInMap;
             if (gridInMaped.type == Grid.GridType.MONSTER) {
-                int cDamage = this.GetComponent<GameManager>().caculateDamage((GridMonster)gridInMaped);
+                int cDamage = this.GetComponent<GameManager>().CaculateDamage((GridMonster)gridInMaped);
                 if (cDamage == -1) {
                     monsterStat.text = "Ãû×Ö:" + ((GridMonster)gridInMaped).name + " Ô¤¼ÆÉËº¦: ???";
                 } else {

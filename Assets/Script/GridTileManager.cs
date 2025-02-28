@@ -15,7 +15,7 @@ public class GridTileManager : MonoBehaviour
     }
     private void OnMouseEnter() {
        /*if (gridType == Grid.GridType.MONSTER) {
-            int cDamage = gameManagerObject.GetComponent<GameManager>().caculateDamage((GridMonster)mapGrid);
+            int cDamage = gameManagerObject.GetComponent<GameManager>().CaculateDamage((GridMonster)mapGrid);
             if (cDamage == -1) {
                 monsterStat.text = "Ãû×Ö:" + ((GridMonster)mapGrid).name + " Ô¤¼ÆÉËº¦: ???"; 
             } else {
