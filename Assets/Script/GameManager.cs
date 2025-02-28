@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
         if (gridTileManager.mapY != GameData.gridHeight-1) return;
         //遭遇怪物
         if (gridTileManager.gridType == Grid.GridType.MONSTER) {
-            int battleDamage = CaculateDamage((GridMonster)GridInMap);
+            int battleDamage = ResolveDamage((GridMonster)GridInMap);
             if (battleDamage == -1) {
                 Debug.Log("战斗伤害：???");
                 return;
@@ -166,8 +167,9 @@ public class GameManager : MonoBehaviour
             grid.GetComponent<GridTileManager>().UpdateData();
         }
     }
-    public int CaculateDamage(GridMonster monster) {
-        if(GameData.playerAtk - (monster.def + monster.hp) >= 0 ) {
+    public int ResolveDamage(GridMonster monster) {
+        //结算时用的伤害 给防杀和攻杀提供地方写
+        if (GameData.playerAtk - (monster.def + monster.hp) >= 0) {
             Debug.Log("攻杀");
             //如果攻击力大于怪物防御力 + 生命值，那么是攻杀
             if (GameData.playerDef > monster.atk) {
@@ -176,9 +178,22 @@ public class GameManager : MonoBehaviour
             }
             return 0;
         }
-        if(GameData.playerDef >= monster.atk && GameData.playerAtk > monster.def) {
+        if (GameData.playerDef >= monster.atk && GameData.playerAtk > monster.def) {
             Debug.Log("防杀");
             return 0;//如果防御大于怪物攻击力，且玩家攻击力大于怪物防御力，那么是防杀
+        }
+        return CaculateDamage(monster);
+    }
+
+    public int CaculateDamage(GridMonster monster) {
+        if(GameData.playerAtk - (monster.def + monster.hp) >= 0 ) {
+            if (GameData.playerDef > monster.atk) {
+                return 0;
+            }
+            return 0;
+        }
+        if(GameData.playerDef >= monster.atk && GameData.playerAtk > monster.def) {
+            return 0;
         }
         if (GameData.playerAtk - monster.def <= 0) {
             return -1;//如果玩家攻击力小于怪物防御力，那么显示???

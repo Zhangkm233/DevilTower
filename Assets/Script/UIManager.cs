@@ -46,13 +46,52 @@ public class UIManager : MonoBehaviour
             if (gridInMaped.type == Grid.GridType.BOTTLE) {
                 switch (gridInMaped.stat) {
                     case 1:
-                        monsterStat.text = "小血瓶 恢复" + ((GridBottle)gridInMaped).healingPoints.ToString();
+                        monsterStat.text = "小血瓶\n恢复" + 
+                            ((GridBottle)gridInMaped).healingPoints.ToString() +"点血量";
                         break;
                     case 2:
-                        monsterStat.text = "中血瓶 恢复" + ((GridBottle)gridInMaped).healingPoints.ToString();
+                        monsterStat.text = "中血瓶\n恢复" + 
+                            ((GridBottle)gridInMaped).healingPoints.ToString() + "点血量";
                         break;
                     case 3:
-                        monsterStat.text = "大血瓶 恢复" + ((GridBottle)gridInMaped).healingPoints.ToString();
+                        monsterStat.text = "大血瓶\n恢复" + 
+                            ((GridBottle)gridInMaped).healingPoints.ToString() + "点血量";
+                        break;
+                }
+            }
+            if (gridInMaped.type == Grid.GridType.GEM) {
+                switch (gridInMaped.stat) {
+                    case 1:
+                        monsterStat.text = "攻击宝石\n加一点攻击力";
+                        break;
+                    case 2:
+                        monsterStat.text = "防御宝石\n加一点防御力";
+                        break;
+                }
+            }
+            if (gridInMaped.type == Grid.GridType.DOOR) {
+                switch (gridInMaped.stat) {
+                    case 1:
+                        monsterStat.text = "被锁住的青铜门\n一把青铜钥匙解锁";
+                        break;
+                    case 2:
+                        monsterStat.text = "被锁住的白银门\n一把白银钥匙解锁";
+                        break;
+                    case 3:
+                        monsterStat.text = "被锁住的黄金门\n一把黄金钥匙解锁";
+                        break;
+                }
+            }
+            if (gridInMaped.type == Grid.GridType.KEY) {
+                switch (gridInMaped.stat) {
+                    case 1:
+                        monsterStat.text = "一把青铜钥匙";
+                        break;
+                    case 2:
+                        monsterStat.text = "一把白银钥匙";
+                        break;
+                    case 3:
+                        monsterStat.text = "一把黄金钥匙";
                         break;
                 }
             }
