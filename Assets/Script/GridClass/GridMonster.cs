@@ -15,8 +15,9 @@ public class GridMonster : Grid
     public bool isCrack;
     public bool isFirmness;
     public bool isStalk;
-    public bool isCorruption;
-    public int corruptionLevel;
+    public bool isCorruptionOne;
+    public bool isCorruptionTwo;
+    public bool isCorruptionThree;
     public bool isBoss;
     /*
     public enum ability {
@@ -40,12 +41,11 @@ public class GridMonster : Grid
         hp = int.Parse(monsterStat[3]);
         gold = int.Parse(monsterStat[4]);
 
-        if (monsterStat.Length == 6) {
+        if (monsterStat.Length >= 6) {
             GainAbility(monsterStat[5]);
         }
-        if (monsterStat.Length == 7) {
-            GainAbility(monsterStat[5]);
-            corruptionLevel = int.Parse(monsterStat[6]);
+        if (monsterStat.Length >= 7) {
+            GainAbility(monsterStat[6]);
         }
     }
 
@@ -59,8 +59,12 @@ public class GridMonster : Grid
                 isFirmness = true; break;
             case "STALK":
                 isStalk = true; break;
-            case "CORRUPTION":
-                isCorruption = true; break;
+            case "CORRUPTIONTWO":
+                isCorruptionOne = true; break;
+            case "CORRUPTIONONE":
+                isCorruptionTwo = true; break;
+            case "CORRUPTIONTHREE":
+                isCorruptionThree = true; break;
             case "BOSS":
                 isBoss = true; break;
             default:

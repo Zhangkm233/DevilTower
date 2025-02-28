@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -25,7 +26,7 @@ public class GameManager : MonoBehaviour
             gridTileManager = objectClick.GetComponent<GridTileManager>();
             GridInMap = GameData.map[gridTileManager.mapX,gridTileManager.mapY];
         }
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0) && objectClick != null) {
             MapClickEvent();
             MonsterMovement();
         }
@@ -127,22 +128,34 @@ public class GameManager : MonoBehaviour
     }
 
     public void MonsterMovement() {
+        bool hasLostMind = false;
         //处理最地下一层怪物的移动逻辑
-        for (int i = 0;i < GameData.gridWidth;i++) {
+        for (int i = 0;i < GameData.gridWidth;i++) { 
+            if (hasLostMind && i == 5) continue;
             Debug.Log("判断" + i + " " + (GameData.gridHeight - 1));
             Grid grid = GameData.map[i,GameData.gridHeight - 1];
             if (grid.type == Grid.GridType.MONSTER) {
                 if (((GridMonster)grid).isFirmness) continue;
                 if (i == 0 && !((GridMonster)grid).isLostmind) continue;
+                Grid targetGrid = null;
                 if (i == 0 && ((GridMonster)grid).isLostmind) {
-                    //回头再写
+                    hasLostMind = true;
+                    targetGrid = GameData.map[5,GameData.gridHeight - 1];
                 }
-                Grid leftGrid = GameData.map[i - 1,GameData.gridHeight - 1];
-                if (leftGrid.type != Grid.GridType.MONSTER &&
-                     leftGrid.type != Grid.GridType.DOOR) {
+                if(targetGrid == null) targetGrid = GameData.map[i - 1,GameData.gridHeight - 1];
+
+                if (targetGrid.type != Grid.GridType.MONSTER &&
+                     targetGrid.type != Grid.GridType.DOOR) {
                     //与左边的格子交换
-                    GameData.map[i - 1,GameData.gridHeight - 1] = grid;
-                    GameData.map[i,GameData.gridHeight - 1] = leftGrid;
+                    if (i == 0 && ((GridMonster)grid).isLostmind) {
+                        GameData.map[5,GameData.gridHeight - 1] = grid;
+                    } else {
+                        GameData.map[i - 1,GameData.gridHeight - 1] = grid;
+                    }
+                    GameData.map[i,GameData.gridHeight - 1] = targetGrid;
+                    if (((GridMonster)grid).isCrack) {
+                        ClearGridInMap(i,GameData.gridHeight - 1);
+                    }
                     UpdateEachGrid();
                 }
             }

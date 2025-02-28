@@ -4,14 +4,17 @@ using static Grid;
 
 public class UIManager : MonoBehaviour
 {
-    public Text KeyStat;
+    public Text keyStat;
     public Text playerStat;
     public Text monsterStat;
+    public Text monsterAbilityStat;
     private void Start() {
         monsterStat = this.GetComponentInChildren<Canvas>().transform.GetChild(0).GetComponent<Text>();
         monsterStat.text = " ";
-        playerStat = this.GetComponentInChildren<Canvas>().transform.GetChild(1).GetComponent<Text>();
-        KeyStat = this.GetComponentInChildren<Canvas>().transform.GetChild(2).GetComponent<Text>();
+        monsterAbilityStat = this.GetComponentInChildren<Canvas>().transform.GetChild(1).GetComponent<Text>();
+        monsterAbilityStat.text = " ";
+        playerStat = this.GetComponentInChildren<Canvas>().transform.GetChild(2).GetComponent<Text>();
+        keyStat = this.GetComponentInChildren<Canvas>().transform.GetChild(3).GetComponent<Text>();
     }
     private void Update() {
         updatePlayerKeyText();
@@ -22,25 +25,39 @@ public class UIManager : MonoBehaviour
             "ÑªÁ¿: " + GameData.playerHp.ToString() +
             "\n¹¥»÷Á¦: "+ GameData.playerAtk.ToString() +
             "\n·ÀÓùÁ¦: " + GameData.playerDef.ToString();
-        KeyStat.text = 
+        keyStat.text = 
             "ÇàÍ­Ô¿³×: " + GameData.key1.ToString() +
             "\n°×ÒøÔ¿³×: " + GameData.key2.ToString() +
             "\n»Æ½ðÔ¿³×: " + GameData.key3.ToString();
     }
     void updateMonsterStat() {
-        if (this.GetComponent<GameManager>().objectClick == null) monsterStat.text = " ";
+        if (this.GetComponent<GameManager>().objectClick == null) {
+            monsterStat.text = " ";
+            monsterAbilityStat.text = " ";
+        }
         if (this.GetComponent<GameManager>().objectClick != null) {
             GameObject objectClicked = this.GetComponent<GameManager>().objectClick;
             if (GetComponent<GameManager>().GridInMap == null) return;
             Grid gridInMaped = GetComponent<GameManager>().GridInMap;
             if (gridInMaped.type == Grid.GridType.MONSTER) {
-                int cDamage = this.GetComponent<GameManager>().CaculateDamage((GridMonster)gridInMaped);
+                GridMonster gridMonster = (GridMonster)gridInMaped;
+                int cDamage = this.GetComponent<GameManager>().CaculateDamage(gridMonster);
                 if (cDamage == -1) {
-                    monsterStat.text = "Ãû×Ö:" + ((GridMonster)gridInMaped).name + " Ô¤¼ÆÉËº¦: ???";
+                    monsterStat.text = "Ãû×Ö:" + gridMonster.name + " Ô¤¼ÆÉËº¦: ???";
                 } else {
-                    monsterStat.text = "Ãû×Ö:" + ((GridMonster)gridInMaped).name + " Ô¤¼ÆÉËº¦:" +
+                    monsterStat.text = "Ãû×Ö:" + gridMonster.name + " Ô¤¼ÆÉËº¦:" +
                         cDamage.ToString();
                 }
+                string abilitys = "";
+                if (gridMonster.isLostmind) abilitys = abilitys + "Ä§ÐÄ ";
+                if (gridMonster.isCrack) abilitys = abilitys + "ËéÁÑ ";
+                if (gridMonster.isFirmness) abilitys = abilitys + "¼á¶¨ ";
+                if (gridMonster.isStalk) abilitys = abilitys + "×·ÁÔ ";
+                if (gridMonster.isCorruptionOne) abilitys = abilitys + "¸¯Ê´1 ";
+                if (gridMonster.isCorruptionTwo) abilitys = abilitys + "¸¯Ê´2 ";
+                if (gridMonster.isCorruptionThree) abilitys = abilitys + "¸¯Ê´3 ";
+                if (gridMonster.isBoss) abilitys = abilitys + "Í·Ä¿ ";
+                monsterAbilityStat.text = abilitys;
                 return;
             }
             if (gridInMaped.type == Grid.GridType.BOTTLE) {

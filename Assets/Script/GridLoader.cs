@@ -40,7 +40,9 @@ public class GridLoader : MonoBehaviour
                     if (gm.isCrack) print("ÆÆËé");
                     if (gm.isFirmness) print("¼á¶¨");
                     if (gm.isStalk) print("×·ÁÔ");
-                    if (gm.isCorruption) print("¸¯»µ");
+                    if (gm.isCorruptionOne) print("¸¯»µ1");
+                    if (gm.isCorruptionTwo) print("¸¯»µ2");
+                    if (gm.isCorruptionThree) print("¸¯»µ3");
                     if (gm.isBoss) print("Í·Ä¿");
                 }
             }
