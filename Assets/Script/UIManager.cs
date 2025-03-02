@@ -1,20 +1,49 @@
+using System;
+using System.IO;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static Grid;
 
 public class UIManager : MonoBehaviour
 {
+    public enum UIState {
+        STAT,DIALOG,DICTIONARY,
+    };
+    public UIState State = UIState.STAT;
     public Text keyStat;
     public Text playerStat;
     public Text monsterStat;
     public Text monsterAbilityStat;
+    public Text dialogName;
+    public Text dialogText;
+    public GameObject statMain;
+    public GameObject dialogMain;
+    public string dialogTitle;
+    public int sentenceNumber = -1;
+    public enum sentenceState {
+        TEXT,EVENT,
+    }
+    public sentenceState[] sentenceStates;
+    public string[] sentenceNames;
+    public string[] sentenceTexts;
+
     private void Start() {
+        statMain = this.transform.GetChild(0).gameObject;
+        dialogMain = this.transform.GetChild(1).gameObject;
         monsterStat = this.GetComponentInChildren<Canvas>().transform.GetChild(0).GetComponent<Text>();
-        monsterStat.text = " ";
         monsterAbilityStat = this.GetComponentInChildren<Canvas>().transform.GetChild(1).GetComponent<Text>();
-        monsterAbilityStat.text = " ";
         playerStat = this.GetComponentInChildren<Canvas>().transform.GetChild(2).GetComponent<Text>();
         keyStat = this.GetComponentInChildren<Canvas>().transform.GetChild(3).GetComponent<Text>();
+        dialogName = this.transform.GetChild(1).GetChild(1).GetComponent<Text>();
+        dialogText = this.transform.GetChild(1).GetChild(2).GetComponent<Text>();
+
+        monsterStat.text = " ";
+        monsterAbilityStat.text = " ";
+        dialogName.text = "润";
+        dialogText.text = "（鞠躬）（点头）\n（摇头）";
+        dialogMain.SetActive(false);
+        ReadDialog(1);
     }
     private void Update() {
         updatePlayerKeyText();
@@ -113,5 +142,52 @@ public class UIManager : MonoBehaviour
                 }
             }
         }
+    }
+    public void ChangeState() {
+        switch (State) {
+            case UIState.STAT:
+                State = UIState.DIALOG;
+                dialogMain.SetActive(true);
+                statMain.SetActive(false);
+                break;
+            case UIState.DIALOG:
+                State = UIState.DICTIONARY;
+                dialogMain.SetActive(false);
+                statMain.SetActive(false);
+                break;
+            case UIState.DICTIONARY:
+                State = UIState.STAT;
+                dialogMain.SetActive(false);
+                statMain.SetActive(true);
+                break;
+        }
+    }
+    public void ReadDialog(int dialogNumber) {
+        //dialogTitle = "Assets/Resources/dialog" + dialogNumber +".txt";
+        dialogTitle = "Assets/Resources/dialog1.txt";
+        Debug.Log(dialogTitle);
+        string[] lines = File.ReadAllLines(dialogTitle);
+        Debug.Log(lines[0]);
+        Debug.Log(lines[0].Split(";")[2]);
+        string[] sentenceNames = new string[lines.Length];
+        string[] sentenceTexts = new string[lines.Length];
+        for (int i = 0;i < lines.Length;i++) {
+            Debug.Log(i);
+            //sentenceStates[i] = (sentenceState)Enum.Parse(typeof(sentenceState),lines[i].Split(';')[0]);
+            sentenceNames[i] = "a";
+            sentenceNames[i] = (lines[i].Split(";"))[1];
+            sentenceTexts[i] = lines[i].Split(";")[2];
+        }
+    }
+    public void NextSentence() {
+        //为什么有bug
+
+        if (sentenceNames[sentenceNumber + 1] == null) {
+            sentenceNumber = 0;
+            return;
+        }
+        sentenceNumber++;
+        dialogName.text = sentenceNames[sentenceNumber];
+        dialogText.text = sentenceTexts[sentenceNumber];
     }
 }
