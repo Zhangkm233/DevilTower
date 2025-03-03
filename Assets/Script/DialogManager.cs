@@ -27,10 +27,10 @@ public class DialogManager : MonoBehaviour
         //dialogTitle = "Assets/Resources/dialog1.txt";
         Debug.Log(dialogTitle);
         string[] lines = File.ReadAllLines(dialogTitle);
-        Debug.Log(lines[0]);
-        Debug.Log(lines[0].Split(";")[2]);
+        //Debug.Log(lines[0]);
+        //Debug.Log(lines[0].Split(";")[2]);
         for (int i = 0;i < lines.Length;i++) {
-            Debug.Log(i);
+            //Debug.Log(i);
             sentenceStates.Add((sentenceState)Enum.Parse(typeof(sentenceState),lines[i].Split(';')[0]));
             sentenceNames.Add(lines[i].Split(";")[1]);
             sentenceTexts.Add(lines[i].Split(";")[2]);

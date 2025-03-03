@@ -32,15 +32,13 @@ public class GameManager : MonoBehaviour
                 MonsterMovement();
                 GameData.eventEncounter++;
             }
-            //记录遭遇的事件数量 打开铁匠铺
-            if(GameData.eventEncounter > 30) {
-
-            }
+            //记录遭遇的事件数量
         }
         UpdateGameDataToPublic();
     }
 
     bool MapClickEvent() {
+        if (this.GetComponent<UIManager>().State != UIManager.UIState.STAT) return false;
         if (gridTileManager.mapY != GameData.gridHeight-1) return false;
         if (gridTileManager.gridType == Grid.GridType.MONSTER) {
             //遭遇怪物
@@ -149,7 +147,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0;i < GameData.gridWidth;i++) { 
             //魔心的判断 防止让他一步走两格
             if (hasLostMind && i == 5) continue;
-            Debug.Log("判断" + i + " " + (GameData.gridHeight - 1));
+            //Debug.Log("判断" + i + " " + (GameData.gridHeight - 1));
             Grid grid = GameData.map[i,GameData.gridHeight - 1];
             if (grid.type == Grid.GridType.MONSTER) {
                 if (((GridMonster)grid).isStalk) {

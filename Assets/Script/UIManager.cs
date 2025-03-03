@@ -24,10 +24,12 @@ public class UIManager : MonoBehaviour
     public Slider completeSlider;
     public GameObject statMain;
     public GameObject dialogMain;
+    public GameObject goForgeButton;
 
     private void Start() {
         statMain = this.transform.GetChild(0).gameObject;
         dialogMain = this.transform.GetChild(1).gameObject;
+
         monsterStat = this.GetComponentInChildren<Canvas>().transform.GetChild(0).GetComponent<Text>();
         monsterAbilityStat = this.GetComponentInChildren<Canvas>().transform.GetChild(1).GetComponent<Text>();
         playerStat = this.GetComponentInChildren<Canvas>().transform.GetChild(2).GetComponent<Text>();
@@ -36,6 +38,7 @@ public class UIManager : MonoBehaviour
         monsterStat.text = " ";
         monsterAbilityStat.text = " ";
         dialogMain.SetActive(false);
+        goForgeButton.SetActive(false);
     }
     private void Update() {
         updatePlayerKeyText();
@@ -43,7 +46,11 @@ public class UIManager : MonoBehaviour
         updateCompleteStatSlide();
     }
     void updateCompleteStatSlide() {
+        //更新进度条 更新铁匠铺
         completeSlider.value = (float)GameData.eventEncounter / 90;
+        if (GameData.eventEncounter >= 30) {
+            goForgeButton.SetActive(true);
+        }
     }
     void updatePlayerKeyText() {
         playerStat.text = 
