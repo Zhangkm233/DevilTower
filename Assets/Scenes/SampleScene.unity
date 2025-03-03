@@ -1334,6 +1334,7 @@ GameObject:
   - component: {fileID: 1211369220}
   - component: {fileID: 1211369221}
   - component: {fileID: 1211369222}
+  - component: {fileID: 1211369223}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1426,12 +1427,24 @@ MonoBehaviour:
   playerStat: {fileID: 1612933847}
   monsterStat: {fileID: 592130178}
   monsterAbilityStat: {fileID: 951214960}
-  dialogName: {fileID: 974259639}
-  dialogText: {fileID: 1027283390}
   statMain: {fileID: 317328505}
   dialogMain: {fileID: 1561647365}
+--- !u!114 &1211369223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211369217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6bd6f1068114264d8cfd93e5b17360b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogName: {fileID: 974259639}
+  dialogText: {fileID: 1027283390}
   dialogTitle: 
-  sentenceNumber: 0
+  sentenceNumber: -1
   sentenceStates: 
   sentenceNames: []
   sentenceTexts: []
@@ -1651,8 +1664,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1211369222}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+      - m_Target: {fileID: 1211369223}
+        m_TargetAssemblyTypeName: DialogManager, Assembly-CSharp
         m_MethodName: NextSentence
         m_Mode: 1
         m_Arguments:

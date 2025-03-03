@@ -72,6 +72,15 @@ public class GridMonster : Grid
         }
     }
 
+    public double CorruptionPercent() {
+        if (isCorruptionOne) {
+            return 0.9;
+        } else if (isCorruptionTwo) {
+            return 0.8;
+        } else if (isCorruptionThree) {
+            return 0.7;
+        } else return 1;
+    }
     public void introduceSelf() {
         Debug.Log("name:" + name + " atk:" + atk + " def:" + def + " hp:" + hp + " gold:" + gold);
     }

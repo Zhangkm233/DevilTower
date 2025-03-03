@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,23 +11,25 @@ public class UIManager : MonoBehaviour
     public enum UIState {
         STAT,DIALOG,DICTIONARY,
     };
+    public enum sentenceState
+    {
+        TEXT, EVENT, END,
+    };
+
     public UIState State = UIState.STAT;
     public Text keyStat;
     public Text playerStat;
     public Text monsterStat;
     public Text monsterAbilityStat;
-    public Text dialogName;
-    public Text dialogText;
+    //public Text dialogName;
+    //public Text dialogText;
     public GameObject statMain;
     public GameObject dialogMain;
-    public string dialogTitle;
-    public int sentenceNumber = -1;
-    public enum sentenceState {
-        TEXT,EVENT,
-    }
-    public sentenceState[] sentenceStates;
-    public string[] sentenceNames;
-    public string[] sentenceTexts;
+    //public string dialogTitle;
+    //public int sentenceNumber = -1;
+    //public List<sentenceState> sentenceStates;
+    //public List<string> sentenceNames = new List<string>();
+    //public List<string> sentenceTexts = new List<string>();
 
     private void Start() {
         statMain = this.transform.GetChild(0).gameObject;
@@ -35,15 +38,10 @@ public class UIManager : MonoBehaviour
         monsterAbilityStat = this.GetComponentInChildren<Canvas>().transform.GetChild(1).GetComponent<Text>();
         playerStat = this.GetComponentInChildren<Canvas>().transform.GetChild(2).GetComponent<Text>();
         keyStat = this.GetComponentInChildren<Canvas>().transform.GetChild(3).GetComponent<Text>();
-        dialogName = this.transform.GetChild(1).GetChild(1).GetComponent<Text>();
-        dialogText = this.transform.GetChild(1).GetChild(2).GetComponent<Text>();
 
         monsterStat.text = " ";
         monsterAbilityStat.text = " ";
-        dialogName.text = "润";
-        dialogText.text = "（鞠躬）（点头）\n（摇头）";
         dialogMain.SetActive(false);
-        ReadDialog(1);
     }
     private void Update() {
         updatePlayerKeyText();
@@ -146,9 +144,7 @@ public class UIManager : MonoBehaviour
     public void ChangeState() {
         switch (State) {
             case UIState.STAT:
-                State = UIState.DIALOG;
-                dialogMain.SetActive(true);
-                statMain.SetActive(false);
+                GoDialog();
                 break;
             case UIState.DIALOG:
                 State = UIState.DICTIONARY;
@@ -156,38 +152,18 @@ public class UIManager : MonoBehaviour
                 statMain.SetActive(false);
                 break;
             case UIState.DICTIONARY:
-                State = UIState.STAT;
-                dialogMain.SetActive(false);
-                statMain.SetActive(true);
+                GoStat();
                 break;
         }
     }
-    public void ReadDialog(int dialogNumber) {
-        //dialogTitle = "Assets/Resources/dialog" + dialogNumber +".txt";
-        dialogTitle = "Assets/Resources/dialog1.txt";
-        Debug.Log(dialogTitle);
-        string[] lines = File.ReadAllLines(dialogTitle);
-        Debug.Log(lines[0]);
-        Debug.Log(lines[0].Split(";")[2]);
-        string[] sentenceNames = new string[lines.Length];
-        string[] sentenceTexts = new string[lines.Length];
-        for (int i = 0;i < lines.Length;i++) {
-            Debug.Log(i);
-            //sentenceStates[i] = (sentenceState)Enum.Parse(typeof(sentenceState),lines[i].Split(';')[0]);
-            sentenceNames[i] = "a";
-            sentenceNames[i] = (lines[i].Split(";"))[1];
-            sentenceTexts[i] = lines[i].Split(";")[2];
-        }
+    public void GoDialog() {
+        State = UIState.DIALOG;
+        dialogMain.SetActive(true);
+        statMain.SetActive(false);
     }
-    public void NextSentence() {
-        //为什么有bug
-
-        if (sentenceNames[sentenceNumber + 1] == null) {
-            sentenceNumber = 0;
-            return;
-        }
-        sentenceNumber++;
-        dialogName.text = sentenceNames[sentenceNumber];
-        dialogText.text = sentenceTexts[sentenceNumber];
+    public void GoStat() {
+        State = UIState.STAT;
+        dialogMain.SetActive(false);
+        statMain.SetActive(true);
     }
 }

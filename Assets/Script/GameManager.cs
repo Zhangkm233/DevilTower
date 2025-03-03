@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
         if (gridTileManager.mapY != GameData.gridHeight-1) return;
         //遭遇怪物
         if (gridTileManager.gridType == Grid.GridType.MONSTER) {
+            //腐蚀
+            GameData.playerHp = (int)(GameData.playerHp * ((GridMonster)GridInMap).CorruptionPercent());
             int battleDamage = ResolveDamage((GridMonster)GridInMap);
             if (battleDamage == -1) {
                 Debug.Log("战斗伤害：???");
@@ -131,11 +133,19 @@ public class GameManager : MonoBehaviour
         bool hasLostMind = false;
         //处理最地下一层怪物的移动逻辑
         for (int i = 0;i < GameData.gridWidth;i++) { 
+            //魔心的判断 防止让他一步走两格
             if (hasLostMind && i == 5) continue;
             Debug.Log("判断" + i + " " + (GameData.gridHeight - 1));
             Grid grid = GameData.map[i,GameData.gridHeight - 1];
             if (grid.type == Grid.GridType.MONSTER) {
+                if (((GridMonster)grid).isStalk) {
+                    //追猎
+                    Debug.Log(((GridMonster)grid).name + "追猎触发");
+                    GameData.playerHp -= ((GridMonster)grid).atk - GameData.playerDef;
+                }
+                //坚定
                 if (((GridMonster)grid).isFirmness) continue;
+                //魔心
                 if (i == 0 && !((GridMonster)grid).isLostmind) continue;
                 Grid targetGrid = null;
                 if (i == 0 && ((GridMonster)grid).isLostmind) {
@@ -154,6 +164,7 @@ public class GameManager : MonoBehaviour
                     }
                     GameData.map[i,GameData.gridHeight - 1] = targetGrid;
                     if (((GridMonster)grid).isCrack) {
+                        //碎裂
                         ClearGridInMap(i,GameData.gridHeight - 1);
                     }
                     UpdateEachGrid();
