@@ -13,17 +13,67 @@ MonoBehaviour:
   m_Name: MonsterDataObject
   m_EditorClassIdentifier: 
   monsterDataList:
-  - name: 
+  - name: heyhey
     atk: 0
     def: 0
     hp: 0
     gold: 0
     abilityType: 
-    sprite: {fileID: 0}
-  - name: 
+    sprite: {fileID: -6682744762430114866, guid: cbbd60f617d2303419dd006c732ff4a9, type: 3}
+    intro: this is me
+  - name: hello
     atk: 0
     def: 0
     hp: 0
     gold: 0
     abilityType: 
-    sprite: {fileID: 0}
+    sprite: {fileID: -826025077468323545, guid: d611912f7b93d2a4f97c8bb17baf1082, type: 3}
+    intro: this is me
+  - name: hello
+    atk: 0
+    def: 0
+    hp: 0
+    gold: 0
+    abilityType: 
+    sprite: {fileID: -826025077468323545, guid: d611912f7b93d2a4f97c8bb17baf1082, type: 3}
+    intro: this is me
+  - name: hello
+    atk: 0
+    def: 0
+    hp: 0
+    gold: 0
+    abilityType: 
+    sprite: {fileID: -826025077468323545, guid: d611912f7b93d2a4f97c8bb17baf1082, type: 3}
+    intro: this is me
+  - name: hello
+    atk: 0
+    def: 0
+    hp: 0
+    gold: 0
+    abilityType: 
+    sprite: {fileID: -826025077468323545, guid: d611912f7b93d2a4f97c8bb17baf1082, type: 3}
+    intro: this is me
+  - name: hello
+    atk: 0
+    def: 0
+    hp: 0
+    gold: 0
+    abilityType: 
+    sprite: {fileID: -826025077468323545, guid: d611912f7b93d2a4f97c8bb17baf1082, type: 3}
+    intro: this is me
+  - name: hello
+    atk: 0
+    def: 0
+    hp: 0
+    gold: 0
+    abilityType: 
+    sprite: {fileID: -826025077468323545, guid: d611912f7b93d2a4f97c8bb17baf1082, type: 3}
+    intro: this is me
+  - name: hello
+    atk: 0
+    def: 0
+    hp: 0
+    gold: 0
+    abilityType: 
+    sprite: {fileID: -826025077468323545, guid: d611912f7b93d2a4f97c8bb17baf1082, type: 3}
+    intro: this is me

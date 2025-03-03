@@ -1,21 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "MonsterDataObject", menuName = "Scriptable Objects/MonsterDataObject")]
-public class MonsterDataObject : ScriptableObject
+[System.Serializable]
+public class MonsterData
 {
-    [System.Serializable]
-    public class MonsterData
-    {
-        public string name;
-        public int atk;
-        public int def;
-        public int hp;
-        public int gold;
-        public ability[] abilityType;
-        public Sprite sprite;
-    }
-
     public enum ability
     {
         LOSTMIND,
@@ -25,6 +13,19 @@ public class MonsterDataObject : ScriptableObject
         CORRPUTION,
         BOSS,
     }
+    public string name;
+    public int atk;
+    public int def;
+    public int hp;
+    public int gold;
+    public ability[] abilityType;
+    public Sprite sprite;
+    public string intro;
+}
 
+
+[CreateAssetMenu(fileName = "MonsterDataObject", menuName = "Scriptable Objects/MonsterDataObject")]
+public class MonsterDataObject : ScriptableObject
+{
     public List<MonsterData> monsterDataList = new List<MonsterData>();
 }
