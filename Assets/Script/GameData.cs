@@ -3,6 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public static class GameData
 {
+    public static int eventEncounter = 0; //遭遇的事件数量
     public static int layer = 1;
     public static int key1 = 0;
     public static int key2 = 0;

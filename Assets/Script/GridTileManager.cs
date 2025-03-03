@@ -11,23 +11,10 @@ public class GridTileManager : MonoBehaviour
     public Text monsterStat;
     public GameObject gameManagerObject;
     private void Start() {
-        //monsterStat = gameManagerObject.GetComponentInChildren<Canvas>().GetComponentInChildren<Text>();
     }
     private void OnMouseEnter() {
-       /*if (gridType == Grid.GridType.MONSTER) {
-            int cDamage = gameManagerObject.GetComponent<GameManager>().CaculateDamage((GridMonster)mapGrid);
-            if (cDamage == -1) {
-                monsterStat.text = "Ãû×Ö:" + ((GridMonster)mapGrid).name + " Ô¤¼ÆÉËº¦: ???"; 
-            } else {
-                monsterStat.text = "Ãû×Ö:" + ((GridMonster)mapGrid).name + " Ô¤¼ÆÉËº¦:" +
-                    cDamage.ToString();
-            }
-        }*/
     }
     private void OnMouseExit() {
-        /*if (monsterStat.text != null) {
-            monsterStat.text = null;
-        }*/
     }
     public void UpdateData() {
         if (GameData.map[mapX,mapY] != null) {

@@ -21,15 +21,9 @@ public class UIManager : MonoBehaviour
     public Text playerStat;
     public Text monsterStat;
     public Text monsterAbilityStat;
-    //public Text dialogName;
-    //public Text dialogText;
+    public Slider completeSlider;
     public GameObject statMain;
     public GameObject dialogMain;
-    //public string dialogTitle;
-    //public int sentenceNumber = -1;
-    //public List<sentenceState> sentenceStates;
-    //public List<string> sentenceNames = new List<string>();
-    //public List<string> sentenceTexts = new List<string>();
 
     private void Start() {
         statMain = this.transform.GetChild(0).gameObject;
@@ -45,7 +39,11 @@ public class UIManager : MonoBehaviour
     }
     private void Update() {
         updatePlayerKeyText();
-        updateMonsterStat();
+        updateGridStat();
+        updateCompleteStatSlide();
+    }
+    void updateCompleteStatSlide() {
+        completeSlider.value = (float)GameData.eventEncounter / 90;
     }
     void updatePlayerKeyText() {
         playerStat.text = 
@@ -57,7 +55,7 @@ public class UIManager : MonoBehaviour
             "\n°×ÒøÔ¿³×: " + GameData.key2.ToString() +
             "\n»Æ½ðÔ¿³×: " + GameData.key3.ToString();
     }
-    void updateMonsterStat() {
+    void updateGridStat() {
         if (this.GetComponent<GameManager>().objectClick == null) {
             monsterStat.text = " ";
             monsterAbilityStat.text = " ";
