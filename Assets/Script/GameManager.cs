@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
             }
             Debug.Log("’Ω∂∑…À∫¶£∫" + battleDamage);
             GameData.playerHp -= battleDamage;
+            GameData.gold += ((GridMonster)GridInMap).gold;
             ClearGridInMap(gridTileManager);
             return true;
         }
@@ -135,8 +136,8 @@ public class GameManager : MonoBehaviour
             return true;
         }
         if (gridTileManager.gridType == Grid.GridType.SHOP) {
-            ClearGridInMap(gridTileManager);
-            return true;
+            
+            return false;
         }
         return false;
     }

@@ -8,6 +8,7 @@ public static class GameData
     public static int key1 = 0;
     public static int key2 = 0;
     public static int key3 = 0;
+    public static int gold = 0;
 
     public static int playerHp = 10;
     public static int playerDef = 10;

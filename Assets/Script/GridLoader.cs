@@ -67,6 +67,9 @@ public class GridLoader : MonoBehaviour
             case "B":
                 g = new GridBottle(gridStat);
                 break;
+            case "S":
+                g = new GridShop(gridStat);
+                break;
             default:
                 g = new Grid(gridType,gridStat);
                 break;
