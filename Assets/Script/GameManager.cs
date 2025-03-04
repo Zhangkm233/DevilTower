@@ -136,7 +136,8 @@ public class GameManager : MonoBehaviour
             return true;
         }
         if (gridTileManager.gridType == Grid.GridType.SHOP) {
-            
+            this.GetComponent<UIManager>().StartTrade((GridShop)GridInMap,
+                gridTileManager.mapX,gridTileManager.mapY);
             return false;
         }
         return false;

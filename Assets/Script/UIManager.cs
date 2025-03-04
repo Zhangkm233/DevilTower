@@ -9,7 +9,7 @@ using static Grid;
 public class UIManager : MonoBehaviour
 {
     public enum UIState {
-        STAT,DIALOG,DICTIONARY,
+        STAT,DIALOG,DICTIONARY,SHOP
     };
     public enum sentenceState
     {
@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     };
 
     public UIState State = UIState.STAT;
+    public Text goldStat;
     public Text keyStat;
     public Text playerStat;
     public Text monsterStat;
@@ -25,6 +26,7 @@ public class UIManager : MonoBehaviour
     public GameObject statMain;
     public GameObject dialogMain;
     public GameObject goForgeButton;
+    public GameObject shopMain;
 
     private void Start() {
         statMain = this.transform.GetChild(0).gameObject;
@@ -39,6 +41,7 @@ public class UIManager : MonoBehaviour
         monsterAbilityStat.text = " ";
         dialogMain.SetActive(false);
         goForgeButton.SetActive(false);
+        shopMain.SetActive(false);
     }
     private void Update() {
         updatePlayerKeyText();
@@ -61,6 +64,7 @@ public class UIManager : MonoBehaviour
             "ÇàÍ­Ô¿³×: " + GameData.key1.ToString() +
             "\n°×ÒøÔ¿³×: " + GameData.key2.ToString() +
             "\n»Æ½ðÔ¿³×: " + GameData.key3.ToString();
+        goldStat.text = "½ð±ÒÊýÁ¿:" + GameData.gold.ToString();
     }
     void updateGridStat() {
         if (this.GetComponent<GameManager>().objectClick == null) {
@@ -152,23 +156,36 @@ public class UIManager : MonoBehaviour
                 GoDialog();
                 break;
             case UIState.DIALOG:
-                State = UIState.DICTIONARY;
-                dialogMain.SetActive(false);
-                statMain.SetActive(false);
-                break;
-            case UIState.DICTIONARY:
                 GoStat();
                 break;
         }
     }
+    public void StartTrade(GridShop gridShop,int X,int Y) {
+        GoShop();
+        shopMain.GetComponent<ShopManager>().UpdateShopData(gridShop,X,Y);
+    }
     public void GoDialog() {
-        State = UIState.DIALOG;
-        dialogMain.SetActive(true);
-        statMain.SetActive(false);
+        GoState(UIState.DIALOG);
     }
     public void GoStat() {
-        State = UIState.STAT;
-        dialogMain.SetActive(false);
-        statMain.SetActive(true);
+        GoState(UIState.STAT);
+    }
+    public void GoShop() {
+        GoState(UIState.SHOP);
+    }
+    public void GoState(UIState uistate) {
+        State = uistate;
+        if (uistate == UIState.DIALOG) dialogMain.SetActive(true);
+        if (uistate != UIState.DIALOG) dialogMain.SetActive(false);
+        if (uistate == UIState.STAT) statMain.SetActive(true);
+        if (uistate != UIState.STAT) statMain.SetActive(false);
+        if (uistate == UIState.SHOP) shopMain.SetActive(true);
+        if (uistate != UIState.SHOP) shopMain.SetActive(false);
+    }
+    public void Cheat() {
+        GameData.key1++;
+        GameData.key2++;
+        GameData.key3++;
+        GameData.gold += 10;
     }
 }

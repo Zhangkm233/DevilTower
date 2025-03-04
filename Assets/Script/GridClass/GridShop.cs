@@ -21,9 +21,11 @@ public class GridShop : Grid
     public GridShop(int stat) {
         this.type = GridType.SHOP;
         this.stat = stat;
-        itemGiveOut = shopItemStat[stat,0];
-        itemGiveOutNum = shopItemNum[stat,0];
-        itemExchangeFor = shopItemStat[stat,1];
-        itemExchangeForNum = shopItemNum[stat,1];
+        //ÊÛ³ö
+        itemGiveOut = shopItemStat[stat,1];
+        itemGiveOutNum = shopItemNum[stat,1];
+        //Ö§¸¶
+        itemExchangeFor = shopItemStat[stat,0];
+        itemExchangeForNum = shopItemNum[stat,0];
     }
 }
