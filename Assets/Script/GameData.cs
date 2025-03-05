@@ -10,9 +10,11 @@ public static class GameData
     public static int key3 = 0;
     public static int gold = 0;
 
-    public static int playerHp = 10;
+    public static int playerHp = 400;
     public static int playerDef = 10;
     public static int playerAtk = 10;
+    //铁匠铺升级次数
+    public static int forgeTime = 0;
 
     public static int gridWidth = 6; // 地图宽度
     public static int gridHeight = 15; // 地图高度

@@ -9,7 +9,7 @@ using static Grid;
 public class UIManager : MonoBehaviour
 {
     public enum UIState {
-        STAT,DIALOG,DICTIONARY,SHOP
+        STAT,DIALOG,DICTIONARY,SHOP,FORGE
     };
     public enum sentenceState
     {
@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     public Text monsterStat;
     public Text monsterAbilityStat;
     public Slider completeSlider;
+    public GameObject forgeMain;
     public GameObject statMain;
     public GameObject dialogMain;
     public GameObject goForgeButton;
@@ -174,6 +175,10 @@ public class UIManager : MonoBehaviour
     public void GoShop() {
         GoState(UIState.SHOP);
     }
+
+    public void GoForge() {
+        GoState(UIState.FORGE);
+    }
     public void GoState(UIState uistate) {
         State = uistate;
         if (uistate == UIState.DIALOG) dialogMain.SetActive(true);
@@ -182,6 +187,8 @@ public class UIManager : MonoBehaviour
         if (uistate != UIState.STAT) statMain.SetActive(false);
         if (uistate == UIState.SHOP) shopMain.SetActive(true);
         if (uistate != UIState.SHOP) shopMain.SetActive(false);
+        if (uistate == UIState.FORGE) forgeMain.SetActive(true);
+        if (uistate != UIState.FORGE) forgeMain.SetActive(false);
     }
     public void Cheat() {
         GameData.key1++;
