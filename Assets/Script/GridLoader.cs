@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 using static Grid;
 
 [System.Serializable]
@@ -8,14 +9,15 @@ public class GridLoader : MonoBehaviour
     public string txtFilePath ; // TXT文件路径
     public int gridWidth = GameData.gridWidth; // 地图宽度
     public int gridHeight = GameData.gridHeight; // 地图高度
-    void Start() {
+    public TextAsset[] maps;
+    void Awake() {
         LoadMapFromTxt();
         PrintGrid();
         this.gameObject.GetComponent<GridDrawer>().DrawThreeGrid();
     }
     //M怪物 X封锁 D门 G宝石 B血瓶 K钥匙 N NPC S商人
-    void LoadMapFromTxt() { 
-        txtFilePath = "Assets/Resources/map" + GameData.layer + ".txt"; // 读取TXT文件
+    void LoadMapFromTxt() {
+         txtFilePath = Application.streamingAssetsPath + "/map" + GameData.layer + ".txt"; // 读取TXT文件
         // 读取TXT文件
         string[] lines = File.ReadAllLines(txtFilePath);
         for (int y = 0;y < gridHeight;y++) {

@@ -23,7 +23,7 @@ public class DialogManager : MonoBehaviour
     public List<string> sentenceTexts = new List<string>();
 
     public void ReadDialog(int dialogNumber) {
-        dialogTitle = "Assets/Resources/dialog" + dialogNumber +".txt";
+        dialogTitle = Application.streamingAssetsPath + "/dialog" + dialogNumber +".txt";
         //dialogTitle = "Assets/Resources/dialog1.txt";
         Debug.Log(dialogTitle);
         string[] lines = File.ReadAllLines(dialogTitle);

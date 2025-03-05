@@ -7,7 +7,9 @@ public class GridDrawer : MonoBehaviour
     public GameObject gridPrefab;
     public Grid[,] map = new Grid[GameData.gridWidth,3];
     public Sprite gridSprite;
-
+    private void Start() {
+        //DrawThreeGrid();
+    }
     public void DrawThreeGrid() {
         for (int j = 0;j < 3;j++) {
             for (int i = 0;i < GameData.gridWidth;i++) {

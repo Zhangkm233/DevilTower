@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.IO;
 using Unity.VisualScripting.FullSerializer;
+using UnityEditor;
+using System.Threading;
 
 public class GridMonster : Grid
 {
@@ -32,7 +34,8 @@ public class GridMonster : Grid
         GridTypeToWord = "M";
         this.stat = stat;
         this.type = GridType.MONSTER;
-        txtFilePath = "Assets/Resources/monster" + GameData.layer + ".txt";
+        //AssetDatabase.LoadAssetAtPath<DefaultAsset>("Assets/StreamingAssets/monster" + GameData.layer + ".txt");
+        txtFilePath = Application.streamingAssetsPath + "/monster" + GameData.layer + ".txt";
         string[] lines = File.ReadAllLines(txtFilePath);
         string[] monsterStat = lines[stat-1].Split(' ');
         name = monsterStat[0];

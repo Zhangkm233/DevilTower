@@ -16,8 +16,8 @@ public class ShopManager : MonoBehaviour
         itemExchangeFor = gridShop.itemExchangeFor;
         itemGiveOutNum = gridShop.itemGiveOutNum;
         itemExchangeForNum = gridShop.itemExchangeForNum;
-        shopStat.text = itemGiveOutNum + "个" + Hanize(itemGiveOut) + 
-            "交换:\n" + itemExchangeForNum + "个" + Hanize(itemExchangeFor);
+        shopStat.text = "我想用" +itemGiveOutNum + "个" + Hanize(itemGiveOut) + 
+            "交换你的" + itemExchangeForNum + "个" + Hanize(itemExchangeFor);
     }
     public string Hanize(string str) {
         //汉化

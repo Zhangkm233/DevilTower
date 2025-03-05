@@ -96,6 +96,7 @@ public class UIManager : MonoBehaviour
                 monsterAbilityStat.text = abilitys;
                 return;
             }
+            monsterAbilityStat.text = "";
             if (gridInMaped.type == Grid.GridType.BOTTLE) {
                 switch (gridInMaped.stat) {
                     case 1:

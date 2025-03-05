@@ -32,7 +32,7 @@ public class GridBottle : Grid
 
     public GridBottle(BottleSizeType size, int layer) {
         this.type = GridType.BOTTLE;
-        this.stat = stat;
+        // this.stat = stat;
         bottleSize = size;
         healingPoints = healingPointsTable[(int)size - 1, layer - 1];
     }
