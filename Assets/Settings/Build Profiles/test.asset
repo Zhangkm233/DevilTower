@@ -119,7 +119,7 @@ MonoBehaviour:
     - line: '|   bakeCollisionMeshes: 0'
     - line: '|   forceSingleInstance: 0'
     - line: '|   useFlipModelSwapchain: 1'
-    - line: '|   resizableWindow: 0'
+    - line: '|   resizableWindow: 1'
     - line: '|   useMacAppStoreValidation: 0'
     - line: '|   macAppStoreCategory: public.app-category.games'
     - line: '|   gpuSkinning: 0'
@@ -165,7 +165,7 @@ MonoBehaviour:
     - line: '|   loadStoreDebugModeEnabled: 0'
     - line: '|   visionOSBundleVersion: 1.0'
     - line: '|   tvOSBundleVersion: 1.0'
-    - line: '|   bundleVersion: 1.0'
+    - line: '|   bundleVersion: 1.1'
     - line: '|   preloadedAssets: []'
     - line: '|   metroInputSource: 0'
     - line: '|   wsaTransparentSwapchain: 0'
@@ -315,7 +315,7 @@ MonoBehaviour:
     - line: '|   - m_BuildTarget: '
     - line: '|     m_Icons:'
     - line: '|     - serializedVersion: 2'
-    - line: '|       m_Icon: {fileID: 2800000, guid: 602cb87b6a29443b8636370ea0751574,
+    - line: '|       m_Icon: {fileID: 2800000, guid: 17c350171f7a3ca479f830547c66d187,
         type: 3}'
     - line: '|       m_Width: 128'
     - line: '|       m_Height: 128'

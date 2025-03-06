@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ForgeManager : MonoBehaviour
 {
@@ -18,30 +19,55 @@ public class ForgeManager : MonoBehaviour
         2,4,8,12,20
     };
     public GameObject gameManager;
+    public Text forgeDialogText;
+    public Text forgeHpText;
+    public Text forgeAtkText;
+    public Text forgeDefText;
     public static int priceNow = 0;
+    public static int hpForgeGive = 0;
+    public static int atkForgeGive = 0;
+    public static int defForgeGive = 0;
     public void initializePrice() {
         if (GameData.forgeTime < 12) {
             priceNow = forgePrice[GameData.forgeTime];
         } else {
             priceNow = forgePrice[11];
         }
+        forgeDialogText.text = "你好，需要锻造吗？只需要" + priceNow + "个魔力结晶";
+        hpForgeGive = forgeHp[GameData.layer - 1];
+        atkForgeGive = forgeAtk[GameData.layer - 1];
+        defForgeGive = forgeDef[GameData.layer - 1];
+        forgeHpText.text = "增加" +hpForgeGive.ToString() + "HP";
+        forgeAtkText.text = "增加" + atkForgeGive.ToString() + "ATK";
+        forgeDefText.text = "增加" + defForgeGive.ToString() + "DEF";
+
+    }
+    public void ForgeHp() {
+        AffirmForge(ForgeOpinion.HP);
+    }
+    public void ForgeAtk() {
+        AffirmForge(ForgeOpinion.ATK);
+    }
+    public void ForgeDef() {
+        AffirmForge(ForgeOpinion.DEF);
     }
     public void AffirmForge(ForgeOpinion opinion) {
         if (GameData.gold >= priceNow) {
             GameData.gold -= priceNow;
             switch (opinion) {
                 case ForgeOpinion.HP:
-                    GameData.playerHp += forgeHp[GameData.layer - 1];
+                    GameData.playerHp += hpForgeGive;
                     break;
                 case ForgeOpinion.ATK:
-                    GameData.playerAtk += forgeAtk[GameData.layer - 1];
+                    GameData.playerAtk += atkForgeGive;
                     break;
                 case ForgeOpinion.DEF:
-                    GameData.playerDef += forgeDef[GameData.layer - 1];
+                    GameData.playerDef += defForgeGive;
                     break;
             }
             GameData.forgeTime++;
         }
+        initializePrice();
     }
     public void LeaveForge() {
         gameManager.GetComponent<UIManager>().GoStat();
