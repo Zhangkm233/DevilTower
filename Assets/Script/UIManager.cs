@@ -43,6 +43,7 @@ public class UIManager : MonoBehaviour
         dialogMain.SetActive(false);
         goForgeButton.SetActive(false);
         shopMain.SetActive(false);
+        forgeMain.SetActive(false);
     }
     private void Update() {
         updatePlayerKeyText();
@@ -165,6 +166,10 @@ public class UIManager : MonoBehaviour
     public void StartTrade(GridShop gridShop,int X,int Y) {
         GoShop();
         shopMain.GetComponent<ShopManager>().UpdateShopData(gridShop,X,Y);
+    }
+    public void StartForge() {
+        GoForge();
+        forgeMain.GetComponent<ForgeManager>().initializePrice();
     }
     public void GoDialog() {
         GoState(UIState.DIALOG);
