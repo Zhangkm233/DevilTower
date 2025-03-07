@@ -38,16 +38,16 @@ public class ShopManager : MonoBehaviour
     public bool IsEnough(string str,int num) {
         switch (str) {
             case "gold":
-                if(GameData.gold > num) return true;
+                if(GameData.gold >= num) return true;
                 return false;
             case "key1":
-                if (GameData.key1 > num) return true;
+                if (GameData.key1 >= num) return true;
                 return false;
             case "key2":
-                if (GameData.key2 > num) return true;
+                if (GameData.key2 >= num) return true;
                 return false;
             case "key3":
-                if (GameData.key3 > num) return true;
+                if (GameData.key3 >= num) return true;
                 return false;
         }
         return false;

@@ -162,7 +162,8 @@ public class GameManager : MonoBehaviour
                 //Ä§ÐÄ
                 if (i == 0 && !((GridMonster)grid).isLostmind) continue;
                 Grid targetGrid = null;
-                if (i == 0 && ((GridMonster)grid).isLostmind) {
+                if (i == 0 && ((GridMonster)grid).isLostmind && 
+                    ((GridMonster)GameData.map[5,GameData.gridHeight - 1]).type != Grid.GridType.MONSTER) {
                     hasLostMind = true;
                     targetGrid = GameData.map[5,GameData.gridHeight - 1];
                 }

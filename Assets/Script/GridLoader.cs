@@ -20,7 +20,9 @@ public class GridLoader : MonoBehaviour
          txtFilePath = Application.streamingAssetsPath + "/map" + GameData.layer + ".txt"; // 读取TXT文件
         // 读取TXT文件
         string[] lines = File.ReadAllLines(txtFilePath);
-        for (int y = 0;y < gridHeight;y++) {
+        GameData.gridHeight = lines.Length;
+        GameData.map = new Grid[GameData.gridWidth,GameData.gridHeight];
+        for (int y = 0;y < GameData.gridHeight;y++) {
             string[] tiles = lines[y].Split(','); 
             for (int x = 0;x < gridWidth;x++) {
                 string gridType = tiles[x].Split(' ')[0];
@@ -32,7 +34,7 @@ public class GridLoader : MonoBehaviour
     }
 
     void PrintGrid() {
-        for (int y = 0;y < gridHeight;y++) {
+        for (int y = 0;y < GameData.gridHeight;y++) {
             for (int x = 0;x < gridWidth;x++) {
                 print("x:" + x + " y:" + y + " gridType:" + GameData.map[x,y].type + " gridStat:" + GameData.map[x,y].stat);
                 if (GameData.map[x,y].type == GridType.MONSTER) {

@@ -19,4 +19,6 @@ public static class GameData
     public static int gridWidth = 6; // 地图宽度
     public static int gridHeight = 15; // 地图高度
     public static Grid[,] map = new Grid[gridWidth,gridHeight];
+
+    public static bool[] tarotUnlock;
 }
