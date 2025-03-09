@@ -9,10 +9,10 @@ public class GridShop : Grid
             {"gold","key2"},
         }; 
     public static readonly int[,] shopItemNum = new int[4,2] {
-            {30,3},
+            {15,3},
+            {15,1},
+            {50,1},
             {30,1},
-            {80,1},
-            {40,1},
         };
     public string itemGiveOut;
     public int itemGiveOutNum;

@@ -19,10 +19,10 @@ MonoBehaviour:
   - cardName: Magician
     description: i am magician
     sprite: {fileID: 9161935325122749129, guid: 1efc228400f438847a8255d5a19e3df5, type: 3}
-  - cardName: High Priestess
+  - cardName: HighPriestess
     description: i am magician
     sprite: {fileID: -1391698445481629555, guid: 1f8e6c20fff8200458e52ccf40dcbb77, type: 3}
-  - cardName: empress
+  - cardName: Empress
     description: i am magician
     sprite: {fileID: 2134878861349702175, guid: aae053eec78f8104fad0e8cb892f15eb, type: 3}
   - cardName: emperor
