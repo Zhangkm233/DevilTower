@@ -14,16 +14,37 @@ public class MonsterCatalogManager : MonoBehaviour
     {
         backgroundPanel.gameObject.SetActive(false);
         OriginPos = transform.position;
-        for(int i = 0 ; i < transform.childCount ; i ++){
-            if(transform.GetChild(i).GetComponent<MonsterProfile>() != null){
-                transform.GetChild(i).GetComponent<MonsterProfile>().UseData(monsterDataObject.monsterDataList[i]);
+        UpdateMonsterData();
+    }
+
+    public void UpdateMonsterData() {
+        string txtFilePath = Application.streamingAssetsPath + "/monster" + GameData.layer + ".txt";
+        string[] lines = System.IO.File.ReadAllLines(txtFilePath);
+        for(int i = 0;i < lines.Length;i++) {
+            string[] monsterStat = lines[i].Split(' ');
+            monsterDataObject.monsterDataList[i].name =  monsterStat[0];
+            monsterDataObject.monsterDataList[i].atk = int.Parse(monsterStat[1]);
+            monsterDataObject.monsterDataList[i].def = int.Parse(monsterStat[2]);
+            monsterDataObject.monsterDataList[i].hp = int.Parse(monsterStat[3]);
+            monsterDataObject.monsterDataList[i].gold = int.Parse(monsterStat[4]);
+        }
+        if (monsterDataObject.monsterDataList.Count > lines.Length) {
+            for(int j = lines.Length;j < monsterDataObject.monsterDataList.Count;j++) {
+                monsterDataObject.monsterDataList[j].name = "----";
+                monsterDataObject.monsterDataList[j].atk = 0;
+                monsterDataObject.monsterDataList[j].def = 0;
+                monsterDataObject.monsterDataList[j].hp = 0;
+                monsterDataObject.monsterDataList[j].gold = 0;
+            }
+        }
+        GameObject monsterFiles = this.transform.GetChild(1).gameObject;
+        for (int i = 0;i < monsterFiles.transform.childCount;i++) {
+            if (monsterFiles.transform.GetChild(i).GetComponent<MonsterProfile>() != null) {
+                monsterFiles.transform.GetChild(i).GetComponent<MonsterProfile>().UseData(monsterDataObject.monsterDataList[i]);
             }
         }
     }
 
-    void UpdateMonsterData() {
-        
-    }
     public void OnButtonClicked(){
         if (isCatalogOpen){
             gameManager.GetComponent<UIManager>().GoStat();

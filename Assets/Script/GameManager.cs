@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public Camera mainCamera;
     public GameObject objectClick;
+    public GameObject catalogObject;
     public GridTileManager gridTileManager;
     public Grid GridInMap;
 
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
         //¸üÐÂÍ¼¼ø
+        catalogObject.GetComponent<MonsterCatalogManager>().UpdateMonsterData();
         this.GetComponent<GridLoader>().LoadMapFromTxt();
         UpdateEachGrid();
     }
