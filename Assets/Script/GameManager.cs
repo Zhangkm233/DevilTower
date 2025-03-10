@@ -166,14 +166,14 @@ public class GameManager : MonoBehaviour
         }
         return false;
     }
-
+    
     public void MonsterMovement() {
         bool hasLostMind = false;
         //处理最地下一层怪物的移动逻辑
-        for (int i = 0;i < GameData.gridWidth;i++) { 
+        for (int i = 0;i < GameData.gridWidth;i++) {
             //魔心的判断 防止让他一步走两格
             if (hasLostMind && i == 5) continue;
-            //Debug.Log("判断" + i + " " + (GameData.gridHeight - 1));
+
             Grid grid = GameData.map[i,GameData.gridHeight - 1];
             if (grid.type == Grid.GridType.MONSTER) {
                 if (((GridMonster)grid).isStalk) {
@@ -185,14 +185,19 @@ public class GameManager : MonoBehaviour
                 if (((GridMonster)grid).isFirmness) continue;
                 //魔心
                 if (i == 0 && !((GridMonster)grid).isLostmind) continue;
+                //如果在第一个格子且没有魔心，那么不移动
                 Grid targetGrid = null;
+                //如果有魔心且最右边不是怪，那么尝试移动到最右边
                 if (i == 0 && ((GridMonster)grid).isLostmind && 
                     (GameData.map[5,GameData.gridHeight - 1]).type != Grid.GridType.MONSTER) {
                     hasLostMind = true;
                     targetGrid = GameData.map[5,GameData.gridHeight - 1];
                 }
-                if(targetGrid == null) targetGrid = GameData.map[i - 1,GameData.gridHeight - 1];
-
+                if (i == 0 && ((GridMonster)grid).isLostmind &&
+                    (GameData.map[5,GameData.gridHeight - 1]).type == Grid.GridType.MONSTER) {
+                    continue;
+                }
+                if (targetGrid == null) targetGrid = GameData.map[i - 1,GameData.gridHeight - 1];
                 if (targetGrid.type != Grid.GridType.MONSTER &&
                      targetGrid.type != Grid.GridType.DOOR &&
                      targetGrid.type != Grid.GridType.BARRIER) {
@@ -207,12 +212,11 @@ public class GameManager : MonoBehaviour
                         //碎裂
                         ClearGridInMap(i,GameData.gridHeight - 1);
                     }
-                    UpdateEachGrid();
                 }
             }
         }
+        UpdateEachGrid();
     }
-        
     public void ClearGridInMap(GridTileManager gridTileManager) {
         ClearGridInMap(gridTileManager.mapX,gridTileManager.mapY);
     }
