@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     public Text playerStat;
     public Text monsterStat;
     public Text monsterAbilityStat;
+    public Text completeStat;
+    public Text layerStat;
     public Slider completeSlider;
     public GameObject forgeMain;
     public GameObject statMain;
@@ -29,7 +31,7 @@ public class UIManager : MonoBehaviour
     public GameObject goForgeButton;
     public GameObject shopMain;
 
-    private void Start() {
+    void Start() {
         statMain = this.transform.GetChild(0).gameObject;
         dialogMain = this.transform.GetChild(1).gameObject;
 
@@ -45,14 +47,37 @@ public class UIManager : MonoBehaviour
         shopMain.SetActive(false);
         forgeMain.SetActive(false);
     }
-    private void Update() {
+    void Update() {
         updatePlayerKeyText();
         updateGridStat();
         updateCompleteStatSlide();
+        updateLayerName();
+    }
+    void updateLayerName() {
+        string temp = "第" + GameData.layer.ToString() + "层\n";
+        switch (GameData.layer) {
+            case 1:
+                temp += "魔女隐居之地";
+                break;
+            case 2:
+                temp += "月亮教会";
+                break;
+            case 3:
+                temp += "狂猎的训练场";
+                break;
+            case 4:
+                temp += "地下监狱";
+                break;
+            case 5:
+                temp += "1";
+                break;
+        }
+        layerStat.text = temp;
     }
     void updateCompleteStatSlide() {
         //更新进度条 更新铁匠铺
-        completeSlider.value = (float)GameData.eventEncounter / 90;
+        completeStat.text = GameData.eventEncounter.ToString();
+        completeSlider.value = (float)GameData.eventEncounter / 85;
         if (GameData.eventEncounter >= 30) {
             goForgeButton.SetActive(true);
         }
@@ -81,10 +106,11 @@ public class UIManager : MonoBehaviour
                 GridMonster gridMonster = (GridMonster)gridInMaped;
                 int cDamage = this.GetComponent<GameManager>().CaculateDamage(gridMonster);
                 if (cDamage == -1) {
-                    monsterStat.text = "名字:" + gridMonster.name + " 预计伤害: ???";
+                    monsterStat.text = gridMonster.name + " " + gridMonster.atk + "/" + gridMonster.def +"/" + gridMonster.hp + 
+                        " \n预计伤害: ???";
                 } else {
-                    monsterStat.text = "名字:" + gridMonster.name + " 预计伤害:" +
-                        cDamage.ToString();
+                    monsterStat.text = gridMonster.name + " " + gridMonster.atk + "/" + gridMonster.def + "/" + gridMonster.hp + 
+                        " \n预计伤害:" + cDamage.ToString();
                 }
                 string abilitys = "";
                 if (gridMonster.isLostmind) abilitys = abilitys + "魔心 ";
@@ -150,6 +176,14 @@ public class UIManager : MonoBehaviour
                         monsterStat.text = "一把黄金钥匙";
                         break;
                 }
+            }
+            if (gridInMaped.type == GridType.SHOP) {
+                GridShop gridShop = (GridShop)gridInMaped;
+                monsterStat.text = "商店\n" + gridShop.itemGiveOut + " " + gridShop.itemGiveOutNum + "个\n" +
+                    gridShop.itemExchangeFor + " " + gridShop.itemExchangeForNum + "个";
+            }
+            if (gridInMaped.type == GridType.NPC) {
+                monsterStat.text = "NPC 暂时没用";
             }
         }
     }

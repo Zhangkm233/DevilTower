@@ -36,7 +36,31 @@ public class GameManager : MonoBehaviour
         }
         UpdateGameDataToPublic();
     }
-
+    public void PlayerStatChange(int hp,int atk,int def,int key1,int key2,int key3,int gold,int forgetime) {
+        GameData.playerHp = hp;
+        GameData.playerAtk = atk;
+        GameData.playerDef = def;
+        GameData.key1 = key1;
+        GameData.key2 = key2;
+        GameData.key3 = key3;
+        GameData.gold = gold;
+        GameData.forgeTime = forgetime;
+    }
+    public void LayerChangeTo(int layerTo) {
+        if(this.GetComponent<UIManager>().State != UIManager.UIState.STAT) return;
+        GameData.layer = layerTo;
+        GameData.eventEncounter = 0;
+        switch (layerTo) {
+            case 1:
+                PlayerStatChange(400,10,10,0,0,0,0,0);
+                break;
+            case 2:
+                PlayerStatChange(600,21,21,0,0,0,50,3);
+                break;
+        }
+        this.GetComponent<GridLoader>().LoadMapFromTxt();
+        UpdateEachGrid();
+    }
     bool MapClickEvent() {
         if (this.GetComponent<UIManager>().State != UIManager.UIState.STAT) return false;
         if (gridTileManager.mapY != GameData.gridHeight-1) return false;
@@ -163,7 +187,7 @@ public class GameManager : MonoBehaviour
                 if (i == 0 && !((GridMonster)grid).isLostmind) continue;
                 Grid targetGrid = null;
                 if (i == 0 && ((GridMonster)grid).isLostmind && 
-                    ((GridMonster)GameData.map[5,GameData.gridHeight - 1]).type != Grid.GridType.MONSTER) {
+                    (GameData.map[5,GameData.gridHeight - 1]).type != Grid.GridType.MONSTER) {
                     hasLostMind = true;
                     targetGrid = GameData.map[5,GameData.gridHeight - 1];
                 }

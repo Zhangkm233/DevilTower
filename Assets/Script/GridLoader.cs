@@ -16,7 +16,7 @@ public class GridLoader : MonoBehaviour
         this.gameObject.GetComponent<GridDrawer>().DrawThreeGrid();
     }
     //M怪物 X封锁 D门 G宝石 B血瓶 K钥匙 N NPC S商人
-    void LoadMapFromTxt() {
+    public void LoadMapFromTxt() {
          txtFilePath = Application.streamingAssetsPath + "/map" + GameData.layer + ".txt"; // 读取TXT文件
         // 读取TXT文件
         string[] lines = File.ReadAllLines(txtFilePath);
