@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class GridDrawer : MonoBehaviour
 {
     public GameObject gridPrefab;
+    public GameObject TilesParent;
     public Grid[,] map = new Grid[GameData.gridWidth,3];
     public Sprite gridSprite;
     private void Start() {
@@ -15,6 +16,7 @@ public class GridDrawer : MonoBehaviour
             for (int i = 0;i < GameData.gridWidth;i++) {
                 GameObject newgrid = Instantiate(gridPrefab);
                 Grid mapGrid = GameData.map[i,GameData.gridHeight - j - 1];
+                newgrid.transform.SetParent(TilesParent.gameObject.transform);
                 newgrid.GetComponent<GridTileManager>().mapGrid = mapGrid;
                 newgrid.GetComponent<GridTileManager>().mapX = i;
                 newgrid.GetComponent<GridTileManager>().mapY = GameData.gridHeight - j - 1;

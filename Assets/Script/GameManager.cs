@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
                 PlayerStatChange(600,21,21,0,0,0,50,3);
                 break;
         }
+        //¸üÐÂÍ¼¼ø
         this.GetComponent<GridLoader>().LoadMapFromTxt();
         UpdateEachGrid();
     }

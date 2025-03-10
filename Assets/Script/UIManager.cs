@@ -30,7 +30,8 @@ public class UIManager : MonoBehaviour
     public GameObject dialogMain;
     public GameObject goForgeButton;
     public GameObject shopMain;
-
+    public GameObject buttonMain;
+    public GameObject dictionaryMain;
     void Start() {
         statMain = this.transform.GetChild(0).gameObject;
         dialogMain = this.transform.GetChild(1).gameObject;
@@ -218,16 +219,28 @@ public class UIManager : MonoBehaviour
     public void GoForge() {
         GoState(UIState.FORGE);
     }
+    public void GoDictionary() {
+        GoState(UIState.DICTIONARY);
+    }
     public void GoState(UIState uistate) {
         State = uistate;
         if (uistate == UIState.DIALOG) dialogMain.SetActive(true);
         if (uistate != UIState.DIALOG) dialogMain.SetActive(false);
-        if (uistate == UIState.STAT) statMain.SetActive(true);
-        if (uistate != UIState.STAT) statMain.SetActive(false);
+        if (uistate == UIState.STAT) {
+            statMain.SetActive(true);
+            buttonMain.SetActive(true);
+            dictionaryMain.SetActive(true);
+        }
+        if (uistate != UIState.STAT) {
+            statMain.SetActive(false);
+            buttonMain.SetActive(false);
+            dictionaryMain.SetActive(false);
+        }
         if (uistate == UIState.SHOP) shopMain.SetActive(true);
         if (uistate != UIState.SHOP) shopMain.SetActive(false);
         if (uistate == UIState.FORGE) forgeMain.SetActive(true);
         if (uistate != UIState.FORGE) forgeMain.SetActive(false);
+        if (uistate == UIState.DICTIONARY) dictionaryMain.SetActive(true);
     }
     public void Cheat() {
         GameData.key1++;

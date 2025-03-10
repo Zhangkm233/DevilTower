@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class MonsterCatalogManager : MonoBehaviour
 {
+    public GameObject gameManager;
+    public GameObject backgroundPanel;
     public MonsterDataObject monsterDataObject;
     public bool isCatalogOpen = false;
 
@@ -10,24 +12,31 @@ public class MonsterCatalogManager : MonoBehaviour
 
     void Awake()
     {
+        backgroundPanel.gameObject.SetActive(false);
         OriginPos = transform.position;
         for(int i = 0 ; i < transform.childCount ; i ++){
             if(transform.GetChild(i).GetComponent<MonsterProfile>() != null){
                 transform.GetChild(i).GetComponent<MonsterProfile>().UseData(monsterDataObject.monsterDataList[i]);
             }
-            
         }
     }
 
+    void UpdateMonsterData() {
+        
+    }
     public void OnButtonClicked(){
-        if(isCatalogOpen){
+        if (isCatalogOpen){
+            gameManager.GetComponent<UIManager>().GoStat();
             HideCatalog();
-        }else{
+        }else {
+            if (gameManager.GetComponent<UIManager>().State != UIManager.UIState.STAT) return;
+            gameManager.GetComponent<UIManager>().GoDictionary();
             ShowCatalog();
         }
     }
 
     public void ShowCatalog(){
+        backgroundPanel.gameObject.SetActive(true);
         isCatalogOpen = true;
         StartCoroutine(ShowCatalogCoroutine(0.3f));
     }
@@ -54,5 +63,6 @@ public class MonsterCatalogManager : MonoBehaviour
             yield return null;
         }
         transform.position = OriginPos;
+        backgroundPanel.gameObject.SetActive(false);
     }
 }
