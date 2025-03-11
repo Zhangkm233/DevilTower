@@ -211,7 +211,7 @@ public class GameManager : MonoBehaviour
                         GameData.map[i - 1,GameData.gridHeight - 1] = grid;
                     }
                     GameData.map[i,GameData.gridHeight - 1] = targetGrid;
-                    if (((GridMonster)grid).isCrack) {
+                    if (((GridMonster)grid).isCrack && targetGrid.type != Grid.GridType.SHOP && targetGrid.type != Grid.GridType.NPC) {
                         //ห้มั
                         ClearGridInMap(i,GameData.gridHeight - 1);
                     }
