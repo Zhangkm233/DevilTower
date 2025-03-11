@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public int gameplayerAtk;
     public int gameplayerDef;
     public int gameEventEncountered;
+    public int gameMapWidth;
+    public int gameMapHeight;
 
     public Camera mainCamera;
     public GameObject objectClick;
@@ -58,6 +60,9 @@ public class GameManager : MonoBehaviour
             case 2:
                 PlayerStatChange(600,23,20,0,0,0,51,3);
                 break;
+            case 3:
+                PlayerStatChange(800,99,99,9,9,9,999,0);
+                break;
         }
         //更新图鉴
         catalogObject.GetComponent<MonsterCatalogManager>().UpdateMonsterData();
@@ -65,8 +70,14 @@ public class GameManager : MonoBehaviour
         UpdateEachGrid();
     }
     bool MapClickEvent() {
-        if (this.GetComponent<UIManager>().State != UIManager.UIState.STAT) return false;
-        if (gridTileManager.mapY != GameData.gridHeight-1) return false;
+        if (this.GetComponent<UIManager>().State != UIManager.UIState.STAT) {
+            Debug.Log("不在正确的UISTATE里");
+            return false;
+        }
+        if (gridTileManager.mapY != GameData.gridHeight - 1) {
+            Debug.Log("不在最底层");
+            return false;
+        }
         if (gridTileManager.gridType == Grid.GridType.MONSTER) {
             //遭遇怪物
             //腐蚀
@@ -286,6 +297,8 @@ public class GameManager : MonoBehaviour
         gameplayerDef = GameData.playerDef;
         gameplayerHp = GameData.playerHp;
         gameEventEncountered = GameData.eventEncounter;
+        gameMapWidth = GameData.gridWidth;
+        gameMapHeight = GameData.gridHeight;
     }
 
     public GameObject ObjectClick() {
