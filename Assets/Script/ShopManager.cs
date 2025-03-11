@@ -9,6 +9,7 @@ public class ShopManager : MonoBehaviour
     public int mapX, mapY;
     public int itemGiveOutNum;
     public int itemExchangeForNum;
+    public bool isThisShopInfinite = false;
 
     public void UpdateShopData(GridShop gridShop,int gridX,int gridY) {
         mapX = gridX; mapY = gridY;
@@ -16,8 +17,14 @@ public class ShopManager : MonoBehaviour
         itemExchangeFor = gridShop.itemExchangeFor;
         itemGiveOutNum = gridShop.itemGiveOutNum;
         itemExchangeForNum = gridShop.itemExchangeForNum;
-        shopStat.text = "我想用" +itemGiveOutNum + "个" + Hanize(itemGiveOut) + 
-            "交换你的" + itemExchangeForNum + "个" + Hanize(itemExchangeFor);
+        if (!gridShop.isInfinite) {
+            shopStat.text = "我想用" + itemGiveOutNum + "个" + Hanize(itemGiveOut) +
+                "交换你的" + itemExchangeForNum + "个" + Hanize(itemExchangeFor);
+        } else {
+            isThisShopInfinite = true;
+            shopStat.text = "我想用" + itemGiveOutNum + "个" + Hanize(itemGiveOut) +
+                "交换你的" + itemExchangeForNum + "个" + Hanize(itemExchangeFor) + "，这是无限的";
+        }
     }
     public string Hanize(string str) {
         //汉化
@@ -75,8 +82,10 @@ public class ShopManager : MonoBehaviour
             AddToInventory(itemGiveOut,itemGiveOutNum);
             gameManager.GetComponent<GameManager>().ClearGridInMap(mapX,mapY);
             gameManager.GetComponent<GameManager>().MonsterMovement();
-            GameData.eventEncounter++;
-            gameManager.GetComponent<UIManager>().GoStat();
+            if(!isThisShopInfinite) {
+                GameData.eventEncounter++;
+                gameManager.GetComponent<UIManager>().GoStat();
+            }
         }
     }
     public void LeaveTrade() {

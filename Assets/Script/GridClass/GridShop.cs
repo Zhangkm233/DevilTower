@@ -18,6 +18,7 @@ public class GridShop : Grid
             {50,1},
             {1,100},
         };
+    public bool isInfinite;
     public string itemGiveOut;
     public int itemGiveOutNum;
     public string itemExchangeFor;
@@ -25,6 +26,11 @@ public class GridShop : Grid
     public GridShop(int stat) {
         this.type = GridType.SHOP;
         this.stat = stat;
+        if(stat != 5) {
+            isInfinite = false;
+        } else {
+            isInfinite = true;
+        }
         //ÊÛ³ö
         itemGiveOut = shopItemStat[stat,1];
         itemGiveOutNum = shopItemNum[stat,1];

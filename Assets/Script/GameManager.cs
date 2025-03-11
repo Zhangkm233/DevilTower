@@ -65,8 +65,16 @@ public class GameManager : MonoBehaviour
                 break;
         }
         //更新图鉴
+        //因为不同尺寸的地图，事件的位置会对不上格子，所以要重新给所有格子改名和更改mapY
+        string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/map" + layerTo + ".txt");
+        if(lines.Length != GameData.gridHeight) {
+            GameObject[] grids = GameObject.FindGameObjectsWithTag("gridGameObject");
+            foreach (GameObject grid in grids) {
+                grid.GetComponent<GridTileManager>().mapY += lines.Length - GameData.gridHeight;
+            }
+        }
         catalogObject.GetComponent<MonsterCatalogManager>().UpdateMonsterData();
-        this.GetComponent<GridLoader>().LoadMapFromTxt();
+        this.GetComponent<GridLoader>().LoadMapFromTxt(); 
         UpdateEachGrid();
     }
     bool MapClickEvent() {
