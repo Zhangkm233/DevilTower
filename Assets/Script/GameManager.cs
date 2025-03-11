@@ -167,6 +167,9 @@ public class GameManager : MonoBehaviour
                 gridTileManager.mapX,gridTileManager.mapY);
             return false;
         }
+        if (gridTileManager.gridType == Grid.GridType.EVENT) {
+            return false;
+        }
         return false;
     }
     

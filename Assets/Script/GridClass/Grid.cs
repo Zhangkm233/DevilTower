@@ -9,9 +9,10 @@ public class Grid
         DOOR = 2,//门 需要钥匙解锁
         MONSTER = 3,//怪兽 点击后进入战斗
         NPC = 4,//可能会有对话或者交易
-        EVENT = 5,//事件
+        EVENT = 5,//特殊物块
         SHOP = 6,//商店
         KEY = 7,//钥匙
+
         BARRIER = 999,//屏障，不让走
     };
 

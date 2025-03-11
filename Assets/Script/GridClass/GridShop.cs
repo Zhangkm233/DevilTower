@@ -2,17 +2,21 @@ using UnityEngine;
 
 public class GridShop : Grid
 {
-    public static readonly string[,] shopItemStat = new string[4,2] {
+    public static readonly string[,] shopItemStat = new string[6,2] {
             {"gold","key1"},
             {"gold","key2"},
             {"gold","key3"},
             {"gold","key2"},
+            {"gold","key2"},
+            {"key1","gold"},
         }; 
-    public static readonly int[,] shopItemNum = new int[4,2] {
+    public static readonly int[,] shopItemNum = new int[6,2] {
             {15,3},
             {15,1},
             {50,1},
             {30,1},
+            {50,1},
+            {1,100},
         };
     public string itemGiveOut;
     public int itemGiveOutNum;
