@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
                 PlayerStatChange(600,23,20,0,0,0,51,3);
                 break;
             case 3:
-                PlayerStatChange(800,99,99,9,9,9,999,0);
+                PlayerStatChange(800,43,46,0,0,0,134,6);
                 break;
         }
         //¸üÐÂÍ¼¼ø
