@@ -81,8 +81,8 @@ public class ShopManager : MonoBehaviour
             GameData.gold -= itemExchangeForNum;
             AddToInventory(itemGiveOut,itemGiveOutNum);
             gameManager.GetComponent<GameManager>().ClearGridInMap(mapX,mapY);
-            gameManager.GetComponent<GameManager>().MonsterMovement();
             if(!isThisShopInfinite) {
+                gameManager.GetComponent<GameManager>().MonsterMovement();
                 GameData.eventEncounter++;
                 gameManager.GetComponent<UIManager>().GoStat();
             }

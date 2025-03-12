@@ -1,3 +1,4 @@
+using NUnit.Framework.Constraints;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +10,7 @@ using static Grid;
 public class UIManager : MonoBehaviour
 {
     public enum UIState {
-        STAT,DIALOG,DICTIONARY,SHOP,FORGE
+        STAT,DIALOG,DICTIONARY,SHOP,FORGE,EVENT
     };
     public enum sentenceState
     {
@@ -32,6 +33,8 @@ public class UIManager : MonoBehaviour
     public GameObject shopMain;
     public GameObject buttonMain;
     public GameObject dictionaryMain;
+    public GameObject EventMain;
+
     void Start() {
         statMain = this.transform.GetChild(0).gameObject;
         dialogMain = this.transform.GetChild(1).gameObject;
@@ -43,10 +46,7 @@ public class UIManager : MonoBehaviour
 
         monsterStat.text = " ";
         monsterAbilityStat.text = " ";
-        dialogMain.SetActive(false);
-        goForgeButton.SetActive(false);
-        shopMain.SetActive(false);
-        forgeMain.SetActive(false);
+        GoStat();
     }
     void Update() {
         updatePlayerKeyText();
@@ -145,10 +145,10 @@ public class UIManager : MonoBehaviour
             if (gridInMaped.type == Grid.GridType.GEM) {
                 switch (gridInMaped.stat) {
                     case 1:
-                        monsterStat.text = "攻击宝石\n加一点攻击力";
+                        monsterStat.text = "攻击宝石\n加"+((GridGem)gridInMaped).AddSum + "点攻击力";
                         break;
                     case 2:
-                        monsterStat.text = "防御宝石\n加一点防御力";
+                        monsterStat.text = "防御宝石\n加"+((GridGem)gridInMaped).AddSum + "点防御力";
                         break;
                 }
             }
@@ -186,6 +186,22 @@ public class UIManager : MonoBehaviour
             if (gridInMaped.type == GridType.NPC) {
                 monsterStat.text = "NPC 暂时没用";
             }
+            if (gridInMaped.type == GridType.EVENT) {
+                switch (((GridEvent)gridInMaped).eventType) {
+                    case GridEvent.EventType.SOULARROW:
+                        monsterStat.text = "拘魂之箭\n可以直接消灭一个怪物";
+                        break;
+                    case GridEvent.EventType.SOULGATE:
+                        monsterStat.text = "灵魂之门\n可以把一个最前排的怪物和\n后面再后面的物块交换";
+                        break;
+                    case GridEvent.EventType.CORRUPTIONROOTSAVE:
+                        monsterStat.text = "腐殖之根\n存入你当前的一半血量";
+                        break;
+                    case GridEvent.EventType.CORRUPTIONROOTLOAD:
+                        monsterStat.text = "腐殖之根\n取出" + ((GridEvent)gridInMaped).hpSave +"血量并摧毁这个格子";
+                        break;
+                }
+            }
         }
     }
     public void ChangeState() {
@@ -197,6 +213,12 @@ public class UIManager : MonoBehaviour
                 GoStat();
                 break;
         }
+    }
+    public void StartEvent(GridEvent gridEvent,int X,int Y) {
+        GoEvent();
+        EventMain.GetComponent<EventManager>().eventType = gridEvent.eventType;
+        EventMain.GetComponent<EventManager>().mapX = X;
+        EventMain.GetComponent<EventManager>().mapY = Y;
     }
     public void StartTrade(GridShop gridShop,int X,int Y) {
         GoShop();
@@ -222,6 +244,9 @@ public class UIManager : MonoBehaviour
     public void GoDictionary() {
         GoState(UIState.DICTIONARY);
     }
+    public void GoEvent() {
+        GoState(UIState.EVENT);
+    }
     public void GoState(UIState uistate) {
         State = uistate;
         if (uistate == UIState.DIALOG) dialogMain.SetActive(true);
@@ -241,6 +266,8 @@ public class UIManager : MonoBehaviour
         if (uistate == UIState.FORGE) forgeMain.SetActive(true);
         if (uistate != UIState.FORGE) forgeMain.SetActive(false);
         if (uistate == UIState.DICTIONARY) dictionaryMain.SetActive(true);
+        if (uistate == UIState.EVENT) EventMain.SetActive(true);
+        if (uistate != UIState.EVENT) EventMain.SetActive(false);
     }
     public void Cheat() {
         GameData.key1++;

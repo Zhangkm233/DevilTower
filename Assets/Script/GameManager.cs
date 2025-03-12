@@ -187,6 +187,19 @@ public class GameManager : MonoBehaviour
             return false;
         }
         if (gridTileManager.gridType == Grid.GridType.EVENT) {
+            if(((GridEvent)GridInMap).eventType == GridEvent.EventType.CORRUPTIONROOTSAVE) {
+                ((GridEvent)GridInMap).hpSave = (int)(GameData.playerHp * 0.5);
+                GameData.playerHp -= ((GridEvent)GridInMap).hpSave;
+                ((GridEvent)GridInMap).eventType = GridEvent.EventType.CORRUPTIONROOTLOAD;
+                return false;
+            }
+            if (((GridEvent)GridInMap).eventType == GridEvent.EventType.CORRUPTIONROOTLOAD) {
+                GameData.playerHp += ((GridEvent)GridInMap).hpSave;
+                ClearGridInMap(gridTileManager);
+                return true;
+            }
+            this.GetComponent<UIManager>().StartEvent((GridEvent)GridInMap,
+                gridTileManager.mapX,gridTileManager.mapY);
             return false;
         }
         return false;

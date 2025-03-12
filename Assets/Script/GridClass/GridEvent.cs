@@ -11,11 +11,14 @@ public class GridEvent : Grid
     {
         SOULARROW = 0,
         SOULGATE = 1,
-        CORRUPTIONROOT = 2,
-        //DEATHPRISONER = 3,
+        CORRUPTIONROOTSAVE = 2,
+        CORRUPTIONROOTLOAD = 3,
+        NULL = 99
     }
+    public int hpSave;
     public EventType eventType;
     public GridEvent(int stat) {
+        this.stat = stat;
         type = GridType.EVENT;
         eventType = (EventType)stat;
     }
