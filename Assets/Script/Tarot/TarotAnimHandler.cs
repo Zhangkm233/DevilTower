@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TarotManager : MonoBehaviour
+public class TarotAnimHandler : MonoBehaviour
 {
-    public static TarotManager instance;
+    public static TarotAnimHandler instance;
     public TarotsDataObject tarotsDataObject;
 
     public float animationDuration = 0.13f;

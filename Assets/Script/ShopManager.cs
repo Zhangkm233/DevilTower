@@ -60,7 +60,7 @@ public class ShopManager : MonoBehaviour
         return false;
     }
 
-    public void AddToInventory(string str,int num) {
+    public void AddToInventory(string str,int num) { 
         switch (str) {
             case "gold":
                 GameData.gold += num;
@@ -78,10 +78,11 @@ public class ShopManager : MonoBehaviour
     }
     public void AffirmTrade() {
         if (IsEnough(itemExchangeFor,itemExchangeForNum)) {
-            GameData.gold -= itemExchangeForNum;
+            //∏ƒ’‚¿Ô
+            AddToInventory(itemExchangeFor,-itemExchangeForNum);
             AddToInventory(itemGiveOut,itemGiveOutNum);
-            gameManager.GetComponent<GameManager>().ClearGridInMap(mapX,mapY);
             if(!isThisShopInfinite) {
+                gameManager.GetComponent<GameManager>().ClearGridInMap(mapX,mapY);
                 gameManager.GetComponent<GameManager>().MonsterMovement();
                 GameData.eventEncounter++;
                 gameManager.GetComponent<UIManager>().GoStat();
