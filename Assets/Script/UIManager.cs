@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     };
 
     public UIState State = UIState.STAT;
+    [Header("UI显示数据对象")]
     public Text goldStat;
     public Text keyStat;
     public Text playerStat;
@@ -26,6 +27,7 @@ public class UIManager : MonoBehaviour
     public Text completeStat;
     public Text layerStat;
     public Slider completeSlider;
+    [Header("UI主体对象")]
     public GameObject forgeMain;
     public GameObject statMain;
     public GameObject dialogMain;
@@ -117,7 +119,9 @@ public class UIManager : MonoBehaviour
                 if (gridMonster.isLostmind) abilitys = abilitys + "魔心 ";
                 if (gridMonster.isCrack) abilitys = abilitys + "碎裂 ";
                 if (gridMonster.isFirmness) abilitys = abilitys + "坚定 ";
-                if (gridMonster.isStalk) abilitys = abilitys + "追猎 ";
+                if (gridMonster.isStalk) {
+                    abilitys = abilitys + "追猎" + gridMonster.stalkTurn +" ";
+                }
                 if (gridMonster.isCorruptionOne) abilitys = abilitys + "腐蚀1 ";
                 if (gridMonster.isCorruptionTwo) abilitys = abilitys + "腐蚀2 ";
                 if (gridMonster.isCorruptionThree) abilitys = abilitys + "腐蚀3 ";
@@ -204,6 +208,7 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+    [ContextMenu("切换UI模式")]
     public void ChangeState() {
         switch (State) {
             case UIState.STAT:

@@ -7,6 +7,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     //用于显示gamedata的变量
+    [Header("GameData的数据")]
     public int gamelayer;
     public int gamekey1;
     public int gamekey2;
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour
     public int gameEventEncountered;
     public int gameMapWidth;
     public int gameMapHeight;
-
+    [Space(15)]
     public Camera mainCamera;
     public GameObject objectClick;
     public GameObject catalogObject;
@@ -215,9 +216,14 @@ public class GameManager : MonoBehaviour
             Grid grid = GameData.map[i,GameData.gridHeight - 1];
             if (grid.type == Grid.GridType.MONSTER) {
                 if (((GridMonster)grid).isStalk) {
-                    //追猎
-                    Debug.Log(((GridMonster)grid).name + "追猎触发");
-                    GameData.playerHp -= ((GridMonster)grid).atk - GameData.playerDef;
+                    if (((GridMonster)grid).stalkTurn == 2) {
+                        //追猎
+                        Debug.Log(((GridMonster)grid).name + "追猎触发");
+                        GameData.playerHp -= ((GridMonster)grid).atk - GameData.playerDef;
+                        ((GridMonster)grid).stalkTurn = 0;
+                    } else {
+                        ((GridMonster)grid).stalkTurn++;
+                    }
                 }
                 //坚定
                 if (((GridMonster)grid).isFirmness) continue;

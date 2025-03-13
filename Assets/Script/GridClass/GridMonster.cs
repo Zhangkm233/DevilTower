@@ -4,12 +4,14 @@ using Unity.VisualScripting.FullSerializer;
 using UnityEditor;
 using System.Threading;
 
+[System.Serializable]
 public class GridMonster : Grid
 {
     public int atk;
     public int def;
     public int hp;
     public int gold;
+    public int stalkTurn = 0;
     //public ability[] abilityType;
     public string txtFilePath;
     public string name;
