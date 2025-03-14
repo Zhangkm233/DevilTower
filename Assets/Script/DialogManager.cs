@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -21,7 +22,8 @@ public class DialogManager : MonoBehaviour
     public List<sentenceState> sentenceStates;
     public List<string> sentenceNames = new List<string>();
     public List<string> sentenceTexts = new List<string>();
-
+    public float delay = 0.01F;
+    public bool isTyping = false;
     public void ReadDialog(int dialogNumber) {
         dialogTitle = Application.streamingAssetsPath + "/dialog" + dialogNumber +".txt";
         Debug.Log(dialogTitle);
@@ -31,6 +33,15 @@ public class DialogManager : MonoBehaviour
             sentenceNames.Add(lines[i].Split(";")[1]);
             sentenceTexts.Add(lines[i].Split(";")[2]);
         }
+    }
+    public void ClickPanel() {
+        if (isTyping) {
+            StopAllCoroutines();
+            dialogText.text = sentenceTexts[sentenceNumber];
+            isTyping = false;
+            return;
+        }
+        NextSentence();
     }
     public void NextSentence() {
         if (this.GetComponent<UIManager>().State != UIState.DIALOG) return;
@@ -47,6 +58,17 @@ public class DialogManager : MonoBehaviour
         }
         sentenceNumber++;
         dialogName.text = sentenceNames[sentenceNumber];
-        dialogText.text = sentenceTexts[sentenceNumber];
+        StartCoroutine(ShowText(sentenceTexts[sentenceNumber]));
+        //dialogText.text = sentenceTexts[sentenceNumber];
+    }
+    IEnumerator ShowText(string fullText) {
+        isTyping = true;
+        string currentText = "";
+        for (int i = 0;i <= fullText.Length;i++) {
+            currentText = fullText.Substring(0,i); // 截取从0到i的字符
+            dialogText.text = currentText; // 更新Text组件的内容
+            yield return new WaitForSeconds((float)delay); // 等待指定的延迟时间
+        }
+        isTyping = false;
     }
 }

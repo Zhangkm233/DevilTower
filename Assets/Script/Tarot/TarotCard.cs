@@ -11,7 +11,7 @@ public class TarotCard : MonoBehaviour
     {
         originPos = transform.position;
 
-        TarotsDataObject tarots = TarotManager.instance.tarotsDataObject;
+        TarotsDataObject tarots = TarotAnimHandler.instance.tarotsDataObject;
         GetComponent<SpriteRenderer>().sprite = tarots.tarotsData[cardIndex].sprite;
 
         var collider = GetComponent<BoxCollider2D>();
@@ -27,7 +27,7 @@ public class TarotCard : MonoBehaviour
 
     public void HandleClick(){
         Debug.Log("Click");
-        TarotManager.instance.selectTarot(this);
+        TarotAnimHandler.instance.selectTarot(this);
     }
 
     public void HandlePointerEnter(){
@@ -73,7 +73,7 @@ public class TarotCard : MonoBehaviour
     public void OnCardPutIn(Slot slot){
         StartCoroutine(HighlightCoroutine(0.5f));
         playParticle();
-        TarotManager.instance.ShakeAll();
+        TarotAnimHandler.instance.ShakeAll();
         slot.ExpandHalo();
     }
 

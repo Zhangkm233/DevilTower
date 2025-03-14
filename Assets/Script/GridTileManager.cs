@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,11 +10,9 @@ public class GridTileManager : MonoBehaviour
     public int mapY;
     public Text monsterStat;
     public GameObject gameManagerObject;
-    private void Start() {
-    }
-    private void OnMouseEnter() {
-    }
-    private void OnMouseExit() {
+    public void InitialData() {
+        gameManagerObject = GameObject.Find("GameManager"); 
+        name = mapGrid.GridTypeToWord + " " + mapX + " " + mapY;
     }
     public void UpdateData() {
         if (GameData.map[mapX,mapY] != null) {
@@ -38,5 +36,9 @@ public class GridTileManager : MonoBehaviour
         gridtext.text = mapGrid.GridTypeToWord;
         gridtext = gridCanvas.transform.GetChild(1).GetComponent<TMP_Text>();
         gridtext.text = mapGrid.stat.ToString();
+    }
+    public void UpdateSprite() {
+        Image gridImage = this.GetComponent<Image>();
+        gridImage.sprite = gameManagerObject.GetComponent<GridDrawer>().gridSprite;
     }
 }
