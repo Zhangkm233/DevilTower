@@ -9,10 +9,10 @@ public class GridEvent : Grid
     物块：死亡囚徒：可以获得一次增益，根据攻防获得血量/获得攻防和少量血量/获得大量钥匙，3*/
     public enum EventType
     {
-        SOULARROW = 0,
-        SOULGATE = 1,
-        CORRUPTIONROOTSAVE = 2,
-        CORRUPTIONROOTLOAD = 3,
+        SOULARROW = 1,
+        SOULGATE = 2,
+        CORRUPTIONROOTSAVE = 3,
+        CORRUPTIONROOTLOAD = 4,
         NULL = 99
     }
     public int hpSave;

@@ -32,10 +32,10 @@ public class GridShop : Grid
             isInfinite = true;
         }
         //ÊÛ³ö
-        itemGiveOut = shopItemStat[stat,1];
-        itemGiveOutNum = shopItemNum[stat,1];
+        itemGiveOut = shopItemStat[stat - 1,1];
+        itemGiveOutNum = shopItemNum[stat - 1,1];
         //Ö§¸¶
-        itemExchangeFor = shopItemStat[stat,0];
-        itemExchangeForNum = shopItemNum[stat,0];
+        itemExchangeFor = shopItemStat[stat - 1,0];
+        itemExchangeForNum = shopItemNum[stat - 1,0];
     }
 }

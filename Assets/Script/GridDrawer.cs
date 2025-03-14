@@ -1,3 +1,4 @@
+using NUnit.Framework.Constraints;
 using System;
 using TMPro;
 using UnityEngine;
@@ -15,6 +16,17 @@ public class GridDrawer : MonoBehaviour
     public void InitializingGrid() {
         GameObject[] grids = GameObject.FindGameObjectsWithTag("gridGameObject");
         foreach (GameObject grid in grids) {
+            switch (grid.GetComponent<GridTileManager>().mapY) {
+                case 12:
+                    grid.GetComponent<SpriteRenderer>().sortingOrder = 97;
+                    break;
+                case 13:
+                    grid.GetComponent<SpriteRenderer>().sortingOrder = 98;
+                    break;
+                case 14:
+                    grid.GetComponent<SpriteRenderer>().sortingOrder = 99;
+                    break;
+            }
             grid.GetComponent<GridTileManager>().InitialData();
             grid.GetComponent<GridTileManager>().UpdateData();
         }

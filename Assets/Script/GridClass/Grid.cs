@@ -14,7 +14,7 @@ public class Grid
         SHOP = 6,//商店
         KEY = 7,//钥匙
 
-        BARRIER = 999,//屏障，不让走
+        BARRIER = 8,//屏障，不让走
     };
 
     public int stat;
