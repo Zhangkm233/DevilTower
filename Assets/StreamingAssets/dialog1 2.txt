@@ -18,5 +18,6 @@ TEXT;你;(´ﾟωﾟ｀)
 TEXT;魔女;（抬手轻抚着“你”的脸庞）世界支离破碎，人们深受苦难，贪欲者依旧作威作福……
 TEXT;魔女;所以还请你拯救这个世界，好吗？
 TEXT;你;……
-EVENT;GAINMAGICIAN;1
+TEXT; ;（开启“魔术师”任务）
+EVENT;UnlockMission;Magician
 END;0;0

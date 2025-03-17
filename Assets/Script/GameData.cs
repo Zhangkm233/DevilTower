@@ -21,4 +21,5 @@ public static class GameData
     public static Grid[,] map = new Grid[gridWidth,gridHeight];
 
     public static bool[] tarotUnlock = new bool[22];
+    public static bool[] tarotMissionUnlock = new bool[22];
 }

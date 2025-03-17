@@ -1,15 +1,19 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class ShopManager : MonoBehaviour
 {
     public GameObject gameManager;
-    public Text shopStat;
+    public GameObject itemImage;
+    public TMP_Text itemName;
+    public TMP_Text itemPrice;
     public string itemGiveOut;
     public string itemExchangeFor;
     public int mapX, mapY;
     public int itemGiveOutNum;
     public int itemExchangeForNum;
     public bool isThisShopInfinite = false;
+    public SpriteScriptObject[] layersprites;
 
     public void UpdateShopData(GridShop gridShop,int gridX,int gridY) {
         mapX = gridX; mapY = gridY;
@@ -17,6 +21,36 @@ public class ShopManager : MonoBehaviour
         itemExchangeFor = gridShop.itemExchangeFor;
         itemGiveOutNum = gridShop.itemGiveOutNum;
         itemExchangeForNum = gridShop.itemExchangeForNum;
+        itemName.text = Hanize(itemGiveOut) + "*" + itemGiveOutNum;
+        itemPrice.text = itemExchangeForNum.ToString();
+        switch (itemGiveOut) {
+            case "key1":
+                if (GameData.layer - 1 >= layersprites.Length) {
+                    itemImage.GetComponent<Image>().sprite = layersprites[0].spriteData[7].sprites[0];
+                    break;
+                }
+                itemImage.GetComponent<Image>().sprite = layersprites[GameData.layer - 1].spriteData[7].sprites[0];
+                break;
+            case "key2":
+                if (GameData.layer - 1 >= layersprites.Length) {
+                    itemImage.GetComponent<Image>().sprite = layersprites[0].spriteData[7].sprites[1];
+                    break;
+                }
+                itemImage.GetComponent<Image>().sprite = layersprites[GameData.layer - 1].spriteData[7].sprites[1];
+                break;
+            case "key3":
+                if (GameData.layer - 1 >= layersprites.Length) {
+                    itemImage.GetComponent<Image>().sprite = layersprites[0].spriteData[7].sprites[2];
+                    break;
+                }
+                itemImage.GetComponent<Image>().sprite = layersprites[GameData.layer - 1].spriteData[7].sprites[2];
+                break;
+            case "gold":
+                //金币的图标还没有
+                itemImage.GetComponent<Image>().sprite = null;
+                break;
+        }
+        /*
         if (!gridShop.isInfinite) {
             shopStat.text = "我想用" + itemGiveOutNum + "个" + Hanize(itemGiveOut) +
                 "交换你的" + itemExchangeForNum + "个" + Hanize(itemExchangeFor);
@@ -24,7 +58,7 @@ public class ShopManager : MonoBehaviour
             isThisShopInfinite = true;
             shopStat.text = "我想用" + itemGiveOutNum + "个" + Hanize(itemGiveOut) +
                 "交换你的" + itemExchangeForNum + "个" + Hanize(itemExchangeFor) + "，这是无限的";
-        }
+        }*/
     }
     public string Hanize(string str) {
         //汉化

@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour
 
         monsterStat.text = " ";
         monsterAbilityStat.text = " ";
+        goForgeButton.SetActive(false);
         GoStat();
     }
     void Update() {
@@ -206,6 +207,12 @@ public class UIManager : MonoBehaviour
                         break;
                 }
             }
+            if (gridInMaped.type == GridType.BARRIER) {
+                monsterStat.text = "障碍物\n无法通过";
+            }
+            if (gridInMaped.type == GridType.PORTAL) {
+                monsterStat.text = "传送门\n传送到下一层";
+            }
         }
     }
     [ContextMenu("切换UI模式")]
@@ -278,6 +285,7 @@ public class UIManager : MonoBehaviour
         GameData.key1++;
         GameData.key2++;
         GameData.key3++;
-        GameData.gold += 10;
+        GameData.gold += 1000;
+        GameData.playerAtk += 100;
     }
 }

@@ -18,14 +18,48 @@ public class DialogManager : MonoBehaviour
     public Text dialogName;
     public Text dialogText;
     public string dialogTitle;
+    public int readingDialogNumber = 1;
     public int sentenceNumber = -1;
     public List<sentenceState> sentenceStates;
     public List<string> sentenceNames = new List<string>();
     public List<string> sentenceTexts = new List<string>();
-    public float delay = 0.01F;
     public bool isTyping = false;
+    public bool isFastForwarding = false;
+
+    [ContextMenu("READDIALOG")]
+    public void ReadDialog() {
+        ReadDialog(readingDialogNumber);
+    }
+    private void Update() {
+        if (this.GetComponent<UIManager>().State != UIState.DIALOG) return;
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            ClickPanel();
+        }
+        if (Input.GetKeyDown(KeyCode.LeftControl) && isFastForwarding == false) {
+            isFastForwarding = true;
+            StopAllCoroutines();
+            FastForwardNextSentence();
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl)) {
+            StopAllCoroutines();
+            isFastForwarding = false;
+        }
+
+    }
+    public void ResetDialog() {
+        isTyping = false;
+        isFastForwarding = false;
+        sentenceNames.Clear();
+        sentenceTexts.Clear();
+        sentenceStates.Clear();
+        sentenceNumber = -1;
+        dialogText.text = "";
+        dialogName.text = "";
+    }
     public void ReadDialog(int dialogNumber) {
-        dialogTitle = Application.streamingAssetsPath + "/dialog" + dialogNumber +".txt";
+        ResetDialog();
+        readingDialogNumber = dialogNumber;
+        dialogTitle = Application.streamingAssetsPath + "/dialog" + GameData.layer +" " + readingDialogNumber + ".txt";
         Debug.Log(dialogTitle);
         string[] lines = File.ReadAllLines(dialogTitle);
         for (int i = 0;i < lines.Length;i++) {
@@ -43,23 +77,43 @@ public class DialogManager : MonoBehaviour
         }
         NextSentence();
     }
-    public void NextSentence() {
-        if (this.GetComponent<UIManager>().State != UIState.DIALOG) return;
+    public bool HandleWithSentence() {
         if (sentenceStates[sentenceNumber + 1] == sentenceState.EVENT) {
+            if (sentenceNames[sentenceNumber + 1] == "UnlockTarot") {
+                this.gameObject.GetComponent<TarotManager>().UnlockTarot(sentenceTexts[sentenceNumber + 1]);
+            }
+            if (sentenceNames[sentenceNumber + 1] == "UnlockMission") {
+                this.gameObject.GetComponent<TarotManager>().UnlockMission(sentenceTexts[sentenceNumber + 1]);
+            }
             //干一些事情 然后跳过这个event
             sentenceNumber++;
-            NextSentence();
-            return;
+            FastForwardNextSentence();
+            return true;
         }
         if (sentenceStates[sentenceNumber + 1] == sentenceState.END) {
-            sentenceNumber = -1;
+            ResetDialog();
             this.GetComponent<UIManager>().GoStat();
-            return;
+            return true;
         }
         sentenceNumber++;
+        return false;
+    }
+
+    [ContextMenu("快进对话")]
+    public void FastForwardNextSentence() {
+        if (this.GetComponent<UIManager>().State != UIState.DIALOG) return;
+        if (isFastForwarding == false) return;
+        if (HandleWithSentence()) return;
+        dialogName.text = sentenceNames[sentenceNumber];
+        dialogText.text = sentenceTexts[sentenceNumber];
+        StartCoroutine(FastForwardText());
+    }
+    public void NextSentence() {
+        if (this.GetComponent<UIManager>().State != UIState.DIALOG) return;
+        if (isFastForwarding == true) StopAllCoroutines();
+        if (HandleWithSentence()) return;
         dialogName.text = sentenceNames[sentenceNumber];
         StartCoroutine(ShowText(sentenceTexts[sentenceNumber]));
-        //dialogText.text = sentenceTexts[sentenceNumber];
     }
     IEnumerator ShowText(string fullText) {
         isTyping = true;
@@ -67,8 +121,12 @@ public class DialogManager : MonoBehaviour
         for (int i = 0;i <= fullText.Length;i++) {
             currentText = fullText.Substring(0,i); // 截取从0到i的字符
             dialogText.text = currentText; // 更新Text组件的内容
-            yield return new WaitForSeconds((float)delay); // 等待指定的延迟时间
+            yield return new WaitForSeconds(0.03f); // 等待指定的延迟时间
         }
         isTyping = false;
+    }
+    IEnumerator FastForwardText() {
+        yield return new WaitForSeconds(0.08f);
+        FastForwardNextSentence();
     }
 }

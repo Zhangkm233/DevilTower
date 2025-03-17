@@ -13,12 +13,13 @@ public class Grid
         EVENT = 5,//特殊物块
         SHOP = 6,//商店
         KEY = 7,//钥匙
-
         BARRIER = 8,//屏障，不让走
+        PORTAL = 9,
     };
 
     public int stat;
     public GridType type { get; set; }
+
     public string GridTypeToWord;
     public Grid(int stat,GridType type) {
         this.stat = stat;
@@ -42,6 +43,9 @@ public class Grid
                 break;
             case "S":
                 this.type = GridType.SHOP;
+                break;
+            case "P":
+                this.type = GridType.PORTAL;
                 break;
             default:
                 break;

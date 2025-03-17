@@ -3,6 +3,7 @@ using System;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour
     public int gameEventEncountered;
     public int gameMapWidth;
     public int gameMapHeight;
+    public bool[] tarotUnlock;
+    public bool[] tarotMissionUnlock;
     [Space(15)]
     public Camera mainCamera;
     public GameObject objectClick;
@@ -65,6 +68,8 @@ public class GameManager : MonoBehaviour
                 PlayerStatChange(800,43,46,0,0,0,134,6);
                 break;
         }
+        this.GetComponent<UIManager>().GoStat();
+        this.GetComponent<UIManager>().goForgeButton.SetActive(false);
         //更新图鉴
         //因为不同尺寸的地图，事件的位置会对不上格子，所以要重新给所有格子改名和更改mapY
         string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/map" + layerTo + ".txt");
@@ -93,12 +98,18 @@ public class GameManager : MonoBehaviour
             GameData.playerHp = (int)(GameData.playerHp * ((GridMonster)GridInMap).CorruptionPercent());
             int battleDamage = ResolveDamage((GridMonster)GridInMap);
             if (battleDamage == -1) {
-                Debug.Log("战斗伤害：???");
+                Debug.Log("战斗伤害;???");
                 return false;
             }
-            Debug.Log("战斗伤害：" + battleDamage);
+            Debug.Log("战斗伤害;" + battleDamage);
             GameData.playerHp -= battleDamage;
             GameData.gold += ((GridMonster)GridInMap).gold;
+            if(((GridMonster)GridInMap).isBoss) {
+                //如果是boss 生成传送门
+                GameData.map[gridTileManager.mapX,gridTileManager.mapY] = new Grid("P",1);
+                UpdateEachGrid();
+                return true;
+            }
             ClearGridInMap(gridTileManager);
             return true;
         }
@@ -203,6 +214,10 @@ public class GameManager : MonoBehaviour
                 gridTileManager.mapX,gridTileManager.mapY);
             return false;
         }
+        if (gridTileManager.gridType == Grid.GridType.PORTAL) {
+            LayerChangeTo(GameData.layer + 1);
+            return false;
+        }
         return false;
     }
     
@@ -244,7 +259,8 @@ public class GameManager : MonoBehaviour
                 if (targetGrid == null) targetGrid = GameData.map[i - 1,GameData.gridHeight - 1];
                 if (targetGrid.type != Grid.GridType.MONSTER &&
                      targetGrid.type != Grid.GridType.DOOR &&
-                     targetGrid.type != Grid.GridType.BARRIER) {
+                     targetGrid.type != Grid.GridType.BARRIER &&
+                     targetGrid.type != Grid.GridType.PORTAL) {
                     //与左边的格子交换
                     if (i == 0 && ((GridMonster)grid).isLostmind) {
                         GameData.map[5,GameData.gridHeight - 1] = grid;
@@ -326,6 +342,8 @@ public class GameManager : MonoBehaviour
         gameEventEncountered = GameData.eventEncounter;
         gameMapWidth = GameData.gridWidth;
         gameMapHeight = GameData.gridHeight;
+        tarotUnlock = GameData.tarotUnlock;
+        tarotMissionUnlock = GameData.tarotMissionUnlock;
     }
 
     public GameObject ObjectClick() {
