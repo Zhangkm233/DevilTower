@@ -26,7 +26,7 @@ public class GridShop : Grid
     public GridShop(int stat) {
         this.type = GridType.SHOP;
         this.stat = stat;
-        if(stat != 5) {
+        if(stat != 6) {
             isInfinite = false;
         } else {
             isInfinite = true;

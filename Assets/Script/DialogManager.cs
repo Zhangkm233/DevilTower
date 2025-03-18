@@ -56,10 +56,23 @@ public class DialogManager : MonoBehaviour
         dialogText.text = "";
         dialogName.text = "";
     }
+    public void ReadDialog(int layer,int dialogNumber) {
+        ResetDialog();
+        readingDialogNumber = dialogNumber;
+        dialogTitle = Application.streamingAssetsPath + "/dialog" + layer + " " + readingDialogNumber + ".txt";
+        Debug.Log(dialogTitle);
+        string[] lines = File.ReadAllLines(dialogTitle);
+        for (int i = 0;i < lines.Length;i++) {
+            sentenceStates.Add((sentenceState)Enum.Parse(typeof(sentenceState),lines[i].Split(';')[0]));
+            sentenceNames.Add(lines[i].Split(";")[1]);
+            sentenceTexts.Add(lines[i].Split(";")[2]);
+        }
+    }
+
     public void ReadDialog(int dialogNumber) {
         ResetDialog();
         readingDialogNumber = dialogNumber;
-        dialogTitle = Application.streamingAssetsPath + "/dialog" + GameData.layer +" " + readingDialogNumber + ".txt";
+        dialogTitle = Application.streamingAssetsPath + "/dialog" + GameData.layer + " " + readingDialogNumber + ".txt";
         Debug.Log(dialogTitle);
         string[] lines = File.ReadAllLines(dialogTitle);
         for (int i = 0;i < lines.Length;i++) {

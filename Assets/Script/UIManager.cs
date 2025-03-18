@@ -232,11 +232,18 @@ public class UIManager : MonoBehaviour
         EventMain.GetComponent<EventManager>().mapX = X;
         EventMain.GetComponent<EventManager>().mapY = Y;
     }
+    public void StartDialog(int dialogStat) {
+        GoDialog();
+        this.GetComponent<DialogManager>().ReadDialog(dialogStat);
+    }
     public void StartTrade(GridShop gridShop,int X,int Y) {
         GoShop();
         shopMain.GetComponent<ShopManager>().UpdateShopData(gridShop,X,Y);
     }
     public void StartForge() {
+        if(GameData.eventEncounter < 30) {
+            return;
+        }
         GoForge();
         forgeMain.GetComponent<ForgeManager>().initializePrice();
     }

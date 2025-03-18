@@ -4,6 +4,8 @@ using UnityEngine;
 [System.Serializable]
 public class Grid
 {
+    [System.Serializable]
+    [SerializeField]
     public enum GridType{
         BOTTLE = 0,//
         GEM = 1,//
@@ -16,10 +18,11 @@ public class Grid
         BARRIER = 8,//∆¡’œ£¨≤ª»√◊ﬂ
         PORTAL = 9,
     };
-
+    [SerializeField]
     public int stat;
+    [SerializeField]
     public GridType type { get; set; }
-
+    [SerializeField]
     public string GridTypeToWord;
     public Grid(int stat,GridType type) {
         this.stat = stat;

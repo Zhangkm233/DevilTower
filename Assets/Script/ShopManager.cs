@@ -17,6 +17,7 @@ public class ShopManager : MonoBehaviour
 
     public void UpdateShopData(GridShop gridShop,int gridX,int gridY) {
         mapX = gridX; mapY = gridY;
+        isThisShopInfinite = gridShop.isInfinite;
         itemGiveOut = gridShop.itemGiveOut;
         itemExchangeFor = gridShop.itemExchangeFor;
         itemGiveOutNum = gridShop.itemGiveOutNum;

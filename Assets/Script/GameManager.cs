@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public int gameMapWidth;
     public int gameMapHeight;
     public bool[] tarotUnlock;
-    public bool[] tarotMissionUnlock;
+    public bool[] tarotMissionUnlock; 
     [Space(15)]
     public Camera mainCamera;
     public GameObject objectClick;
@@ -54,23 +54,28 @@ public class GameManager : MonoBehaviour
         GameData.forgeTime = forgetime;
     }
     public void LayerChangeTo(int layerTo) {
+        LayerChangeTo(layerTo,false);
+    }
+    public void LayerChangeTo(int layerTo, bool isInherit) {
         if(this.GetComponent<UIManager>().State != UIManager.UIState.STAT) return;
         GameData.layer = layerTo;
         GameData.eventEncounter = 0;
-        switch (layerTo) {
-            case 1:
-                PlayerStatChange(400,10,10,0,0,0,0,0);
-                break;
-            case 2:
-                PlayerStatChange(600,23,20,0,0,0,51,3);
-                break;
-            case 3:
-                PlayerStatChange(800,43,46,0,0,0,134,6);
-                break;
+        if (!isInherit) {
+            switch (layerTo) {
+                case 1:
+                    PlayerStatChange(400,10,10,0,0,0,0,0);
+                    break;
+                case 2:
+                    PlayerStatChange(600,23,20,0,0,0,51,3);
+                    break;
+                case 3:
+                    PlayerStatChange(800,43,46,0,0,0,134,6);
+                    break;
+            }
         }
+        //重置UI和铁匠铺
         this.GetComponent<UIManager>().GoStat();
         this.GetComponent<UIManager>().goForgeButton.SetActive(false);
-        //更新图鉴
         //因为不同尺寸的地图，事件的位置会对不上格子，所以要重新给所有格子改名和更改mapY
         string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/map" + layerTo + ".txt");
         if(lines.Length != GameData.gridHeight) {
@@ -79,8 +84,11 @@ public class GameManager : MonoBehaviour
                 grid.GetComponent<GridTileManager>().mapY += lines.Length - GameData.gridHeight;
             }
         }
+        //更新怪物数据到图鉴
         catalogObject.GetComponent<MonsterCatalogManager>().UpdateMonsterData();
+        //加载地图到map里
         this.GetComponent<GridLoader>().LoadMapFromTxt(); 
+        //刷新格子
         UpdateEachGrid();
     }
     bool MapClickEvent() {
@@ -190,6 +198,12 @@ public class GameManager : MonoBehaviour
             }
         }
         if (gridTileManager.gridType == Grid.GridType.NPC) {
+            if (GameData.layer != 1) {
+                ClearGridInMap(gridTileManager);
+                return true;
+            }
+            int dialogStat = GridInMap.stat;
+            this.GetComponent<UIManager>().StartDialog(dialogStat);
             ClearGridInMap(gridTileManager);
             return true;
         }
@@ -215,7 +229,7 @@ public class GameManager : MonoBehaviour
             return false;
         }
         if (gridTileManager.gridType == Grid.GridType.PORTAL) {
-            LayerChangeTo(GameData.layer + 1);
+            LayerChangeTo(GameData.layer + 1,true);
             return false;
         }
         return false;

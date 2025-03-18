@@ -4,33 +4,21 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class GridDrawer : MonoBehaviour
 {
+    [Obsolete]
     public GameObject gridPrefab;
+    [Obsolete]
     public GameObject TilesParent;
+    [Obsolete]
     public Grid[,] map = new Grid[GameData.gridWidth,3];
+    [Obsolete]
     public Sprite gridSprite;
     private void Start() {
         //DrawThreeGrid();
     }
-    public void InitializingGrid() {
-        GameObject[] grids = GameObject.FindGameObjectsWithTag("gridGameObject");
-        foreach (GameObject grid in grids) {
-            switch (grid.GetComponent<GridTileManager>().mapY) {
-                case 12:
-                    grid.GetComponent<SpriteRenderer>().sortingOrder = 97;
-                    break;
-                case 13:
-                    grid.GetComponent<SpriteRenderer>().sortingOrder = 98;
-                    break;
-                case 14:
-                    grid.GetComponent<SpriteRenderer>().sortingOrder = 99;
-                    break;
-            }
-            grid.GetComponent<GridTileManager>().InitialData();
-            grid.GetComponent<GridTileManager>().UpdateData();
-        }
-    }
+    
     [Obsolete("Use InitializingGrid instead")]
     public void DrawThreeGrid() {
         for (int j = 0;j < 3;j++) {

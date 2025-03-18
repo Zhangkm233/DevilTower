@@ -13,11 +13,29 @@ public class GridLoader : MonoBehaviour
     void Awake() {
         LoadMapFromTxt();
         PrintGrid();
-        this.gameObject.GetComponent<GridDrawer>().InitializingGrid();
+        InitializingGrid();
+    }
+    public void SaveAll() {
+        SaveManager.Save();
+    }
+    public void LoadAll() {
+        SaveManager.Load();
+        this.GetComponent<GameManager>().UpdateEachGrid();
+    }
+
+    public void InitializingGrid() {
+        // 初始化所有格子
+        GameObject[] grids = GameObject.FindGameObjectsWithTag("gridGameObject");
+        foreach (GameObject grid in grids) {
+            grid.GetComponent<GridTileManager>().InitialData();
+            grid.GetComponent<GridTileManager>().UpdateData();
+        }
     }
     //M怪物 X封锁 D门 G宝石 B血瓶 K钥匙 N NPC S商人
+
     public void LoadMapFromTxt() {
-         txtFilePath = Application.streamingAssetsPath + "/map" + GameData.layer + ".txt"; // 读取TXT文件
+        // 把TXT文件的地图存储到GameData.map里
+        txtFilePath = Application.streamingAssetsPath + "/map" + GameData.layer + ".txt";
         // 读取TXT文件
         string[] lines = File.ReadAllLines(txtFilePath);
         GameData.gridHeight = lines.Length;
@@ -28,6 +46,7 @@ public class GridLoader : MonoBehaviour
                 string gridType = tiles[x].Split(' ')[0];
                 int gridStat = int.Parse(tiles[x].Split(' ')[1]);
                 print("x:" + x + " y:" + y + " gridType:" + gridType + " gridStat:" + gridStat);
+                //写进map里
                 writeInGrid(x,y,gridType,gridStat);
             }
         }
@@ -53,7 +72,7 @@ public class GridLoader : MonoBehaviour
         }
     }
 
-    void writeInGrid(int x,int y,string gridType,int gridStat) {
+    public void writeInGrid(int x,int y,string gridType,int gridStat) {
         Grid g;
         switch (gridType) {
             case "M":
