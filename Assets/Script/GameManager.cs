@@ -102,6 +102,11 @@ public class GameManager : MonoBehaviour
         }
         if (gridTileManager.gridType == Grid.GridType.MONSTER) {
             //遭遇怪物
+            if (((GridMonster)GridInMap).isBoss && !GameData.hasEncounterBoss) { 
+                this.GetComponent<UIManager>().StartDialogBeforeBoss();
+                GameData.hasEncounterBoss = true;
+                return false;
+            }
             //腐蚀
             GameData.playerHp = (int)(GameData.playerHp * ((GridMonster)GridInMap).CorruptionPercent());
             int battleDamage = ResolveDamage((GridMonster)GridInMap);
@@ -112,10 +117,12 @@ public class GameManager : MonoBehaviour
             Debug.Log("战斗伤害;" + battleDamage);
             GameData.playerHp -= battleDamage;
             GameData.gold += ((GridMonster)GridInMap).gold;
-            if(((GridMonster)GridInMap).isBoss) {
+            if(((GridMonster)GridInMap).isBoss && GameData.hasEncounterBoss) {
                 //如果是boss 生成传送门
+                this.GetComponent<UIManager>().StartDialogAfterBoss();
                 GameData.map[gridTileManager.mapX,gridTileManager.mapY] = new Grid("P",1);
                 UpdateEachGrid();
+                GameData.hasEncounterBoss = false;
                 return true;
             }
             ClearGridInMap(gridTileManager);
@@ -229,7 +236,9 @@ public class GameManager : MonoBehaviour
             return false;
         }
         if (gridTileManager.gridType == Grid.GridType.PORTAL) {
+            //进入塔罗牌
             LayerChangeTo(GameData.layer + 1,true);
+            this.GetComponent<UIManager>().GoTarot();
             return false;
         }
         return false;

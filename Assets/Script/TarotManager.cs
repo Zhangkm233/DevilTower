@@ -4,6 +4,9 @@ public class TarotManager : MonoBehaviour
 {
     public TarotsDataObject tarotsDataObject;
 
+    public void equipTarot(int tarot) {
+        GameData.tarotEquip = tarot;
+    }
     //хннЯ
     public void UnlockMission(string tarot) {
         GameData.tarotMissionUnlock[TarotToNum(tarot)] = true;

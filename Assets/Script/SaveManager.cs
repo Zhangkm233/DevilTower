@@ -20,6 +20,7 @@ public class PlayerData
     public GridWrapper gridWrapper;
     public bool[] tarotUnlock;
     public bool[] tarotMissionUnlock;
+    public bool hasEncounterBoss;
 
     public void ReadDataFromGame(){
         layer = GameData.layer;
@@ -38,6 +39,7 @@ public class PlayerData
         gridWrapper.SetGrid(GameData.map,GridWidth,GridHeight);
         tarotUnlock = GameData.tarotUnlock;
         tarotMissionUnlock = GameData.tarotMissionUnlock;
+        hasEncounterBoss = GameData.hasEncounterBoss;
     }
 
     public void WriteDataToGame(){
@@ -58,6 +60,7 @@ public class PlayerData
         GameData.map = gridWrapper.GetGrid(GridWidth,GridHeight);
         GameData.tarotUnlock = tarotUnlock;
         GameData.tarotMissionUnlock = tarotMissionUnlock;
+        GameData.hasEncounterBoss = hasEncounterBoss;
     }
 }
 

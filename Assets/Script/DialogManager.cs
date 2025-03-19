@@ -9,7 +9,7 @@ using static UIManager;
 public class DialogManager : MonoBehaviour
 {
     private void Start() {
-        ReadDialog(1);
+        //ReadDialog(1);
     }
     public enum sentenceState
     {
@@ -68,11 +68,16 @@ public class DialogManager : MonoBehaviour
             sentenceTexts.Add(lines[i].Split(";")[2]);
         }
     }
-
     public void ReadDialog(int dialogNumber) {
         ResetDialog();
         readingDialogNumber = dialogNumber;
-        dialogTitle = Application.streamingAssetsPath + "/dialog" + GameData.layer + " " + readingDialogNumber + ".txt";
+        if (dialogNumber == 99) {
+            dialogTitle = Application.streamingAssetsPath + "/dialog" + GameData.layer + " BeforeBoss.txt";
+        } else if (dialogNumber == 100){
+            dialogTitle = Application.streamingAssetsPath + "/dialog" + GameData.layer + " AfterBoss.txt";
+        } else {
+            dialogTitle = Application.streamingAssetsPath + "/dialog" + GameData.layer + " " + readingDialogNumber + ".txt";
+        }
         Debug.Log(dialogTitle);
         string[] lines = File.ReadAllLines(dialogTitle);
         for (int i = 0;i < lines.Length;i++) {

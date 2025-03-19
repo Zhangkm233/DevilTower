@@ -10,7 +10,7 @@ using static Grid;
 public class UIManager : MonoBehaviour
 {
     public enum UIState {
-        STAT,DIALOG,DICTIONARY,SHOP,FORGE,EVENT
+        STAT,DIALOG,DICTIONARY,SHOP,FORGE,EVENT,TAROT
     };
     public enum sentenceState
     {
@@ -35,9 +35,21 @@ public class UIManager : MonoBehaviour
     public GameObject shopMain;
     public GameObject buttonMain;
     public GameObject dictionaryMain;
-    public GameObject EventMain;
-
+    public GameObject eventMain;
+    public GameObject backGroundMain;
+    public GameObject tarotMain;
+    public GameObject tileMain;
     void Start() {
+        initializeUI();
+    }
+    
+    void Update() {
+        updatePlayerKeyText();
+        updateGridStat();
+        updateCompleteStatSlide();
+        updateLayerName();
+    }
+    public void initializeUI() {
         statMain = this.transform.GetChild(0).gameObject;
         dialogMain = this.transform.GetChild(1).gameObject;
 
@@ -49,14 +61,10 @@ public class UIManager : MonoBehaviour
         monsterStat.text = " ";
         monsterAbilityStat.text = " ";
         goForgeButton.SetActive(false);
-        GoStat();
+        
+        StartDialog(0);
     }
-    void Update() {
-        updatePlayerKeyText();
-        updateGridStat();
-        updateCompleteStatSlide();
-        updateLayerName();
-    }
+
     void updateLayerName() {
         string temp = "µÚ" + GameData.layer.ToString() + "²ã\n";
         switch (GameData.layer) {
@@ -228,9 +236,17 @@ public class UIManager : MonoBehaviour
     }
     public void StartEvent(GridEvent gridEvent,int X,int Y) {
         GoEvent();
-        EventMain.GetComponent<EventManager>().eventType = gridEvent.eventType;
-        EventMain.GetComponent<EventManager>().mapX = X;
-        EventMain.GetComponent<EventManager>().mapY = Y;
+        eventMain.GetComponent<EventManager>().eventType = gridEvent.eventType;
+        eventMain.GetComponent<EventManager>().mapX = X;
+        eventMain.GetComponent<EventManager>().mapY = Y;
+    }
+    public void StartDialogBeforeBoss() {
+        GoDialog();
+        this.GetComponent<DialogManager>().ReadDialog(99);
+    }
+    public void StartDialogAfterBoss() {
+        GoDialog();
+        this.GetComponent<DialogManager>().ReadDialog(100);
     }
     public void StartDialog(int dialogStat) {
         GoDialog();
@@ -266,6 +282,9 @@ public class UIManager : MonoBehaviour
     public void GoEvent() {
         GoState(UIState.EVENT);
     }
+    public void GoTarot() {
+        GoState(UIState.TAROT);
+    }
     public void GoState(UIState uistate) {
         State = uistate;
         if (uistate == UIState.DIALOG) dialogMain.SetActive(true);
@@ -285,8 +304,18 @@ public class UIManager : MonoBehaviour
         if (uistate == UIState.FORGE) forgeMain.SetActive(true);
         if (uistate != UIState.FORGE) forgeMain.SetActive(false);
         if (uistate == UIState.DICTIONARY) dictionaryMain.SetActive(true);
-        if (uistate == UIState.EVENT) EventMain.SetActive(true);
-        if (uistate != UIState.EVENT) EventMain.SetActive(false);
+        if (uistate == UIState.EVENT) eventMain.SetActive(true);
+        if (uistate != UIState.EVENT) eventMain.SetActive(false);
+        if (uistate != UIState.TAROT) {
+            backGroundMain.SetActive(true);
+            tileMain.SetActive(true);
+            tarotMain.SetActive(false);
+        }
+        if (uistate == UIState.TAROT) {
+            backGroundMain.SetActive(false);
+            tarotMain.SetActive(true);
+            tileMain.SetActive(false);
+        }
     }
     public void Cheat() {
         GameData.key1++;
