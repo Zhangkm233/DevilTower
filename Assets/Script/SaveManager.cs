@@ -1,3 +1,4 @@
+using System.Data;
 using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -68,6 +69,25 @@ public static class SaveManager
 {
 
     private static string filePath = Application.persistentDataPath + "/savefile.json";
+    public static void Delete(int saveIndex) {
+        filePath = Application.persistentDataPath + "/savefile" + saveIndex + ".json";
+        if (File.Exists(filePath)) {
+            File.Delete(filePath);
+        }
+    }
+    public static void Delete() {
+        if (File.Exists(filePath)) {
+            File.Delete(filePath);
+        }
+    }
+    public static void Save(int saveIndex) {
+        filePath = Application.persistentDataPath + "/savefile" + saveIndex + ".json";
+        Save();
+    }
+    public static void Load(int saveIndex) {
+        filePath = Application.persistentDataPath + "/savefile" + saveIndex + ".json";
+        Load();
+    }
 
     public static void Save(){
 

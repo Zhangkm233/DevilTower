@@ -47,9 +47,9 @@ public class MonsterCatalogManager : MonoBehaviour
 
     public void OnButtonClicked(){
         if (isCatalogOpen){
-            gameManager.GetComponent<UIManager>().GoStat();
             HideCatalog();
-        }else {
+            //gameManager.GetComponent<UIManager>().GoStat();
+        } else {
             if (gameManager.GetComponent<UIManager>().State != UIManager.UIState.STAT) return;
             gameManager.GetComponent<UIManager>().GoDictionary();
             ShowCatalog();
@@ -85,5 +85,6 @@ public class MonsterCatalogManager : MonoBehaviour
         }
         transform.position = OriginPos;
         backgroundPanel.gameObject.SetActive(false);
+        gameManager.GetComponent<UIManager>().GoStat();
     }
 }

@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     public int gameMapHeight;
     public bool[] tarotUnlock;
     public bool[] tarotMissionUnlock; 
+    public int tarotEquip;
+    public string tarotEquipName;
     [Space(15)]
     public Camera mainCamera;
     public GameObject objectClick;
@@ -43,6 +45,14 @@ public class GameManager : MonoBehaviour
         }
         UpdateGameDataToPublic();
     }
+    private void Start() {
+        StartGame();
+    }
+    public void StartGame() {
+        this.GetComponent<GridLoader>().InitialzeMapAndGrid();
+        this.GetComponent<UIManager>().InitializeUI();
+    }
+
     public void PlayerStatChange(int hp,int atk,int def,int key1,int key2,int key3,int gold,int forgetime) {
         GameData.playerHp = hp;
         GameData.playerAtk = atk;
@@ -90,6 +100,8 @@ public class GameManager : MonoBehaviour
         this.GetComponent<GridLoader>().LoadMapFromTxt(); 
         //刷新格子
         UpdateEachGrid();
+        //更新自动存档
+        SaveManager.Save(0);
     }
     bool MapClickEvent() {
         if (this.GetComponent<UIManager>().State != UIManager.UIState.STAT) {
@@ -367,6 +379,8 @@ public class GameManager : MonoBehaviour
         gameMapHeight = GameData.gridHeight;
         tarotUnlock = GameData.tarotUnlock;
         tarotMissionUnlock = GameData.tarotMissionUnlock;
+        tarotEquip = GameData.tarotEquip;
+        tarotEquipName =this.GetComponent<TarotManager>().NumToTarot(GameData.tarotEquip);
     }
 
     public GameObject ObjectClick() {

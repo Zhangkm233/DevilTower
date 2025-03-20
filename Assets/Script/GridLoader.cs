@@ -1,4 +1,5 @@
 using System.IO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static Grid;
@@ -11,16 +12,35 @@ public class GridLoader : MonoBehaviour
     public int gridHeight = GameData.gridHeight; // 地图高度
     public TextAsset[] maps;
     void Awake() {
+
+    }
+    public void InitialzeMapAndGrid() {
         LoadMapFromTxt();
         PrintGrid();
         InitializingGrid();
     }
+    public void ChangeSaveSlot(TMP_Dropdown dd) {
+        GameData.saveSlotChoose = dd.value;
+    }
     public void SaveAll() {
-        SaveManager.Save();
+        if(GameData.saveSlotChoose == 0) {
+            // 不能覆盖自动存档
+            Debug.Log("不能覆盖自动存档");
+            return;
+        }
+        SaveManager.Save(GameData.saveSlotChoose);
     }
     public void LoadAll() {
-        SaveManager.Load();
+        SaveManager.Load(GameData.saveSlotChoose);
         this.GetComponent<GameManager>().UpdateEachGrid();
+    }
+    public void DeleteAll() {
+        if (GameData.saveSlotChoose == 0) {
+            // 不能删除自动存档
+            Debug.Log("不能删除自动存档");
+            return;
+        }
+        SaveManager.Delete(GameData.saveSlotChoose);
     }
 
     public void InitializingGrid() {

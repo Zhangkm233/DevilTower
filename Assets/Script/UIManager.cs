@@ -20,8 +20,12 @@ public class UIManager : MonoBehaviour
     public UIState State = UIState.STAT;
     [Header("UI显示数据对象")]
     public Text goldStat;
-    public Text keyStat;
-    public Text playerStat;
+    public Text key1Stat;
+    public Text key2Stat;
+    public Text key3Stat;
+    public Text HpStat;
+    public Text AtkStat;
+    public Text DefStat;
     public Text monsterStat;
     public Text monsterAbilityStat;
     public Text completeStat;
@@ -40,7 +44,7 @@ public class UIManager : MonoBehaviour
     public GameObject tarotMain;
     public GameObject tileMain;
     void Start() {
-        initializeUI();
+
     }
     
     void Update() {
@@ -49,15 +53,7 @@ public class UIManager : MonoBehaviour
         updateCompleteStatSlide();
         updateLayerName();
     }
-    public void initializeUI() {
-        statMain = this.transform.GetChild(0).gameObject;
-        dialogMain = this.transform.GetChild(1).gameObject;
-
-        monsterStat = this.GetComponentInChildren<Canvas>().transform.GetChild(0).GetComponent<Text>();
-        monsterAbilityStat = this.GetComponentInChildren<Canvas>().transform.GetChild(1).GetComponent<Text>();
-        playerStat = this.GetComponentInChildren<Canvas>().transform.GetChild(2).GetComponent<Text>();
-        keyStat = this.GetComponentInChildren<Canvas>().transform.GetChild(3).GetComponent<Text>();
-
+    public void InitializeUI() {
         monsterStat.text = " ";
         monsterAbilityStat.text = " ";
         goForgeButton.SetActive(false);
@@ -95,15 +91,13 @@ public class UIManager : MonoBehaviour
         }
     }
     void updatePlayerKeyText() {
-        playerStat.text = 
-            "血量: " + GameData.playerHp.ToString() +
-            "\n攻击力: "+ GameData.playerAtk.ToString() +
-            "\n防御力: " + GameData.playerDef.ToString();
-        keyStat.text = 
-            "青铜钥匙: " + GameData.key1.ToString() +
-            "\n白银钥匙: " + GameData.key2.ToString() +
-            "\n黄金钥匙: " + GameData.key3.ToString();
-        goldStat.text = "金币数量:" + GameData.gold.ToString();
+        HpStat.text = GameData.playerHp.ToString();
+        AtkStat.text = GameData.playerAtk.ToString();
+        DefStat.text = GameData.playerDef.ToString();
+        key1Stat.text = GameData.key1.ToString();
+        key2Stat.text = GameData.key2.ToString();
+        key3Stat.text = GameData.key3.ToString();
+        goldStat.text = GameData.gold.ToString();
     }
     void updateGridStat() {
         if (this.GetComponent<GameManager>().objectClick == null) {

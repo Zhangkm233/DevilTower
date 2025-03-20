@@ -67,6 +67,7 @@ public class DialogManager : MonoBehaviour
             sentenceNames.Add(lines[i].Split(";")[1]);
             sentenceTexts.Add(lines[i].Split(";")[2]);
         }
+        NextSentence();
     }
     public void ReadDialog(int dialogNumber) {
         ResetDialog();
@@ -85,6 +86,7 @@ public class DialogManager : MonoBehaviour
             sentenceNames.Add(lines[i].Split(";")[1]);
             sentenceTexts.Add(lines[i].Split(";")[2]);
         }
+        NextSentence();
     }
     public void ClickPanel() {
         if (isTyping) {

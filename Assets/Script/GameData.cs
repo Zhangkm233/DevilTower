@@ -24,4 +24,6 @@ public static class GameData
     public static int tarotEquip = 0;
     public static bool[] tarotUnlock = new bool[22];
     public static bool[] tarotMissionUnlock = new bool[22];
+
+    public static int saveSlotChoose = 0;
 }
