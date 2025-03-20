@@ -26,7 +26,8 @@ public class UIManager : MonoBehaviour
     public Text HpStat;
     public Text AtkStat;
     public Text DefStat;
-    public Text monsterStat;
+    public Text gridName;
+    public Text gridStat;
     public Text monsterAbilityStat;
     public Text completeStat;
     public Text layerStat;
@@ -54,7 +55,7 @@ public class UIManager : MonoBehaviour
         updateLayerName();
     }
     public void InitializeUI() {
-        monsterStat.text = " ";
+        gridStat.text = " ";
         monsterAbilityStat.text = " ";
         goForgeButton.SetActive(false);
         
@@ -101,21 +102,28 @@ public class UIManager : MonoBehaviour
     }
     void updateGridStat() {
         if (this.GetComponent<GameManager>().objectClick == null) {
-            monsterStat.text = " ";
+            gridStat.text = " ";
             monsterAbilityStat.text = " ";
         }
+
         if (this.GetComponent<GameManager>().objectClick != null) {
             GameObject objectClicked = this.GetComponent<GameManager>().objectClick;
             if (GetComponent<GameManager>().GridInMap == null) return;
             Grid gridInMaped = GetComponent<GameManager>().GridInMap;
+            if (gridInMaped.type != Grid.GridType.EVENT) {
+                gridStat.fontSize = 64;
+            } else {
+                gridStat.fontSize = 48;
+            }
             if (gridInMaped.type == Grid.GridType.MONSTER) {
                 GridMonster gridMonster = (GridMonster)gridInMaped;
                 int cDamage = this.GetComponent<GameManager>().CaculateDamage(gridMonster);
+                gridName.text = gridMonster.name;
                 if (cDamage == -1) {
-                    monsterStat.text = gridMonster.name + " " + gridMonster.atk + "/" + gridMonster.def +"/" + gridMonster.hp + 
+                    gridStat.text =gridMonster.atk + "/" + gridMonster.def +"/" + gridMonster.hp + 
                         " \n预计伤害: ???";
                 } else {
-                    monsterStat.text = gridMonster.name + " " + gridMonster.atk + "/" + gridMonster.def + "/" + gridMonster.hp + 
+                    gridStat.text =gridMonster.atk + "/" + gridMonster.def + "/" + gridMonster.hp + 
                         " \n预计伤害:" + cDamage.ToString();
                 }
                 string abilitys = "";
@@ -136,15 +144,18 @@ public class UIManager : MonoBehaviour
             if (gridInMaped.type == Grid.GridType.BOTTLE) {
                 switch (gridInMaped.stat) {
                     case 1:
-                        monsterStat.text = "小血瓶\n恢复" + 
+                        gridName.text = "小血瓶";
+                        gridStat.text = "拾起以恢复" + 
                             ((GridBottle)gridInMaped).healingPoints.ToString() +"点血量";
                         break;
                     case 2:
-                        monsterStat.text = "中血瓶\n恢复" + 
+                        gridName.text = "中血瓶";
+                        gridStat.text = "拾起以恢复" + 
                             ((GridBottle)gridInMaped).healingPoints.ToString() + "点血量";
                         break;
                     case 3:
-                        monsterStat.text = "大血瓶\n恢复" + 
+                        gridName.text = "大血瓶";
+                        gridStat.text = "拾起以恢复" + 
                             ((GridBottle)gridInMaped).healingPoints.ToString() + "点血量";
                         break;
                 }
@@ -152,68 +163,84 @@ public class UIManager : MonoBehaviour
             if (gridInMaped.type == Grid.GridType.GEM) {
                 switch (gridInMaped.stat) {
                     case 1:
-                        monsterStat.text = "攻击宝石\n加"+((GridGem)gridInMaped).AddSum + "点攻击力";
+                        gridName.text = "攻击宝石";
+                        gridStat.text = "拾起以加"+((GridGem)gridInMaped).AddSum + "点攻击力";
                         break;
                     case 2:
-                        monsterStat.text = "防御宝石\n加"+((GridGem)gridInMaped).AddSum + "点防御力";
+                        gridName.text = "防御宝石";
+                        gridStat.text = "拾起以加" + ((GridGem)gridInMaped).AddSum + "点防御力";
                         break;
                 }
             }
             if (gridInMaped.type == Grid.GridType.DOOR) {
                 switch (gridInMaped.stat) {
                     case 1:
-                        monsterStat.text = "被锁住的青铜门\n一把青铜钥匙解锁";
+                        gridName.text = "上锁的青铜门";
+                        gridStat.text = "一把青铜钥匙以解锁";
                         break;
                     case 2:
-                        monsterStat.text = "被锁住的白银门\n一把白银钥匙解锁";
+                        gridName.text = "上锁的白银门";
+                        gridStat.text = "一把白银钥匙以解锁";
                         break;
                     case 3:
-                        monsterStat.text = "被锁住的黄金门\n一把黄金钥匙解锁";
+                        gridName.text = "上锁的黄金门";
+                        gridStat.text = "一把黄金钥匙以解锁";
                         break;
                 }
             }
             if (gridInMaped.type == Grid.GridType.KEY) {
                 switch (gridInMaped.stat) {
                     case 1:
-                        monsterStat.text = "一把青铜钥匙";
+                        gridName.text = "青铜钥匙";
+                        gridStat.text = "一把青铜钥匙";
                         break;
                     case 2:
-                        monsterStat.text = "一把白银钥匙";
+                        gridName.text = "白银钥匙";
+                        gridStat.text = "一把白银钥匙";
                         break;
                     case 3:
-                        monsterStat.text = "一把黄金钥匙";
+                        gridName.text = "黄金钥匙";
+                        gridStat.text = "一把黄金钥匙";
                         break;
                 }
             }
             if (gridInMaped.type == GridType.SHOP) {
                 GridShop gridShop = (GridShop)gridInMaped;
-                monsterStat.text = "商店\n" + gridShop.itemGiveOut + " " + gridShop.itemGiveOutNum + "个\n" +
+                gridName.text = "商店";
+                gridStat.text = gridShop.itemGiveOut + " " + gridShop.itemGiveOutNum + "个\n" +
                     gridShop.itemExchangeFor + " " + gridShop.itemExchangeForNum + "个";
             }
             if (gridInMaped.type == GridType.NPC) {
-                monsterStat.text = "NPC 暂时没用";
+                gridName.text = "NPC";
+                gridStat.text = "NPC 暂时没用";
             }
             if (gridInMaped.type == GridType.EVENT) {
                 switch (((GridEvent)gridInMaped).eventType) {
                     case GridEvent.EventType.SOULARROW:
-                        monsterStat.text = "拘魂之箭\n可以直接消灭一个怪物";
+                        gridName.text = "拘魂之箭";
+                        gridStat.text = "点击可以直接消灭一个怪物";
                         break;
                     case GridEvent.EventType.SOULGATE:
-                        monsterStat.text = "灵魂之门\n可以把一个最前排的怪物和\n后面再后面的物块交换";
+                        gridName.text = "灵魂之门";
+                        gridStat.text = "点击可以把一个最前排的怪物和后面再后面的物块交换";
                         break;
                     case GridEvent.EventType.CORRUPTIONROOTSAVE:
-                        monsterStat.text = "腐殖之根\n存入你当前的一半血量";
+                        gridName.text = "腐殖之根";
+                        gridStat.text = "点击以存入你当前的一半血量";
                         break;
                     case GridEvent.EventType.CORRUPTIONROOTLOAD:
-                        monsterStat.text = "腐殖之根\n取出" + ((GridEvent)gridInMaped).hpSave +"血量并摧毁这个格子";
+                        gridName.text = "腐殖之根";
+                        gridStat.text = "点击以取出" + ((GridEvent)gridInMaped).hpSave +"血量并摧毁这个格子";
                         break;
                 }
             }
             if (gridInMaped.type == GridType.BARRIER) {
-                monsterStat.text = "障碍物\n无法通过";
+                gridName.text = "障碍物";
+                gridStat.text = "无法通过";
             }
             if (gridInMaped.type == GridType.PORTAL) {
-                monsterStat.text = "传送门\n传送到下一层";
+                gridName.text = "传送门";
+                gridStat.text = "点击以传送到下一层";
             }
         }
     }

@@ -121,6 +121,28 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: low_0
+      rect:
+        serializedVersion: 2
+        x: 2119
+        y: 1538
+        width: 1150
+        height: 750
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3ca83b16a44f8e4d82ce1a15fec4272
+      internalID: 186077139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -135,6 +157,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      low_0: 186077139
       sdall (2)_0: 4619754238039030174
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

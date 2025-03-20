@@ -35,7 +35,7 @@ MonoBehaviour:
     hp: 24
     gold: 3
     abilityType: 
-    sprite: {fileID: -701133936354736473, guid: 45347abf325915e42a6ab562ecf481ed, type: 3}
+    sprite: {fileID: -8814018876901235483, guid: 72a06a83e1c8f944dbea538828089542, type: 3}
     intro: this is me
   - name: "\u6B8B\u7F3A\u8EAF\u4F53"
     atk: 33
@@ -67,7 +67,7 @@ MonoBehaviour:
     hp: 50
     gold: 8
     abilityType: 
-    sprite: {fileID: -8814018876901235483, guid: 281e0b8e3ca49244eacaf08b05927276, type: 3}
+    sprite: {fileID: -701133936354736473, guid: 45347abf325915e42a6ab562ecf481ed, type: 3}
     intro: this is me
   - name: "\u201C\u5012\u540A\u4EBA\u201D"
     atk: 45
