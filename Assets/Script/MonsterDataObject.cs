@@ -18,7 +18,8 @@ public class MonsterData
     public int def;
     public int hp;
     public int gold;
-    public ability[] abilityType;
+    public string abilities;
+    //public ability[] abilityType;
     public Sprite sprite;
     public string intro;
 }

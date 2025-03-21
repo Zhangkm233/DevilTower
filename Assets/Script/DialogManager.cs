@@ -118,7 +118,22 @@ public class DialogManager : MonoBehaviour
         sentenceNumber++;
         return false;
     }
-
+    [ContextMenu("跳过对话")]
+    public void SkipDialog() {
+        for (int i = sentenceNumber;i < sentenceStates.Count;i++) {
+            //Debug.Log(sentenceStates[i]);
+            if (sentenceStates[i] == sentenceState.EVENT) {
+                if (sentenceNames[i] == "UnlockTarot") {
+                    this.gameObject.GetComponent<TarotManager>().UnlockTarot(sentenceTexts[i]);
+                }
+                if (sentenceNames[i].ToString() == "UnlockMission") {
+                    this.gameObject.GetComponent<TarotManager>().UnlockMission(sentenceTexts[i]);
+                }
+            }
+        }
+        ResetDialog();
+        this.GetComponent <UIManager>().GoStat();
+    }
     [ContextMenu("快进对话")]
     public void FastForwardNextSentence() {
         if (this.GetComponent<UIManager>().State != UIState.DIALOG) return;

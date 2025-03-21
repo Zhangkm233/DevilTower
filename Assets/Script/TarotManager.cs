@@ -3,7 +3,7 @@ using UnityEngine;
 public class TarotManager : MonoBehaviour
 {
     public TarotsDataObject tarotsDataObject;
-
+    
     public void equipTarot(int tarot) {
         GameData.tarotEquip = tarot;
     }
@@ -63,15 +63,6 @@ public class TarotManager : MonoBehaviour
         for (int i = 0;i < GameData.tarotUnlock.Length;i++) {
             GameData.tarotUnlock[i] = true;
         }
-    }
-    public int GetTarotCount() {
-        int count = 0;
-        for (int i = 0;i < GameData.tarotUnlock.Length;i++) {
-            if (GameData.tarotUnlock[i]) {
-                count++;
-            }
-        }
-        return count;
     }
 
     /// <summary>

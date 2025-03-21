@@ -26,4 +26,23 @@ public static class GameData
     public static bool[] tarotMissionUnlock = new bool[22];
 
     public static int saveSlotChoose = 0;
+
+    public static int allGame_DevilsDefeated = 0;
+    public static int allGame_Door1Opened = 0;
+    public static int allGame_SoulDefeated = 0;
+    public static int allGame_GoldGained = 0; 
+    public static int allGame_EventEncountered = 0;
+
+    public static bool isEventUsed;
+    public static int defeatSHDPJ = 0;
+    public static int defeatSHWQJ = 0;
+    public static int GetTarotCount(bool[] tarots) {
+        int count = 0;
+        for (int i = 0;i < tarots.Length;i++) {
+            if (tarots[i]) {
+                count++;
+            }
+        }
+        return count;
+    }
 }

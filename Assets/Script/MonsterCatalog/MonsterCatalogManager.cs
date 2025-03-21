@@ -26,7 +26,39 @@ public class MonsterCatalogManager : MonoBehaviour
             monsterDataObject.monsterDataList[i].atk = int.Parse(monsterStat[1]);
             monsterDataObject.monsterDataList[i].def = int.Parse(monsterStat[2]);
             monsterDataObject.monsterDataList[i].hp = int.Parse(monsterStat[3]);
-            monsterDataObject.monsterDataList[i].gold = int.Parse(monsterStat[4]);
+            monsterDataObject.monsterDataList[i].gold = int.Parse(monsterStat[4]); 
+            monsterDataObject.monsterDataList[i].abilities = "";
+            int abilityLength = monsterStat.Length - 5;
+            if (abilityLength > 0) {
+                for (int j = 0;j < abilityLength;j++) {
+                    switch (monsterStat[j + 5]) {
+                        case "LOSTMIND":
+                            monsterDataObject.monsterDataList[i].abilities += "Ä§ÐÄ ";
+                            break;
+                        case "CRACK":
+                            monsterDataObject.monsterDataList[i].abilities += "ËéÁÑ ";
+                            break;
+                        case "FIRMNESS":
+                            monsterDataObject.monsterDataList[i].abilities += "¼á¶¨ ";
+                            break;
+                        case "STALK":
+                            monsterDataObject.monsterDataList[i].abilities += "×·ÁÔ ";
+                            break;
+                        case "CORRPUTIONONE":
+                            monsterDataObject.monsterDataList[i].abilities += "¸¯Ê´I ";
+                            break;
+                        case "CORRPUTIONTWO":
+                            monsterDataObject.monsterDataList[i].abilities += "¸¯Ê´II ";
+                            break;
+                        case "CORRPUTIONTHREE":
+                            monsterDataObject.monsterDataList[i].abilities += "¸¯Ê´III ";
+                            break;
+                        case "BOSS":
+                            monsterDataObject.monsterDataList[i].abilities += "Í·Ä¿ ";
+                            break;
+                    }
+                }
+            }
         }
         if (monsterDataObject.monsterDataList.Count > lines.Length) {
             for(int j = lines.Length;j < monsterDataObject.monsterDataList.Count;j++) {
