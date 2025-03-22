@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,6 +7,7 @@ public class GridTileManager : MonoBehaviour
 {
     public Grid mapGrid;
     public Grid.GridType gridType;
+    public Vector3 positionPivot, scalePivot;
     public int mapX;
     public int mapY;
     public Text monsterStat;
@@ -15,6 +17,9 @@ public class GridTileManager : MonoBehaviour
         this.gameObject.layer = 6;
         gameManagerObject = GameObject.Find("GameManager"); 
         name = mapGrid.GridTypeToWord + " " + mapX + " " + mapY;
+
+        positionPivot = transform.position;
+        scalePivot = transform.localScale;
     }
     public void UpdateData() {
         if (GameData.map[mapX,mapY] != null) {
@@ -54,8 +59,56 @@ public class GridTileManager : MonoBehaviour
     public void UpdateSprite() {
         try {
             this.gameObject.GetComponent<SpriteRenderer>().sprite = layer1sprites.spriteData[(int)gridType].sprites[mapGrid.stat - 1];
+            GridMove();
         } catch (System.Exception e) {
             Debug.Log("Error: " + mapGrid.GridTypeToWord + " " + mapGrid.stat + e);
         }
+    }
+
+    public void GridMove(){
+        StartCoroutine(GridMoveAnimCoroutine());
+    }
+
+    IEnumerator GridMoveAnimCoroutine(){
+        GridTileManager originalGridTile = FindGridIn(GameData.thisGridComeFrom[mapX,mapY]);
+        Vector3 originalPosition = new Vector3();
+        Vector3 originalScale = new Vector3();
+        if(originalGridTile != null){
+            originalPosition = originalGridTile.positionPivot;
+            originalScale = originalGridTile.scalePivot;
+        }else{
+            originalPosition = positionPivot - new Vector3(0, 2, 0);
+            originalScale = scalePivot;
+        }
+        
+        float duration = 0.1f;
+        float elapsed = 0.0f;
+
+        while(elapsed <= duration){
+            transform.position = Vector3.Lerp(originalPosition, positionPivot, elapsed/duration);
+            transform.localScale = Vector3.Lerp(originalScale, scalePivot, elapsed/duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = positionPivot;
+        transform.localScale = scalePivot;
+
+        GameData.thisGridComeFrom[mapX,mapY] = new Vector2Int(mapX, mapY);
+        
+    }
+
+    GridTileManager FindGridIn(Vector2Int map){
+        return FindGridIn(map.x, map.y);
+    }
+
+    GridTileManager FindGridIn(int x, int y){
+        GameObject[] grids = GameObject.FindGameObjectsWithTag("gridGameObject");
+        foreach (GameObject grid in grids) {
+            if (grid.GetComponent<GridTileManager>().mapX == x && grid.GetComponent<GridTileManager>().mapY == y){
+                return grid.GetComponent<GridTileManager>();
+            }
+        }
+        return null;
     }
 }

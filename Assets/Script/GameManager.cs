@@ -405,6 +405,7 @@ public class GameManager : MonoBehaviour
         for (i = mapY; i > 0; i--) {
             if (GameData.map[mapX,i - 1] == null) break;
             GameData.map[mapX,i] = GameData.map[mapX,i-1];
+            GameData.thisGridComeFrom[mapX,i] = new Vector2Int(mapX, i-1);
         }
         GameData.map[mapX,i] = null;
         UpdateEachGrid();
