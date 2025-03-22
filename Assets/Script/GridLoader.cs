@@ -124,5 +124,7 @@ public class GridLoader : MonoBehaviour
         GameData.map[x,y] = g;
         g.x = x;
         g.y = y;
+        g.fromX = x;
+        g.fromY = y;
     }
 }
