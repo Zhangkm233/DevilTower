@@ -18,31 +18,31 @@ MonoBehaviour:
     def: 1
     hp: 35
     gold: 1
-    abilityType: 
-    sprite: {fileID: 186077139, guid: 993cb32350df94d4bba6eff99617a9a9, type: 3}
+    abilities: 
+    sprite: {fileID: 4619754238039030174, guid: 993cb32350df94d4bba6eff99617a9a9, type: 3}
     intro: this is me
   - name: "\u7834\u788E\u8EAF\u4F53"
     atk: 20
     def: 2
     hp: 40
     gold: 2
-    abilityType: 
-    sprite: {fileID: -2129530729, guid: a9b4081207ac6cd4295e8d6868950ac6, type: 3}
+    abilities: 
+    sprite: {fileID: 776292312289234510, guid: a9b4081207ac6cd4295e8d6868950ac6, type: 3}
     intro: this is me
   - name: "\u4E2D\u7B49\u536B\u5175"
     atk: 38
     def: 3
     hp: 24
     gold: 3
-    abilityType: 
-    sprite: {fileID: -1248189323, guid: 72a06a83e1c8f944dbea538828089542, type: 3}
+    abilities: 
+    sprite: {fileID: -8814018876901235483, guid: 72a06a83e1c8f944dbea538828089542, type: 3}
     intro: this is me
   - name: "\u6B8B\u7F3A\u8EAF\u4F53"
     atk: 33
     def: 5
     hp: 30
     gold: 3
-    abilityType: 
+    abilities: 
     sprite: {fileID: -6682744762430114866, guid: cbbd60f617d2303419dd006c732ff4a9, type: 3}
     intro: this is me
   - name: "\u6E38\u8361\u8EAF\u4F53"
@@ -50,30 +50,30 @@ MonoBehaviour:
     def: 6
     hp: 50
     gold: 5
-    abilityType: 
-    sprite: {fileID: 614791774, guid: d5e1895fcf091734aaaecc01646b3c9e, type: 3}
+    abilities: 
+    sprite: {fileID: 3970941607457096416, guid: d5e1895fcf091734aaaecc01646b3c9e, type: 3}
     intro: this is me
   - name: "\u521D\u7B49\u6076\u9B54"
     atk: 40
     def: 8
     hp: 80
     gold: 6
-    abilityType: 
-    sprite: {fileID: -565257578, guid: ae2a660adb556314faf23a68bd8ca658, type: 3}
+    abilities: "\u9B54\u5FC3 "
+    sprite: {fileID: 8646932244216540387, guid: ae2a660adb556314faf23a68bd8ca658, type: 3}
     intro: this is me
   - name: "\u9AD8\u7B49\u536B\u5175"
     atk: 30
     def: 18
     hp: 50
     gold: 8
-    abilityType: 
-    sprite: {fileID: 1658631570, guid: 45347abf325915e42a6ab562ecf481ed, type: 3}
+    abilities: 
+    sprite: {fileID: -701133936354736473, guid: 45347abf325915e42a6ab562ecf481ed, type: 3}
     intro: this is me
   - name: "\u201C\u5012\u540A\u4EBA\u201D"
     atk: 45
     def: 15
     hp: 100
     gold: 50
-    abilityType: 
-    sprite: {fileID: -1845354884, guid: 769bb11fcfcbe1d46ba849d3b11a382b, type: 3}
+    abilities: "\u5934\u76EE "
+    sprite: {fileID: -4094297598476236443, guid: 769bb11fcfcbe1d46ba849d3b11a382b, type: 3}
     intro: this is me
