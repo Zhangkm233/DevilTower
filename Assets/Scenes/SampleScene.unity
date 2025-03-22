@@ -10266,6 +10266,10 @@ MonoBehaviour:
   GridInMap:
     stat: 0
     GridTypeToWord: 
+    x: 0
+    y: 0
+    fromX: 0
+    fromY: 0
 --- !u!114 &1211369222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10303,6 +10307,7 @@ MonoBehaviour:
   backGroundMain: {fileID: 611972121}
   tarotMain: {fileID: 1733047089}
   tileMain: {fileID: 2147028049}
+  numberPrefab: {fileID: 298824180997395607, guid: a36d8ac4119f8214687012478d1088c7, type: 3}
 --- !u!114 &1211369223
 MonoBehaviour:
   m_ObjectHideFlags: 0

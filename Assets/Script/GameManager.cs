@@ -1,10 +1,6 @@
-using DG.Tweening;
-using JetBrains.Annotations;
-using System;
-using System.Threading;
-using Unity.VisualScripting;
+
 using UnityEngine;
-using UnityEngine.Rendering;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -133,6 +129,8 @@ public class GameManager : MonoBehaviour
                 return false;
             }
             Debug.Log("战斗伤害;" + battleDamage);
+            GetComponent<UIManager>().PopNumber(battleDamage, new Color(255.0f/255f,102.0f/255,28.0f/255));
+            
             GameData.playerHp -= battleDamage;
             //全局金币
             //在所有游戏流程中，消灭5个恶魔（包括初等恶魔，中等恶魔，高等恶魔）
@@ -227,8 +225,10 @@ public class GameManager : MonoBehaviour
         }
         //捡血瓶
         if (gridTileManager.gridType == Grid.GridType.BOTTLE) {
-            GameData.playerHp += ((GridBottle)gridTileManager.mapGrid).healingPoints;
-            Debug.Log("捡到了血瓶，血量+" + ((GridBottle)gridTileManager.mapGrid).healingPoints);
+            int healingPoints = ((GridBottle)gridTileManager.mapGrid).healingPoints;
+            GameData.playerHp += healingPoints;
+            Debug.Log("捡到了血瓶，血量+" + healingPoints);
+            GetComponent<UIManager>().PopNumber(healingPoints, Color.green);
             ClearGridInMap(gridTileManager);
             return true;
         }
@@ -480,6 +480,8 @@ public class GameManager : MonoBehaviour
         }
         return null;
     }
+
+
 
 
 }

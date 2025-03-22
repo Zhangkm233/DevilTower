@@ -1,7 +1,6 @@
-using NUnit.Framework.Constraints;
-using System;
-using System.Collections.Generic;
-using System.IO;
+using System.Collections;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -45,7 +44,6 @@ public class UIManager : MonoBehaviour
     public GameObject tarotMain;
     public GameObject tileMain;
     void Start() {
-
     }
     
     void Update() {
@@ -344,5 +342,41 @@ public class UIManager : MonoBehaviour
         GameData.key3++;
         GameData.gold += 1000;
         GameData.playerAtk += 100;
+    }
+
+    [Header("Pop Number")]
+    public GameObject numberPrefab;
+    public void PopNumber(int num, Color color, int size = 1, float intensity = 0.015f){
+        GameObject number = Instantiate(numberPrefab);
+
+        Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        number.transform.position = new Vector3(position.x, position.y, 0);
+        number.transform.localScale = new Vector3(size,size,size);
+        number.GetComponent<TextMeshPro>().color = color;
+        number.GetComponent<TextMeshPro>().text = num.ToString();
+
+        Vector3 direction = new Vector3(Random.Range(-1f,1f), Random.Range(0,1f), 0).normalized;
+        Vector3 velocity = direction * intensity;
+
+        StartCoroutine(NumberJumpCoroutine(number, velocity));
+    }
+    IEnumerator NumberJumpCoroutine(GameObject number, Vector3 initVelocity){
+        float duration = 2.0f;
+        float elapsed = 0.0f;
+        Vector3 velocity = initVelocity;
+        TextMeshPro tmp = number.GetComponent<TextMeshPro>();
+        
+
+        while(elapsed <= duration){
+
+            velocity += new Vector3(0,-0.05f,0) * Time.deltaTime;
+            number.transform.position += velocity;
+            tmp.color = new Color(tmp.color.r, tmp.color.g, tmp.color.b, (duration-elapsed)/duration);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(number);
     }
 }

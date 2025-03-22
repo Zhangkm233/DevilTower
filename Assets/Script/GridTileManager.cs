@@ -91,8 +91,11 @@ public class GridTileManager : MonoBehaviour
         transform.position = originalPosition;
         transform.localScale = originalScale;
 
-        Tween move = DOTween.To(()=>transform.position, x => transform.position = x, positionPivot, duration * 3);
-        move.SetEase(Ease.OutBounce);
+        transform.DOMoveX(positionPivot.x, duration * 1.5f).SetEase(Ease.Linear);
+        transform.DOMoveY(positionPivot.y, duration * 3).SetEase(Ease.OutBounce);
+
+        //Tween move = DOTween.To(()=>transform.position, x => transform.position = x, positionPivot, duration * 3);
+        //move.SetEase(Ease.OutBounce);
         Tween scale = DOTween.To(()=>transform.localScale, x => transform.localScale = x, scalePivot, duration);
         scale.SetEase(Ease.Linear);
 
