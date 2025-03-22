@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Security.Cryptography.X509Certificates;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -70,9 +71,12 @@ public class GridTileManager : MonoBehaviour
     }
 
     IEnumerator GridMoveAnimCoroutine(){
-        GridTileManager originalGridTile = FindGridIn(GameData.thisGridComeFrom[mapX,mapY]);
+        int X = GameData.map[mapX,mapY].fromX;
+        int Y = GameData.map[mapX,mapY].fromY;
+        GridTileManager originalGridTile = FindGridIn(X,Y);
         Vector3 originalPosition = new Vector3();
         Vector3 originalScale = new Vector3();
+
         if(originalGridTile != null){
             originalPosition = originalGridTile.positionPivot;
             originalScale = originalGridTile.scalePivot;
@@ -94,7 +98,8 @@ public class GridTileManager : MonoBehaviour
         transform.position = positionPivot;
         transform.localScale = scalePivot;
 
-        GameData.thisGridComeFrom[mapX,mapY] = new Vector2Int(mapX, mapY);
+        GameData.map[mapX,mapY].fromX = mapX;
+        GameData.map[mapX,mapY].fromY = mapY;
         
     }
 

@@ -383,11 +383,14 @@ public class GameManager : MonoBehaviour
                      targetGrid.type != Grid.GridType.PORTAL) {
                     //与左边的格子交换
                     if (i == 0 && ((GridMonster)grid).isLostmind) {
-                        GameData.map[5,GameData.gridHeight - 1] = grid;
+                        //GameData.map[5,GameData.gridHeight - 1] = grid;
+                        grid.MoveTo(5, GameData.gridHeight - 1);
                     } else {
-                        GameData.map[i - 1,GameData.gridHeight - 1] = grid;
+                        //GameData.map[i - 1,GameData.gridHeight - 1] = grid;
+                        grid.MoveTo(i - 1,GameData.gridHeight - 1);
                     }
-                    GameData.map[i,GameData.gridHeight - 1] = targetGrid;
+                    //GameData.map[i,GameData.gridHeight - 1] = targetGrid;
+                    targetGrid.MoveTo(i,GameData.gridHeight - 1);
                     if (((GridMonster)grid).isCrack && targetGrid.type != Grid.GridType.SHOP && targetGrid.type != Grid.GridType.NPC) {
                         //碎裂
                         ClearGridInMap(i,GameData.gridHeight - 1);
@@ -404,8 +407,7 @@ public class GameManager : MonoBehaviour
         int i;
         for (i = mapY; i > 0; i--) {
             if (GameData.map[mapX,i - 1] == null) break;
-            GameData.map[mapX,i] = GameData.map[mapX,i-1];
-            GameData.thisGridComeFrom[mapX,i] = new Vector2Int(mapX, i-1);
+            GameData.map[mapX,i-1].MoveTo(mapX, i);
         }
         GameData.map[mapX,i] = null;
         UpdateEachGrid();
@@ -477,4 +479,6 @@ public class GameManager : MonoBehaviour
         }
         return null;
     }
+
+    
 }

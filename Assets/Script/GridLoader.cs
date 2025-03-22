@@ -68,7 +68,6 @@ public class GridLoader : MonoBehaviour
                 print("x:" + x + " y:" + y + " gridType:" + gridType + " gridStat:" + gridStat);
                 //Ð´½ømapÀï
                 writeInGrid(x,y,gridType,gridStat);
-                GameData.thisGridComeFrom[x,y] = new Vector2Int(x,y);
             }
         }
     }
@@ -123,5 +122,7 @@ public class GridLoader : MonoBehaviour
         }
         g.GridTypeToWord = gridType;
         GameData.map[x,y] = g;
+        g.x = x;
+        g.y = y;
     }
 }

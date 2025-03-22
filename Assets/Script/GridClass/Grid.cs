@@ -57,4 +57,15 @@ public class Grid
     public virtual Grid AsEnter() {
         return this;
     }
+
+    public void MoveTo(int x, int y){
+        GameData.map[x, y] = this;
+        fromX = this.x;
+        fromY = this.y;
+        this.x = x;
+        this.y = y;
+    }
+
+    public int x,y;
+    public int fromX, fromY;
 }
