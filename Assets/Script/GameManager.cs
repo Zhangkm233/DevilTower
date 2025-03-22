@@ -1,3 +1,4 @@
+using DG.Tweening;
 using JetBrains.Annotations;
 using System;
 using System.Threading;
@@ -480,5 +481,5 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
-    
+
 }

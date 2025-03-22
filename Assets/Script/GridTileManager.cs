@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Security.Cryptography.X509Certificates;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -60,13 +61,13 @@ public class GridTileManager : MonoBehaviour
     public void UpdateSprite() {
         try {
             this.gameObject.GetComponent<SpriteRenderer>().sprite = layer1sprites.spriteData[(int)gridType].sprites[mapGrid.stat - 1];
-            GridMove();
+            GridMoveAnim();
         } catch (System.Exception e) {
             Debug.Log("Error: " + mapGrid.GridTypeToWord + " " + mapGrid.stat + e);
         }
     }
 
-    public void GridMove(){
+    void GridMoveAnim(){
         StartCoroutine(GridMoveAnimCoroutine());
     }
 
@@ -86,17 +87,16 @@ public class GridTileManager : MonoBehaviour
         }
         
         float duration = 0.1f;
-        float elapsed = 0.0f;
 
-        while(elapsed <= duration){
-            transform.position = Vector3.Lerp(originalPosition, positionPivot, elapsed/duration);
-            transform.localScale = Vector3.Lerp(originalScale, scalePivot, elapsed/duration);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
+        transform.position = originalPosition;
+        transform.localScale = originalScale;
 
-        transform.position = positionPivot;
-        transform.localScale = scalePivot;
+        Tween move = DOTween.To(()=>transform.position, x => transform.position = x, positionPivot, duration * 3);
+        move.SetEase(Ease.OutBounce);
+        Tween scale = DOTween.To(()=>transform.localScale, x => transform.localScale = x, scalePivot, duration);
+        scale.SetEase(Ease.Linear);
+
+        yield return new WaitForSeconds(duration);
 
         GameData.map[mapX,mapY].fromX = mapX;
         GameData.map[mapX,mapY].fromY = mapY;
