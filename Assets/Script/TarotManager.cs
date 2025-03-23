@@ -3,9 +3,11 @@ using UnityEngine;
 public class TarotManager : MonoBehaviour
 {
     public TarotsDataObject tarotsDataObject;
-    
-    public void equipTarot(int tarot) {
-        GameData.tarotEquip = tarot;
+
+    public void EffectsWhenEquipTarot(int tarotIndex) {
+        switch (tarotIndex) {
+            //根据不同的塔罗牌执行“选择时”的效果，是在结束塔罗牌选择界面的按钮上挂载的方法
+        }
     }
     //任务
     public void UnlockMission(string tarot) {

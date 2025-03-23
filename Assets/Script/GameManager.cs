@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using static Grid;
 
 
 public class GameManager : MonoBehaviour
@@ -116,8 +117,12 @@ public class GameManager : MonoBehaviour
         }
         if (gridTileManager.gridType == Grid.GridType.MONSTER) {
             //‘‚”ˆπ÷ŒÔ
+            TarotManager tarots = this.GetComponent<TarotManager>();
             if (((GridMonster)GridInMap).isBoss && !GameData.hasEncounterBoss) {
                 this.GetComponent<UIManager>().StartDialogBeforeBoss();
+                if((GameData.layer == 2) && (tarots.IsMissionUnlock("Strength"))) {
+                    tarots.UnlockTarot("Strength");
+                }
                 GameData.hasEncounterBoss = true;
                 return false;
             }
@@ -148,22 +153,27 @@ public class GameManager : MonoBehaviour
             if (((GridMonster)GridInMap).name == " …ªÍ∂‹≈∆Ω≥") {
                 GameData.defeatSHDPJ++;
                 if (GameData.defeatSHDPJ == 3 && GameData.isEventUsed == false) {
-                    TarotManager tarots = this.GetComponent<TarotManager>();
                     if (tarots.IsMissionUnlock("Pope")) tarots.UnlockTarot("Pope");
                 }
             }
             if (((GridMonster)GridInMap).name == " …ªÍŒ‰∆˜Ω≥") {
                 GameData.defeatSHWQJ++;
                 if (GameData.defeatSHWQJ == 3 && GameData.isEventUsed == false) {
-                    TarotManager tarots = this.GetComponent<TarotManager>();
                     if (tarots.IsMissionUnlock("Empress")) tarots.UnlockTarot("Empress");
                 }
+            }
+            if (((GridMonster)GridInMap).name == GameData.lastMonsterName) {
+                GameData.continueDefeatStatrack++;
+                if((GameData.continueDefeatStatrack >= 4) && tarots.IsMissionUnlock("Tower")) {
+                    tarots.UnlockTarot("Tower");
+                }
+            } else {
+                GameData.continueDefeatStatrack = 1;
             }
             GameData.allGame_GoldGained += ((GridMonster)GridInMap).gold;
             GameData.gold += ((GridMonster)GridInMap).gold;
             if(((GridMonster)GridInMap).isBoss && GameData.hasEncounterBoss) {
                 //Ω‚À¯À˛¬ﬁ≈∆
-                TarotManager tarots = this.GetComponent<TarotManager>();
                 switch (GameData.layer) {
                     case 1:
                         if (tarots.IsMissionUnlock("HangedMan")) tarots.UnlockTarot("HangedMan");
@@ -312,6 +322,21 @@ public class GameManager : MonoBehaviour
                     }
                     if (GameData.playerAtk >= 23 && tarots.IsMissionUnlock("Devil")) {
                         tarots.UnlockTarot("Devil");
+                    }
+                    break;
+                case 2:
+                    int monsterCount = 0;
+                    //±È¿˙map£¨≤È’“ «∑Ò√ª”–π÷ŒÔ¡À
+                    for (int y = 0;y < GameData.gridHeight;y++) {
+                        for (int x = 0;x < GameData.gridWidth;x++) {
+                            if (GameData.map[x,y] != null) {
+                                if (GameData.map[x,y].type == GridType.MONSTER) monsterCount++;
+                            }
+
+                        }
+                    }
+                    if ((monsterCount == 0) && (tarots.IsMissionUnlock("Moon"))){
+                        tarots.UnlockTarot("Moon");
                     }
                     break;
             }

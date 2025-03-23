@@ -22,12 +22,18 @@ public class TarotAnimHandler : MonoBehaviour
     public void selectTarot(TarotCard card){
         //更新选择的卡牌数据为这张
         //Gamedata. ...
-
         //进行动画效果
-        if(selectedCard != null){
+        TarotCard LastCard = null;
+        if (selectedCard != null) {
             selectedCard.MoveOutSlot();
+            LastCard = selectedCard;
+            selectedCard = null;
+            GameData.tarotEquip = 0;
         }
-        selectedCard = card;
+        if (LastCard != card) {
+            selectedCard = card;
+            GameData.tarotEquip = card.cardIndex;
+        }
         card.MoveIntoSlot(targetSlot);
     }
 

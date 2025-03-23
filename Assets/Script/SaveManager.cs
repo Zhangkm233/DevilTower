@@ -31,6 +31,8 @@ public class PlayerData
     public bool isEventUsed;
     public int defeatSHDPJ;
     public int defeatSHWQJ;
+    public string lastMonsterName;
+    public int continueDefeatStatrack;
 
     public void ReadForeverDataFromGame() {
         tarotUnlock = GameData.tarotUnlock;
@@ -74,6 +76,8 @@ public class PlayerData
         isEventUsed = GameData.isEventUsed;
         defeatSHDPJ = GameData.defeatSHDPJ;
         defeatSHWQJ = GameData.defeatSHWQJ;
+        lastMonsterName = GameData.lastMonsterName;
+        continueDefeatStatrack = GameData.continueDefeatStatrack;
     }
 
     public void WriteDataToGame(){
@@ -97,6 +101,8 @@ public class PlayerData
         GameData.isEventUsed = isEventUsed;
         GameData.defeatSHWQJ = defeatSHWQJ;
         GameData.defeatSHDPJ = defeatSHDPJ;
+        GameData.lastMonsterName = lastMonsterName;
+        GameData.continueDefeatStatrack = continueDefeatStatrack;
     }
 }
 

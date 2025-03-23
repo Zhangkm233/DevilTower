@@ -301,6 +301,7 @@ public class UIManager : MonoBehaviour
     public void GoEvent() {
         GoState(UIState.EVENT);
     }
+    [ContextMenu("ËþÂÞÅÆSTATE")]
     public void GoTarot() {
         GoState(UIState.TAROT);
     }

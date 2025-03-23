@@ -36,6 +36,8 @@ public static class GameData
     public static bool isEventUsed;
     public static int defeatSHDPJ = 0;
     public static int defeatSHWQJ = 0;
+    public static string lastMonsterName = string.Empty;
+    public static int continueDefeatStatrack = 0;
     public static int GetTarotCount(bool[] tarots) {
         int count = 0;
         for (int i = 0;i < tarots.Length;i++) {
