@@ -15,6 +15,9 @@ public class DialogManager : MonoBehaviour
     {
         TEXT, EVENT, END,
     };
+    public GameObject nameTag;
+    public GameObject dialogNameObject;
+    public Sprite[] tagSprites;
     public Text dialogName;
     public Text dialogText;
     public string dialogTitle;
@@ -118,6 +121,29 @@ public class DialogManager : MonoBehaviour
         sentenceNumber++;
         return false;
     }
+    public void HandleWithName() {
+        dialogName.text = sentenceNames[sentenceNumber];
+        if (dialogName.text == " ") {
+            nameTag.SetActive(false);
+            dialogNameObject.SetActive(false);
+        } else {
+            nameTag.SetActive(true);
+            dialogNameObject.SetActive(false);
+        }
+        //设置nametag的sprite
+        //魔女1 铁匠2 半魔人3 修女4 倒吊人5
+        Image tagImage = nameTag.GetComponent<Image>();
+        tagImage.sprite = dialogName.text switch {
+            "魔女" => tagSprites[1],
+            "铁匠" => tagSprites[2],
+            "半魔人" => tagSprites[3],
+            "修女" => tagSprites[4],
+            "倒吊人" => tagSprites[5],
+            _ => tagSprites[0],
+        };
+        if (tagImage.sprite == tagSprites[0]) dialogNameObject.SetActive(true);
+        tagImage.SetNativeSize();
+    }
     [ContextMenu("跳过对话")]
     public void SkipDialog() {
         for (int i = sentenceNumber;i < sentenceStates.Count;i++) {
@@ -139,7 +165,7 @@ public class DialogManager : MonoBehaviour
         if (this.GetComponent<UIManager>().State != UIState.DIALOG) return;
         if (isFastForwarding == false) return;
         if (HandleWithSentence()) return;
-        dialogName.text = sentenceNames[sentenceNumber];
+        HandleWithName();
         dialogText.text = sentenceTexts[sentenceNumber];
         StartCoroutine(FastForwardText());
     }
@@ -147,7 +173,7 @@ public class DialogManager : MonoBehaviour
         if (this.GetComponent<UIManager>().State != UIState.DIALOG) return;
         if (isFastForwarding == true) StopAllCoroutines();
         if (HandleWithSentence()) return;
-        dialogName.text = sentenceNames[sentenceNumber];
+        HandleWithName();
         StartCoroutine(ShowText(sentenceTexts[sentenceNumber]));
     }
     IEnumerator ShowText(string fullText) {
