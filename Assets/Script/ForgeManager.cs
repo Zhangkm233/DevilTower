@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,10 +20,12 @@ public class ForgeManager : MonoBehaviour
         2,4,8,12,20
     };
     public GameObject gameManager;
-    public Text forgeDialogText;
+    //public Text forgeDialogText;
     public Text forgeHpText;
     public Text forgeAtkText;
     public Text forgeDefText;
+    public TMP_Text goldStatText;
+    public TMP_Text Price1, Price2, Price3;
     public static int priceNow = 0;
     public static int hpForgeGive = 0;
     public static int atkForgeGive = 0;
@@ -33,14 +36,19 @@ public class ForgeManager : MonoBehaviour
         } else {
             priceNow = forgePrice[11];
         }
-        forgeDialogText.text = "你好，需要锻造吗？只需要" + priceNow + "个魔力结晶";
+        //forgeDialogText.text = "你好，需要锻造吗？只需要" + priceNow + "个魔力结晶";
         hpForgeGive = forgeHp[GameData.layer - 1];
         atkForgeGive = forgeAtk[GameData.layer - 1];
         defForgeGive = forgeDef[GameData.layer - 1];
         forgeHpText.text = "增加" +hpForgeGive.ToString() + "HP";
         forgeAtkText.text = "增加" + atkForgeGive.ToString() + "ATK";
         forgeDefText.text = "增加" + defForgeGive.ToString() + "DEF";
-
+        Price1.text = priceNow.ToString();
+        Price2.text = priceNow.ToString();
+        Price3.text = priceNow.ToString();
+    }
+    public void Update() {
+        if (this.isActiveAndEnabled) goldStatText.text = (GameData.gold).ToString();
     }
     public void ForgeHp() {
         AffirmForge(ForgeOpinion.HP);

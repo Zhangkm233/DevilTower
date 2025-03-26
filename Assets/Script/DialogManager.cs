@@ -17,6 +17,9 @@ public class DialogManager : MonoBehaviour
     };
     public GameObject nameTag;
     public GameObject dialogNameObject;
+    public GameObject dialogIllustrationObject;
+    public GameObject dialogIllustrationShadowObject;
+    public Sprite[] illustrationSprites;
     public Sprite[] tagSprites;
     public Text dialogName;
     public Text dialogText;
@@ -143,6 +146,26 @@ public class DialogManager : MonoBehaviour
         };
         if (tagImage.sprite == tagSprites[0]) dialogNameObject.SetActive(true);
         tagImage.SetNativeSize();
+        //设置立绘的sprite
+        dialogIllustrationObject.SetActive(true);
+        dialogIllustrationShadowObject.SetActive(true);
+        Image illuImage = dialogIllustrationObject.GetComponent<Image>();
+        illuImage.sprite = dialogName.text switch {
+            "魔女" => illustrationSprites[0],
+            "铁匠" => illustrationSprites[1],
+            "半魔人" => illustrationSprites[2],
+            "修女" => illustrationSprites[3],
+            "倒吊人" => illustrationSprites[4],
+            _ => null,
+        };
+        if (illuImage.sprite == null) {
+            illuImage.gameObject.SetActive(false);
+            dialogIllustrationShadowObject.SetActive(false);
+        } else {
+            dialogIllustrationShadowObject.GetComponent<Image>().sprite = illuImage.sprite;
+            illuImage.SetNativeSize(); 
+            dialogIllustrationShadowObject.GetComponent<Image>().SetNativeSize();
+        }
     }
     [ContextMenu("跳过对话")]
     public void SkipDialog() {

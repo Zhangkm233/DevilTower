@@ -261,6 +261,9 @@ public class GameManager : MonoBehaviour
                 if (GameData.key2 > 0) {
                     GameData.key2--;
                     Debug.Log("打开了" + door.doorStat + "门");
+                    if(this.GetComponent<TarotManager>().NumToTarot(GameData.tarotEquip) == "Magician") {
+                        GameData.key1 ++;
+                    }
                     ClearGridInMap(gridTileManager);
                     return true;
                 } else {

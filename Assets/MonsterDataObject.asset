@@ -43,7 +43,7 @@ MonoBehaviour:
     hp: 30
     gold: 3
     abilities: 
-    sprite: {fileID: -6682744762430114866, guid: cbbd60f617d2303419dd006c732ff4a9, type: 3}
+    sprite: {fileID: 848398782808015807, guid: 023aaf79c050b6b4297febc84a9adbdc, type: 3}
     intro: this is me
   - name: "\u6E38\u8361\u8EAF\u4F53"
     atk: 34
