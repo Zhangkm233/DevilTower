@@ -18,9 +18,9 @@ public class GameManager : MonoBehaviour
     public int gameMapWidth;
     public int gameMapHeight;
     public bool[] tarotUnlock;
-    public bool[] tarotMissionUnlock; 
-    public int tarotEquip;
-    public string tarotEquipName;
+    //public bool[] tarotMissionUnlock; 
+    public int[] tarotEquip;
+    //public string[] tarotEquipName;
     [Space(15)]
     public Camera mainCamera;
     public GameObject objectClick;
@@ -120,9 +120,9 @@ public class GameManager : MonoBehaviour
             TarotManager tarots = this.GetComponent<TarotManager>();
             if (((GridMonster)GridInMap).isBoss && !GameData.hasEncounterBoss) {
                 this.GetComponent<UIManager>().StartDialogBeforeBoss();
-                if((GameData.layer == 2) && (tarots.IsMissionUnlock("Strength"))) {
-                    tarots.UnlockTarot("Strength");
-                }
+                //if((GameData.layer == 2) && (tarots.IsMissionUnlock("Strength"))) {
+                //    tarots.UnlockTarot("Strength");
+                //}
                 GameData.hasEncounterBoss = true;
                 return false;
             }
@@ -139,6 +139,7 @@ public class GameManager : MonoBehaviour
             GameData.playerHp -= battleDamage;
             //全局金币
             //在所有游戏流程中，消灭5个恶魔（包括初等恶魔，中等恶魔，高等恶魔）
+            /*
             if (((GridMonster)GridInMap).name == "初等恶魔" ||
                 ((GridMonster)GridInMap).name == "中等恶魔" ||
                 ((GridMonster)GridInMap).name == "高等恶魔") {
@@ -171,9 +172,11 @@ public class GameManager : MonoBehaviour
                 GameData.continueDefeatStatrack = 1;
             }
             GameData.allGame_GoldGained += ((GridMonster)GridInMap).gold;
+            */
             GameData.gold += ((GridMonster)GridInMap).gold;
             if(((GridMonster)GridInMap).isBoss && GameData.hasEncounterBoss) {
                 //解锁塔罗牌
+                /*
                 switch (GameData.layer) {
                     case 1:
                         if (tarots.IsMissionUnlock("HangedMan")) tarots.UnlockTarot("HangedMan");
@@ -191,6 +194,7 @@ public class GameManager : MonoBehaviour
                         if (tarots.IsMissionUnlock("World")) tarots.UnlockTarot("World");
                         break;
                 }
+                */
                 //如果是boss 生成传送门
                 this.GetComponent<UIManager>().StartDialogAfterBoss();
                 GameData.map[gridTileManager.mapX,gridTileManager.mapY] = new Grid("P",1);
@@ -261,7 +265,7 @@ public class GameManager : MonoBehaviour
                 if (GameData.key2 > 0) {
                     GameData.key2--;
                     Debug.Log("打开了" + door.doorStat + "门");
-                    if(this.GetComponent<TarotManager>().NumToTarot(GameData.tarotEquip) == "Magician") {
+                    if(GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Magician"))) {
                         GameData.key1 ++;
                     }
                     ClearGridInMap(gridTileManager);
@@ -310,12 +314,19 @@ public class GameManager : MonoBehaviour
                 ClearGridInMap(gridTileManager);
                 return true;
             }
+            if (((GridEvent)GridInMap).eventType == GridEvent.EventType.BOOM) {
+                if(gridTileManager.mapX != 0) ClearGridInMap(gridTileManager.mapX - 1,gridTileManager.mapY);
+                if(gridTileManager.mapX != 5) ClearGridInMap(gridTileManager.mapX + 1,gridTileManager.mapY);
+                ClearGridInMap(gridTileManager);
+                return true;
+            }
             this.GetComponent<UIManager>().StartEvent((GridEvent)GridInMap,
                 gridTileManager.mapX,gridTileManager.mapY);
             return false;
         }
         if (gridTileManager.gridType == Grid.GridType.PORTAL) {
             //进入塔罗牌
+            /*
             TarotManager tarots = this.GetComponent<TarotManager>();
             switch (GameData.layer) {
                 case 1:
@@ -361,6 +372,7 @@ public class GameManager : MonoBehaviour
             if (GameData.GetTarotCount(GameData.tarotUnlock)>=7 && tarots.IsMissionUnlock("HighPriestess")) {
                 tarots.UnlockTarot("HighPriestess");
             }
+            */
             //储存永久数据
             SaveManager.SaveForeverData();
             LayerChangeTo(GameData.layer + 1,true);
@@ -495,9 +507,8 @@ public class GameManager : MonoBehaviour
         gameMapWidth = GameData.gridWidth;
         gameMapHeight = GameData.gridHeight;
         tarotUnlock = GameData.tarotUnlock;
-        tarotMissionUnlock = GameData.tarotMissionUnlock;
+        //tarotMissionUnlock = GameData.tarotMissionUnlock;
         tarotEquip = GameData.tarotEquip;
-        tarotEquipName =this.GetComponent<TarotManager>().NumToTarot(GameData.tarotEquip);
     }
 
     public GameObject ObjectClick() {
@@ -508,8 +519,4 @@ public class GameManager : MonoBehaviour
         }
         return null;
     }
-
-
-
-
 }

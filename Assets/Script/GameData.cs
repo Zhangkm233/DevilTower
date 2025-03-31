@@ -21,9 +21,9 @@ public static class GameData
     public static int gridHeight = 15; // µØÍ¼¸ß¶È
     public static Grid[,] map = new Grid[gridWidth,gridHeight];
 
-    public static int tarotEquip = 0;
+    public static int[] tarotEquip = {-1,-1,-1,-1,-1};
     public static bool[] tarotUnlock = new bool[22];
-    public static bool[] tarotMissionUnlock = new bool[22];
+    //public static bool[] tarotMissionUnlock = new bool[22];
 
     public static int saveSlotChoose = 0;
 
@@ -46,5 +46,13 @@ public static class GameData
             }
         }
         return count;
+    }
+    public static bool IsTarotEquip(int tarotIndex) {
+        for (int i = 0;i < tarotEquip.Length;i++) {
+            if (tarotEquip[i] == tarotIndex) {
+                return true;
+            }
+        }
+        return false;
     }
 }

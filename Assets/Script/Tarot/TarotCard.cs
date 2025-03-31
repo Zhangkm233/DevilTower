@@ -5,7 +5,7 @@ using UnityEngine;
 public class TarotCard : MonoBehaviour
 {
     public int cardIndex;
-
+    public bool isEquiping;
     public Vector3 originPos;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,7 +28,14 @@ public class TarotCard : MonoBehaviour
 
     public void HandleClick(){
         Debug.Log("Click");
-        TarotAnimHandler.instance.selectTarot(this);
+        if (isEquiping) {
+            TarotAnimHandler.instance.UnEquipTarot(this);
+            return;
+        }
+        if (!isEquiping) {
+            TarotAnimHandler.instance.selectTarot(this);
+            return;
+        }
     }
 
     public void HandlePointerEnter(){

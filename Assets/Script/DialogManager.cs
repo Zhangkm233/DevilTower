@@ -109,7 +109,7 @@ public class DialogManager : MonoBehaviour
                 this.gameObject.GetComponent<TarotManager>().UnlockTarot(sentenceTexts[sentenceNumber + 1]);
             }
             if (sentenceNames[sentenceNumber + 1] == "UnlockMission") {
-                this.gameObject.GetComponent<TarotManager>().UnlockMission(sentenceTexts[sentenceNumber + 1]);
+                //this.gameObject.GetComponent<TarotManager>().UnlockMission(sentenceTexts[sentenceNumber + 1]);
             }
             //干一些事情 然后跳过这个event
             sentenceNumber++;
@@ -176,7 +176,7 @@ public class DialogManager : MonoBehaviour
                     this.gameObject.GetComponent<TarotManager>().UnlockTarot(sentenceTexts[i]);
                 }
                 if (sentenceNames[i].ToString() == "UnlockMission") {
-                    this.gameObject.GetComponent<TarotManager>().UnlockMission(sentenceTexts[i]);
+                    //this.gameObject.GetComponent<TarotManager>().UnlockMission(sentenceTexts[i]);
                 }
             }
         }

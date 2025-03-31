@@ -10,6 +10,7 @@ public class TarotManager : MonoBehaviour
         }
     }
     //ÈÎÎñ
+    /*
     public void UnlockMission(string tarot) {
         GameData.tarotMissionUnlock[TarotToNum(tarot)] = true;
     }
@@ -27,6 +28,7 @@ public class TarotManager : MonoBehaviour
     public bool IsMissionUnlock(string tarot) {
         return GameData.tarotMissionUnlock[TarotToNum(tarot)];
     }
+    */
     //ËþÂÞÅÆ
     public void UnlockTarot(int[] index) {
         for (int i = 0;i < index.Length;i++) {

@@ -20,14 +20,14 @@ public class PlayerData
     public int GridHeight;
     public GridWrapper gridWrapper;
     public bool[] tarotUnlock;
-    public bool[] tarotMissionUnlock;
+    //public bool[] tarotMissionUnlock;
     public bool hasEncounterBoss;
     public int tarotEquip;
-    public int allGame_DevilsDefeated;
-    public int allGame_Door1Opened;
-    public int allGame_SoulDefeated;
-    public int allGame_GoldGained;
-    public int allGame_EventEncountered;
+    //public int allGame_DevilsDefeated;
+    //public int allGame_Door1Opened;
+    //public int allGame_SoulDefeated;
+    //public int allGame_GoldGained;
+    //public int allGame_EventEncountered;
     public bool isEventUsed;
     public int defeatSHDPJ;
     public int defeatSHWQJ;
@@ -36,25 +36,30 @@ public class PlayerData
 
     public void ReadForeverDataFromGame() {
         tarotUnlock = GameData.tarotUnlock;
-        tarotMissionUnlock = GameData.tarotMissionUnlock;
-        allGame_DevilsDefeated = GameData.allGame_DevilsDefeated;
-        allGame_Door1Opened = GameData.allGame_Door1Opened;
-        allGame_SoulDefeated = GameData.allGame_SoulDefeated;
-        allGame_GoldGained = GameData.allGame_GoldGained;
-        allGame_EventEncountered = GameData.allGame_EventEncountered;
+        //tarotMissionUnlock = GameData.tarotMissionUnlock;
+        //allGame_DevilsDefeated = GameData.allGame_DevilsDefeated;
+        //allGame_Door1Opened = GameData.allGame_Door1Opened;
+        //allGame_SoulDefeated = GameData.allGame_SoulDefeated;
+        //allGame_GoldGained = GameData.allGame_GoldGained;
+        //allGame_EventEncountered = GameData.allGame_EventEncountered;
     }
     public void WriteForeverDataToGame() {
-        if (GameData.GetTarotCount(GameData.tarotUnlock) < GameData.GetTarotCount(tarotUnlock)) {
-            GameData.tarotUnlock = tarotUnlock;
+        for (int i = 0;i < tarotUnlock.Length;i++) {
+            if (GameData.tarotUnlock[i] || tarotUnlock[i]) {
+                GameData.tarotUnlock[i] = true;
+            }
         }
-        if (GameData.GetTarotCount(GameData.tarotMissionUnlock) < GameData.GetTarotCount(tarotMissionUnlock)) {
-            GameData.tarotMissionUnlock = tarotMissionUnlock;
-        }
-        GameData.allGame_DevilsDefeated = Mathf.Max(allGame_DevilsDefeated,GameData.allGame_DevilsDefeated);
-        GameData.allGame_Door1Opened = Mathf.Max(allGame_Door1Opened,GameData.allGame_Door1Opened);
-        GameData.allGame_SoulDefeated = Mathf.Max(allGame_SoulDefeated,GameData.allGame_SoulDefeated);
-        GameData.allGame_GoldGained = Mathf.Max(allGame_GoldGained,GameData.allGame_GoldGained);
-        GameData.allGame_EventEncountered = Mathf.Max(allGame_EventEncountered,GameData.allGame_EventEncountered);
+        //if (GameData.GetTarotCount(GameData.tarotUnlock) < GameData.GetTarotCount(tarotUnlock)) {
+        //    GameData.tarotUnlock = tarotUnlock;
+        //}
+        //if (GameData.GetTarotCount(GameData.tarotMissionUnlock) < GameData.GetTarotCount(tarotMissionUnlock)) {
+        //    GameData.tarotMissionUnlock = tarotMissionUnlock;
+        //}
+        //GameData.allGame_DevilsDefeated = Mathf.Max(allGame_DevilsDefeated,GameData.allGame_DevilsDefeated);
+        //GameData.allGame_Door1Opened = Mathf.Max(allGame_Door1Opened,GameData.allGame_Door1Opened);
+        //GameData.allGame_SoulDefeated = Mathf.Max(allGame_SoulDefeated,GameData.allGame_SoulDefeated);
+        //GameData.allGame_GoldGained = Mathf.Max(allGame_GoldGained,GameData.allGame_GoldGained);
+        //GameData.allGame_EventEncountered = Mathf.Max(allGame_EventEncountered,GameData.allGame_EventEncountered);
     }
     public void ReadDataFromGame(){
         layer = GameData.layer;
@@ -72,7 +77,7 @@ public class PlayerData
         gridWrapper = new GridWrapper(GridWidth,GridHeight);
         gridWrapper.SetGrid(GameData.map,GridWidth,GridHeight);
         hasEncounterBoss = GameData.hasEncounterBoss;
-        tarotEquip = GameData.tarotEquip;
+        //tarotEquip = GameData.tarotEquip;
         isEventUsed = GameData.isEventUsed;
         defeatSHDPJ = GameData.defeatSHDPJ;
         defeatSHWQJ = GameData.defeatSHWQJ;
@@ -97,7 +102,7 @@ public class PlayerData
         GameData.map = new Grid[GameData.gridWidth,GameData.gridHeight];
         GameData.map = gridWrapper.GetGrid(GridWidth,GridHeight);
         GameData.hasEncounterBoss = hasEncounterBoss;
-        GameData.tarotEquip = tarotEquip;
+        //GameData.tarotEquip = tarotEquip;
         GameData.isEventUsed = isEventUsed;
         GameData.defeatSHWQJ = defeatSHWQJ;
         GameData.defeatSHDPJ = defeatSHDPJ;

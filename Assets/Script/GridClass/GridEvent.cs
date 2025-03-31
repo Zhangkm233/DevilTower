@@ -13,6 +13,7 @@ public class GridEvent : Grid
         SOULGATE = 2,
         CORRUPTIONROOTSAVE = 3,
         CORRUPTIONROOTLOAD = 4,
+        BOOM = 5,
         NULL = 99
     }
     public int hpSave;
