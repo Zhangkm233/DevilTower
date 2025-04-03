@@ -344,11 +344,20 @@ MonoBehaviour:
   mapGrid:
     stat: 0
     GridTypeToWord: 
+    x: 0
+    y: 0
+    fromX: 0
+    fromY: 0
   gridType: 0
+  positionPivot: {x: 0, y: 0, z: 0}
+  scalePivot: {x: 0, y: 0, z: 0}
   mapX: 0
   mapY: 0
   monsterStat: {fileID: 0}
   gameManagerObject: {fileID: 0}
+  layerspritess:
+  - {fileID: 11400000, guid: 357f3cff43303384c968ee5e16f9c709, type: 2}
+  - {fileID: 11400000, guid: ab92a93a5641bdb4095006e06b00be1b, type: 2}
 --- !u!65 &4143470630366157282
 BoxCollider:
   m_ObjectHideFlags: 0

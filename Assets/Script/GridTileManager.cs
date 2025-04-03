@@ -14,7 +14,7 @@ public class GridTileManager : MonoBehaviour
     public int mapY;
     public Text monsterStat;
     public GameObject gameManagerObject;
-    public SpriteScriptObject layer1sprites;
+    public SpriteScriptObject[] layerspritess;
     public void InitialData() {
         this.gameObject.layer = 6;
         gameManagerObject = GameObject.Find("GameManager"); 
@@ -47,7 +47,9 @@ public class GridTileManager : MonoBehaviour
             gridtext = gridCanvas.transform.GetChild(1).GetComponent<TMP_Text>();
             gridtext.text = " ";
 
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = layer1sprites.spriteData[8].sprites[0];
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = layerspritess[GameData.layer-1].spriteData[8].sprites[0];
+            transform.name = "X" + " " + mapX + " " + mapY;
+            //UpdateData();
         }
     }
     public void UpdateText() {
@@ -60,7 +62,7 @@ public class GridTileManager : MonoBehaviour
     }
     public void UpdateSprite() {
         try {
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = layer1sprites.spriteData[(int)gridType].sprites[mapGrid.stat - 1];
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = layerspritess[GameData.layer-1].spriteData[(int)gridType].sprites[mapGrid.stat - 1];
             GridMoveAnim();
         } catch (System.Exception e) {
             Debug.Log("Error: " + mapGrid.GridTypeToWord + " " + mapGrid.stat + e);

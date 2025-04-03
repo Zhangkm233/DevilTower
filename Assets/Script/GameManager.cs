@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     void Update() {
         objectClick = ObjectClick();
-        if (objectClick != null) {
+        if (objectClick != null && this.GetComponent<UIManager>().State != UIManager.UIState.STANDBY) {
             gridTileManager = objectClick.GetComponent<GridTileManager>();
             GridInMap = GameData.map[gridTileManager.mapX,gridTileManager.mapY];
         }
@@ -68,11 +68,13 @@ public class GameManager : MonoBehaviour
     }
     public void LayerChangeTo(int layerTo, bool isInherit) {
         if(this.GetComponent<UIManager>().State != UIManager.UIState.STAT) return;
+        this.GetComponent<UIManager>().GoState(UIManager.UIState.STANDBY);
         GameData.layer = layerTo;
         GameData.eventEncounter = 0;
+        /*
         GameData.defeatSHWQJ = 0;
         GameData.defeatSHDPJ = 0;
-        GameData.isEventUsed = false;
+        GameData.isEventUsed = false;*/
         if (!isInherit) {
             switch (layerTo) {
                 case 1:
@@ -88,7 +90,11 @@ public class GameManager : MonoBehaviour
         }
         //重置UI和铁匠铺
         this.GetComponent<UIManager>().GoStat();
-        this.GetComponent<UIManager>().goForgeButton.SetActive(false);
+        if (layerTo <= 2) {
+            this.GetComponent<UIManager>().goForgeButton.SetActive(false);
+        } else {
+            this.GetComponent<UIManager>().goForgeButton.SetActive(true);
+        }
         //因为不同尺寸的地图，事件的位置会对不上格子，所以要重新给所有格子改名和更改mapY
         string[] lines = System.IO.File.ReadAllLines(Application.streamingAssetsPath + "/map" + layerTo + ".txt");
         if(lines.Length != GameData.gridHeight) {
@@ -98,13 +104,14 @@ public class GameManager : MonoBehaviour
             }
         }
         //更新怪物数据到图鉴
-        catalogObject.GetComponent<MonsterCatalogManager>().UpdateMonsterData();
+        //catalogObject.GetComponent<MonsterCatalogManager>().UpdateMonsterData();
         //加载地图到map里
         this.GetComponent<GridLoader>().LoadMapFromTxt(); 
         //刷新格子
         UpdateEachGrid();
         //更新自动存档
         SaveManager.Save(0);
+        //this.GetComponent<UIManager>().GoStat();
     }
     bool MapClickEvent() {
         if (this.GetComponent<UIManager>().State != UIManager.UIState.STAT) {
@@ -118,6 +125,7 @@ public class GameManager : MonoBehaviour
         if (gridTileManager.gridType == Grid.GridType.MONSTER) {
             //遭遇怪物
             TarotManager tarots = this.GetComponent<TarotManager>();
+            /*
             if (((GridMonster)GridInMap).isBoss && !GameData.hasEncounterBoss) {
                 this.GetComponent<UIManager>().StartDialogBeforeBoss();
                 //if((GameData.layer == 2) && (tarots.IsMissionUnlock("Strength"))) {
@@ -125,7 +133,7 @@ public class GameManager : MonoBehaviour
                 //}
                 GameData.hasEncounterBoss = true;
                 return false;
-            }
+            }*/
             //腐蚀
             GameData.playerHp = (int)(GameData.playerHp * ((GridMonster)GridInMap).CorruptionPercent());
             int battleDamage = ResolveDamage((GridMonster)GridInMap);
@@ -174,9 +182,9 @@ public class GameManager : MonoBehaviour
             GameData.allGame_GoldGained += ((GridMonster)GridInMap).gold;
             */
             GameData.gold += ((GridMonster)GridInMap).gold;
+            /*
             if(((GridMonster)GridInMap).isBoss && GameData.hasEncounterBoss) {
                 //解锁塔罗牌
-                /*
                 switch (GameData.layer) {
                     case 1:
                         if (tarots.IsMissionUnlock("HangedMan")) tarots.UnlockTarot("HangedMan");
@@ -194,14 +202,13 @@ public class GameManager : MonoBehaviour
                         if (tarots.IsMissionUnlock("World")) tarots.UnlockTarot("World");
                         break;
                 }
-                */
                 //如果是boss 生成传送门
-                this.GetComponent<UIManager>().StartDialogAfterBoss();
+                //this.GetComponent<UIManager>().StartDialogAfterBoss();
                 GameData.map[gridTileManager.mapX,gridTileManager.mapY] = new Grid("P",1);
                 UpdateEachGrid();
                 GameData.hasEncounterBoss = false;
                 return true;
-            }
+            }*/
             ClearGridInMap(gridTileManager);
             return true;
         }
@@ -390,6 +397,8 @@ public class GameManager : MonoBehaviour
             if (hasLostMind && i == 5) continue;
 
             Grid grid = GameData.map[i,GameData.gridHeight - 1];
+            if(grid == null) continue;
+            Debug.Log(grid.x + " " + grid.y);
             if (grid.type == Grid.GridType.MONSTER) {
                 if (((GridMonster)grid).isStalk) {
                     if (((GridMonster)grid).stalkTurn == 2) {
