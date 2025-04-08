@@ -46,6 +46,27 @@ public class ShopManager : MonoBehaviour
                 }
                 itemImage.GetComponent<Image>().sprite = layersprites[GameData.layer - 1].spriteData[7].sprites[2];
                 break;
+            case "B1":
+                if (GameData.layer - 1 >= layersprites.Length) {
+                    itemImage.GetComponent<Image>().sprite = layersprites[0].spriteData[0].sprites[0];
+                    break;
+                }
+                itemImage.GetComponent<Image>().sprite = layersprites[GameData.layer - 1].spriteData[0].sprites[0];
+                break;
+            case "B2":
+                if (GameData.layer - 1 >= layersprites.Length) {
+                    itemImage.GetComponent<Image>().sprite = layersprites[0].spriteData[0].sprites[1];
+                    break;
+                }
+                itemImage.GetComponent<Image>().sprite = layersprites[GameData.layer - 1].spriteData[0].sprites[1];
+                break;
+            case "B3":
+                if (GameData.layer - 1 >= layersprites.Length) {
+                    itemImage.GetComponent<Image>().sprite = layersprites[0].spriteData[0].sprites[2];
+                    break;
+                }
+                itemImage.GetComponent<Image>().sprite = layersprites[GameData.layer - 1].spriteData[0].sprites[2];
+                break;
             case "gold":
                 //金币的图标还没有
                 itemImage.GetComponent<Image>().sprite = null;
@@ -72,6 +93,12 @@ public class ShopManager : MonoBehaviour
                 return "白银钥匙";
             case "key3":
                 return "黄金钥匙";
+            case "B1":
+                return "小血瓶";
+            case "B2":
+                return "中血瓶";
+            case "B3":
+                return "大血瓶";
             default:
                 break;
         }
@@ -110,6 +137,22 @@ public class ShopManager : MonoBehaviour
             case "key3":
                 GameData.key3 += num;
                 break;
+            case "B1":
+                for (int i = 0;i < num;i++) {
+                    GameData.playerHp += GridBottle.healingPointsTable[0,GameData.layer - 1];
+                }
+                break;
+            case "B2":
+                for (int i = 0;i < num;i++) {
+                    GameData.playerHp += GridBottle.healingPointsTable[1,GameData.layer - 1];
+                }
+                break;
+            case "B3":
+                for (int i = 0;i < num;i++) {
+                    GameData.playerHp += GridBottle.healingPointsTable[2,GameData.layer - 1];
+                }
+                break;
+
         }
     }
     public void AffirmTrade() {

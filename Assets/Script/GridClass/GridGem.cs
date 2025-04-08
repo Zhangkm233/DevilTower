@@ -13,6 +13,6 @@ public class GridGem : Grid
         this.type = GridType.GEM;
         this.stat = stat;
         this.gemType = (GemType)stat;
-        AddSum = GameData.layer;
+        AddSum = GameData.layer - 1;
     }
 }
