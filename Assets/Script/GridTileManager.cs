@@ -23,6 +23,20 @@ public class GridTileManager : MonoBehaviour
         positionPivot = transform.position;
         scalePivot = transform.localScale;
     }
+    void SetToBarrier() {
+        //没东西就清空
+        mapGrid = new Grid(1,Grid.GridType.BARRIER);
+        gridType = Grid.GridType.BARRIER;
+
+        Canvas gridCanvas = this.GetComponentInChildren<Canvas>();
+        TMP_Text gridtext = gridCanvas.transform.GetChild(0).GetComponent<TMP_Text>();
+        gridtext.text = " ";
+        gridtext = gridCanvas.transform.GetChild(1).GetComponent<TMP_Text>();
+        gridtext.text = " ";
+
+        this.gameObject.GetComponent<SpriteRenderer>().sprite = layerspritess[GameData.layer - 1].spriteData[8].sprites[0];
+        transform.name = "X" + " " + mapX + " " + mapY;
+    }
     public void UpdateData() {
         if (GameData.map[mapX,mapY] != null) {
             mapGrid = GameData.map[mapX,mapY];
@@ -38,18 +52,7 @@ public class GridTileManager : MonoBehaviour
 
             UpdateSprite();
         } else {
-            //没东西就清空
-            mapGrid = null;
-            gridType = Grid.GridType.BARRIER;
-            Canvas gridCanvas = this.GetComponentInChildren<Canvas>();
-            TMP_Text gridtext = gridCanvas.transform.GetChild(0).GetComponent<TMP_Text>();
-            gridtext.text = " ";
-            gridtext = gridCanvas.transform.GetChild(1).GetComponent<TMP_Text>();
-            gridtext.text = " ";
-
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = layerspritess[GameData.layer-1].spriteData[8].sprites[0];
-            transform.name = "X" + " " + mapX + " " + mapY;
-            //UpdateData();
+            SetToBarrier();
         }
     }
     public void UpdateText() {
@@ -61,12 +64,25 @@ public class GridTileManager : MonoBehaviour
         gridtext.text = mapGrid.stat.ToString();
     }
     public void UpdateSprite() {
-        try {
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = layerspritess[GameData.layer-1].spriteData[(int)gridType].sprites[mapGrid.stat - 1];
-            GridMoveAnim();
-        } catch (System.Exception e) {
-            Debug.Log("Error: " + mapGrid.GridTypeToWord + " " + mapGrid.stat + e);
+        //try {
+        if (mapGrid.GridTypeToWord == "") {
+            SetToBarrier();
         }
+        if (gridType == Grid.GridType.BARRIER) {
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = layerspritess[GameData.layer - 1].spriteData[8].sprites[0];
+            return;
+        } else {
+            try {
+                this.gameObject.GetComponent<SpriteRenderer>().sprite = layerspritess[GameData.layer - 1].spriteData[(int)gridType].sprites[mapGrid.stat - 1];
+            } catch (System.Exception e) {
+                Debug.LogWarning("Error: " + mapGrid.GridTypeToWord + " " + mapGrid.stat + "\n" + e);
+            }
+            //this.gameObject.GetComponent<SpriteRenderer>().sprite = layerspritess[GameData.layer - 1].spriteData[(int)gridType].sprites[mapGrid.stat - 1];
+        }
+        GridMoveAnim();
+        //} catch (System.Exception e) {
+        //    Debug.LogWarning("Error: " + mapGrid.GridTypeToWord + " " + mapGrid.stat + "\n" + e);
+        //}
     }
 
     void GridMoveAnim(){

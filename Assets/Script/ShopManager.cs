@@ -125,7 +125,7 @@ public class ShopManager : MonoBehaviour
     public void AddToInventory(string str,int num) { 
         switch (str) {
             case "gold":
-                GameData.allGame_GoldGained += num;
+                //GameData.allGame_GoldGained += num;
                 GameData.gold += num;
                 break;
             case "key1":

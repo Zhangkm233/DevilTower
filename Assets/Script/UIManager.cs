@@ -9,7 +9,7 @@ using static Grid;
 public class UIManager : MonoBehaviour
 {
     public enum UIState {
-        STAT,DIALOG,DICTIONARY,SHOP,FORGE,EVENT,TAROT,STANDBY
+        STAT,DIALOG,DICTIONARY,SHOP,FORGE,EVENT,TAROT,STANDBY,SETTING
     };
     public enum sentenceState
     {
@@ -43,6 +43,7 @@ public class UIManager : MonoBehaviour
     public GameObject backGroundMain;
     public GameObject tarotMain;
     public GameObject tileMain;
+    public GameObject settingMain;
     void Start() {
     }
     
@@ -56,7 +57,7 @@ public class UIManager : MonoBehaviour
         gridStat.text = " ";
         monsterAbilityStat.text = " ";
         goForgeButton.SetActive(false);
-        
+        settingMain.SetActive(false);
         StartDialog(0);
     }
 
@@ -83,11 +84,8 @@ public class UIManager : MonoBehaviour
     }
     void updateCompleteStatSlide() {
         //更新进度条 更新铁匠铺
-        completeStat.text = GameData.eventEncounter.ToString();
-        completeSlider.value = (float)GameData.eventEncounter / 85;
-        if (GameData.eventEncounter >= 30) {
-            goForgeButton.SetActive(true);
-        }
+        completeStat.text = GameData.eventEncounter.ToString() + "/" + GameData.eventCount.ToString();
+        completeSlider.value = (float)GameData.eventEncounter / GameData.eventCount;
     }
     void updatePlayerKeyText() {
         HpStat.text = GameData.playerHp.ToString();
@@ -100,13 +98,21 @@ public class UIManager : MonoBehaviour
     }
     void updateGridStat() {
         if (this.GetComponent<GameManager>().objectClick == null) {
+            gridName.text = " ";
             gridStat.text = " ";
             monsterAbilityStat.text = " ";
         }
 
         if (this.GetComponent<GameManager>().objectClick != null) {
             GameObject objectClicked = this.GetComponent<GameManager>().objectClick;
-            if (GetComponent<GameManager>().GridInMap == null) return;
+            if (GetComponent<GameManager>().GridInMap == null) {
+                GridTileManager gridTileManager = objectClicked.GetComponent<GridTileManager>();
+                if(gridTileManager.gridType == GridType.BARRIER) {
+                    gridName.text = "障碍物";
+                    gridStat.text = "无法通过";
+                }
+                return;
+            }
             Grid gridInMaped = GetComponent<GameManager>().GridInMap;
             if (gridInMaped.type != Grid.GridType.EVENT) {
                 gridStat.fontSize = 64;
@@ -305,6 +311,10 @@ public class UIManager : MonoBehaviour
     public void GoTarot() {
         GoState(UIState.TAROT);
     }
+    public void GoSetting() {
+        GoState(UIState.SETTING);
+    }
+
     public void GoState(UIState uistate) {
         State = uistate;
         if (uistate == UIState.DIALOG) dialogMain.SetActive(true);
@@ -336,6 +346,8 @@ public class UIManager : MonoBehaviour
             tarotMain.SetActive(true);
             tileMain.SetActive(false);
         }
+        if (uistate == UIState.SETTING) settingMain.SetActive(true);
+        if (uistate != UIState.SETTING) settingMain.SetActive(false);
     }
     public void Cheat() {
         GameData.key1++;

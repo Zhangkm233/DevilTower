@@ -8,6 +8,7 @@ using static Grid;
 public class GridLoader : MonoBehaviour
 {
     public string txtFilePath ; // TXT文件路径
+    private int eventCount = 0;
     //public int gridWidth = GameData.gridWidth; // 地图宽度
     //public int gridHeight = GameData.gridHeight; // 地图高度
     public TextAsset[] maps;
@@ -60,6 +61,7 @@ public class GridLoader : MonoBehaviour
         string[] lines = File.ReadAllLines(txtFilePath);
         GameData.gridHeight = lines.Length;
         Debug.Log("更改GridHeight为" + lines.Length);
+        eventCount = 0;
         GameData.map = new Grid[GameData.gridWidth,GameData.gridHeight];
         for (int y = 0;y < GameData.gridHeight;y++) {
             string[] tiles = lines[y].Split(','); 
@@ -67,10 +69,12 @@ public class GridLoader : MonoBehaviour
                 string gridType = tiles[x].Split(' ')[0];
                 int gridStat = int.Parse(tiles[x].Split(' ')[1]);
                 print("x:" + x + " y:" + y + " gridType:" + gridType + " gridStat:" + gridStat);
+                if (gridType != "X") eventCount++;
                 //写进map里
                 writeInGrid(x,y,gridType,gridStat);
             }
         }
+        GameData.eventCount = eventCount;
     }
 
     void PrintGrid() {

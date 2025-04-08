@@ -78,11 +78,11 @@ public class PlayerData
         gridWrapper.SetGrid(GameData.map,GridWidth,GridHeight);
         hasEncounterBoss = GameData.hasEncounterBoss;
         //tarotEquip = GameData.tarotEquip;
-        isEventUsed = GameData.isEventUsed;
-        defeatSHDPJ = GameData.defeatSHDPJ;
-        defeatSHWQJ = GameData.defeatSHWQJ;
-        lastMonsterName = GameData.lastMonsterName;
-        continueDefeatStatrack = GameData.continueDefeatStatrack;
+        //isEventUsed = GameData.isEventUsed;
+        //defeatSHDPJ = GameData.defeatSHDPJ;
+        //defeatSHWQJ = GameData.defeatSHWQJ;
+        //lastMonsterName = GameData.lastMonsterName;
+        //continueDefeatStatrack = GameData.continueDefeatStatrack;
     }
 
     public void WriteDataToGame(){
@@ -103,11 +103,11 @@ public class PlayerData
         GameData.map = gridWrapper.GetGrid(GridWidth,GridHeight);
         GameData.hasEncounterBoss = hasEncounterBoss;
         //GameData.tarotEquip = tarotEquip;
-        GameData.isEventUsed = isEventUsed;
-        GameData.defeatSHWQJ = defeatSHWQJ;
-        GameData.defeatSHDPJ = defeatSHDPJ;
-        GameData.lastMonsterName = lastMonsterName;
-        GameData.continueDefeatStatrack = continueDefeatStatrack;
+        //GameData.isEventUsed = isEventUsed;
+        //GameData.defeatSHWQJ = defeatSHWQJ;
+        //GameData.defeatSHDPJ = defeatSHDPJ;
+        //GameData.lastMonsterName = lastMonsterName;
+        //GameData.continueDefeatStatrack = continueDefeatStatrack;
     }
 }
 
@@ -148,7 +148,7 @@ public static class SaveManager
             Debug.Log("Load:" + filePath);
             data.WriteForeverDataToGame();
         } else {
-            Debug.Log("Save file not found in " + filePath);
+            Debug.LogWarning("Save file not found in " + filePath);
         }
     }
 

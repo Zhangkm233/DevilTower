@@ -348,7 +348,7 @@ MonoBehaviour:
     y: 0
     fromX: 0
     fromY: 0
-  gridType: 0
+  gridType: 8
   positionPivot: {x: 0, y: 0, z: 0}
   scalePivot: {x: 0, y: 0, z: 0}
   mapX: 0

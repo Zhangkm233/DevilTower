@@ -3,6 +3,7 @@ using UnityEngine;
 [System.Serializable]
 public static class GameData
 {
+    public static int eventCount = 24; //事件数量
     public static int eventEncounter = 0; //遭遇的事件数量
     public static int layer = 1;
     public static int key1 = 0;
@@ -27,17 +28,20 @@ public static class GameData
 
     public static int saveSlotChoose = 0;
 
-    public static int allGame_DevilsDefeated = 0;
-    public static int allGame_Door1Opened = 0;
-    public static int allGame_SoulDefeated = 0;
-    public static int allGame_GoldGained = 0; 
-    public static int allGame_EventEncountered = 0;
+    public static float sfxVolume = 1f;
+    public static float bgmVolume = 1f;
 
-    public static bool isEventUsed;
-    public static int defeatSHDPJ = 0;
-    public static int defeatSHWQJ = 0;
-    public static string lastMonsterName = string.Empty;
-    public static int continueDefeatStatrack = 0;
+    //public static int allGame_DevilsDefeated = 0;
+    //public static int allGame_Door1Opened = 0;
+    //public static int allGame_SoulDefeated = 0;
+    //public static int allGame_GoldGained = 0; 
+    //public static int allGame_EventEncountered = 0;
+
+    //public static bool isEventUsed;
+    //public static int defeatSHDPJ = 0;
+    //public static int defeatSHWQJ = 0;
+    //public static string lastMonsterName = string.Empty;
+    //public static int continueDefeatStatrack = 0;
     public static int GetTarotCount(bool[] tarots) {
         int count = 0;
         for (int i = 0;i < tarots.Length;i++) {
