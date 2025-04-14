@@ -137,18 +137,18 @@ public static class SaveManager
     public static void SaveForeverData() {
         PlayerData data = new PlayerData();
         data.ReadForeverDataFromGame();
-        Debug.Log("Save:" + filePath);
+        Debug.Log("Save:" + foreverFilePath);
         string json = JsonUtility.ToJson(data);
-        File.WriteAllText(filePath,json);
+        File.WriteAllText(foreverFilePath,json);
     }
     public static void LoadForeverData() {
         if (File.Exists(foreverFilePath)) {
             string json = File.ReadAllText(foreverFilePath);
             PlayerData data = JsonUtility.FromJson<PlayerData>(json);
-            Debug.Log("Load:" + filePath);
+            Debug.Log("Load:" + foreverFilePath);
             data.WriteForeverDataToGame();
         } else {
-            Debug.LogWarning("Save file not found in " + filePath);
+            Debug.LogWarning("Save file not found in " + foreverFilePath);
         }
     }
 
