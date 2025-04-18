@@ -31,10 +31,16 @@ public class ForgeManager : MonoBehaviour
     public static int atkForgeGive = 0;
     public static int defForgeGive = 0;
     public void initializePrice() {
+        //力量
+        //锻造的价格降低10 %
+
         if (GameData.forgeTime < 12) {
             priceNow = forgePrice[GameData.forgeTime];
         } else {
             priceNow = forgePrice[11];
+        }
+        if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Strength"))) {
+            priceNow = Mathf.FloorToInt(priceNow * 0.9f);
         }
         //forgeDialogText.text = "你好，需要锻造吗？只需要" + priceNow + "个魔力结晶";
         hpForgeGive = forgeHp[GameData.layer - 1];

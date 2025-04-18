@@ -1,5 +1,7 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class TarotCard : MonoBehaviour
@@ -7,6 +9,11 @@ public class TarotCard : MonoBehaviour
     public int cardIndex;
     public bool isEquiping;
     public Vector3 originPos;
+    public GameObject cardDescribe;
+    public GameObject cardDescribeImage;
+    public GameObject cardDescribeName;
+    public GameObject cardDescribeText;
+    public TarotsDataObject tarotsDataObject;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,7 +21,10 @@ public class TarotCard : MonoBehaviour
 
         TarotsDataObject tarots = TarotAnimHandler.instance.tarotsDataObject;
         GetComponent<SpriteRenderer>().sprite = tarots.tarotsData[cardIndex].sprite;
-
+        cardDescribe = GameObject.Find("CardDescribe");
+        cardDescribeImage = cardDescribe.transform.GetChild(0).gameObject;
+        cardDescribeName = cardDescribe.transform.GetChild(1).gameObject;
+        cardDescribeText = cardDescribe.transform.GetChild(2).gameObject;
         var collider = GetComponent<BoxCollider2D>();
         var sprite = GetComponent<SpriteRenderer>();
         collider.size = sprite.bounds.size;
@@ -40,11 +50,16 @@ public class TarotCard : MonoBehaviour
 
     public void HandlePointerEnter(){
         Debug.Log("Hover");
+        cardDescribe.SetActive(true);
+        cardDescribeImage.GetComponent<Image>().sprite = GetComponent<SpriteRenderer>().sprite;
+        cardDescribeName.GetComponent<TMP_Text>().text = tarotsDataObject.tarotsData[cardIndex].cardName;
+        cardDescribeText.GetComponent<TMP_Text>().text = tarotsDataObject.tarotsData[cardIndex].description;
         StartCoroutine(scaleUp());
     }
 
     public void HandlePointerExit(){
         Debug.Log("Exit");
+        cardDescribe.SetActive(false);
         StartCoroutine(scaleDown());
     }
 

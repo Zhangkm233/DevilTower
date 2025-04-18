@@ -89,8 +89,8 @@ public class UIManager : MonoBehaviour
     }
     void updatePlayerKeyText() {
         HpStat.text = GameData.playerHp.ToString();
-        AtkStat.text = GameData.playerAtk.ToString();
-        DefStat.text = GameData.playerDef.ToString();
+        AtkStat.text = GameData.playerTotalAtk.ToString();
+        DefStat.text = GameData.playerTotalDef.ToString();
         key1Stat.text = GameData.key1.ToString();
         key2Stat.text = GameData.key2.ToString();
         key3Stat.text = GameData.key3.ToString();
@@ -307,14 +307,28 @@ public class UIManager : MonoBehaviour
     public void GoEvent() {
         GoState(UIState.EVENT);
     }
+
     [ContextMenu("塔罗牌STATE")]
     public void GoTarot() {
+        GameData.tarotLastEquip = GameData.tarotEquip;
         GoState(UIState.TAROT);
     }
     public void GoSetting() {
         GoState(UIState.SETTING);
     }
 
+    public void EndTarot() {
+        //执行塔罗牌的选择时效果
+        //阶段开始时的效果
+        if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Magician"))) {
+            //魔术师
+            //在你进入新的区域后，获得一把钥匙1
+            Debug.Log("魔术师触发，获得一把钥匙1");
+            GameData.key1++;
+        }
+        this.GetComponent<GameManager>().UpdatePlayerOffset();
+        GoStat();
+    }
     public void GoState(UIState uistate) {
         State = uistate;
         if (uistate == UIState.DIALOG) dialogMain.SetActive(true);

@@ -17,7 +17,7 @@ MonoBehaviour:
     description: i am fool
     sprite: {fileID: -6682744762430114866, guid: cbbd60f617d2303419dd006c732ff4a9, type: 3}
   - cardName: Magician
-    description: i am magician
+    description: "\u5728\u4F60\u8FDB\u5165\u65B0\u7684\u533A\u57DF\u540E\uFF0C\u83B7\u5F97\u4E00\u628A\u94A5\u53191"
     sprite: {fileID: 9161935325122749129, guid: 1efc228400f438847a8255d5a19e3df5, type: 3}
   - cardName: HighPriestess
     description: i am magician
@@ -35,31 +35,31 @@ MonoBehaviour:
     description: i am magician
     sprite: {fileID: -8721429980907763177, guid: 2a8d7c287dffbe7458d69119f398d797, type: 3}
   - cardName: Chariot
-    description: i am magician
+    description: "\u4F60\u5177\u6709\u653B\u51FB\u529B+1\uFF0C\u9632\u5FA1\u529B+1"
     sprite: {fileID: 7605121969695853714, guid: 1f106fa17d31a324396eab5e4de8acc1, type: 3}
   - cardName: Justice
     description: i am magician
     sprite: {fileID: -7201624119766976070, guid: e02a6c0ae1ad73b4695639ed44181158, type: 3}
   - cardName: Hermit
-    description: i am magician
+    description: "\u5728\u4F60\u5B8C\u6210NPC\u4E8B\u4EF6\u540E\uFF0C\u83B7\u5F97\u4E00\u628A\u94A5\u53191"
     sprite: {fileID: 4064284013594149234, guid: 26c634e8a538bb740a665275d8532bcf, type: 3}
   - cardName: WheelOfFortune
     description: i am magician
     sprite: {fileID: 6512646141590230514, guid: 7890df306b677264ab3415aa4627ff88, type: 3}
   - cardName: Strength
-    description: i am magician
+    description: "\u953B\u9020\u7684\u4EF7\u683C\u964D\u4F4E10%"
     sprite: {fileID: 6964257170247351951, guid: 3a72443254eea474eb9a5f5df1fea0e0, type: 3}
   - cardName: HangedMan
-    description: i am magician
+    description: "\u5728\u4F60\u5B8C\u6210\u4E00\u4E2A\u533A\u57DF\u7684\u65F6\u5019\uFF08\u8FDB\u5165\u4F20\u9001\u95E8\u7684\u65F6\u5019\uFF09\u5931\u53BB\u5F53\u524D\u4E00\u534A\u7684\u751F\u547D\u503C\uFF0C\u5E76\u4F7F\u4F60\u7684\u9B54\u529B\u7ED3\u6676\u589E\u5E4525%"
     sprite: {fileID: -4127451361129954941, guid: afa83ce6063ff7942abadcf8857caff3, type: 3}
   - cardName: Death
-    description: i am magician
+    description: "\u5728\u4F60\u51FB\u8D25\u4E00\u4E2A\u654C\u4EBA\u540E\uFF0C\u5982\u679C\u4F60\u672A\u83B7\u5F97\u6B7B\u795E\u6548\u679C\u7684buff\uFF0C\u5219\u5728\u4E0B\u4E00\u6B21\u6218\u6597\u4E2D\u5177\u6709\u653B\u51FB\u529B+5"
     sprite: {fileID: 5074338579839013100, guid: f197663ad13cb4d41807c9de22fb4456, type: 3}
   - cardName: Temperance
     description: i am magician
     sprite: {fileID: -292526783001261222, guid: 86293c81fd1b34b49ada1e3afb534306, type: 3}
   - cardName: Devil
-    description: i am magician
+    description: "\u4E0E\u602A\u7269\u6218\u6597\u4F1A\u6539\u4E3A\u4F7F\u4F60\u83B7\u5F97\u7B49\u540C\u4E8E\u4F24\u5BB3\u7684\u751F\u547D\u503C\uFF0C\u4F46\u662F\u8840\u74F6\u4F1A\u6539\u4E3A\u5BF9\u4F60\u9020\u6210\u7B49\u540C\u4E8E\u56DE\u590D\u91CF\u53CC\u500D\u7684\u4F24\u5BB3"
     sprite: {fileID: -1935561286319929584, guid: 38e5849044168bb4da9945be4b20224d, type: 3}
   - cardName: Tower
     description: i am magician
@@ -68,13 +68,13 @@ MonoBehaviour:
     description: i am magician
     sprite: {fileID: -5136612702803252847, guid: 5de1fa6e043b7a0408619e2346f5bba4, type: 3}
   - cardName: Moon
-    description: i am magician
+    description: "\u4F60\u5F53\u524D\u6301\u6709\u7684\u6BCF\u4E00\u628A\u94A5\u53191\u4F7F\u5F97\u4F60\u83B7\u5F97\u653B\u51FB\u529B+1\uFF0C\u6BCF\u4E00\u628A\u94A5\u53192\u4F7F\u5F97\u4F60\u83B7\u5F97\u9632\u5FA1\u529B+2"
     sprite: {fileID: 4538191114827030698, guid: 25cdfdb58922ba144a02652cb243ecd7, type: 3}
   - cardName: Sun
-    description: i am magician
+    description: "\u4F60\u653B\u6740\u7684\u6BCF\u4E2A\u602A\u7269\u4F7F\u5F97\u4F60\u83B7\u5F97\u9632\u5FA1\u529B+1\uFF0C\u4F60\u9632\u6740\u7684\u6BCF\u4E2A\u602A\u7269\u4F7F\u5F97\u4F60\u83B7\u5F97\u653B\u51FB\u529B+1"
     sprite: {fileID: 9138298438030876161, guid: f7bf8c3955a304c47b6e962723f6b27a, type: 3}
   - cardName: Judgment
-    description: i am magician
+    description: "\u8FDE\u7EED\u51FB\u8D25\u540C\u4E00\u4E2A\u602A\u7269\u4F1A\u4F7F\u5F97\u4F60\u83B7\u5F97\u7B49\u540C\u4E8E\u953B\u9020\u6570\u503C\u7684\u653B\u51FB\u529B\u548C\u9632\u5FA1\u529B"
     sprite: {fileID: 3802000781681616770, guid: 58e8456a0ef2b114481c26f2568979c5, type: 3}
   - cardName: World
     description: i am magician
