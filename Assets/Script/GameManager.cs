@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public Grid GridInMap;
     public GameObject audioManagerObject;
     public AudioManager audioManagerScript;
+    public GameObject backGroundObject;
 
     void Update() {
         objectClick = ObjectClick();
@@ -87,13 +88,13 @@ public class GameManager : MonoBehaviour
         if (!isInherit) {
             switch (layerTo) {
                 case 1:
-                    PlayerStatChange(400,10,10,0,0,0,0,0);
+                    PlayerStatChange(100,5,5,0,0,0,0,0);
                     break;
                 case 2:
-                    PlayerStatChange(600,23,20,0,0,0,51,3);
+                    PlayerStatChange(500,5,5,0,0,0,0,0);
                     break;
                 case 3:
-                    PlayerStatChange(800,43,46,0,0,0,134,6);
+                    PlayerStatChange(400,10,10,1,1,0,0,0);
                     break;
             }
         }
@@ -118,6 +119,8 @@ public class GameManager : MonoBehaviour
         this.GetComponent<GridLoader>().LoadMapFromTxt(); 
         //刷新格子
         UpdateEachGrid();
+        //更新背景sprite
+        backGroundObject.GetComponent<BackGroundManager>().UpdateSprite();
         //更新自动存档
         SaveManager.Save(0);
         //this.GetComponent<UIManager>().GoStat();

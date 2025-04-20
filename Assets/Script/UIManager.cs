@@ -68,16 +68,19 @@ public class UIManager : MonoBehaviour
                 temp += "魔女隐居之地";
                 break;
             case 2:
-                temp += "月亮教会";
+                temp += "倒吊人的阵枢之座";
                 break;
             case 3:
-                temp += "狂猎的训练场";
+                temp += "月亮教会";
                 break;
             case 4:
-                temp += "地下监狱";
+                temp += "狂猎的驻扎地";
                 break;
             case 5:
-                temp += "1";
+                temp += "灵魂坟场";
+                break;
+            case 6:
+                temp += "征服者广场";
                 break;
         }
         layerStat.text = temp;
