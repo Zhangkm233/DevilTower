@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class GridBottle : Grid
 {
-    public static readonly int[,] healingPointsTable = new int[3,4] {
-        { 25, 50, 75, 200 },
-        { 100, 125, 200, 400 },
-        { 200, 225, 300, 1000 }
+    public static readonly int[,] healingPointsTable = new int[3,6] {
+        { 25, 50, 75, 200 ,9, 9},
+        {100, 125, 200, 400, 9, 9},
+        {200, 225, 300, 1000, 9, 9}
     };
 
     public enum BottleSizeType{

@@ -52,8 +52,8 @@ public class TarotCard : MonoBehaviour
         Debug.Log("Hover");
         cardDescribe.SetActive(true);
         cardDescribeImage.GetComponent<Image>().sprite = GetComponent<SpriteRenderer>().sprite;
-        cardDescribeName.GetComponent<TMP_Text>().text = tarotsDataObject.tarotsData[cardIndex].cardName;
-        cardDescribeText.GetComponent<TMP_Text>().text = tarotsDataObject.tarotsData[cardIndex].description;
+        cardDescribeName.GetComponent<Text>().text = tarotsDataObject.tarotsData[cardIndex].cardName;
+        cardDescribeText.GetComponent<Text>().text = tarotsDataObject.tarotsData[cardIndex].description;
         StartCoroutine(scaleUp());
     }
 

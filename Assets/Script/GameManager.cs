@@ -1,4 +1,5 @@
 using System;
+using System.Net;
 using Unity.VisualScripting;
 using UnityEngine;
 using static Grid;
@@ -38,15 +39,18 @@ public class GameManager : MonoBehaviour
 
     void Update() {
         objectClick = ObjectClick();
-        if (objectClick != null && this.GetComponent<UIManager>().State != UIManager.UIState.STANDBY) {
-            gridTileManager = objectClick.GetComponent<GridTileManager>();
-            GridInMap = GameData.map[gridTileManager.mapX,gridTileManager.mapY];
+        if (objectClick != null && this.GetComponent<UIManager>().State == UIManager.UIState.STAT) {
+            if (objectClick.CompareTag("gridGameObject")) {
+                gridTileManager = objectClick.GetComponent<GridTileManager>();
+                GridInMap = GameData.map[gridTileManager.mapX,gridTileManager.mapY];
+            }
         }
         if (Input.GetMouseButtonDown(0) && objectClick != null) {
-            if (MapClickEvent()) {
-                EventCountered();
+            if (objectClick.CompareTag("gridGameObject")) {
+                if (MapClickEvent()) {
+                    EventCountered();
+                }
             }
-            //记录遭遇的事件数量
         }
         UpdatePlayerOffset();
         UpdateGameDataToPublic();
@@ -60,6 +64,10 @@ public class GameManager : MonoBehaviour
         SaveManager.LoadForeverData();
         audioManagerObject.GetComponent<AudioManager>().PlayBgm(GameData.layer - 1);
         audioManagerObject.GetComponent<AudioManager>().InitialVolume();
+        LayerChangeTo(GameData.layer,false);
+        this.GetComponent<UIManager>().GoDialog();
+        this.GetComponent<DialogManager>().ReadDialog(0,GameData.layer);
+
     }
     public void EventCountered() {
         MonsterMovement();
@@ -157,6 +165,7 @@ public class GameManager : MonoBehaviour
         //更新自动存档
         SaveManager.Save(0);
         //this.GetComponent<UIManager>().GoStat();
+        audioManagerObject.GetComponent<AudioManager>().PlayBgm(GameData.layer - 1);
     }
     bool MapClickEvent() {
         audioManagerScript = audioManagerObject.GetComponent<AudioManager>();
@@ -251,7 +260,7 @@ public class GameManager : MonoBehaviour
             }
             //重置死神的buff
             if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Death"))) {
-                if (GameData.isDeathBuff == false) GameData.isDeathBuff = true;
+                GameData.isDeathBuff = !GameData.isDeathBuff;
             }
             GameData.gold += ((GridMonster)GridInMap).gold;
             if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("HighPriestess"))) {
@@ -429,54 +438,6 @@ public class GameManager : MonoBehaviour
             return false;
         }
         if (gridTileManager.gridType == Grid.GridType.PORTAL) {
-            //进入塔罗牌
-            /*
-            TarotManager tarots = this.GetComponent<TarotManager>();
-            switch (GameData.layer) {
-                case 1:
-                    if (tarots.IsMissionUnlock("Chariot")) tarots.UnlockTarot("Chariot");
-                    if (GameData.key1 + GameData.key2 + GameData.key3 >= 5 && tarots.IsMissionUnlock("Magician")) {
-                        tarots.UnlockTarot("Magician");
-                    }
-                    if (GameData.playerAtk >= 23 && tarots.IsMissionUnlock("Devil")) {
-                        tarots.UnlockTarot("Devil");
-                    }
-                    break;
-                case 2:
-                    int monsterCount = 0;
-                    //遍历map，查找是否没有怪物了
-                    for (int y = 0;y < GameData.gridHeight;y++) {
-                        for (int x = 0;x < GameData.gridWidth;x++) {
-                            if (GameData.map[x,y] != null) {
-                                if (GameData.map[x,y].type == GridType.MONSTER) monsterCount++;
-                            }
-
-                        }
-                    }
-                    if ((monsterCount == 0) && (tarots.IsMissionUnlock("Moon"))){
-                        tarots.UnlockTarot("Moon");
-                    }
-                    break;
-            }
-            if (GameData.allGame_EventEncountered >= 1000 && tarots.IsMissionUnlock("WheelOfFortune")) {
-                tarots.UnlockTarot("WheelOfFortune");
-            }
-            if (GameData.allGame_GoldGained >= 5000 && tarots.IsMissionUnlock("Emperor")) {
-                tarots.UnlockTarot("Emperor");
-            }
-            if (GameData.allGame_SoulDefeated >= 15 && tarots.IsMissionUnlock("Judgment")) {
-                tarots.UnlockTarot("Judgment");
-            }
-            if (GameData.allGame_DevilsDefeated >= 5 && tarots.IsMissionUnlock("Star")) {
-                tarots.UnlockTarot("Star");
-            }
-            if (GameData.allGame_Door1Opened >= 100 && tarots.IsMissionUnlock("Hermit")) {
-                tarots.UnlockTarot("Hermit");
-            }
-            if (GameData.GetTarotCount(GameData.tarotUnlock)>=7 && tarots.IsMissionUnlock("HighPriestess")) {
-                tarots.UnlockTarot("HighPriestess");
-            }
-            */
             //储存永久数据
             SaveManager.SaveForeverData();
             if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("HangedMan"))) {
@@ -486,9 +447,8 @@ public class GameManager : MonoBehaviour
                 GameData.playerHp = (int)(GameData.playerHp * 0.5);
                 GameData.gold = (int)(GameData.gold * 1.25);
             }
-            LayerChangeTo(GameData.layer + 1,true);
-            this.GetComponent<UIManager>().GoTarot();
-            audioManagerObject.GetComponent<AudioManager>().PlayBgm(GameData.layer - 1);
+            //进入塔罗牌
+            this.GetComponent<UIManager>().StartDialog(10,GameData.layer);
             return false;
         }
         return false;
@@ -503,7 +463,7 @@ public class GameManager : MonoBehaviour
 
             Grid grid = GameData.map[i,GameData.gridHeight - 1];
             if(grid == null) continue;
-            Debug.Log(grid.x + " " + grid.y);
+            //Debug.Log(grid.x + " " + grid.y);
             if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Tower"))) {
                 //塔
                 //门1和门2会像怪物一样移动，在你将要进入一个新的区域时，立刻获得一把钥匙1和一把钥匙2

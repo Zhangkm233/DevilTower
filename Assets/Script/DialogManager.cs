@@ -31,6 +31,7 @@ public class DialogManager : MonoBehaviour
     public List<string> sentenceTexts = new List<string>();
     public bool isTyping = false;
     public bool isFastForwarding = false;
+    public bool isTextRed = false;
 
     [ContextMenu("READDIALOG")]
     public void ReadDialog() {
@@ -108,17 +109,19 @@ public class DialogManager : MonoBehaviour
             if (sentenceNames[sentenceNumber + 1] == "UnlockTarot") {
                 this.gameObject.GetComponent<TarotManager>().UnlockTarot(sentenceTexts[sentenceNumber + 1]);
             }
-            if (sentenceNames[sentenceNumber + 1] == "UnlockMission") {
-                //this.gameObject.GetComponent<TarotManager>().UnlockMission(sentenceTexts[sentenceNumber + 1]);
-            }
             //干一些事情 然后跳过这个event
             sentenceNumber++;
             FastForwardNextSentence();
             return true;
         }
         if (sentenceStates[sentenceNumber + 1] == sentenceState.END) {
-            ResetDialog();
-            this.GetComponent<UIManager>().GoStat();
+            if(sentenceTexts[sentenceNumber + 1] == "GOTAROT") {
+                ResetDialog();
+                this.GetComponent<UIManager>().GoTarot();
+            } else {
+                ResetDialog();
+                this.GetComponent<UIManager>().GoStat();
+            }
             return true;
         }
         sentenceNumber++;
@@ -132,6 +135,12 @@ public class DialogManager : MonoBehaviour
         } else {
             nameTag.SetActive(true);
             dialogNameObject.SetActive(false);
+        }
+        isTextRed = (dialogName.text == "??");
+        if(isTextRed) {
+            dialogText.color = Color.red;
+        } else {
+            dialogText.color = Color.black;
         }
         //设置nametag的sprite
         //魔女1 铁匠2 半魔人3 修女4 倒吊人5
@@ -175,12 +184,20 @@ public class DialogManager : MonoBehaviour
                 if (sentenceNames[i] == "UnlockTarot") {
                     this.gameObject.GetComponent<TarotManager>().UnlockTarot(sentenceTexts[i]);
                 }
-                if (sentenceNames[i].ToString() == "UnlockMission") {
-                    //this.gameObject.GetComponent<TarotManager>().UnlockMission(sentenceTexts[i]);
+            }
+            if (sentenceStates[i] == sentenceState.END) {
+                if (sentenceTexts[i] == "GOTAROT") {
+                    ResetDialog();
+                    this.GetComponent<UIManager>().GoTarot();
+                    return;
+                } else {
+                    ResetDialog();
+                    this.GetComponent<UIManager>().GoStat();
+                    return;
                 }
             }
         }
-        ResetDialog();
+        //ResetDialog();
         this.GetComponent <UIManager>().GoStat();
     }
     [ContextMenu("快进对话")]

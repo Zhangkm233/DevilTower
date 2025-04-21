@@ -44,6 +44,7 @@ public class UIManager : MonoBehaviour
     public GameObject tarotMain;
     public GameObject tileMain;
     public GameObject settingMain;
+    public GameObject offsetPanel;
     [Header("Manager")]
     public GameObject audioManager;
     void Start() {
@@ -60,7 +61,6 @@ public class UIManager : MonoBehaviour
         monsterAbilityStat.text = " ";
         goForgeButton.SetActive(false);
         settingMain.SetActive(false);
-        StartDialog(0);
     }
 
     void updateLayerName() {
@@ -106,9 +106,24 @@ public class UIManager : MonoBehaviour
             gridName.text = " ";
             gridStat.text = " ";
             monsterAbilityStat.text = " ";
+            offsetPanel.gameObject.SetActive(false);
         }
 
         if (this.GetComponent<GameManager>().objectClick != null) {
+            if (this.GetComponent<GameManager>().objectClick.CompareTag("statGameObject")) {
+                if(this.GetComponent<GameManager>().objectClick.name == "AtkVolume") {
+                    offsetPanel.gameObject.SetActive(true);
+                    Text offsetText = offsetPanel.transform.GetChild(0).GetComponent<Text>();
+                    offsetText.text = GameData.playerAtk.ToString() + "+" + GameData.atkOffsetInt.ToString() + "=" + GameData.playerTotalAtk + "\n";
+                    if (GameData.isDeathBuff) offsetText.text += "À¿…Òbuff  ”√÷–";
+                }
+                if (this.GetComponent<GameManager>().objectClick.name == "DefVolume") {
+                    offsetPanel.gameObject.SetActive(true);
+                    Text offsetText = offsetPanel.transform.GetChild(0).GetComponent<Text>();
+                    offsetText.text = GameData.playerDef.ToString() + "+" + GameData.defOffsetInt.ToString() + "=" + GameData.playerTotalDef + "\n";
+                }
+            }
+            if (this.GetComponent<GameManager>().objectClick.CompareTag("gridGameObject") == false) return;
             GameObject objectClicked = this.GetComponent<GameManager>().objectClick;
             if (GetComponent<GameManager>().GridInMap == null) {
                 GridTileManager gridTileManager = objectClicked.GetComponent<GridTileManager>();
@@ -278,6 +293,10 @@ public class UIManager : MonoBehaviour
         GoDialog();
         this.GetComponent<DialogManager>().ReadDialog(100);
     }
+    public void StartDialog(int layer,int dialogStat) {
+        GoDialog();
+        this.GetComponent<DialogManager>().ReadDialog(layer,dialogStat);
+    }
     public void StartDialog(int dialogStat) {
         GoDialog();
         this.GetComponent<DialogManager>().ReadDialog(dialogStat);
@@ -350,6 +369,8 @@ public class UIManager : MonoBehaviour
         }
         this.GetComponent<GameManager>().UpdatePlayerOffset();
         GoStat();
+        this.GetComponent<GameManager>().LayerChangeTo(GameData.layer + 1,true);
+        StartDialog(0,GameData.layer);
     }
     public void GoState(UIState uistate) {
         State = uistate;
