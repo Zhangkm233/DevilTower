@@ -1,4 +1,5 @@
-
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using static Grid;
 
@@ -43,9 +44,7 @@ public class GameManager : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && objectClick != null) {
             if (MapClickEvent()) {
-                MonsterMovement();
-                //GameData.allGame_EventEncountered++;
-                GameData.eventEncounter++;
+                EventCountered();
             }
             //记录遭遇的事件数量
         }
@@ -60,9 +59,43 @@ public class GameManager : MonoBehaviour
         this.GetComponent<UIManager>().InitializeUI();
         SaveManager.LoadForeverData();
         audioManagerObject.GetComponent<AudioManager>().PlayBgm(GameData.layer - 1);
-        audioManagerObject.GetComponent<AudioManager>().UpdateVolume();
+        audioManagerObject.GetComponent<AudioManager>().InitialVolume();
     }
-
+    public void EventCountered() {
+        MonsterMovement();
+        GameData.eventEncounter++;
+        //命运之轮
+        //你每完成一个事件，有3 % 的概率获得随机一项效果：
+        //*攻击力 + 3 %
+        //*防御力 + 3 %
+        //*血量 + 3 %
+        //*魔力结晶 + 33 %
+        if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("WheelOfFortune"))) {
+            int randomNumber = UnityEngine.Random.Range(0,100);
+            Debug.Log("命运之轮判定" + randomNumber);
+            if (randomNumber < 3) {
+                randomNumber = UnityEngine.Random.Range(0,4);
+                switch (randomNumber) {
+                    case 0:
+                        Debug.Log("命运之轮触发，攻击力+ 3 %");
+                        GameData.playerAtk += (int)Math.Ceiling(GameData.playerAtk * 0.03f);
+                        break;
+                    case 1:
+                        Debug.Log("命运之轮触发，防御力+ 3 %");
+                        GameData.playerDef += (int)Math.Ceiling(GameData.playerDef * 0.03f);
+                        break;
+                    case 2:
+                        Debug.Log("命运之轮触发，血量+ 3 %");
+                        GameData.playerHp += (int)Math.Ceiling(GameData.playerHp * 0.03f);
+                        break;
+                    case 3:
+                        Debug.Log("命运之轮触发，魔力结晶+ 33 %");
+                        GameData.gold += (int)Math.Ceiling(GameData.gold * 0.33f);
+                        break;
+                }
+            }
+        }
+    }
     public void PlayerStatChange(int hp,int atk,int def,int key1,int key2,int key3,int gold,int forgetime) {
         GameData.playerHp = hp;
         GameData.playerAtk = atk;
@@ -148,6 +181,7 @@ public class GameManager : MonoBehaviour
                 GameData.hasEncounterBoss = true;
                 return false;
             }*/
+            int playerOldHp = GameData.playerHp;
             //腐蚀
             GameData.playerHp = (int)(GameData.playerHp * ((GridMonster)GridInMap).CorruptionPercent());
             int battleDamage = ResolveDamage((GridMonster)GridInMap);
@@ -204,12 +238,13 @@ public class GameManager : MonoBehaviour
             GameData.allGame_GoldGained += ((GridMonster)GridInMap).gold;
             */
             if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Judgment"))) {
-                Debug.Log("审判触发，获得等同于锻造数值的攻击力和防御力");
+                Debug.Log("审判判断，连续击败同一个怪物会使得你获得2点攻击力和防御力");
                 //审判
-                //连续击败同一个怪物会使得你获得等同于锻造数值的攻击力和防御力
+                //连续击败同一个怪物会使得你获得2点攻击力和防御力
                 if (((GridMonster)GridInMap).name == GameData.lastMonsterName) {
-                    GameData.playerAtk += GameData.forgeTime;
-                    GameData.playerDef += GameData.forgeTime;
+                    Debug.Log("审判触发，获得2点攻击力和防御力");
+                    GameData.playerAtk += 2;
+                    GameData.playerDef += 2;
                     GameData.lastMonsterName = ((GridMonster)GridInMap).name;
                     //触发效果
                 }
@@ -219,6 +254,29 @@ public class GameManager : MonoBehaviour
                 if (GameData.isDeathBuff == false) GameData.isDeathBuff = true;
             }
             GameData.gold += ((GridMonster)GridInMap).gold;
+            if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("HighPriestess"))) {
+                Debug.Log("女祭司触发，在你击败一个怪物的时候，额外获得2魔力结晶");
+                GameData.gold += 2;
+            }
+            if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Hermit"))) {
+                Debug.Log("隐者判断，如果你在一次战斗中至少失去了25%的生命值，获得一把钥匙1");
+                if(playerOldHp - GameData.playerHp >= playerOldHp * 0.25) {
+                    Debug.Log("隐者触发，获得一把钥匙1");
+                    GameData.key1++;
+                }
+            }
+            //正义 每当你击败具有“魔心”的怪物后，会使你获得500生命值
+            if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Justice"))) {
+                Debug.Log("正义判断，每当你击败具有“魔心”的怪物后，会使你获得500生命值");
+                if (((GridMonster)GridInMap).isLostmind) {
+                    Debug.Log("正义触发，获得500生命值");
+                    GameData.playerHp += 500;
+                }
+            }
+            if (GameData.popeBuffTime != 0) {
+                GameData.popeBuffTime = 0;
+                Debug.Log("教皇提供的临时防御值已归0");
+            }
             ClearGridInMap(gridTileManager);
             return true;
         }
@@ -265,16 +323,33 @@ public class GameManager : MonoBehaviour
                 Debug.Log("星星触发，血瓶额外提供25点生命值");
                 healingPoints += 25;
             }
+            if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Empress"))) {
+                Debug.Log("女皇触发，你从血瓶中会额外获得150点生命值，但是在你获得一个血瓶后，立刻摧毁其相邻的事件");
+                healingPoints += 150;
+            }
+            //教皇
+            //每当你拾取血瓶，你获得在下一次战斗中具有防御力 + 1（可叠加）
+            if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Pope"))) {
+                Debug.Log("教皇触发，获得在下一次战斗中具有防御力 + 1（可叠加）");
+                GameData.popeBuffTime++;
+            }
             if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Devil"))) {
                 Debug.Log("恶魔触发，血瓶对你造成等同于回复量双倍的伤害");
                 //恶魔
                 //血瓶对你造成等同于回复量双倍的伤害
-                GameData.playerHp -= healingPoints * 2;
+                healingPoints *= 2;
+                GameData.playerHp -= healingPoints;
+                GetComponent<UIManager>().PopNumber(healingPoints,Color.red);
             } else {
+                Debug.Log("捡到了血瓶，血量+" + healingPoints);
                 GameData.playerHp += healingPoints;
+                GetComponent<UIManager>().PopNumber(healingPoints,Color.green);
             }
-            Debug.Log("捡到了血瓶，血量+" + healingPoints);
-            GetComponent<UIManager>().PopNumber(healingPoints, Color.green);
+            if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Empress"))) {
+                Debug.Log("女皇触发，在你获得一个血瓶后，立刻摧毁其相邻的事件");
+                if (gridTileManager.mapX != 0) ClearGridInMap(gridTileManager.mapX - 1,gridTileManager.mapY);
+                if (gridTileManager.mapX != 5) ClearGridInMap(gridTileManager.mapX + 1,gridTileManager.mapY);
+            }
             ClearGridInMap(gridTileManager);
             return true;
         }
@@ -317,13 +392,6 @@ public class GameManager : MonoBehaviour
             }
         }
         if (gridTileManager.gridType == Grid.GridType.NPC) {
-            //隐者
-            //在你完成NPC事件后，获得一把钥匙1
-
-            if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Hermit"))) {
-                Debug.Log("隐者触发，获得一把钥匙1");
-                GameData.key1++;
-            }
             if (GameData.layer != 1) {
                 ClearGridInMap(gridTileManager);
                 return true;
@@ -436,6 +504,25 @@ public class GameManager : MonoBehaviour
             Grid grid = GameData.map[i,GameData.gridHeight - 1];
             if(grid == null) continue;
             Debug.Log(grid.x + " " + grid.y);
+            if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Tower"))) {
+                //塔
+                //门1和门2会像怪物一样移动，在你将要进入一个新的区域时，立刻获得一把钥匙1和一把钥匙2
+                if (grid.type == Grid.GridType.DOOR && ((grid.stat == 1) || (grid.stat == 2))) {
+                    if (i == 0) continue; 
+                    Grid targetGrid = GameData.map[i - 1,GameData.gridHeight - 1];
+                    if (targetGrid.type != Grid.GridType.MONSTER && targetGrid.type != Grid.GridType.DOOR &&
+                         targetGrid.type != Grid.GridType.BARRIER && targetGrid.type != Grid.GridType.PORTAL) {
+                        //与左边的格子交换
+                        if (i == 0 && ((GridMonster)grid).isLostmind) {
+                            grid.MoveTo(5,GameData.gridHeight - 1);
+                        } else {
+                            grid.MoveTo(i - 1,GameData.gridHeight - 1);
+                        }
+                        targetGrid.MoveTo(i,GameData.gridHeight - 1);
+                    }
+                    continue;
+                }
+            }
             if (grid.type == Grid.GridType.MONSTER) {
                 if (((GridMonster)grid).isStalk) {
                     if (((GridMonster)grid).stalkTurn == 2) {
@@ -511,7 +598,12 @@ public class GameManager : MonoBehaviour
         //你攻杀的每个怪物使得你获得防御力 + 1，你防杀的每个怪物使得你获得攻击力 + 1
         int pAtk = GameData.playerTotalAtk;
         int pDef = GameData.playerTotalDef;
-        if (pAtk - (monster.def + monster.hp) >= 0) {
+        int mDef = monster.def; 
+        //节制 无视怪兽防御
+        if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Temperance"))) {
+            mDef = 0;
+        }
+        if (pAtk - (mDef + monster.hp) >= 0) {
             Debug.Log("攻杀");
             if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Sun"))) {
                 Debug.Log("太阳触发，获得防御力 + 1");
@@ -528,7 +620,7 @@ public class GameManager : MonoBehaviour
             }
             return 0;
         }
-        if (pDef >= monster.atk && pAtk > monster.def) {
+        if (pDef >= monster.atk && pAtk > mDef) {
             Debug.Log("防杀");
             if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Sun"))) {
                 Debug.Log("太阳触发，获得攻击力 + 1");
@@ -543,20 +635,24 @@ public class GameManager : MonoBehaviour
     public int CaculateDamage(GridMonster monster) {
         int pAtk = GameData.playerTotalAtk;
         int pDef = GameData.playerTotalDef;
-        if (pAtk - (monster.def + monster.hp) >= 0 ) {
+        int mDef = monster.def; 
+        if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Temperance"))) {
+            mDef = 0;
+        }
+        if (pAtk - (mDef + monster.hp) >= 0 ) {
             if (pDef > monster.atk) {
                 return 0;
             }
             return 0;
         }
-        if(pDef >= monster.atk && pAtk > monster.def) {
+        if(pDef >= monster.atk && pAtk > mDef) {
             return 0;
         }
-        if (pAtk - monster.def <= 0) {
+        if (pAtk - mDef <= 0) {
             return -1;//如果玩家攻击力小于怪物防御力，那么显示???
         }
-        if(pAtk - monster.def > 0) {
-            return (monster.hp / (pAtk - monster.def)) * (monster.atk - pDef);
+        if(pAtk - mDef > 0) {
+            return (monster.hp / (pAtk - mDef)) * (monster.atk - pDef);
         }//正常显示伤害
         return -2;//errrrror
     }
@@ -582,7 +678,18 @@ public class GameManager : MonoBehaviour
                 GameData.atkOffsetInt += 5;
             }
         }
-        GameData.playerTotalAtk = GameData.playerAtk + GameData.atkOffsetInt;
+        //教皇的buff 每当你拾取血瓶，你获得在下一次战斗中具有防御力+1（可叠加）
+        if (GameData.popeBuffTime != 0) {
+            GameData.defOffsetInt += GameData.popeBuffTime;
+        }
+        //节制
+        //你的攻击力降低80 %，但是你无视敌方防御
+        if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Temperance"))) {
+            //向上取整
+            GameData.playerTotalAtk = (int)Math.Ceiling(((GameData.playerAtk + GameData.atkOffsetInt) * 0.2));
+        } else {
+            GameData.playerTotalAtk = GameData.playerAtk + GameData.atkOffsetInt;
+        }
         GameData.playerTotalDef = GameData.playerDef + GameData.defOffsetInt;
     }
     public void UpdateGameDataToPublic() {

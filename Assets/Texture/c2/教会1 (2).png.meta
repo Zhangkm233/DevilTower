@@ -1,13 +1,19 @@
 fileFormatVersion: 2
-guid: 83640631e9bf77c42a63b9d1b75a77f4
+guid: 498e0762b57ba474a80fac9c64e7deff
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2974881162785079220
-    second: "\u72C2\u730E1_0"
+      213: -429262833103590065
+    second: "\u6559\u4F1A1 (2)_0"
   - first:
-      213: -5310658536659633337
-    second: "\u72C2\u730E1_1"
+      213: 2608064452360419601
+    second: "\u6559\u4F1A1 (2)_1"
+  - first:
+      213: 4949483820903845940
+    second: "\u6559\u4F1A1 (2)_2"
+  - first:
+      213: -8180043900981257849
+    second: "\u6559\u4F1A1 (2)_3"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +60,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 640
+  spritePixelsToUnits: 600
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -103,45 +109,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u72C2\u730E\u76FE\u724C\u5320"
+      name: "\u6559\u4F1A1 (2)_0"
       rect:
         serializedVersion: 2
-        x: 194
-        y: 388
-        width: 1778
-        height: 2218
+        x: 218
+        y: 153
+        width: 919
+        height: 2375
       alignment: 9
-      pivot: {x: 0.48774683, y: 0.24461286}
+      pivot: {x: 0.5210727, y: 0.301246}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c40c133185917b6d0800000000000000
-      internalID: -2974881162785079220
+      spriteID: f4d25954ab3fa0af0800000000000000
+      internalID: -429262833103590065
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u72C2\u730E\u6B66\u5668\u5320"
+      name: "\u6559\u4F1A1 (2)_1"
       rect:
         serializedVersion: 2
-        x: 2364
-        y: 303
-        width: 1599
-        height: 2358
+        x: 1444
+        y: 155
+        width: 1130
+        height: 2751
       alignment: 9
-      pivot: {x: 0.39251354, y: 0.26388234}
+      pivot: {x: 0.41645324, y: 0.25009635}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 74bb10fa230cc46b0800000000000000
-      internalID: -5310658536659633337
+      spriteID: 11934422dc4b13420800000000000000
+      internalID: 2608064452360419601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\u6559\u4F1A1 (2)_3"
+      rect:
+        serializedVersion: 2
+        x: 2625
+        y: 193
+        width: 1001
+        height: 2239
+      alignment: 9
+      pivot: {x: 0.53869325, y: 0.30647197}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78959ea6965aa7e80800000000000000
+      internalID: -8180043900981257849
       vertices: []
       indices: 
       edges: []
@@ -150,7 +178,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3d7bd3265af683b49a2ef16154bd45e9
+    spriteID: 10af1434025390140af50ceacce77f8d
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +188,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u72C2\u730E\u6B66\u5668\u5320": -5310658536659633337
-      "\u72C2\u730E\u76FE\u724C\u5320": -2974881162785079220
+      "\u6559\u4F1A1 (2)_0": -429262833103590065
+      "\u6559\u4F1A1 (2)_1": 2608064452360419601
+      "\u6559\u4F1A1 (2)_3": -8180043900981257849
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

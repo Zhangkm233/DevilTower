@@ -44,6 +44,8 @@ public class UIManager : MonoBehaviour
     public GameObject tarotMain;
     public GameObject tileMain;
     public GameObject settingMain;
+    [Header("Manager")]
+    public GameObject audioManager;
     void Start() {
     }
     
@@ -318,6 +320,7 @@ public class UIManager : MonoBehaviour
     }
     public void GoSetting() {
         GoState(UIState.SETTING);
+        audioManager.GetComponent<AudioManager>().InitialVolume();
     }
 
     public void EndTarot() {
@@ -328,6 +331,22 @@ public class UIManager : MonoBehaviour
             //在你进入新的区域后，获得一把钥匙1
             Debug.Log("魔术师触发，获得一把钥匙1");
             GameData.key1++;
+        }
+        if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Tower"))) {
+            //塔
+            //门1和门2会像怪物一样移动，在你将要进入一个新的区域时，立刻获得一把钥匙1和一把钥匙2
+            Debug.Log("塔触发，获得一把钥匙1和一把钥匙2");
+            GameData.key1++;
+            GameData.key2++;
+        }
+        if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Lover"))) {
+            //恋人
+            //在你进入一个新的区域后，获得一把钥匙1，7点攻击力，7点防御力，700点生命值
+            Debug.Log("恋人触发，获得一把钥匙1，7点攻击力，7点防御力，700点生命值");
+            GameData.key1++;
+            GameData.playerAtk += 7;
+            GameData.playerDef += 7;
+            GameData.playerHp += 700;
         }
         this.GetComponent<GameManager>().UpdatePlayerOffset();
         GoStat();

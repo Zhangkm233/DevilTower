@@ -162,8 +162,7 @@ public class ShopManager : MonoBehaviour
             AddToInventory(itemGiveOut,itemGiveOutNum);
             if(!isThisShopInfinite) {
                 gameManager.GetComponent<GameManager>().ClearGridInMap(mapX,mapY);
-                gameManager.GetComponent<GameManager>().MonsterMovement();
-                GameData.eventEncounter++;
+                gameManager.GetComponent<GameManager>().EventCountered();
                 gameManager.GetComponent<UIManager>().GoStat();
             }
         }
@@ -173,8 +172,7 @@ public class ShopManager : MonoBehaviour
     }
     public void ExileTrade() {
         gameManager.GetComponent<GameManager>().ClearGridInMap(mapX, mapY);
-        gameManager.GetComponent<GameManager>().MonsterMovement();
-        GameData.eventEncounter++;
+        gameManager.GetComponent<GameManager>().EventCountered();
         gameManager.GetComponent<UIManager>().GoStat();
     }
 }

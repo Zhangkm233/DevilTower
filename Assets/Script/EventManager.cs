@@ -1,4 +1,5 @@
 
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 
 public class EventManager : MonoBehaviour
@@ -33,8 +34,7 @@ public class EventManager : MonoBehaviour
             } else {
                 GameManager.GetComponent<GameManager>().ClearGridInMap(mapX,mapY);
             }
-            GameManager.GetComponent<GameManager>().MonsterMovement();
-            GameData.eventEncounter++;
+            GameManager.GetComponent<GameManager>().EventCountered();
             GameManager.GetComponent<UIManager>().GoStat();
         } else {
             Debug.Log("…±≤ª¡Àboss");
@@ -52,9 +52,8 @@ public class EventManager : MonoBehaviour
         Grid tempGrid = GameData.map[cgtManager.mapX,cgtManager.mapY - 2];
         GameData.map[cgtManager.mapX,cgtManager.mapY - 2] = GameData.map[cgtManager.mapX,cgtManager.mapY];
         GameData.map[cgtManager.mapX,cgtManager.mapY] = tempGrid;
-        GameManager.GetComponent<GameManager>().ClearGridInMap(mapX,mapY); 
-        GameManager.GetComponent<GameManager>().MonsterMovement();
-        GameData.eventEncounter++;
+        GameManager.GetComponent<GameManager>().ClearGridInMap(mapX,mapY);
+        GameManager.GetComponent<GameManager>().EventCountered();
         GameManager.GetComponent<UIManager>().GoStat();
     }
     public void CancelEvent() {

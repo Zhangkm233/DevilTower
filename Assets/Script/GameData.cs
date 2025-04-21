@@ -11,9 +11,9 @@ public static class GameData
     public static int key3 = 0;
     public static int gold = 0;
 
-    public static int playerHp = 400;
-    public static int playerDef = 10;
-    public static int playerAtk = 10;
+    public static int playerHp = 100;
+    public static int playerDef = 5;
+    public static int playerAtk = 5;
     
     public static int forgeTime = 0;//Ìú½³ÆÌÉý¼¶´ÎÊý
 
@@ -28,11 +28,12 @@ public static class GameData
 
     public static int saveSlotChoose = 0;
 
-    public static float sfxVolume = 0.5f;
-    public static float bgmVolume = 0.5f;
+    public static float sfxVolume = 0.2f;
+    public static float bgmVolume = 0.2f;
 
     public static string lastMonsterName = string.Empty;
     public static bool isDeathBuff = false;
+    public static int popeBuffTime = 0;
     public static int atkOffsetInt = 0;
     public static int defOffsetInt = 0;
     public static int playerTotalAtk = 0;

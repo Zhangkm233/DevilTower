@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip sfx_pick;
     public AudioClip sfx_click;
     public AudioClip[] backGroundMusics;
+    public GameObject bgmVolumeBar;
+    public GameObject sfxVolumeBar;
     public void PlayAudioClip(AudioClip clip) {
         sfxSource.PlayOneShot(clip);
     }
@@ -29,11 +32,15 @@ public class AudioManager : MonoBehaviour
         bgmSource.Play();
     }
     public void UpdateVolume() {
+        GameData.bgmVolume = bgmVolumeBar.GetComponent<Slider>().value;
+        GameData.sfxVolume = sfxVolumeBar.GetComponent<Slider>().value;
         sfxSource.volume = GameData.sfxVolume;
         bgmSource.volume = GameData.bgmVolume;
     }
-    public void ChangeSfxVolume(float volume) {
-        sfxSource.volume = volume;
-        GameData.sfxVolume = volume;
+    public void InitialVolume() {
+        bgmVolumeBar.GetComponent<Slider>().value = GameData.bgmVolume;
+        sfxVolumeBar.GetComponent<Slider>().value = GameData.sfxVolume;
+        sfxSource.volume = GameData.sfxVolume;
+        bgmSource.volume = GameData.bgmVolume;
     }
 }

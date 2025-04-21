@@ -121,6 +121,14 @@ public class GridLoader : MonoBehaviour
             case "E":
                 g = new GridEvent(gridStat);
                 break;
+            case "N":
+                if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Emperor"))){
+                    Debug.Log("皇帝触发，地图中的NPC变为防御宝石");
+                    g = new GridGem(2);
+                } else {
+                    g = new Grid(gridType,gridStat);
+                }
+                break;
             default:
                 g = new Grid(gridType,gridStat);
                 break;
