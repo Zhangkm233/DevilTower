@@ -6,6 +6,8 @@ TagManager:
   tags:
   - gridGameObject
   - statGameObject
+  - cardGameObject
+  - saveSlotGameObject
   layers:
   - Default
   - TransparentFX

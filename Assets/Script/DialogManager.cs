@@ -106,7 +106,8 @@ public class DialogManager : MonoBehaviour
     }
     public bool HandleWithSentence() {
         if (sentenceStates[sentenceNumber + 1] == sentenceState.EVENT) {
-            if (sentenceNames[sentenceNumber + 1] == "UnlockTarot") {
+            if (sentenceNames[sentenceNumber + 1] == "GAINTAROT") {
+                //Debug.Log("DialogManager尝试UnlockTarot:" + sentenceTexts[sentenceNumber + 1]);
                 this.gameObject.GetComponent<TarotManager>().UnlockTarot(sentenceTexts[sentenceNumber + 1]);
             }
             //干一些事情 然后跳过这个event
@@ -181,7 +182,7 @@ public class DialogManager : MonoBehaviour
         for (int i = sentenceNumber;i < sentenceStates.Count;i++) {
             //Debug.Log(sentenceStates[i]);
             if (sentenceStates[i] == sentenceState.EVENT) {
-                if (sentenceNames[i] == "UnlockTarot") {
+                if (sentenceNames[i] == "GAINTAROT") {
                     this.gameObject.GetComponent<TarotManager>().UnlockTarot(sentenceTexts[i]);
                 }
             }

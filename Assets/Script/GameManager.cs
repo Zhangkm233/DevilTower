@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     public int forgeTime;
     public int atkOffsetInt;
     public int defOffsetInt;
+    public float sfxVolume;
+    public float bgmVolume;
 
     [Space(15)]
     public Camera mainCamera;
@@ -62,12 +64,16 @@ public class GameManager : MonoBehaviour
         this.GetComponent<GridLoader>().InitialzeMapAndGrid();
         this.GetComponent<UIManager>().InitializeUI();
         SaveManager.LoadForeverData();
+        LayerChangeTo(GameData.layer,false);
+        if (MenuData.isContinueGame) {
+            SaveManager.Load(MenuData.loadGameSlot);
+            this.GetComponent<GameManager>().UpdateEachGrid();
+        } else {
+            this.GetComponent<UIManager>().GoDialog();
+            this.GetComponent<DialogManager>().ReadDialog(0,GameData.layer);
+        }
         audioManagerObject.GetComponent<AudioManager>().PlayBgm(GameData.layer - 1);
         audioManagerObject.GetComponent<AudioManager>().InitialVolume();
-        LayerChangeTo(GameData.layer,false);
-        this.GetComponent<UIManager>().GoDialog();
-        this.GetComponent<DialogManager>().ReadDialog(0,GameData.layer);
-
     }
     public void EventCountered() {
         MonsterMovement();
@@ -401,11 +407,31 @@ public class GameManager : MonoBehaviour
             }
         }
         if (gridTileManager.gridType == Grid.GridType.NPC) {
-            if (GameData.layer != 1) {
+            if (GameData.layer > 2) {
                 ClearGridInMap(gridTileManager);
                 return true;
             }
-            int dialogStat = GridInMap.stat;
+            int dialogStat = 114514;
+            switch (GameData.layer) {
+                case 1:
+                    dialogStat = UnityEngine.Random.Range(0,4);
+                    break;
+                case 2:
+                    dialogStat = UnityEngine.Random.Range(0,4);
+                    break;
+                case 3:
+                    dialogStat = UnityEngine.Random.Range(0,8);
+                    break;
+                case 4:
+                    dialogStat = UnityEngine.Random.Range(0,8);
+                    break;
+                case 5:
+                    dialogStat = UnityEngine.Random.Range(0,5);
+                    break;
+                case 6:
+                    dialogStat = UnityEngine.Random.Range(0,5);
+                    break;
+            }
             this.GetComponent<UIManager>().StartDialog(dialogStat);
             ClearGridInMap(gridTileManager);
             return true;
@@ -670,6 +696,9 @@ public class GameManager : MonoBehaviour
         forgeTime = GameData.forgeTime;
         atkOffsetInt = GameData.atkOffsetInt;
         defOffsetInt = GameData.defOffsetInt;
+        bgmVolume = GameData.bgmVolume;
+        sfxVolume = GameData.sfxVolume;
+
     }
 
     public GameObject ObjectClick() {

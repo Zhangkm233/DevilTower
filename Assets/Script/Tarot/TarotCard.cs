@@ -14,6 +14,7 @@ public class TarotCard : MonoBehaviour
     public GameObject cardDescribeName;
     public GameObject cardDescribeText;
     public TarotsDataObject tarotsDataObject;
+    public Sprite lockSprite;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,15 +22,23 @@ public class TarotCard : MonoBehaviour
 
         TarotsDataObject tarots = TarotAnimHandler.instance.tarotsDataObject;
         GetComponent<SpriteRenderer>().sprite = tarots.tarotsData[cardIndex].sprite;
-        cardDescribe = GameObject.Find("CardDescribe");
-        cardDescribeImage = cardDescribe.transform.GetChild(0).gameObject;
-        cardDescribeName = cardDescribe.transform.GetChild(1).gameObject;
-        cardDescribeText = cardDescribe.transform.GetChild(2).gameObject;
+        //cardDescribe = GameObject.Find("CardDescribe");
+        //cardDescribeImage = cardDescribe.transform.GetChild(0).gameObject;
+        //cardDescribeName = cardDescribe.transform.GetChild(1).gameObject;
+        //cardDescribeText = cardDescribe.transform.GetChild(2).gameObject;
         var collider = GetComponent<BoxCollider2D>();
         var sprite = GetComponent<SpriteRenderer>();
         collider.size = sprite.bounds.size;
+        CheckIfThisUnlock();
     }
 
+    public void CheckIfThisUnlock() {
+        if(GameData.tarotUnlock[cardIndex] == false) {
+            this.GetComponent<SpriteRenderer>().sprite = lockSprite;
+        } else {
+            this.GetComponent<SpriteRenderer>().sprite = tarotsDataObject.tarotsData[cardIndex].sprite;
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -38,6 +47,9 @@ public class TarotCard : MonoBehaviour
 
     public void HandleClick(){
         Debug.Log("Click");
+        if (GameData.tarotUnlock[cardIndex] == false) {
+            return;
+        }
         if (isEquiping) {
             TarotAnimHandler.instance.UnEquipTarot(this);
             return;
@@ -50,6 +62,9 @@ public class TarotCard : MonoBehaviour
 
     public void HandlePointerEnter(){
         Debug.Log("Hover");
+        if (GameData.tarotUnlock[cardIndex] == false) {
+            return;
+        }
         cardDescribe.SetActive(true);
         cardDescribeImage.GetComponent<Image>().sprite = GetComponent<SpriteRenderer>().sprite;
         cardDescribeName.GetComponent<Text>().text = tarotsDataObject.tarotsData[cardIndex].cardName;
@@ -59,6 +74,9 @@ public class TarotCard : MonoBehaviour
 
     public void HandlePointerExit(){
         Debug.Log("Exit");
+        if (GameData.tarotUnlock[cardIndex] == false) {
+            return;
+        }
         cardDescribe.SetActive(false);
         StartCoroutine(scaleDown());
     }

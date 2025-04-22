@@ -31,16 +31,18 @@ public class AudioManager : MonoBehaviour
         bgmSource.clip = backGroundMusics[index];
         bgmSource.Play();
     }
-    public void UpdateVolume() {
+    public void UpdateBgmVolume() {
         GameData.bgmVolume = bgmVolumeBar.GetComponent<Slider>().value;
-        GameData.sfxVolume = sfxVolumeBar.GetComponent<Slider>().value;
-        sfxSource.volume = GameData.sfxVolume;
         bgmSource.volume = GameData.bgmVolume;
     }
+    public void UpdateSfxVolume() {
+        GameData.sfxVolume = sfxVolumeBar.GetComponent<Slider>().value;
+        sfxSource.volume = GameData.sfxVolume;
+    }
     public void InitialVolume() {
-        bgmVolumeBar.GetComponent<Slider>().value = GameData.bgmVolume;
-        sfxVolumeBar.GetComponent<Slider>().value = GameData.sfxVolume;
         sfxSource.volume = GameData.sfxVolume;
         bgmSource.volume = GameData.bgmVolume;
+        bgmVolumeBar.GetComponent<Slider>().value = GameData.bgmVolume;
+        sfxVolumeBar.GetComponent<Slider>().value = GameData.sfxVolume;
     }
 }

@@ -336,6 +336,10 @@ public class UIManager : MonoBehaviour
     public void GoTarot() {
         GameData.tarotLastEquip = GameData.tarotEquip;
         GoState(UIState.TAROT);
+        GameObject[] cards = GameObject.FindGameObjectsWithTag("cardGameObject");
+        foreach (GameObject card in cards) {
+            card.GetComponent<TarotCard>().CheckIfThisUnlock();
+        }
     }
     public void GoSetting() {
         GoState(UIState.SETTING);

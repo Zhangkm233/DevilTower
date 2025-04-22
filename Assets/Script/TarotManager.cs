@@ -1,30 +1,10 @@
+using System;
 using UnityEngine;
 
 public class TarotManager : MonoBehaviour
 {
     public TarotsDataObject tarotsDataObject;
 
-    //任务
-    /*
-    public void UnlockMission(string tarot) {
-        GameData.tarotMissionUnlock[TarotToNum(tarot)] = true;
-    }
-    public void UnlockMission(int index) {
-        GameData.tarotMissionUnlock[index] = true;
-    }
-    public void UnlockAllMission() {
-        for (int i = 0;i < GameData.tarotMissionUnlock.Length;i++) {
-            GameData.tarotMissionUnlock[i] = true;
-        }
-    }
-    public bool IsMissionUnlock(int index) {
-        return GameData.tarotMissionUnlock[index];
-    }
-    public bool IsMissionUnlock(string tarot) {
-        return GameData.tarotMissionUnlock[TarotToNum(tarot)];
-    }
-    */
-    //塔罗牌
     public void UnlockTarot(int[] index) {
         for (int i = 0;i < index.Length;i++) {
             GameData.tarotUnlock[index[i]] = true;
@@ -36,9 +16,11 @@ public class TarotManager : MonoBehaviour
         }
     }
     public void UnlockTarot(int index) {
+        Debug.Log("TarotManager尝试UnlockTarot:" + index);
         GameData.tarotUnlock[index] = true;
     }
     public void UnlockTarot(string tarot) {
+        Debug.Log("TarotManager尝试UnlockTarot:" + tarot + TarotToNum(tarot));
         GameData.tarotUnlock[TarotToNum(tarot)] = true;
     }
     public void LockTarot(int index) {
@@ -63,28 +45,6 @@ public class TarotManager : MonoBehaviour
             GameData.tarotUnlock[i] = true;
         }
     }
-
-    /// <summary>
-    /// PlayerPrefs会存到注册表，所以暂时先不用
-    /// </summary>
-    /*
-    public void SaveTarotData() {
-        PlayerPrefs.SetInt("tarotUnlockCount",GetTarotCount());
-        for (int i = 0;i < GameData.tarotUnlock.Length;i++) {
-            PlayerPrefs.SetInt("tarotUnlock" + i,GameData.tarotUnlock[i] ? 1 : 0);
-        }
-    }
-    public void LoadTarotData() {
-        ResetTarot();
-        int count = PlayerPrefs.GetInt("tarotUnlockCount");
-        for (int i = 0;i < count;i++) {
-            GameData.tarotUnlock[i] = PlayerPrefs.GetInt("tarotUnlock" + i) == 1;
-        }
-    }
-    public void ClearTarotData() {
-        PlayerPrefs.DeleteAll();
-    }
-    */
 
     public int TarotToNum(string tarot) {
         for(int i = 0;i < tarotsDataObject.tarotsData.Count;i++) {
