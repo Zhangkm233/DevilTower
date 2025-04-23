@@ -15,6 +15,27 @@ public class GridTileManager : MonoBehaviour
     public Text monsterStat;
     public GameObject gameManagerObject;
     public SpriteScriptObject[] layerspritess;
+
+    public void OnMouseEnter()
+    {
+        if(mapY != 3)return;
+        transform.DOScale(scalePivot * 1.1f, 0.2f).SetEase(Ease.OutElastic);
+    }
+
+    public void OnMouseExit()
+    {
+        if(mapY != 3)return;
+        transform.DOScale(scalePivot, 0.2f).SetEase(Ease.OutElastic);
+    }
+
+    void Update()
+    {
+        if (gridType == Grid.GridType.MONSTER){
+            Vector3 scale =  new Vector3(0, Mathf.Sin(Time.time * 2) * 0.02f * Time.deltaTime, 0);
+            transform.localScale += scale;
+        }
+    }
+
     public void InitialData() {
         this.gameObject.layer = 6;
         gameManagerObject = GameObject.Find("GameManager"); 
