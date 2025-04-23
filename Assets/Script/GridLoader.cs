@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static Grid;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 [System.Serializable]
 public class GridLoader : MonoBehaviour
@@ -32,8 +33,23 @@ public class GridLoader : MonoBehaviour
         SaveManager.Save(GameData.saveSlotChoose);
     }
     public void LoadAll() {
+        int oldLayer = GameData.layer;
+        int oldHeight = GameData.gridHeight;
         SaveManager.Load(GameData.saveSlotChoose);
-        this.GetComponent<GameManager>().UpdateEachGrid();
+        if (oldLayer != GameData.layer) {
+            // 如果层数改变了，重新加载地图
+            Debug.Log("层数改变了，重新加载地图");
+            GameObject[] grids = GameObject.FindGameObjectsWithTag("gridGameObject");
+            foreach (GameObject grid in grids) {
+                grid.GetComponent<GridTileManager>().mapY += GameData.gridHeight - oldHeight;
+            }
+            //SaveManager.Load(GameData.saveSlotChoose);
+            this.GetComponent<GameManager>().UpdateLayerSprites();
+        } else {
+            // 否则只更新格子
+            Debug.Log("层数没有改变，只更新格子");
+            this.GetComponent<GameManager>().UpdateEachGrid();
+        }
     }
     public void DeleteAll() {
         if (GameData.saveSlotChoose == 0) {

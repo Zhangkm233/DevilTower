@@ -163,15 +163,16 @@ public class GameManager : MonoBehaviour
         //更新怪物数据到图鉴
         //catalogObject.GetComponent<MonsterCatalogManager>().UpdateMonsterData();
         //加载地图到map里
-        this.GetComponent<GridLoader>().LoadMapFromTxt(); 
+        this.GetComponent<GridLoader>().LoadMapFromTxt();
+        UpdateLayerSprites();
         //刷新格子
-        UpdateEachGrid();
+        //UpdateEachGrid();
         //更新背景sprite
-        backGroundObject.GetComponent<BackGroundManager>().UpdateSprite();
+        //backGroundObject.GetComponent<BackGroundManager>().UpdateSprite();
         //更新自动存档
         SaveManager.Save(0);
         //this.GetComponent<UIManager>().GoStat();
-        audioManagerObject.GetComponent<AudioManager>().PlayBgm(GameData.layer - 1);
+        //audioManagerObject.GetComponent<AudioManager>().PlayBgm(GameData.layer - 1);
     }
     bool MapClickEvent() {
         audioManagerScript = audioManagerObject.GetComponent<AudioManager>();
@@ -571,6 +572,11 @@ public class GameManager : MonoBehaviour
         }
         GameData.map[mapX,i] = null;
         UpdateEachGrid();
+    }
+    public void UpdateLayerSprites() {
+        UpdateEachGrid();
+        backGroundObject.GetComponent<BackGroundManager>().UpdateSprite();
+        audioManagerObject.GetComponent<AudioManager>().PlayBgm(GameData.layer - 1);
     }
     public void UpdateEachGrid() {
         GameObject[] grids = GameObject.FindGameObjectsWithTag("gridGameObject");

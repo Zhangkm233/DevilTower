@@ -47,6 +47,7 @@ public class UIManager : MonoBehaviour
     public GameObject offsetPanel;
     [Header("Manager")]
     public GameObject audioManager;
+    public GameObject[] haloSlots;
     void Start() {
     }
     
@@ -235,8 +236,8 @@ public class UIManager : MonoBehaviour
                     gridShop.itemExchangeFor + " " + gridShop.itemExchangeForNum + "个";
             }
             if (gridInMaped.type == GridType.NPC) {
-                gridName.text = "NPC";
-                gridStat.text = "NPC 暂时没用";
+                gridName.text = "神秘人";
+                gridStat.text = "或许会遇到什么好事呢";
             }
             if (gridInMaped.type == GridType.EVENT) {
                 switch (((GridEvent)gridInMaped).eventType) {
@@ -306,9 +307,7 @@ public class UIManager : MonoBehaviour
         shopMain.GetComponent<ShopManager>().UpdateShopData(gridShop,X,Y);
     }
     public void StartForge() {
-        if(GameData.eventEncounter < 30) {
-            return;
-        }
+        if(GameData.layer < 2) return;
         GoForge();
         forgeMain.GetComponent<ForgeManager>().initializePrice();
     }
@@ -339,7 +338,13 @@ public class UIManager : MonoBehaviour
         GameObject[] cards = GameObject.FindGameObjectsWithTag("cardGameObject");
         foreach (GameObject card in cards) {
             card.GetComponent<TarotCard>().CheckIfThisUnlock();
+            card.GetComponent<TarotCard>().ClearParticle();
         }
+        /*
+        foreach (GameObject haloslot in haloSlots) {
+            Debug.Log("haloslot");
+            haloslot.SetActive(true);
+        }*/
     }
     public void GoSetting() {
         GoState(UIState.SETTING);
@@ -362,7 +367,7 @@ public class UIManager : MonoBehaviour
             GameData.key1++;
             GameData.key2++;
         }
-        if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Lover"))) {
+        if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Lovers"))) {
             //恋人
             //在你进入一个新的区域后，获得一把钥匙1，7点攻击力，7点防御力，700点生命值
             Debug.Log("恋人触发，获得一把钥匙1，7点攻击力，7点防御力，700点生命值");
@@ -371,6 +376,13 @@ public class UIManager : MonoBehaviour
             GameData.playerDef += 7;
             GameData.playerHp += 700;
         }
+        /*
+        foreach (GameObject haloslot in haloSlots) {
+            Debug.Log("haloslot");
+            haloslot.SetActive(false);
+        }
+        */
+        //StopAllCoroutines();
         this.GetComponent<GameManager>().UpdatePlayerOffset();
         GoStat();
         this.GetComponent<GameManager>().LayerChangeTo(GameData.layer + 1,true);

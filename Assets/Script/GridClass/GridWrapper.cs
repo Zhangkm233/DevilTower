@@ -56,6 +56,10 @@ public class GridWrapper
                         break;
                     }
                 g.GridTypeToWord = gridType;
+                g.fromX = grid[i * height + j].fromX;
+                g.fromY = grid[i * height + j].fromY;
+                g.x = grid[i * height + j].x;
+                g.y = grid[i * height + j].y;
                 resultGrid[i,j] = g;
             }
         }

@@ -29,11 +29,10 @@ MonoBehaviour:
     - {fileID: -6809007401660860033, guid: c9bd8873da8894e4590223d0f4f1432f, type: 3}
   - type: 3
     sprites:
-    - {fileID: -5310658536659633337, guid: 92bb31a49b158374e95596959da08367, type: 3}
-    - {fileID: -2974881162785079220, guid: 92bb31a49b158374e95596959da08367, type: 3}
-    - {fileID: -5310658536659633337, guid: 83640631e9bf77c42a63b9d1b75a77f4, type: 3}
-    - {fileID: -2974881162785079220, guid: 83640631e9bf77c42a63b9d1b75a77f4, type: 3}
-    - {fileID: 8646932244216540387, guid: ae2a660adb556314faf23a68bd8ca658, type: 3}
+    - {fileID: -4485180083487654487, guid: 0e43552c67cfe484ebacf2ddbc1eb781, type: 3}
+    - {fileID: 6780885887922170312, guid: 81ad7925dae7ea64d85082995426601a, type: 3}
+    - {fileID: -1210568303632167783, guid: 4431bb158d6acc34ea3bd09ac48f690f, type: 3}
+    - {fileID: -1210568303632167783, guid: 4431bb158d6acc34ea3bd09ac48f690f, type: 3}
   - type: 4
     sprites:
     - {fileID: -1372589302711875340, guid: 570e5529c09714242b596ef9a56b7458, type: 3}
@@ -60,4 +59,4 @@ MonoBehaviour:
     - {fileID: 6913452853105607542, guid: c9bd8873da8894e4590223d0f4f1432f, type: 3}
   - type: 9
     sprites:
-    - {fileID: 1845699164250916626, guid: 862196192a4d8a349ac42895471df0a7, type: 3}
+    - {fileID: -4993719680165414804, guid: d3573445d0ce855469d6e56213259f83, type: 3}

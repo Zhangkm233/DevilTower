@@ -52,7 +52,8 @@ public class TarotManager : MonoBehaviour
                 return i;
             }
         }
-        return -1;
+        Debug.LogWarning("TarotManager: TarotToNum: " + tarot + " not found");
+        return -99;
     }
     public string NumToTarot(int num) {
         return tarotsDataObject.tarotsData[num].cardName;

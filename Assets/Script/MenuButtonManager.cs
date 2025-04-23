@@ -9,8 +9,9 @@ public class MenuButtonManager : MonoBehaviour
     //public GameObject blackPanel;
     public CanvasGroup fadeCanvasGroup;
     public GameObject saveChoosePanel;
+    public GameObject galleyPanel;
     public void Start() {
-        saveChoosePanel.SetActive(false);
+        backToMenu();
     }
     public void StartGame() {
         Debug.Log("Start Game button clicked");
@@ -26,6 +27,18 @@ public class MenuButtonManager : MonoBehaviour
         foreach (GameObject slot in slots) {
             slot.GetComponent<SaveSlotManager>().UpdateSaveSlotData();
         }
+    }
+    public void backToMenu() {
+        saveChoosePanel.SetActive(false);
+        galleyPanel.SetActive(false);
+    }
+    public void ToGallery() {
+        Debug.Log("Gallery button clicked");
+        galleyPanel.SetActive(true);
+        saveChoosePanel.SetActive(false);
+        galleyPanel.GetComponent<GalleryManager>().initialAllMusic();
+        galleyPanel.GetComponent<GalleryManager>().ChangeState(0);
+        galleyPanel.GetComponent<GalleryManager>().ChangeInteractableOfButtons(); 
     }
     public void ExitGame() {
         Debug.Log("Exit Game button clicked");

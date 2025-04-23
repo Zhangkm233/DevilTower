@@ -21,6 +21,8 @@ MonoBehaviour:
   m_OverrideGlobalSceneList: 1
   m_Scenes:
   - m_enabled: 1
+    m_path: Assets/Scenes/MainMenu.unity
+  - m_enabled: 1
     m_path: Assets/Scenes/MainGame.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
@@ -165,7 +167,7 @@ MonoBehaviour:
     - line: '|   loadStoreDebugModeEnabled: 0'
     - line: '|   visionOSBundleVersion: 1.0'
     - line: '|   tvOSBundleVersion: 1.0'
-    - line: '|   bundleVersion: 1.3'
+    - line: '|   bundleVersion: 1.4'
     - line: '|   preloadedAssets: []'
     - line: '|   metroInputSource: 0'
     - line: '|   wsaTransparentSwapchain: 0'
@@ -315,7 +317,7 @@ MonoBehaviour:
     - line: '|   - m_BuildTarget: '
     - line: '|     m_Icons:'
     - line: '|     - serializedVersion: 2'
-    - line: '|       m_Icon: {fileID: 2800000, guid: a0fc465d6cf04254a2938578735e2383,
+    - line: '|       m_Icon: {fileID: 2800000, guid: 0e43552c67cfe484ebacf2ddbc1eb781,
         type: 3}'
     - line: '|       m_Width: 128'
     - line: '|       m_Height: 128'

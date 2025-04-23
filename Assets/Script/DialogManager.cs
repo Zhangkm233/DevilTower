@@ -179,6 +179,8 @@ public class DialogManager : MonoBehaviour
     }
     [ContextMenu("Ìø¹ý¶Ô»°")]
     public void SkipDialog() {
+        StopAllCoroutines();
+        isTyping = false;
         for (int i = sentenceNumber;i < sentenceStates.Count;i++) {
             //Debug.Log(sentenceStates[i]);
             if (sentenceStates[i] == sentenceState.EVENT) {

@@ -150,6 +150,7 @@ MonoBehaviour:
   filePath: 
   saveDescribe1: {fileID: 1095537252494201706}
   menuManager: {fileID: 0}
+  tarotsDataObject: {fileID: 11400000, guid: 6bb3eed9deaa6424cb3b0b238b27533a, type: 2}
 --- !u!1 &1095537252494201706
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,8 +185,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000015258789, y: 98}
-  m_SizeDelta: {x: -15.4156, y: -280.4}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
+  m_SizeDelta: {x: -53.6839, y: -46.9058}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3881269949041347366
 CanvasRenderer:
@@ -222,7 +223,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 40
-    m_Alignment: 1
+    m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0

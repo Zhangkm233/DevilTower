@@ -8,6 +8,7 @@ TagManager:
   - statGameObject
   - cardGameObject
   - saveSlotGameObject
+  - slotGameObject
   layers:
   - Default
   - TransparentFX
