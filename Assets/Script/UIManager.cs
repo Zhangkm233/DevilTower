@@ -1,15 +1,17 @@
 using System.Collections;
+using System.Net.NetworkInformation;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static Grid;
 
 public class UIManager : MonoBehaviour
 {
     public enum UIState {
-        STAT,DIALOG,DICTIONARY,SHOP,FORGE,EVENT,TAROT,STANDBY,SETTING
+        STAT,DIALOG,DICTIONARY,SHOP,FORGE,EVENT,TAROT,STANDBY,SETTING,FAIL
     };
     public enum sentenceState
     {
@@ -45,6 +47,7 @@ public class UIManager : MonoBehaviour
     public GameObject tileMain;
     public GameObject settingMain;
     public GameObject offsetPanel;
+    public GameObject failMain;
     [Header("Manager")]
     public GameObject audioManager;
     public GameObject[] haloSlots;
@@ -62,6 +65,7 @@ public class UIManager : MonoBehaviour
         monsterAbilityStat.text = " ";
         goForgeButton.SetActive(false);
         settingMain.SetActive(false);
+        failMain.SetActive(false);
     }
 
     void updateLayerName() {
@@ -330,7 +334,14 @@ public class UIManager : MonoBehaviour
     public void GoEvent() {
         GoState(UIState.EVENT);
     }
-
+    public void GoMenu() {
+        GoStat();
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void RestartGame() {
+        GoStat();
+        gameObject.GetComponent<GameManager>().RestartGame();
+    }
     [ContextMenu("ËþÂÞÅÆSTATE")]
     public void GoTarot() {
         GameData.tarotLastEquip = GameData.tarotEquip;
@@ -421,6 +432,8 @@ public class UIManager : MonoBehaviour
         }
         if (uistate == UIState.SETTING) settingMain.SetActive(true);
         if (uistate != UIState.SETTING) settingMain.SetActive(false);
+        if (uistate == UIState.FAIL) failMain.SetActive(true);
+        if (uistate != UIState.FAIL) failMain.SetActive(false);
     }
     public void Cheat() {
         GameData.key1++;

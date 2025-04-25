@@ -10,9 +10,13 @@ public class MenuButtonManager : MonoBehaviour
     public CanvasGroup fadeCanvasGroup;
     public GameObject saveChoosePanel;
     public GameObject galleyPanel;
+    public GameObject optionPanel;
+    public GameObject audioManager;
     public void Start() {
         backToMenu();
+        audioManager.GetComponent<AudioManager>().InitialVolume();
     }
+
     public void StartGame() {
         Debug.Log("Start Game button clicked");
         MenuData.isContinueGame = false;
@@ -31,6 +35,7 @@ public class MenuButtonManager : MonoBehaviour
     public void backToMenu() {
         saveChoosePanel.SetActive(false);
         galleyPanel.SetActive(false);
+        optionPanel.SetActive(false);
     }
     public void ToGallery() {
         Debug.Log("Gallery button clicked");
@@ -40,6 +45,13 @@ public class MenuButtonManager : MonoBehaviour
         galleyPanel.GetComponent<GalleryManager>().ChangeState(0);
         galleyPanel.GetComponent<GalleryManager>().ChangeInteractableOfButtons(); 
     }
+    public void ToOption() {
+        Debug.Log("Option button clicked");
+        optionPanel.SetActive(true);
+        saveChoosePanel.SetActive(false);
+        galleyPanel.SetActive(false);
+    }
+
     public void ExitGame() {
         Debug.Log("Exit Game button clicked");
         StartCoroutine(FadeAndLoadScene("Exit"));

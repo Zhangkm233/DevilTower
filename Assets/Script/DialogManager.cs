@@ -122,6 +122,7 @@ public class DialogManager : MonoBehaviour
             } else {
                 ResetDialog();
                 this.GetComponent<UIManager>().GoStat();
+                SaveManager.Save(0);
             }
             return true;
         }
@@ -195,6 +196,7 @@ public class DialogManager : MonoBehaviour
                     return;
                 } else {
                     ResetDialog();
+                    SaveManager.Save(0);
                     this.GetComponent<UIManager>().GoStat();
                     return;
                 }

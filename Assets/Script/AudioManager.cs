@@ -42,7 +42,11 @@ public class AudioManager : MonoBehaviour
     public void InitialVolume() {
         sfxSource.volume = GameData.sfxVolume;
         bgmSource.volume = GameData.bgmVolume;
-        bgmVolumeBar.GetComponent<Slider>().value = GameData.bgmVolume;
-        sfxVolumeBar.GetComponent<Slider>().value = GameData.sfxVolume;
+        try {
+            bgmVolumeBar.GetComponent<Slider>().value = GameData.bgmVolume;
+            sfxVolumeBar.GetComponent<Slider>().value = GameData.sfxVolume;
+        } catch (System.Exception e) {
+            Debug.LogError("Error initializing volume: " + e.Message);
+        }
     }
 }

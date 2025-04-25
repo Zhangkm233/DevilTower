@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
             if (objectClick.CompareTag("gridGameObject")) {
                 if (MapClickEvent()) {
                     EventCountered();
+                    CheckGameOver();
                 }
             }
         }
@@ -75,6 +76,17 @@ public class GameManager : MonoBehaviour
         audioManagerObject.GetComponent<AudioManager>().PlayBgm(GameData.layer - 1);
         audioManagerObject.GetComponent<AudioManager>().InitialVolume();
     }
+    public void RestartGame() {
+        SaveManager.Load(0);
+        this.GetComponent<GameManager>().UpdateEachGrid();
+    }
+    public void CheckGameOver() {
+        if (GameData.playerHp <= 0) {
+            Debug.Log("Game Over");
+            this.GetComponent<UIManager>().GoState(UIManager.UIState.FAIL);
+        }
+    }
+
     public void EventCountered() {
         MonsterMovement();
         GameData.eventEncounter++;
