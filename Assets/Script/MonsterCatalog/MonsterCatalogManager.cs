@@ -5,6 +5,11 @@ public class MonsterCatalogManager : MonoBehaviour
 {
     public GameObject gameManager;
     public GameObject backgroundPanel;
+    public GameObject[] monsterProfiles;
+    public SpriteScriptObject[] layerSpritess;
+    public Sprite[] backgrounds;
+    public Sprite[] frames;
+    public Sprite[] questionMarks;
     public MonsterDataObject monsterDataObject;
     public bool isCatalogOpen = false;
 
@@ -28,6 +33,7 @@ public class MonsterCatalogManager : MonoBehaviour
             monsterDataObject.monsterDataList[i].hp = int.Parse(monsterStat[3]);
             monsterDataObject.monsterDataList[i].gold = int.Parse(monsterStat[4]); 
             monsterDataObject.monsterDataList[i].abilities = "";
+            monsterDataObject.monsterDataList[i].sprite = layerSpritess[GameData.layer - 1].spriteData[3].sprites[i];
             int abilityLength = monsterStat.Length - 5;
             if (abilityLength > 0) {
                 for (int j = 0;j < abilityLength;j++) {
@@ -62,17 +68,18 @@ public class MonsterCatalogManager : MonoBehaviour
         }
         if (monsterDataObject.monsterDataList.Count > lines.Length) {
             for(int j = lines.Length;j < monsterDataObject.monsterDataList.Count;j++) {
-                monsterDataObject.monsterDataList[j].name = "----";
+                monsterDataObject.monsterDataList[j].name = null;
+                monsterDataObject.monsterDataList[j].sprite = questionMarks[GameData.layer - 1];
                 monsterDataObject.monsterDataList[j].atk = 0;
                 monsterDataObject.monsterDataList[j].def = 0;
                 monsterDataObject.monsterDataList[j].hp = 0;
                 monsterDataObject.monsterDataList[j].gold = 0;
             }
         }
-        GameObject monsterFiles = this.transform.GetChild(1).gameObject;
-        for (int i = 0;i < monsterFiles.transform.childCount;i++) {
-            if (monsterFiles.transform.GetChild(i).GetComponent<MonsterProfile>() != null) {
-                monsterFiles.transform.GetChild(i).GetComponent<MonsterProfile>().UseData(monsterDataObject.monsterDataList[i]);
+        //更改显示的数据
+        for (int i = 0;i < monsterProfiles.Length;i++) {
+            if (monsterProfiles[i].GetComponent<MonsterProfile>() != null) {
+                monsterProfiles[i].GetComponent<MonsterProfile>().UseData(monsterDataObject.monsterDataList[i]);
             }
         }
     }
