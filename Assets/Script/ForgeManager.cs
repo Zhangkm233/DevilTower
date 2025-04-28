@@ -39,16 +39,17 @@ public class ForgeManager : MonoBehaviour
         } else {
             priceNow = forgePrice[11];
         }
-        if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Strength"))) {
+        if (GameData.IsTarotEquip(gameManager.GetComponent<TarotManager>().TarotToNum("Strength"))) {
             priceNow = Mathf.FloorToInt(priceNow * 0.9f);
         }
         //forgeDialogText.text = "你好，需要锻造吗？只需要" + priceNow + "个魔力结晶";
         hpForgeGive = forgeHp[GameData.layer - 1];
         atkForgeGive = forgeAtk[GameData.layer - 1];
         defForgeGive = forgeDef[GameData.layer - 1];
-        forgeHpText.text = "增加" +hpForgeGive.ToString() + "HP";
-        forgeAtkText.text = "增加" + atkForgeGive.ToString() + "ATK";
-        forgeDefText.text = "增加" + defForgeGive.ToString() + "DEF";
+        forgeHpText.text = "增加\n" +hpForgeGive.ToString() + "\nHP";
+        forgeAtkText.text = "增加\n" + atkForgeGive.ToString() + "\nATK";
+        forgeDefText.text = "增加\n" + defForgeGive.ToString() + "\nDEF";
+        Debug.Log(priceNow);
         Price1.text = priceNow.ToString();
         Price2.text = priceNow.ToString();
         Price3.text = priceNow.ToString();

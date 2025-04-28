@@ -51,6 +51,10 @@ public class UIManager : MonoBehaviour
     [Header("Manager")]
     public GameObject audioManager;
     public GameObject[] haloSlots;
+
+    private float fadeDuration = 0.5f;
+    public CanvasGroup fadeCanvasGroup;
+
     void Start() {
     }
     
@@ -335,8 +339,25 @@ public class UIManager : MonoBehaviour
         GoState(UIState.EVENT);
     }
     public void GoMenu() {
-        GoStat();
-        SceneManager.LoadScene("MainMenu");
+        //GoStat();
+        StartCoroutine(FadeAndLoadScene("MainMenu"));
+        //SceneManager.LoadScene("MainMenu");
+    }
+    public IEnumerator FadeAndLoadScene(string sceneTitle) {
+        // 渐暗效果
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeDuration) {
+            fadeCanvasGroup.alpha = Mathf.Lerp(0f,1f,elapsedTime / fadeDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        fadeCanvasGroup.alpha = 1f; // 确保完全变黑
+        if (sceneTitle == "Exit") {
+            Application.Quit();
+        } else {
+            SceneManager.LoadScene(sceneTitle);
+        }
     }
     public void RestartGame() {
         GoStat();
@@ -417,7 +438,9 @@ public class UIManager : MonoBehaviour
         if (uistate != UIState.SHOP) shopMain.SetActive(false);
         if (uistate == UIState.FORGE) forgeMain.SetActive(true);
         if (uistate != UIState.FORGE) forgeMain.SetActive(false);
-        if (uistate == UIState.DICTIONARY) dictionaryMain.SetActive(true);
+        if (uistate == UIState.DICTIONARY) {
+            dictionaryMain.SetActive(true);
+        }
         if (uistate == UIState.EVENT) eventMain.SetActive(true);
         if (uistate != UIState.EVENT) eventMain.SetActive(false);
         if (uistate != UIState.TAROT) {

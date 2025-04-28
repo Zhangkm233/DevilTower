@@ -73,8 +73,8 @@ public class GameManager : MonoBehaviour
             this.GetComponent<UIManager>().GoDialog();
             this.GetComponent<DialogManager>().ReadDialog(0,GameData.layer);
         }
-        audioManagerObject.GetComponent<AudioManager>().PlayBgm(GameData.layer - 1);
         audioManagerObject.GetComponent<AudioManager>().InitialVolume();
+        audioManagerObject.GetComponent<AudioManager>().PlayBgm(GameData.layer - 1);
     }
     public void RestartGame() {
         SaveManager.Load(0);
@@ -132,6 +132,9 @@ public class GameManager : MonoBehaviour
         GameData.gold = gold;
         GameData.forgeTime = forgetime;
     }
+    public void SaveForeverData() {
+        SaveManager.SaveForeverData();
+    }
     public void LayerChangeTo(int layerTo) {
         LayerChangeTo(layerTo,false);
     }
@@ -173,7 +176,7 @@ public class GameManager : MonoBehaviour
             }
         }
         //更新怪物数据到图鉴
-        //catalogObject.GetComponent<MonsterCatalogManager>().UpdateMonsterData();
+        catalogObject.GetComponent<MonsterCatalogManager>().UpdateMonsterData();
         //加载地图到map里
         this.GetComponent<GridLoader>().LoadMapFromTxt();
         UpdateLayerSprites();
@@ -333,12 +336,14 @@ public class GameManager : MonoBehaviour
             if(((GridGem)gridTileManager.mapGrid).gemType == GridGem.GemType.ATK) {
                 GameData.playerAtk += ((GridGem)gridTileManager.mapGrid).AddSum;
                 Debug.Log("捡到了攻击宝石，攻击力+" + ((GridGem)gridTileManager.mapGrid).AddSum);
+                audioManagerScript.PlayAtk();
             }
             if (((GridGem)gridTileManager.mapGrid).gemType == GridGem.GemType.DEF) {
                 GameData.playerDef += ((GridGem)gridTileManager.mapGrid).AddSum;
                 Debug.Log("捡到了防御宝石，防御力+" + ((GridGem)gridTileManager.mapGrid).AddSum);
+                audioManagerScript.PlayDef();
             }
-            audioManagerScript.PlayPick();
+            //audioManagerScript.PlayPick();
             ClearGridInMap(gridTileManager);
             return true;
         }
@@ -378,6 +383,7 @@ public class GameManager : MonoBehaviour
                 if (gridTileManager.mapX != 0) ClearGridInMap(gridTileManager.mapX - 1,gridTileManager.mapY);
                 if (gridTileManager.mapX != 5) ClearGridInMap(gridTileManager.mapX + 1,gridTileManager.mapY);
             }
+            audioManagerScript.PlayHeal();
             ClearGridInMap(gridTileManager);
             return true;
         }
@@ -390,6 +396,7 @@ public class GameManager : MonoBehaviour
                     Debug.Log("打开了" + door.doorStat + "门");
                     //GameData.allGame_Door1Opened++;
                     ClearGridInMap(gridTileManager);
+                    audioManagerScript.PlayDoor();
                     return true;
                 } else {
                     Debug.Log("青铜钥匙不足！");
@@ -401,6 +408,7 @@ public class GameManager : MonoBehaviour
                     GameData.key2--;
                     Debug.Log("打开了" + door.doorStat + "门");
                     ClearGridInMap(gridTileManager);
+                    audioManagerScript.PlayDoor();
                     return true;
                 } else {
                     Debug.Log("白银钥匙不足！");
@@ -412,6 +420,7 @@ public class GameManager : MonoBehaviour
                     GameData.key3--;
                     Debug.Log("打开了" + door.doorStat + "门");
                     ClearGridInMap(gridTileManager);
+                    audioManagerScript.PlayDoor();
                     return true;
                 } else {
                     Debug.Log("黄金钥匙不足！");

@@ -8,6 +8,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip sfx_battle;
     public AudioClip sfx_pick;
     public AudioClip sfx_click;
+    public AudioClip sfx_atk;
+    public AudioClip sfx_def;
+    public AudioClip sfx_door;
+    public AudioClip sfx_heal;
     public AudioClip[] backGroundMusics;
     public GameObject bgmVolumeBar;
     public GameObject sfxVolumeBar;
@@ -22,6 +26,18 @@ public class AudioManager : MonoBehaviour
     }
     public void PlayClick() {
         sfxSource.PlayOneShot(sfx_click);
+    }
+    public void PlayAtk() {
+        sfxSource.PlayOneShot(sfx_atk);
+    }
+    public void PlayDef() {
+        sfxSource.PlayOneShot(sfx_def);
+    }
+    public void PlayDoor() {
+        sfxSource.PlayOneShot(sfx_door);
+    }
+    public void PlayHeal() {
+        sfxSource.PlayOneShot(sfx_heal);
     }
     public void PlayBgm(int index) {
         if (index < 0 || index >= backGroundMusics.Length) {

@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 142
+  spritePixelsToUnits: 400
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -115,28 +115,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "4-\u683C\u5B50_0"
-      rect:
-        serializedVersion: 2
-        x: 681
-        y: 2470
-        width: 1785
-        height: 1959
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5dca838a426826e80800000000000000
-      internalID: -8186833680606909227
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: "4-\u683C\u5B50_1"
       rect:
         serializedVersion: 2
@@ -144,8 +122,8 @@ TextureImporter:
         y: 2474
         width: 1420
         height: 1959
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.47698614, y: 0.2984196}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -167,7 +145,7 @@ TextureImporter:
         width: 1420
         height: 1959
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -181,28 +159,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "4-\u683C\u5B50_3"
-      rect:
-        serializedVersion: 2
-        x: 1421
-        y: 408
-        width: 1785
-        height: 1959
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 43358af7ae79612a0800000000000000
-      internalID: -6767054356657712332
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: "4-\u683C\u5B50_4"
       rect:
         serializedVersion: 2
@@ -211,7 +167,7 @@ TextureImporter:
         width: 1420
         height: 1959
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -233,7 +189,7 @@ TextureImporter:
         width: 1420
         height: 1959
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

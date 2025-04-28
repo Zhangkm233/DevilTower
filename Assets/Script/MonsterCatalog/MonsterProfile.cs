@@ -30,9 +30,10 @@ public class MonsterProfile : MonoBehaviour
         transform.Find("Name").GetComponent<Text>().text = MonsterName;
         //transform.Find("Intro").GetComponent<Text>().text = intro;
         transform.Find("Sprite").GetComponent<Image>().sprite = sprite;
-        transform.Find("Atk").GetComponent<Text>().text = "¹¥»÷Á¦:" + Atk;
-        transform.Find("Def").GetComponent<Text>().text = "·ÀÓùÁ¦:" + Def;
-        transform.Find("Hp").GetComponent<Text>().text = "ÑªÁ¿:" + Hp;
+        transform.Find("Sprite").GetComponent<Image>().SetNativeSize();
+        transform.Find("Atk").GetComponent<Text>().text = Atk;
+        transform.Find("Def").GetComponent<Text>().text =  Def;
+        transform.Find("Hp").GetComponent<Text>().text = Hp;
         transform.Find("Abilities").GetComponent<Text>().text = abilities;
     }
 

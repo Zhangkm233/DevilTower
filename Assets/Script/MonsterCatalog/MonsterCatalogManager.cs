@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
+using UnityEngine.UI;
+
 public class MonsterCatalogManager : MonoBehaviour
 {
     public GameObject gameManager;
@@ -74,20 +76,24 @@ public class MonsterCatalogManager : MonoBehaviour
                 monsterDataObject.monsterDataList[j].def = 0;
                 monsterDataObject.monsterDataList[j].hp = 0;
                 monsterDataObject.monsterDataList[j].gold = 0;
+                monsterDataObject.monsterDataList[j].abilities = "";
             }
         }
         //更改显示的数据
         for (int i = 0;i < monsterProfiles.Length;i++) {
             if (monsterProfiles[i].GetComponent<MonsterProfile>() != null) {
                 monsterProfiles[i].GetComponent<MonsterProfile>().UseData(monsterDataObject.monsterDataList[i]);
+                monsterProfiles[i].transform.Find("Frame").GetComponent<Image>().sprite = frames[GameData.layer - 1];
+                monsterProfiles[i].transform.Find("Frame").GetComponent<Image>().SetNativeSize();
             }
         }
+        backgroundPanel.GetComponent<Image>().sprite = backgrounds[GameData.layer - 1];
     }
 
     public void OnButtonClicked(){
         if (isCatalogOpen){
             HideCatalog();
-            //gameManager.GetComponent<UIManager>().GoStat();
+            gameManager.GetComponent<UIManager>().GoStat();
         } else {
             if (gameManager.GetComponent<UIManager>().State != UIManager.UIState.STAT) return;
             gameManager.GetComponent<UIManager>().GoDictionary();
