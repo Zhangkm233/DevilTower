@@ -496,6 +496,7 @@ public class GameManager : MonoBehaviour
                 GameData.gold = (int)(GameData.gold * 1.25);
             }
             //½øÈëËşÂŞÅÆ
+            audioManagerScript.PlayTeleport();
             this.GetComponent<UIManager>().StartDialog(10,GameData.layer);
             return false;
         }

@@ -12,11 +12,30 @@ public class MenuButtonManager : MonoBehaviour
     public GameObject galleyPanel;
     public GameObject optionPanel;
     public GameObject audioManager;
+    public AudioSource bgmAudioSource;
+    public GameObject[] mainMenuObjects;
+    public GameObject standbyCanvas;
+    public bool isStandBy = false;
     public void Start() {
-        backToMenu();
+        isStandBy = true;
+        ShowStandBy();
+        //backToMenu();
         audioManager.GetComponent<AudioManager>().InitialVolume();
     }
-
+    public void Update() {
+        if(isStandBy) {
+            if (Input.anyKeyDown) {
+                isStandBy = false;
+                backToMenu();
+            }
+        }
+    }
+    public void ShowStandBy() {
+        standbyCanvas.SetActive(true);
+        foreach (GameObject obj in mainMenuObjects) {
+            obj.SetActive(false);
+        }
+    }
     public void StartGame() {
         Debug.Log("Start Game button clicked");
         MenuData.isContinueGame = false;
@@ -31,16 +50,26 @@ public class MenuButtonManager : MonoBehaviour
         foreach (GameObject slot in slots) {
             slot.GetComponent<SaveSlotManager>().UpdateSaveSlotData();
         }
+        foreach (GameObject obj in mainMenuObjects) {
+            obj.SetActive(false);
+        }
     }
     public void backToMenu() {
         saveChoosePanel.SetActive(false);
         galleyPanel.SetActive(false);
         optionPanel.SetActive(false);
+        standbyCanvas.SetActive(false);
+        foreach (GameObject obj in mainMenuObjects) {
+            obj.SetActive(true);
+        }
     }
     public void ToGallery() {
         Debug.Log("Gallery button clicked");
         galleyPanel.SetActive(true);
         saveChoosePanel.SetActive(false);
+        foreach (GameObject obj in mainMenuObjects) {
+            obj.SetActive(false);
+        }
         galleyPanel.GetComponent<GalleryManager>().initialAllMusic();
         galleyPanel.GetComponent<GalleryManager>().ChangeState(0);
         galleyPanel.GetComponent<GalleryManager>().ChangeInteractableOfButtons(); 
@@ -50,19 +79,26 @@ public class MenuButtonManager : MonoBehaviour
         optionPanel.SetActive(true);
         saveChoosePanel.SetActive(false);
         galleyPanel.SetActive(false);
+        foreach (GameObject obj in mainMenuObjects) {
+            obj.SetActive(false);
+        }
     }
 
     public void ExitGame() {
         Debug.Log("Exit Game button clicked");
         StartCoroutine(FadeAndLoadScene("Exit"));
     }
-
+    public void SaveForeverData() {
+        SaveManager.SaveForeverData();
+    }
 
     public IEnumerator FadeAndLoadScene(string sceneTitle) {
         // ½¥°µÐ§¹û
         float elapsedTime = 0f;
+        float bgmVolume = bgmAudioSource.volume;
         while (elapsedTime < fadeDuration) {
             fadeCanvasGroup.alpha = Mathf.Lerp(0f,1f,elapsedTime / fadeDuration);
+            bgmAudioSource.volume = Mathf.Lerp(bgmVolume,0f,elapsedTime / fadeDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }

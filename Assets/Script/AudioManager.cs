@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip sfx_def;
     public AudioClip sfx_door;
     public AudioClip sfx_heal;
+    public AudioClip sfx_teleport;
     public AudioClip[] backGroundMusics;
     public GameObject bgmVolumeBar;
     public GameObject sfxVolumeBar;
@@ -39,6 +40,9 @@ public class AudioManager : MonoBehaviour
     public void PlayHeal() {
         sfxSource.PlayOneShot(sfx_heal);
     }
+    public void PlayTeleport() {
+        sfxSource.PlayOneShot(sfx_teleport);
+    }
     public void PlayBgm(int index) {
         if (index < 0 || index >= backGroundMusics.Length) {
             Debug.LogError("Index out of range");
@@ -56,6 +60,7 @@ public class AudioManager : MonoBehaviour
         sfxSource.volume = GameData.sfxVolume;
     }
     public void InitialVolume() {
+        SaveManager.LoadForeverData();
         sfxSource.volume = GameData.sfxVolume;
         bgmSource.volume = GameData.bgmVolume;
         try {
