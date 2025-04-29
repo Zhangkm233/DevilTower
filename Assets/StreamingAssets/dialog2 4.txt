@@ -17,5 +17,5 @@ TEXT;半魔人;要、要走了？我知道了……
 TEXT;半魔人;（深吸一大口气，叫道）还请你注意安全！我也会好好活下去的！
 TEXT;“你”;（挥手告别）
 TEXT; ;（获得“恶魔”牌）
-EVENT;GAINTAROT;HighPriestess
+EVENT;GAINTAROT;Devil
 END;0;0

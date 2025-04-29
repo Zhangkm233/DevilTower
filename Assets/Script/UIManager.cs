@@ -11,7 +11,7 @@ using static Grid;
 public class UIManager : MonoBehaviour
 {
     public enum UIState {
-        STAT,DIALOG,DICTIONARY,SHOP,FORGE,EVENT,TAROT,STANDBY,SETTING,FAIL
+        STAT,DIALOG,DICTIONARY,SHOP,FORGE,EVENT,TAROT,STANDBY,SETTING,FAIL,BOSS
     };
     public enum sentenceState
     {
@@ -48,6 +48,7 @@ public class UIManager : MonoBehaviour
     public GameObject settingMain;
     public GameObject offsetPanel;
     public GameObject failMain;
+    public GameObject bossMain;
     [Header("Manager")]
     public GameObject audioManager;
     public GameObject[] haloSlots;
@@ -117,7 +118,7 @@ public class UIManager : MonoBehaviour
             monsterAbilityStat.text = " ";
             offsetPanel.gameObject.SetActive(false);
         }
-
+        if (State != UIState.STAT) return;
         if (this.GetComponent<GameManager>().objectClick != null) {
             if (this.GetComponent<GameManager>().objectClick.CompareTag("statGameObject")) {
                 if(this.GetComponent<GameManager>().objectClick.name == "AtkVolume") {
@@ -338,6 +339,11 @@ public class UIManager : MonoBehaviour
     public void GoEvent() {
         GoState(UIState.EVENT);
     }
+
+    [ContextMenu("Bossս")]
+    public void GoBoss() {
+        GoState(UIState.BOSS);
+    }
     public void GoMenu() {
         //GoStat();
         StartCoroutine(FadeAndLoadScene("MainMenu"));
@@ -457,6 +463,11 @@ public class UIManager : MonoBehaviour
         if (uistate != UIState.SETTING) settingMain.SetActive(false);
         if (uistate == UIState.FAIL) failMain.SetActive(true);
         if (uistate != UIState.FAIL) failMain.SetActive(false);
+        if (uistate == UIState.BOSS) {
+            statMain.SetActive(true);
+            bossMain.SetActive(true);
+        };
+        if (uistate != UIState.BOSS) bossMain.SetActive(false);
     }
     public void Cheat() {
         GameData.key1++;

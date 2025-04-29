@@ -17,8 +17,11 @@ public class MenuButtonManager : MonoBehaviour
     public GameObject standbyCanvas;
     public bool isStandBy = false;
     public void Start() {
-        isStandBy = true;
-        ShowStandBy();
+        if(MenuData.isFirstStart) {
+            MenuData.isFirstStart = false;
+            isStandBy = true;
+            ShowStandBy();
+        }
         //backToMenu();
         audioManager.GetComponent<AudioManager>().InitialVolume();
     }

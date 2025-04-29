@@ -429,29 +429,26 @@ public class GameManager : MonoBehaviour
             }
         }
         if (gridTileManager.gridType == Grid.GridType.NPC) {
-            if (GameData.layer > 2) {
+            if (GameData.layer > 4) {
                 ClearGridInMap(gridTileManager);
                 return true;
             }
             int dialogStat = 114514;
             switch (GameData.layer) {
                 case 1:
-                    dialogStat = UnityEngine.Random.Range(0,4);
-                    break;
                 case 2:
-                    dialogStat = UnityEngine.Random.Range(0,4);
+                    dialogStat = GameData.GetRandomNumberExclude(0,4,GameData.npcEncountered[0]);
+                    GameData.npcEncountered[0] = dialogStat;
                     break;
                 case 3:
-                    dialogStat = UnityEngine.Random.Range(0,8);
-                    break;
                 case 4:
-                    dialogStat = UnityEngine.Random.Range(0,8);
+                    dialogStat = GameData.GetRandomNumberExclude(0,8,GameData.npcEncountered[1]);
+                    GameData.npcEncountered[1] = dialogStat;
                     break;
                 case 5:
-                    dialogStat = UnityEngine.Random.Range(0,5);
-                    break;
                 case 6:
-                    dialogStat = UnityEngine.Random.Range(0,5);
+                    dialogStat = GameData.GetRandomNumberExclude(0,4,GameData.npcEncountered[2]);
+                    GameData.npcEncountered[2] = dialogStat;
                     break;
             }
             this.GetComponent<UIManager>().StartDialog(dialogStat);

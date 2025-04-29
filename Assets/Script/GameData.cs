@@ -39,6 +39,7 @@ public static class GameData
     public static int playerTotalAtk = 0;
     public static int playerTotalDef = 0;
 
+    public static int[] npcEncountered = { -1,-1,-1 };
     public static int GetTarotCount(bool[] tarots) {
         int count = 0;
         for (int i = 0;i < tarots.Length;i++) {
@@ -63,5 +64,13 @@ public static class GameData
             }
         }
         return false;
+    }
+
+    public static int GetRandomNumberExclude(int min,int max,int exclude) {
+        int randomNumber;
+        do {
+            randomNumber = Random.Range(min,max);
+        } while (randomNumber == exclude);
+        return randomNumber;
     }
 }
