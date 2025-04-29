@@ -10,6 +10,7 @@ public class BossManager : MonoBehaviour
     public int bossDef = 0;
     public Slider bossHpSlider;
     public GameObject gameManager;
+    public GameObject bossObject;
     public void Fight() {
         bossHpSlider.value = (float)bossHp / (float)bossFullHp;
         gameManager.GetComponent<GameManager>().UpdatePlayerOffset();
@@ -19,12 +20,19 @@ public class BossManager : MonoBehaviour
             bossHp -= (GameData.playerTotalAtk - bossDef);
         }
         bossHpSlider.value = (float)bossHp / (float)bossFullHp;
-
+        bossObject.GetComponent<Animator>().Play("bossHurt");
         if (bossHp < 0) {
             bossHp = 0;
+            //结束战斗
+            gameManager.GetComponent<UIManager>().GoState(UIManager.UIState.STAT);
         }
         int damage = (bossAtk - GameData.playerTotalDef);
         GameData.playerHp -= damage;
         gameManager.GetComponent<UIManager>().PopNumber(damage,Color.red);
+        if (GameData.playerHp < 0) {
+            GameData.playerHp = 0;
+            //结束战斗
+            gameManager.GetComponent<UIManager>().GoState(UIManager.UIState.FAIL);
+        }
     }
 }
