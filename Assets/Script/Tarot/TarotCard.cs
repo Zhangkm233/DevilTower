@@ -113,9 +113,9 @@ public class TarotCard : MonoBehaviour
 
     public void OnCardPutIn(Slot slot){
         StartCoroutine(HighlightCoroutine(0.5f));
-        playParticle();
+        //playParticle();
         TarotAnimHandler.instance.ShakeAll();
-        slot.ExpandHalo();
+        //slot.ExpandHalo();
     }
 
     public void MoveIntoSlot(Slot slot){
