@@ -7,6 +7,8 @@ public class ShopManager : MonoBehaviour
     public GameObject itemImage;
     public TMP_Text itemName;
     public TMP_Text itemPrice;
+    public TMP_Text shopStat;
+    public TMP_Text goldStatText;
     public string itemGiveOut;
     public string itemExchangeFor;
     public int mapX, mapY;
@@ -15,6 +17,10 @@ public class ShopManager : MonoBehaviour
     public bool isThisShopInfinite = false;
     public SpriteScriptObject[] layersprites;
 
+
+    public void Update() {
+        if (this.isActiveAndEnabled) goldStatText.text = (GameData.gold).ToString();
+    }
     public void UpdateShopData(GridShop gridShop,int gridX,int gridY) {
         mapX = gridX; mapY = gridY;
         isThisShopInfinite = gridShop.isInfinite;
@@ -72,7 +78,6 @@ public class ShopManager : MonoBehaviour
                 itemImage.GetComponent<Image>().sprite = null;
                 break;
         }
-        /*
         if (!gridShop.isInfinite) {
             shopStat.text = "我想用" + itemGiveOutNum + "个" + Hanize(itemGiveOut) +
                 "交换你的" + itemExchangeForNum + "个" + Hanize(itemExchangeFor);
@@ -80,7 +85,7 @@ public class ShopManager : MonoBehaviour
             isThisShopInfinite = true;
             shopStat.text = "我想用" + itemGiveOutNum + "个" + Hanize(itemGiveOut) +
                 "交换你的" + itemExchangeForNum + "个" + Hanize(itemExchangeFor) + "，这是无限的";
-        }*/
+        }
     }
     public string Hanize(string str) {
         //汉化

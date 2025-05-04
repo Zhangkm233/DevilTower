@@ -19,14 +19,14 @@ public class GridTileManager : MonoBehaviour
     public void OnMouseEnter()
     {
         if(gameManagerObject.GetComponent<UIManager>().State != UIManager.UIState.STAT) return;
-        if (mapY != 3)return;
+        if (mapY != GameData.gridHeight - 1)return;
         transform.DOScale(scalePivot * 1.1f, 0.2f).SetEase(Ease.OutElastic);
     }
 
     public void OnMouseExit()
     {
         if(gameManagerObject.GetComponent<UIManager>().State != UIManager.UIState.STAT) return;
-        if(mapY != 3)return;
+        if (mapY != GameData.gridHeight - 1) return;
         transform.DOScale(scalePivot, 0.2f).SetEase(Ease.OutElastic);
     }
 

@@ -241,8 +241,8 @@ public class UIManager : MonoBehaviour
             if (gridInMaped.type == GridType.SHOP) {
                 GridShop gridShop = (GridShop)gridInMaped;
                 gridName.text = "商店";
-                gridStat.text = gridShop.itemGiveOut + " " + gridShop.itemGiveOutNum + "个\n" +
-                    gridShop.itemExchangeFor + " " + gridShop.itemExchangeForNum + "个";
+                gridStat.text = gridShop.itemExchangeForNum + "个" + GameData.Hanize(gridShop.itemExchangeFor) + "\n交换\n" + gridShop.itemGiveOutNum + "个" + GameData.Hanize(gridShop.itemGiveOut);
+                    
             }
             if (gridInMaped.type == GridType.NPC) {
                 gridName.text = "神秘人";

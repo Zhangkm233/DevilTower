@@ -158,6 +158,12 @@ public class GameManager : MonoBehaviour
                 case 3:
                     PlayerStatChange(400,10,10,1,1,0,0,0);
                     break;
+                case 4:
+                    PlayerStatChange(600,20,20,1,1,0,0,0);
+                    break;
+                case 5:
+                    PlayerStatChange(1000,40,40,1,1,0,0,0);
+                    break;
             }
         }
         //÷ÿ÷√UI∫ÕÃ˙Ω≥∆Ã
@@ -437,18 +443,30 @@ public class GameManager : MonoBehaviour
             switch (GameData.layer) {
                 case 1:
                 case 2:
-                    dialogStat = GameData.GetRandomNumberExclude(0,4,GameData.npcEncountered[0]);
-                    GameData.npcEncountered[0] = dialogStat;
+                    dialogStat = GameData.GetRandomNumberExclude(0,4,GameData.npcEncounteredLayer12);
+                    for(int i = 0;i < GameData.npcEncounteredLayer12.Length;i++) {
+                        if(GameData.npcEncounteredLayer12[i] == -1 ) {
+                            GameData.npcEncounteredLayer12[i] = dialogStat;
+                        }
+                    }
                     break;
                 case 3:
                 case 4:
-                    dialogStat = GameData.GetRandomNumberExclude(0,8,GameData.npcEncountered[1]);
-                    GameData.npcEncountered[1] = dialogStat;
+                    dialogStat = GameData.GetRandomNumberExclude(0,4,GameData.npcEncounteredLayer34);
+                    for (int i = 0;i < GameData.npcEncounteredLayer34.Length;i++) {
+                        if (GameData.npcEncounteredLayer34[i] == -1) {
+                            GameData.npcEncounteredLayer34[i] = dialogStat;
+                        }
+                    }
                     break;
                 case 5:
                 case 6:
-                    dialogStat = GameData.GetRandomNumberExclude(0,4,GameData.npcEncountered[2]);
-                    GameData.npcEncountered[2] = dialogStat;
+                    dialogStat = GameData.GetRandomNumberExclude(0,4,GameData.npcEncounteredLayer56);
+                    for (int i = 0;i < GameData.npcEncounteredLayer56.Length;i++) {
+                        if (GameData.npcEncounteredLayer56[i] == -1) {
+                            GameData.npcEncounteredLayer56[i] = dialogStat;
+                        }
+                    }
                     break;
             }
             this.GetComponent<UIManager>().StartDialog(dialogStat);
