@@ -122,12 +122,14 @@ public class UIManager : MonoBehaviour
         if (this.GetComponent<GameManager>().objectClick != null) {
             if (this.GetComponent<GameManager>().objectClick.CompareTag("statGameObject")) {
                 if(this.GetComponent<GameManager>().objectClick.name == "AtkVolume") {
+                    if (GameData.atkOffsetInt == 0) return;
                     offsetPanel.gameObject.SetActive(true);
                     Text offsetText = offsetPanel.transform.GetChild(0).GetComponent<Text>();
                     offsetText.text = GameData.playerAtk.ToString() + "+" + GameData.atkOffsetInt.ToString() + "=" + GameData.playerTotalAtk + "\n";
                     if (GameData.isDeathBuff) offsetText.text += "À¿…Òbuff  ”√÷–";
                 }
                 if (this.GetComponent<GameManager>().objectClick.name == "DefVolume") {
+                    if (GameData.defOffsetInt == 0) return;
                     offsetPanel.gameObject.SetActive(true);
                     Text offsetText = offsetPanel.transform.GetChild(0).GetComponent<Text>();
                     offsetText.text = GameData.playerDef.ToString() + "+" + GameData.defOffsetInt.ToString() + "=" + GameData.playerTotalDef + "\n";

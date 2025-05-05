@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
         StartGame();
     }
     public void StartGame() {
+        GameData.layer = 1;
         this.GetComponent<GridLoader>().InitialzeMapAndGrid();
         this.GetComponent<UIManager>().InitializeUI();
         SaveManager.LoadForeverData();
@@ -453,9 +454,11 @@ public class GameManager : MonoBehaviour
                 case 3:
                 case 4:
                     dialogStat = GameData.GetRandomNumberExclude(0,4,GameData.npcEncounteredLayer34);
+                    Debug.Log("NPC¶Ô»°" + dialogStat);
                     for (int i = 0;i < GameData.npcEncounteredLayer34.Length;i++) {
                         if (GameData.npcEncounteredLayer34[i] == -1) {
                             GameData.npcEncounteredLayer34[i] = dialogStat;
+                            break;
                         }
                     }
                     break;

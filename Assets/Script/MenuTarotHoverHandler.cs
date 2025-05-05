@@ -16,7 +16,7 @@ public class MenuTarotHoverHandler : MonoBehaviour
     }
     public void ChangeDisplayData() {
         tarotName.text = tarotsDataObject.tarotsData[cardIndex].cardName + "\n" + tarotsDataObject.tarotsData[cardIndex].chineseName;
-        tarotDescription.text = tarotsDataObject.tarotsData[cardIndex].description;
+        tarotDescription.text = "\u00A0\u00A0\u00A0\u00A0" + tarotsDataObject.tarotsData[cardIndex].description + "\n\n\u00A0\u00A0\u00A0\u00A0" + tarotsDataObject.tarotsData[cardIndex].flavorText;
         tarotImage.sprite = tarotsDataObject.tarotsData[cardIndex].sprite;
     }
 }

@@ -11,6 +11,7 @@ public class TarotsDataObject : ScriptableObject
         public string description;
         public Sprite sprite;
         public string chineseName;
+        public string flavorText;
         //还没想好卡牌效果要怎么实现，以俟主程
     }
     

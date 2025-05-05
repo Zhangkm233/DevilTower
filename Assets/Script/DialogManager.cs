@@ -167,6 +167,12 @@ public class DialogManager : MonoBehaviour
             "半魔人" => illustrationSprites[2],
             "修女" => illustrationSprites[3],
             "倒吊人" => illustrationSprites[4],
+            "学者" => illustrationSprites[5],
+            "月亮圣女" => illustrationSprites[6],
+            "太阳圣女" => illustrationSprites[7],
+            "月之刃" => illustrationSprites[8],
+            "密探" => illustrationSprites[9],
+            "十字军" => illustrationSprites[10],
             _ => null,
         };
         if (illuImage.sprite == null) {

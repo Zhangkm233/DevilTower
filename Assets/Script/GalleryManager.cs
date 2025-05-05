@@ -5,15 +5,16 @@ public class GalleryManager : MonoBehaviour
 {
     public GameObject musicPanel;
     public GameObject tarotPanel;
-    public GameObject cgPanel;
+    public GameObject MonsterPanel;
     public GameObject musicButton;
     public GameObject tarotButton;
-    public GameObject cgButton;
+    public GameObject MonsterButton;
+    public GameObject backButton;
     public enum GalleryState
     {
         Music,
         Tarot,
-        CG
+        Monster,
     }
     public GalleryState currentState = GalleryState.Music;
     public void initialAllMusic() {
@@ -32,7 +33,7 @@ public class GalleryManager : MonoBehaviour
                 ChangeState(GalleryState.Tarot);
                 break;
             case 2:
-                ChangeState(GalleryState.CG);
+                ChangeState(GalleryState.Monster);
                 break;
             default:
                 Debug.LogError("Invalid state index: " + stateIndex);
@@ -43,13 +44,19 @@ public class GalleryManager : MonoBehaviour
         currentState = state;
         musicPanel.SetActive(state == GalleryState.Music);
         tarotPanel.SetActive(state == GalleryState.Tarot);
-        cgPanel.SetActive(state == GalleryState.CG);
+        MonsterPanel.SetActive(state == GalleryState.Monster);
         ChangeInteractableOfButtons();
     }
 
     public void ChangeInteractableOfButtons() {
         musicButton.GetComponent<Button>().interactable = (currentState != GalleryState.Music);
         tarotButton.GetComponent<Button>().interactable = (currentState != GalleryState.Tarot);
-        cgButton.GetComponent<Button>().interactable = (currentState != GalleryState.CG);
+        MonsterButton.GetComponent<Button>().interactable = (currentState != GalleryState.Monster);
+    }
+    public void ResetAllButtonPos() {
+        musicButton.GetComponent<MenuButtonAnimManager>().resetPos();
+        tarotButton.GetComponent<MenuButtonAnimManager>().resetPos();
+        MonsterButton.GetComponent<MenuButtonAnimManager>().resetPos();
+        backButton.GetComponent<MenuButtonAnimManager>().resetPos();
     }
 }

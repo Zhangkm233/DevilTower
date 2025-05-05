@@ -76,6 +76,7 @@ public class MenuButtonManager : MonoBehaviour
         galleyPanel.GetComponent<GalleryManager>().initialAllMusic();
         galleyPanel.GetComponent<GalleryManager>().ChangeState(0);
         galleyPanel.GetComponent<GalleryManager>().ChangeInteractableOfButtons(); 
+        galleyPanel.GetComponent<GalleryManager>().ResetAllButtonPos();
     }
     public void ToOption() {
         Debug.Log("Option button clicked");

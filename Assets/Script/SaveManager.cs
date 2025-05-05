@@ -30,6 +30,10 @@ public class PlayerData
     public int atkOffsetInt;
     public int defOffsetInt;
 
+    public int[] npcEncounteredLayer12 = { -1,-1,-1,-1,-1,-1 };
+    public int[] npcEncounteredLayer34 = { -1,-1,-1,-1,-1,-1 };
+    public int[] npcEncounteredLayer56 = { -1,-1,-1,-1,-1,-1 };
+
     public void ReadForeverDataFromGame() {
         sfxVolume = GameData.sfxVolume;
         bgmVolume = GameData.bgmVolume;
@@ -60,6 +64,9 @@ public class PlayerData
         popeBuffTime = GameData.popeBuffTime;
         atkOffsetInt = GameData.atkOffsetInt;
         defOffsetInt = GameData.defOffsetInt;
+        npcEncounteredLayer12 = GameData.npcEncounteredLayer12;
+        npcEncounteredLayer34 = GameData.npcEncounteredLayer34;
+        npcEncounteredLayer56 = GameData.npcEncounteredLayer56;
     }
 
     public void WriteDataToGame(){
@@ -85,6 +92,9 @@ public class PlayerData
         GameData.popeBuffTime = popeBuffTime;
         GameData.atkOffsetInt = atkOffsetInt;
         GameData.defOffsetInt = defOffsetInt;
+        GameData.npcEncounteredLayer12 = npcEncounteredLayer12;
+        GameData.npcEncounteredLayer34 = npcEncounteredLayer34;
+        GameData.npcEncounteredLayer56 = npcEncounteredLayer56;
     }
 }
 
