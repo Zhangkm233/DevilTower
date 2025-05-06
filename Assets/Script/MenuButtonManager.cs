@@ -15,6 +15,7 @@ public class MenuButtonManager : MonoBehaviour
     public AudioSource bgmAudioSource;
     public GameObject[] mainMenuObjects;
     public GameObject standbyCanvas;
+    public GameObject mirrorObject;
     public bool isStandBy = false;
     public void Start() {
         if(MenuData.isFirstStart) {
@@ -65,6 +66,8 @@ public class MenuButtonManager : MonoBehaviour
         foreach (GameObject obj in mainMenuObjects) {
             obj.SetActive(true);
         }
+        mirrorObject.SetActive(true);
+        mirrorObject.GetComponent<MenuMirrorManager>().startFade();
     }
     public void ToGallery() {
         Debug.Log("Gallery button clicked");
