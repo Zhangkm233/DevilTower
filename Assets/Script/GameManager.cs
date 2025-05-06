@@ -84,7 +84,8 @@ public class GameManager : MonoBehaviour
     public void CheckGameOver() {
         if (GameData.playerHp <= 0) {
             Debug.Log("Game Over");
-            this.GetComponent<UIManager>().GoState(UIManager.UIState.FAIL);
+            audioManagerObject.GetComponent<AudioManager>().PlayBadEndBGM();
+            this.GetComponent<UIManager>().FadeAndGoState(UIManager.UIState.FAIL,0.2f);
         }
     }
 

@@ -35,8 +35,10 @@ public class TarotCard : MonoBehaviour
     public void CheckIfThisUnlock() {
         if(GameData.tarotUnlock[cardIndex] == false) {
             this.GetComponent<SpriteRenderer>().sprite = lockSprite;
+            this.GetComponent<SpriteRenderer>().color = new Color(0.2f,0.2f,0.2f,1f);
         } else {
             this.GetComponent<SpriteRenderer>().sprite = tarotsDataObject.tarotsData[cardIndex].sprite;
+            this.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
         }
     }
     // Update is called once per frame

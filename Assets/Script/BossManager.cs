@@ -21,18 +21,24 @@ public class BossManager : MonoBehaviour
         }
         bossHpSlider.value = (float)bossHp / (float)bossFullHp;
         bossObject.GetComponent<Animator>().Play("bossHurt");
-        if (bossHp < 0) {
+        if (bossHp <= 0) {
             bossHp = 0;
             //结束战斗
-            gameManager.GetComponent<UIManager>().GoState(UIManager.UIState.STAT);
+            for(int i = 0; i < GameData.tarotEquip.Length;i++) {
+                if (GameData.tarotEquip[i] != -1 || GameData.tarotEquip[i] != 0) {
+                    gameManager.GetComponent<UIManager>().FadeAndLoadScene("GoodEnd");
+                    return;
+                }
+            }
+            gameManager.GetComponent<UIManager>().FadeAndLoadScene("TrueEnd");
         }
         int damage = (bossAtk - GameData.playerTotalDef);
         GameData.playerHp -= damage;
         gameManager.GetComponent<UIManager>().PopNumber(damage,Color.red);
-        if (GameData.playerHp < 0) {
+        if (GameData.playerHp <= 0) {
             GameData.playerHp = 0;
             //结束战斗
-            gameManager.GetComponent<UIManager>().GoState(UIManager.UIState.FAIL);
+            gameManager.GetComponent<UIManager>().FadeAndLoadScene("BadEnd");
         }
     }
 }

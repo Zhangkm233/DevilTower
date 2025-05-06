@@ -15,7 +15,8 @@ public class MenuButtonManager : MonoBehaviour
     public AudioSource bgmAudioSource;
     public GameObject[] mainMenuObjects;
     public GameObject standbyCanvas;
-    public GameObject mirrorObject;
+    public GameObject mirrorIlluObject;
+    public GameObject worldObject;
     public bool isStandBy = false;
     public void Start() {
         if(MenuData.isFirstStart) {
@@ -24,6 +25,12 @@ public class MenuButtonManager : MonoBehaviour
             ShowStandBy();
         }
         //backToMenu();
+        SaveManager.LoadForeverData();
+        if (MenuData.isCompleteGame) {
+            worldObject.SetActive(true);
+        } else {
+            worldObject.SetActive(false);
+        }
         audioManager.GetComponent<AudioManager>().InitialVolume();
     }
     public void Update() {
@@ -66,8 +73,8 @@ public class MenuButtonManager : MonoBehaviour
         foreach (GameObject obj in mainMenuObjects) {
             obj.SetActive(true);
         }
-        mirrorObject.SetActive(true);
-        mirrorObject.GetComponent<MenuMirrorManager>().startFade();
+        mirrorIlluObject.SetActive(true);
+        mirrorIlluObject.GetComponent<MenuMirrorManager>().startFade();
     }
     public void ToGallery() {
         Debug.Log("Gallery button clicked");

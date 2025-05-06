@@ -11,7 +11,7 @@ using static Grid;
 public class UIManager : MonoBehaviour
 {
     public enum UIState {
-        STAT,DIALOG,DICTIONARY,SHOP,FORGE,EVENT,TAROT,STANDBY,SETTING,FAIL,BOSS
+        STAT,DIALOG,DICTIONARY,SHOP,FORGE,EVENT,TAROT,STANDBY,SETTING,FAIL,BOSS,CG
     };
     public enum sentenceState
     {
@@ -351,6 +351,13 @@ public class UIManager : MonoBehaviour
         StartCoroutine(FadeAndLoadScene("MainMenu"));
         //SceneManager.LoadScene("MainMenu");
     }
+    public void FadeAndGoState(UIState uistate) {
+        StartCoroutine(IFadeAndGoState(uistate,fadeDuration));
+    }
+    public void FadeAndGoState(UIState uistate,float fadeDuration) {
+        StartCoroutine(IFadeAndGoState(uistate,fadeDuration));
+    }
+
     public IEnumerator FadeAndLoadScene(string sceneTitle) {
         // 渐暗效果
         float elapsedTime = 0f;
@@ -366,6 +373,25 @@ public class UIManager : MonoBehaviour
         } else {
             SceneManager.LoadScene(sceneTitle);
         }
+    }
+    public IEnumerator IFadeAndGoState(UIState uistate,float fadeDuration) {
+        // 渐暗效果
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeDuration) {
+            fadeCanvasGroup.alpha = Mathf.Lerp(0f,1f,elapsedTime / fadeDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        fadeCanvasGroup.alpha = 1f; // 确保完全变黑
+        GoState(uistate);
+
+        while (elapsedTime > 0f) {
+            fadeCanvasGroup.alpha = Mathf.Lerp(0f,1f,elapsedTime / fadeDuration);
+            elapsedTime -= Time.deltaTime;
+            yield return null;
+        }
+        fadeCanvasGroup.alpha = 0f; // 确保完全变亮
     }
     public void RestartGame() {
         GoStat();

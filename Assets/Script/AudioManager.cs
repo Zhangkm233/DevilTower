@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip sfx_heal;
     public AudioClip sfx_teleport;
     public AudioClip[] backGroundMusics;
+    public AudioClip badEndingMusic;
     public GameObject bgmVolumeBar;
     public GameObject sfxVolumeBar;
     public void PlayAudioClip(AudioClip clip) {
@@ -43,6 +45,12 @@ public class AudioManager : MonoBehaviour
     public void PlayTeleport() {
         sfxSource.PlayOneShot(sfx_teleport);
     }
+
+    public void PlayBadEndBGM() {
+        bgmSource.Stop();
+        bgmSource.clip = badEndingMusic;
+        bgmSource.Play();
+    }
     public void PlayBgm(int index) {
         if (index < 0 || index >= backGroundMusics.Length) {
             Debug.LogError("Index out of range");
@@ -50,6 +58,9 @@ public class AudioManager : MonoBehaviour
         }
         bgmSource.clip = backGroundMusics[index];
         bgmSource.Play();
+    }
+    public void PlayBgm() {
+        PlayBgm(GameData.layer - 1);
     }
     public void UpdateBgmVolume() {
         GameData.bgmVolume = bgmVolumeBar.GetComponent<Slider>().value;
