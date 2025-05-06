@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
         SaveManager.LoadForeverData();
         LayerChangeTo(GameData.layer,false);
         if (MenuData.isContinueGame) {
+            GameData.saveSlotChoose = MenuData.loadGameSlot;
+            this.GetComponent<GridLoader>().LoadAll();
             SaveManager.Load(MenuData.loadGameSlot);
             this.GetComponent<GameManager>().UpdateEachGrid();
         } else {
@@ -437,10 +439,11 @@ public class GameManager : MonoBehaviour
             }
         }
         if (gridTileManager.gridType == Grid.GridType.NPC) {
+            /*
             if (GameData.layer > 4) {
                 ClearGridInMap(gridTileManager);
                 return true;
-            }
+            }*/
             int dialogStat = 114514;
             switch (GameData.layer) {
                 case 1:

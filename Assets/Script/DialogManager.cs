@@ -98,7 +98,7 @@ public class DialogManager : MonoBehaviour
     public void ClickPanel() {
         if (isTyping) {
             StopAllCoroutines();
-            dialogText.text = sentenceTexts[sentenceNumber];
+            dialogText.text = "\u00A0\u00A0\u00A0\u00A0" + sentenceTexts[sentenceNumber];
             isTyping = false;
             return;
         }
@@ -217,7 +217,7 @@ public class DialogManager : MonoBehaviour
         if (isFastForwarding == false) return;
         if (HandleWithSentence()) return;
         HandleWithName();
-        dialogText.text = sentenceTexts[sentenceNumber];
+        dialogText.text = "\u00A0\u00A0\u00A0\u00A0" + sentenceTexts[sentenceNumber];
         StartCoroutine(FastForwardText());
     }
     public void NextSentence() {
@@ -231,7 +231,7 @@ public class DialogManager : MonoBehaviour
         isTyping = true;
         string currentText = "";
         for (int i = 0;i <= fullText.Length;i++) {
-            currentText = fullText.Substring(0,i); // 截取从0到i的字符
+            currentText = "\u00A0\u00A0\u00A0\u00A0" + fullText.Substring(0,i); // 截取从0到i的字符
             dialogText.text = currentText; // 更新Text组件的内容
             yield return new WaitForSeconds(0.03f); // 等待指定的延迟时间
         }

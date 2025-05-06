@@ -18,12 +18,14 @@ MonoBehaviour:
   m_PlatformId: 4e3c793746204150860bf175a9a41a05
   m_PlatformBuildProfile:
     rid: 3048928620041207808
-  m_OverrideGlobalSceneList: 0
+  m_OverrideGlobalSceneList: 1
   m_Scenes:
   - m_enabled: 1
     m_path: Assets/Scenes/MainMenu.unity
   - m_enabled: 1
     m_path: Assets/Scenes/MainGame.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/GoodEnd.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings:
@@ -107,7 +109,7 @@ MonoBehaviour:
     - line: '|   androidAutoRotationBehavior: 1'
     - line: '|   androidPredictiveBackSupport: 0'
     - line: '|   androidApplicationEntry: 2'
-    - line: '|   defaultIsNativeResolution: 1'
+    - line: '|   defaultIsNativeResolution: 0'
     - line: '|   macRetinaSupport: 1'
     - line: '|   runInBackground: 1'
     - line: '|   muteOtherAudioSources: 0'
@@ -133,7 +135,7 @@ MonoBehaviour:
     - line: '|   xboxEnableFitness: 0'
     - line: '|   visibleInBackground: 1'
     - line: '|   allowFullscreenSwitch: 1'
-    - line: '|   fullscreenMode: 0'
+    - line: '|   fullscreenMode: 2'
     - line: '|   xboxSpeechDB: 0'
     - line: '|   xboxEnableHeadOrientation: 0'
     - line: '|   xboxEnableGuest: 0'
@@ -167,8 +169,10 @@ MonoBehaviour:
     - line: '|   loadStoreDebugModeEnabled: 0'
     - line: '|   visionOSBundleVersion: 1.0'
     - line: '|   tvOSBundleVersion: 1.0'
-    - line: '|   bundleVersion: 1.5'
-    - line: '|   preloadedAssets: []'
+    - line: '|   bundleVersion: 1.6'
+    - line: '|   preloadedAssets:'
+    - line: '|   - {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100,
+        type: 3}'
     - line: '|   metroInputSource: 0'
     - line: '|   wsaTransparentSwapchain: 0'
     - line: '|   m_HolographicPauseOnTrackingLoss: 1'
@@ -609,7 +613,24 @@ MonoBehaviour:
     - line: '|   webGLWebAssemblyBigInt: 0'
     - line: '|   webGLCloseOnQuit: 0'
     - line: '|   webWasm2023: 0'
-    - line: '|   scriptingDefineSymbols: {}'
+    - line: '|   scriptingDefineSymbols:'
+    - line: '|     Android: DOTWEEN'
+    - line: '|     EmbeddedLinux: DOTWEEN'
+    - line: '|     GameCoreScarlett: DOTWEEN'
+    - line: '|     GameCoreXboxOne: DOTWEEN'
+    - line: '|     LinuxHeadlessSimulation: DOTWEEN'
+    - line: '|     Nintendo Switch: DOTWEEN'
+    - line: '|     PS4: DOTWEEN'
+    - line: '|     PS5: DOTWEEN'
+    - line: '|     QNX: DOTWEEN'
+    - line: '|     ReservedCFE: DOTWEEN'
+    - line: '|     Standalone: DOTWEEN'
+    - line: '|     VisionOS: DOTWEEN'
+    - line: '|     WebGL: DOTWEEN'
+    - line: '|     Windows Store Apps: DOTWEEN'
+    - line: '|     XboxOne: DOTWEEN'
+    - line: '|     iPhone: DOTWEEN'
+    - line: '|     tvOS: DOTWEEN'
     - line: '|   additionalCompilerArguments: {}'
     - line: '|   platformArchitecture: {}'
     - line: '|   scriptingBackend:'

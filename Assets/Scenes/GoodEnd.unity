@@ -514,6 +514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
+  - {fileID: 468515924779497524, guid: ca8c50e7a80eb4647abbfb862df0a2ac, type: 3}
   - {fileID: 21300000, guid: 7aa5a8690cfc34a4c8d5419a41f9f135, type: 3}
   - {fileID: 21300000, guid: fae1dd2340b24c644aedc6ceb3cf893e, type: 3}
   - {fileID: 21300000, guid: 0d9d6b7f370b95e46abd432899dd9e7a, type: 3}
@@ -521,6 +522,7 @@ MonoBehaviour:
   lastImage: {fileID: 1678427875}
   spriteIndex: 0
   fadeDuration: 2
+  isAutoPlay: 1
 --- !u!1 &1331764949
 GameObject:
   m_ObjectHideFlags: 0

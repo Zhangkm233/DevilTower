@@ -49,6 +49,7 @@ public class UIManager : MonoBehaviour
     public GameObject offsetPanel;
     public GameObject failMain;
     public GameObject bossMain;
+    public GameObject bossBar;
     [Header("Manager")]
     public GameObject audioManager;
     public GameObject[] haloSlots;
@@ -494,8 +495,12 @@ public class UIManager : MonoBehaviour
         if (uistate == UIState.BOSS) {
             statMain.SetActive(true);
             bossMain.SetActive(true);
+            bossBar.SetActive(true);
         };
-        if (uistate != UIState.BOSS) bossMain.SetActive(false);
+        if (uistate != UIState.BOSS) {
+            bossMain.SetActive(false);
+            bossBar.SetActive(false);
+        }
     }
     public void Cheat() {
         GameData.key1++;
@@ -509,7 +514,7 @@ public class UIManager : MonoBehaviour
     public GameObject numberPrefab;
     public void PopNumber(int num, Color color, int size = 1, float intensity = 0.015f){
         GameObject number = Instantiate(numberPrefab);
-
+        numberPrefab.GetComponent<Canvas>().worldCamera = Camera.main;
         Vector3 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         number.transform.position = new Vector3(position.x, position.y, 0);
