@@ -160,13 +160,16 @@ public class GameManager : MonoBehaviour
                     PlayerStatChange(500,5,5,0,0,0,0,0);
                     break;
                 case 3:
-                    PlayerStatChange(400,10,10,1,1,0,0,0);
+                    PlayerStatChange(800,10,10,1,1,0,0,0);
                     break;
                 case 4:
-                    PlayerStatChange(600,20,20,1,1,0,0,0);
+                    PlayerStatChange(1000,20,20,1,1,0,0,0);
                     break;
                 case 5:
-                    PlayerStatChange(1000,40,40,1,1,0,0,0);
+                    PlayerStatChange(1000,45,45,1,1,0,0,0);
+                    break;
+                case 6:
+                    PlayerStatChange(1000, 75, 75, 1, 1, 0, 0, 0);
                     break;
             }
         }
@@ -361,10 +364,10 @@ public class GameManager : MonoBehaviour
         if (gridTileManager.gridType == Grid.GridType.BOTTLE) {
             int healingPoints = ((GridBottle)gridTileManager.mapGrid).healingPoints;
             //星星
-            //血瓶额外提供25点生命值
+            //血瓶额外提供10点生命值
             if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Star"))) {
-                Debug.Log("星星触发，血瓶额外提供25点生命值");
-                healingPoints += 25;
+                Debug.Log("星星触发，血瓶额外提供10点生命值");
+                healingPoints += 10;
             }
             if (GameData.IsTarotEquip(this.GetComponent<TarotManager>().TarotToNum("Empress"))) {
                 Debug.Log("女皇触发，你从血瓶中会额外获得150点生命值，但是在你获得一个血瓶后，立刻摧毁其相邻的事件");

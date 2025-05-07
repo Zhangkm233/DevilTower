@@ -8,16 +8,16 @@ public class ForgeManager : MonoBehaviour
         HP,ATK,DEF,
     };
     public static readonly int[] forgePrice = {
-        10,20,40,70,120,200,330,500,800,900,1000,1100
+        10,20,40,70,120,200,350,600,700,800,900,1000,1100
     };
     public static readonly int[] forgeHp = {
-        500,1000,1500,2000,3000
+        0,0,500,1000,1500,2000
     };
     public static readonly int[] forgeAtk = {
-        1,2,4,6,10
+        0,0,1,2,4,6
     };
     public static readonly int[] forgeDef = {
-        2,4,8,12,20
+        0,0,2,4,8,12
     };
     public GameObject gameManager;
     //public Text forgeDialogText;

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GridShop : Grid
 {
-    public static readonly string[,] shopItemStat = new string[8,2] {
+    public static readonly string[,] shopItemStat = new string[10,2] {
             {"gold","B2"},
             {"gold","B3"},
             {"gold","key1"},
@@ -11,8 +11,10 @@ public class GridShop : Grid
             {"key1","gold"},
             {"gold","key2"},
             {"gold","key3"},
+            {"gold","key1"},
+            {"gold","B1"},
         }; 
-    public static readonly int[,] shopItemNum = new int[8,2] {
+    public static readonly int[,] shopItemNum = new int[10,2] {
             {5,1},
             {20,1},
             {30,2},
@@ -21,6 +23,8 @@ public class GridShop : Grid
             {1,40},
             {80,1},
             {800,1},
+            {50,2},
+            {50,2},
         };
     public bool isInfinite;
     public string itemGiveOut;
