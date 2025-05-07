@@ -53,7 +53,7 @@ public class UIManager : MonoBehaviour
     [Header("Manager")]
     public GameObject audioManager;
     public GameObject[] haloSlots;
-
+    public GameObject bossManager;
     private float fadeDuration = 0.5f;
     public CanvasGroup fadeCanvasGroup;
 
@@ -119,7 +119,7 @@ public class UIManager : MonoBehaviour
             monsterAbilityStat.text = " ";
             offsetPanel.gameObject.SetActive(false);
         }
-        if (State != UIState.STAT) return;
+        if (State != UIState.STAT && State != UIState.BOSS) return;
         if (this.GetComponent<GameManager>().objectClick != null) {
             if (this.GetComponent<GameManager>().objectClick.CompareTag("statGameObject")) {
                 if(this.GetComponent<GameManager>().objectClick.name == "AtkVolume") {
@@ -135,6 +135,14 @@ public class UIManager : MonoBehaviour
                     Text offsetText = offsetPanel.transform.GetChild(0).GetComponent<Text>();
                     offsetText.text = GameData.playerDef.ToString() + "+" + GameData.defOffsetInt.ToString() + "=" + GameData.playerTotalDef + "\n";
                 }
+            }
+            if (this.GetComponent<GameManager>().objectClick.CompareTag("bossGameObject")) {
+                //为什么生效不了？
+                //为什么
+                //为什么
+                gridName.text = "暴君";
+                BossManager bm = bossManager.GetComponent<BossManager>();
+                gridStat.text = bm.bossAtk.ToString() + "/" + bm.bossDef.ToString() + "/" + bm.bossHp;
             }
             if (this.GetComponent<GameManager>().objectClick.CompareTag("gridGameObject") == false) return;
             GameObject objectClicked = this.GetComponent<GameManager>().objectClick;
@@ -463,6 +471,10 @@ public class UIManager : MonoBehaviour
             statMain.SetActive(true);
             buttonMain.SetActive(true);
             dictionaryMain.SetActive(true);
+            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("gridGameObject");
+            foreach (GameObject gameObject in gameObjects) {
+                gameObject.SetActive(true);
+            }
         }
         if (uistate != UIState.STAT) {
             statMain.SetActive(false);
@@ -494,7 +506,12 @@ public class UIManager : MonoBehaviour
         if (uistate != UIState.FAIL) failMain.SetActive(false);
         if (uistate == UIState.BOSS) {
             statMain.SetActive(true);
+            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("gridGameObject");
+            foreach (GameObject gameObject in gameObjects) {
+                gameObject.SetActive(false);
+            }
             bossMain.SetActive(true);
+            Debug.Log("bossMainTRUE");
             bossBar.SetActive(true);
         };
         if (uistate != UIState.BOSS) {

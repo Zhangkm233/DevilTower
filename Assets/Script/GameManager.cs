@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     void Update() {
         objectClick = ObjectClick();
-        if (objectClick != null && this.GetComponent<UIManager>().State == UIManager.UIState.STAT) {
+        if (objectClick != null && (this.GetComponent<UIManager>().State == UIManager.UIState.STAT)) {
             if (objectClick.CompareTag("gridGameObject")) {
                 gridTileManager = objectClick.GetComponent<GridTileManager>();
                 GridInMap = GameData.map[gridTileManager.mapX,gridTileManager.mapY];

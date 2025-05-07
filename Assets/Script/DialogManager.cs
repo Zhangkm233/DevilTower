@@ -119,7 +119,10 @@ public class DialogManager : MonoBehaviour
             if(sentenceTexts[sentenceNumber + 1] == "GOTAROT") {
                 ResetDialog();
                 this.GetComponent<UIManager>().GoTarot();
-            } else {
+            } else if (sentenceTexts[sentenceNumber + 1] == "GOBOSS") {
+                ResetDialog();
+                this.GetComponent<UIManager>().GoBoss();
+            } else{
                 ResetDialog();
                 this.GetComponent<UIManager>().GoStat();
                 SaveManager.Save(0);
@@ -199,6 +202,10 @@ public class DialogManager : MonoBehaviour
                 if (sentenceTexts[i] == "GOTAROT") {
                     ResetDialog();
                     this.GetComponent<UIManager>().GoTarot();
+                    return;
+                } else if (sentenceTexts[i] == "GOBOSS") {
+                    ResetDialog();
+                    this.GetComponent<UIManager>().GoBoss();
                     return;
                 } else {
                     ResetDialog();

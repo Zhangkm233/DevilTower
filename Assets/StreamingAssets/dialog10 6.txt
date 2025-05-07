@@ -29,4 +29,4 @@ TEXT;“你”;（表示自己一定会拯救世界的）
 TEXT;魔女;路上小心~
 TEXT;“你”;我出发了！
 TEXT; ;（六区结束，最终Boss战解锁）
-END;0;GOTAROT
+END;0;GOBOSS

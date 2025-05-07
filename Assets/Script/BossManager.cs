@@ -11,13 +11,17 @@ public class BossManager : MonoBehaviour
     public Slider bossHpSlider;
     public GameObject gameManager;
     public GameObject bossObject;
+    public GameObject audioManager;
     public void Fight() {
+        //需要添加一个如果双方都破不了防的判断
+        audioManager.GetComponent<AudioManager>().PlayBattle();
         bossHpSlider.value = (float)bossHp / (float)bossFullHp;
         gameManager.GetComponent<GameManager>().UpdatePlayerOffset();
+        //给你一拳
         if (GameData.IsTarotEquip(14)) {
-            bossHp -= GameData.playerTotalAtk;
+            bossHp -= Math.Max(GameData.playerTotalAtk,0);
         } else {
-            bossHp -= (GameData.playerTotalAtk - bossDef);
+            bossHp -= Math.Max((GameData.playerTotalAtk - bossDef),0);
         }
         bossHpSlider.value = (float)bossHp / (float)bossFullHp;
         bossObject.GetComponent<Animator>().Play("bossHurt");
@@ -32,7 +36,8 @@ public class BossManager : MonoBehaviour
             }
             gameManager.GetComponent<UIManager>().FadeAndLoadScene("TrueEnd");
         }
-        int damage = (bossAtk - GameData.playerTotalDef);
+        //给我一拳
+        int damage = Math.Max((bossAtk - GameData.playerTotalDef),0);
         GameData.playerHp -= damage;
         gameManager.GetComponent<UIManager>().PopNumber(damage,Color.red);
         if (GameData.playerHp <= 0) {
@@ -40,5 +45,15 @@ public class BossManager : MonoBehaviour
             //结束战斗
             gameManager.GetComponent<UIManager>().FadeAndLoadScene("BadEnd");
         }
+
+        updateBossDataToUI();
+    }
+
+    public void updateBossDataToUI() {
+        gameManager.GetComponent<UIManager>().gridName.text = "暴君";
+        gameManager.GetComponent<UIManager>().gridStat.text = bossAtk + "/" + bossDef + "/" + bossHp;
+        //为什么生效不了？
+        //为什么
+        //为什么
     }
 }
