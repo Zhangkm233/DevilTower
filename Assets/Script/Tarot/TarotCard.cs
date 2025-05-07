@@ -85,8 +85,10 @@ public class TarotCard : MonoBehaviour
 
     IEnumerator scaleUp(){
         float elapsed = 0;
+        Vector3 startScale = transform.localScale;
+        Vector3 targetScale = startScale * 1.2f;
         while (elapsed < 0.07f) {
-            transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 1.2f, elapsed/0.1f);
+            transform.localScale = Vector3.Lerp(startScale, targetScale, elapsed/0.1f);
             elapsed += Time.deltaTime;
             yield return null;
         }
@@ -94,8 +96,10 @@ public class TarotCard : MonoBehaviour
 
     IEnumerator scaleDown(){
         float elapsed = 0;
+        Vector3 startScale = transform.localScale;
+        Vector3 targetScale = startScale / 1.2f;
         while (elapsed < 0.07f) {
-            transform.localScale = Vector3.Lerp(Vector3.one * 1.2f, Vector3.one, elapsed/0.1f);
+            transform.localScale = Vector3.Lerp(startScale, targetScale, elapsed/0.1f);
             elapsed += Time.deltaTime;
             yield return null;
         }
@@ -121,6 +125,7 @@ public class TarotCard : MonoBehaviour
     }
 
     public void MoveIntoSlot(Slot slot){
+        
         StartCoroutine(MoveIntoSlotCoroutine(slot));
     }
 
@@ -148,8 +153,12 @@ public class TarotCard : MonoBehaviour
     }
 
     IEnumerator MoveIntoSlotCoroutine(Slot slot){
+        GetComponent<BoxCollider2D>().enabled = false;
         Vector3 startPos = transform.position;
         Vector3 targetPos = slot.transform.position;
+
+        Vector3 startScale = transform.localScale;
+        Vector3 targetScale = slot.transform.localScale * 1.6f;
 
         float elapsed = 0;
         float speed = 30f;
@@ -159,11 +168,13 @@ public class TarotCard : MonoBehaviour
 
         while (elapsed < distance / speed) {
             transform.position = Vector3.Lerp(startPos, targetPos, elapsed/(distance/speed));
+            transform.localScale = Vector3.Lerp(startScale, targetScale, elapsed/(distance/speed));
             elapsed += Time.deltaTime;
             yield return null;
         }
 
         transform.position = targetPos;
+        transform.localScale = targetScale;
 
         GetComponent<BoxCollider2D>().enabled = true;
 
@@ -171,8 +182,12 @@ public class TarotCard : MonoBehaviour
     }
 
     IEnumerator MoveOutSlotCoroutine(){
+        GetComponent<BoxCollider2D>().enabled = false;
         Vector3 startPos = transform.position;
         Vector3 targetPos = originPos;
+
+        Vector3 startScale = transform.localScale;
+        Vector3 targetScale = new Vector3(1f, 1f, 1f);
 
         float elapsed = 0;
         float speed = 40f;
@@ -180,10 +195,13 @@ public class TarotCard : MonoBehaviour
 
         while (elapsed < distance / speed) {
             transform.position = Vector3.Lerp(startPos, targetPos, elapsed/(distance/speed));
+            transform.localScale = Vector3.Lerp(startScale, targetScale, elapsed/(distance/speed));
             elapsed += Time.deltaTime;
             yield return null;
         }
 
         transform.position = targetPos;
+        transform.localScale = targetScale;
+        GetComponent<BoxCollider2D>().enabled = true;
     }
 }
