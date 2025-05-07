@@ -142,9 +142,13 @@ public class GridTileManager : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
 
-        GameData.map[mapX,mapY].fromX = mapX;
-        GameData.map[mapX,mapY].fromY = mapY;
-        
+        try {
+            GameData.map[mapX,mapY].fromX = mapX;
+            GameData.map[mapX,mapY].fromY = mapY;
+        } catch (System.Exception e) {
+            Debug.LogWarning("Error: " + mapGrid.GridTypeToWord + " " + mapGrid.stat + "\n" + e);
+        }
+
     }
 
     GridTileManager FindGridIn(Vector2Int map){

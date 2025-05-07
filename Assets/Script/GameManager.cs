@@ -585,6 +585,12 @@ public class GameManager : MonoBehaviour
                     continue;
                 }
                 if (targetGrid == null) targetGrid = GameData.map[i - 1,GameData.gridHeight - 1];
+                try {
+                    Grid.GridType gridType = targetGrid.type;
+                } catch (System.Exception e) {
+                    Debug.Log("π÷ŒÔ“∆∂Ø“Ï≥£" + e);
+                    return;
+                }
                 if (targetGrid.type != Grid.GridType.MONSTER &&
                      targetGrid.type != Grid.GridType.DOOR &&
                      targetGrid.type != Grid.GridType.BARRIER &&
