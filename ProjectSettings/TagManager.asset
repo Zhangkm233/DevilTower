@@ -10,6 +10,7 @@ TagManager:
   - saveSlotGameObject
   - slotGameObject
   - musicGameObject
+  - bossGameObject
   layers:
   - Default
   - TransparentFX

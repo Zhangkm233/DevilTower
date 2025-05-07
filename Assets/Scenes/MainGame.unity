@@ -7935,7 +7935,7 @@ RectTransform:
   m_Father: {fileID: 880277863}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8207,9 +8207,10 @@ GameObject:
   - component: {fileID: 622502133}
   - component: {fileID: 622502132}
   - component: {fileID: 622502135}
+  - component: {fileID: 622502136}
   m_Layer: 0
   m_Name: boss
-  m_TagString: Untagged
+  m_TagString: bossGameObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8349,6 +8350,42 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!58 &622502136
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622502130}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.08792138, y: 0.0688076}
+  m_Radius: 2.3081167
 --- !u!1 &634174758
 GameObject:
   m_ObjectHideFlags: 0
@@ -15467,6 +15504,7 @@ MonoBehaviour:
   - {fileID: 311567027}
   - {fileID: 1378214338}
   - {fileID: 1767565832}
+  bossManager: {fileID: 0}
   fadeCanvasGroup: {fileID: 393390264}
   numberPrefab: {fileID: 298824180997395607, guid: a36d8ac4119f8214687012478d1088c7, type: 3}
 --- !u!114 &1211369223
@@ -16866,7 +16904,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1320933623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23566,8 +23604,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 94076678}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
