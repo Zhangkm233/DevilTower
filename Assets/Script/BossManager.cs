@@ -30,11 +30,12 @@ public class BossManager : MonoBehaviour
             //结束战斗
             for(int i = 0; i < GameData.tarotEquip.Length;i++) {
                 if (GameData.tarotEquip[i] != -1 || GameData.tarotEquip[i] != 0) {
-                    gameManager.GetComponent<UIManager>().FadeAndLoadScene("GoodEnd");
+                    StartCoroutine(gameManager.GetComponent<UIManager>().FadeAndLoadScene("GoodEnd"));
+                    Debug.Log("good end");
                     return;
                 }
             }
-            gameManager.GetComponent<UIManager>().FadeAndLoadScene("TrueEnd");
+            StartCoroutine(gameManager.GetComponent<UIManager>().FadeAndLoadScene("TrueEnd"));
         }
         //给我一拳
         int damage = Math.Max((bossAtk - GameData.playerTotalDef),0);
@@ -43,7 +44,7 @@ public class BossManager : MonoBehaviour
         if (GameData.playerHp <= 0) {
             GameData.playerHp = 0;
             //结束战斗
-            gameManager.GetComponent<UIManager>().FadeAndLoadScene("BadEnd");
+            StartCoroutine(gameManager.GetComponent<UIManager>().FadeAndLoadScene("BadEnd"));
         }
 
         updateBossDataToUI();
