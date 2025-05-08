@@ -49,7 +49,7 @@ public class MenuMirrorManager : MonoBehaviour
             // 完全透明后切换到下一个Sprite
             currentIndex = (currentIndex + 1) % sprites.Length;
             im.sprite = sprites[currentIndex];
-
+            im.SetNativeSize();
             // 重置颜色（包括alpha值）
             im.color = originalColor;
 

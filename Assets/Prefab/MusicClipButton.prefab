@@ -147,7 +147,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5943748213888039486, guid: 2edba9e8ee3d8434bb37f84eab0e9b57, type: 3}
+  m_Sprite: {fileID: 1768337075366533350, guid: a114be4b4fe37cc4696f0cc4efdbc471, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -237,8 +237,8 @@ MonoBehaviour:
   - "\u7B2C\u4E94\u5173"
   - "\u7B2C\u516D\u5173"
   - "\u9996\u9886\u6218"
-  - bgm_9
-  - bgm_10
-  - bgm_11
-  - bgm_12
+  - "\u4E3B\u754C\u9762"
+  - "\u80DC\u5229\u97F3\u4E50"
+  - "\u5931\u8D25\u97F3\u4E50"
+  - "\u94C1\u5320\u94FA"
   - bgm_13

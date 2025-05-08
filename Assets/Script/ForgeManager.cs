@@ -30,6 +30,8 @@ public class ForgeManager : MonoBehaviour
     public static int hpForgeGive = 0;
     public static int atkForgeGive = 0;
     public static int defForgeGive = 0;
+
+    public GameObject audioManager;
     public void initializePrice() {
         //力量
         //锻造的价格降低10 %
@@ -85,6 +87,7 @@ public class ForgeManager : MonoBehaviour
         initializePrice();
     }
     public void LeaveForge() {
+        audioManager.GetComponent<AudioManager>().PlayBgm();
         gameManager.GetComponent<UIManager>().GoStat();
     }
 }

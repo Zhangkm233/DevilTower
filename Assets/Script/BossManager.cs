@@ -44,7 +44,8 @@ public class BossManager : MonoBehaviour
         if (GameData.playerHp <= 0) {
             GameData.playerHp = 0;
             //结束战斗
-            StartCoroutine(gameManager.GetComponent<UIManager>().FadeAndLoadScene("BadEnd"));
+            //StartCoroutine(gameManager.GetComponent<UIManager>().FadeAndLoadScene("BadEnd"));
+            gameManager.GetComponent<UIManager>().GoFail();
         }
 
         updateBossDataToUI();
@@ -53,8 +54,5 @@ public class BossManager : MonoBehaviour
     public void updateBossDataToUI() {
         gameManager.GetComponent<UIManager>().gridName.text = "暴君";
         gameManager.GetComponent<UIManager>().gridStat.text = bossAtk + "/" + bossDef + "/" + bossHp;
-        //为什么生效不了？
-        //为什么
-        //为什么
     }
 }

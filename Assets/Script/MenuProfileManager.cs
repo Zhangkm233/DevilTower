@@ -19,11 +19,12 @@ public class MenuProfileManager : MonoBehaviour
     public MonsterDataObject monsterDataObject;
     public SpriteScriptObject[] layerSpritess;
     public GameObject monsterProfile;
-
+    public Text monsDescribe;
     public void Awake() {
         layerText.text = "µÚ" + (layerIndex + 1) + "²ã " + layerNames[layerIndex];
         ReadMonster();
         UpdateMonsterText();
+        UpdateMonsterDescribe();
     }
 
     public void NextLayer() {
@@ -35,6 +36,7 @@ public class MenuProfileManager : MonoBehaviour
         ReadMonster();
         monsterIndex = 0;
         UpdateMonsterText();
+        UpdateMonsterDescribe();
     }
 
     public void LastLayer() {
@@ -46,6 +48,7 @@ public class MenuProfileManager : MonoBehaviour
         ReadMonster();
         monsterIndex = 0;
         UpdateMonsterText();
+        UpdateMonsterDescribe();
     }
 
     public void NextMonster() {
@@ -54,6 +57,7 @@ public class MenuProfileManager : MonoBehaviour
             monsterIndex = 0;
         }
         UpdateMonsterText();
+        UpdateMonsterDescribe();
     }
     public void LastMonster() {
         monsterIndex--;
@@ -61,6 +65,7 @@ public class MenuProfileManager : MonoBehaviour
             monsterIndex = monsterCount - 1;
         }
         UpdateMonsterText();
+        UpdateMonsterDescribe();
     }
 
     public void UpdateLayerText() {
@@ -70,6 +75,26 @@ public class MenuProfileManager : MonoBehaviour
     public void UpdateMonsterText() {
         monsterProfile.GetComponent<MonsterProfile>().UseData(monsterDataObject.monsterDataList[monsterIndex]);
     }
+    public void UpdateMonsterDescribe() {
+        string monsFilePath = Application.streamingAssetsPath + "/monsterDescribe.txt";
+        int index = layerIndex switch {
+            0 => 0,
+            1 => 2,
+            2 => 4,
+            3 => 8,
+            4 => 13,
+            5 => 17,
+            _ => 0,
+        };
+        index += monsterIndex;
+        string[] lines = System.IO.File.ReadAllLines(monsFilePath);
+        if (index < lines.Length) {
+            monsDescribe.text = lines[index];
+        } else {
+            monsDescribe.text = "Ã»ÓÐÃèÊö";
+        }
+    }
+
 
     public void ReadMonster() {
         string txtFilePath = Application.streamingAssetsPath + "/monster" + (layerIndex+1) + ".txt";

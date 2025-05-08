@@ -16,6 +16,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip sfx_teleport;
     public AudioClip[] backGroundMusics;
     public AudioClip badEndingMusic;
+    public AudioClip forgeMusic;
     public GameObject bgmVolumeBar;
     public GameObject sfxVolumeBar;
     public void PlayAudioClip(AudioClip clip) {
@@ -45,7 +46,11 @@ public class AudioManager : MonoBehaviour
     public void PlayTeleport() {
         sfxSource.PlayOneShot(sfx_teleport);
     }
-
+    public void PlayForge() {
+        bgmSource.Stop();
+        bgmSource.clip = forgeMusic;
+        bgmSource.Play();
+    }
     public void PlayBadEndBGM() {
         bgmSource.Stop();
         bgmSource.clip = badEndingMusic;
@@ -60,6 +65,7 @@ public class AudioManager : MonoBehaviour
         bgmSource.Play();
     }
     public void PlayBgm() {
+        bgmSource.Stop();
         PlayBgm(GameData.layer - 1);
     }
     public void UpdateBgmVolume() {

@@ -33,7 +33,7 @@ MonoBehaviour:
     - {fileID: 848398782808015807, guid: b5d7f135aa10f6141acb6d778c0af20a, type: 3}
     - {fileID: 3970941607457096416, guid: d5e1895fcf091734aaaecc01646b3c9e, type: 3}
     - {fileID: -1780264615771366595, guid: 81ad7925dae7ea64d85082995426601a, type: 3}
-    - {fileID: -1780264615771366595, guid: 81ad7925dae7ea64d85082995426601a, type: 3}
+    - {fileID: -3493121686875465148, guid: 50c0ea62e37b0194580aaa1dbf3b10d6, type: 3}
   - type: 4
     sprites:
     - {fileID: -1372589302711875340, guid: 570e5529c09714242b596ef9a56b7458, type: 3}

@@ -137,9 +137,6 @@ public class UIManager : MonoBehaviour
                 }
             }
             if (this.GetComponent<GameManager>().objectClick.CompareTag("bossGameObject")) {
-                //为什么生效不了？
-                //为什么
-                //为什么
                 gridName.text = "暴君";
                 BossManager bm = bossManager.GetComponent<BossManager>();
                 gridStat.text = bm.bossAtk.ToString() + "/" + bm.bossDef.ToString() + "/" + bm.bossHp;
@@ -330,6 +327,7 @@ public class UIManager : MonoBehaviour
         if(GameData.layer < 2) return;
         GoForge();
         forgeMain.GetComponent<ForgeManager>().initializePrice();
+        audioManager.GetComponent<AudioManager>().PlayForge();
     }
     public void GoDialog() {
         GoState(UIState.DIALOG);
@@ -353,7 +351,19 @@ public class UIManager : MonoBehaviour
 
     [ContextMenu("Boss战")]
     public void GoBoss() {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("gridGameObject");
+        foreach (GameObject gameObject in gameObjects) {
+            gameObject.SetActive(false);
+        }
         GoState(UIState.BOSS);
+    }
+
+    public void GoFail() {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("gridGameObject");
+        foreach (GameObject gameObject in gameObjects) {
+            gameObject.SetActive(true);
+        }
+        GoState(UIState.FAIL);
     }
     public void GoMenu() {
         //GoStat();
@@ -506,10 +516,6 @@ public class UIManager : MonoBehaviour
         if (uistate != UIState.FAIL) failMain.SetActive(false);
         if (uistate == UIState.BOSS) {
             statMain.SetActive(true);
-            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("gridGameObject");
-            foreach (GameObject gameObject in gameObjects) {
-                gameObject.SetActive(false);
-            }
             bossMain.SetActive(true);
             Debug.Log("bossMainTRUE");
             bossBar.SetActive(true);
