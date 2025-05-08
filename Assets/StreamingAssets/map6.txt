@@ -1,3 +1,6 @@
+X 1,X 1,X 1,X 1,X 1,X 1
+X 1,X 1,X 1,X 1,X 1,X 1
+X 1,X 1,X 1,X 1,X 1,X 1
 P 1,X 1,K 2,X 1,X 1,X 1
 D 3,B 3,S 9,X 1,K 3,G 2
 M 4,G 1,D 2,G 2,M 4,M 4

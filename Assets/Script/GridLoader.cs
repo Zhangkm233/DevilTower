@@ -33,11 +33,11 @@ public class GridLoader : MonoBehaviour
     public void LoadAll() {
         int oldLayer = GameData.layer;
         int oldHeight = GameData.gridHeight;
+        GameObject[] grids = GameObject.FindGameObjectsWithTag("gridGameObject");
         SaveManager.Load(GameData.saveSlotChoose);
         if (oldLayer != GameData.layer) {
             // 如果层数改变了，重新加载地图
             Debug.Log("层数改变了，重新加载地图");
-            GameObject[] grids = GameObject.FindGameObjectsWithTag("gridGameObject");
             foreach (GameObject grid in grids) {
                 grid.GetComponent<GridTileManager>().mapY += GameData.gridHeight - oldHeight;
             }
@@ -47,6 +47,10 @@ public class GridLoader : MonoBehaviour
             // 否则只更新格子
             Debug.Log("层数没有改变，只更新格子");
             this.GetComponent<GameManager>().UpdateEachGrid();
+        }
+        foreach (GameObject grid in grids) {
+
+            grid.GetComponent<GridTileManager>().UpdateData();
         }
     }
     public void DeleteAll() {

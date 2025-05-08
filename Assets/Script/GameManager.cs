@@ -591,6 +591,7 @@ public class GameManager : MonoBehaviour
                     Debug.Log("怪物移动异常" + e);
                     return;
                 }
+                Debug.Log("怪物移动");
                 if (targetGrid.type != Grid.GridType.MONSTER &&
                      targetGrid.type != Grid.GridType.DOOR &&
                      targetGrid.type != Grid.GridType.BARRIER &&

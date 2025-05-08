@@ -50,6 +50,7 @@ public class GridTileManager : MonoBehaviour
         //没东西就清空
         mapGrid = new Grid(1,Grid.GridType.BARRIER);
         gridType = Grid.GridType.BARRIER;
+        //GameData.map[mapX,mapY] = mapGrid;
 
         Canvas gridCanvas = this.GetComponentInChildren<Canvas>();
         TMP_Text gridtext = gridCanvas.transform.GetChild(0).GetComponent<TMP_Text>();

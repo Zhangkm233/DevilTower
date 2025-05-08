@@ -19,7 +19,7 @@ public static class GameData
 
     public static bool hasEncounterBoss = false;
     public static int gridWidth = 6; // 地图宽度
-    public static int gridHeight = 4; // 地图高度
+    public static int gridHeight = 7; // 地图高度
     public static Grid[,] map = new Grid[gridWidth,gridHeight];
 
     public static int[] tarotLastEquip = { -1,-1,-1,-1,-1 }; //上次装备的塔罗牌
