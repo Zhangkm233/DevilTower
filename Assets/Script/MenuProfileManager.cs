@@ -19,7 +19,9 @@ public class MenuProfileManager : MonoBehaviour
     public MonsterDataObject monsterDataObject;
     public SpriteScriptObject[] layerSpritess;
     public GameObject monsterProfile;
-    public Text monsDescribe;
+    public Text monsDescribe1;
+    public Text monsDescribe2;
+    public Text monsDescribe3;
     public void Awake() {
         layerText.text = "第" + (layerIndex + 1) + "层 " + layerNames[layerIndex];
         ReadMonster();
@@ -76,8 +78,8 @@ public class MenuProfileManager : MonoBehaviour
         monsterProfile.GetComponent<MonsterProfile>().UseData(monsterDataObject.monsterDataList[monsterIndex]);
     }
     public void UpdateMonsterDescribe() {
-        string monsFilePath = Application.streamingAssetsPath + "/monsterDescribe.txt";
-        int index = layerIndex switch {
+        string monsFilePath1 = Application.streamingAssetsPath + "/monsterDescribe1.txt";
+        int index1 = layerIndex switch {
             0 => 0,
             1 => 2,
             2 => 4,
@@ -86,12 +88,56 @@ public class MenuProfileManager : MonoBehaviour
             5 => 17,
             _ => 0,
         };
-        index += monsterIndex;
-        string[] lines = System.IO.File.ReadAllLines(monsFilePath);
-        if (index < lines.Length) {
-            monsDescribe.text = lines[index];
+        index1 += monsterIndex;
+        string[] lines1 = System.IO.File.ReadAllLines(monsFilePath1);
+        if (index1 < lines1.Length) {
+            monsDescribe1.text = lines1[index1];
         } else {
-            monsDescribe.text = "没有描述";
+            monsDescribe1.text = "没有描述";
+        }
+
+        string monsFilePath2 = Application.streamingAssetsPath + "/monsterDescribe2.txt";
+        int index2 = layerIndex switch
+        {
+            0 => 0,
+            1 => 2,
+            2 => 4,
+            3 => 8,
+            4 => 13,
+            5 => 17,
+            _ => 0,
+        };
+        index2 += monsterIndex;
+        string[] lines2 = System.IO.File.ReadAllLines(monsFilePath2);
+        if (index2 < lines2.Length)
+        {
+            monsDescribe2.text = lines2[index2];
+        }
+        else
+        {
+            monsDescribe2.text = "没有描述";
+        }
+
+        string monsFilePath3 = Application.streamingAssetsPath + "/monsterDescribe3.txt";
+        int index3 = layerIndex switch
+        {
+            0 => 0,
+            1 => 2,
+            2 => 4,
+            3 => 8,
+            4 => 13,
+            5 => 17,
+            _ => 0,
+        };
+        index3 += monsterIndex;
+        string[] lines3 = System.IO.File.ReadAllLines(monsFilePath3);
+        if (index3 < lines3.Length)
+        {
+            monsDescribe3.text = lines3[index3];
+        }
+        else
+        {
+            monsDescribe3.text = "没有描述";
         }
     }
 

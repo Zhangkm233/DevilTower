@@ -254,7 +254,7 @@ public class UIManager : MonoBehaviour
             }
             if (gridInMaped.type == GridType.NPC) {
                 gridName.text = "神秘人";
-                gridStat.text = "或许会遇到什么好事呢";
+                gridStat.text = "一位故人，或者，一位朋友？";
             }
             if (gridInMaped.type == GridType.EVENT) {
                 switch (((GridEvent)gridInMaped).eventType) {
@@ -278,11 +278,11 @@ public class UIManager : MonoBehaviour
             }
             if (gridInMaped.type == GridType.BARRIER) {
                 gridName.text = "障碍物";
-                gridStat.text = "无法通过";
+                gridStat.text = "你无法继续前进了 尝试其他路径吧";
             }
             if (gridInMaped.type == GridType.PORTAL) {
                 gridName.text = "传送门";
-                gridStat.text = "点击以传送到下一层";
+                gridStat.text = "点击以传送到下区";
             }
         }
     }
