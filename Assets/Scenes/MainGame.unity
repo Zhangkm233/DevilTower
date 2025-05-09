@@ -22979,8 +22979,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 677, y: -59}
-  m_SizeDelta: {x: 340.8, y: 153.23}
+  m_AnchoredPosition: {x: 668, y: -68.55}
+  m_SizeDelta: {x: 465.69, y: 137.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1637704315
 MonoBehaviour:
@@ -23651,7 +23651,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4979f97af70721a4da689993f7f03845, type: 3}
   - {fileID: 8300000, guid: 252618feb8b32d549b28cd6db4bfbf69, type: 3}
   - {fileID: 8300000, guid: e026445274689f04bbc774429ec05264, type: 3}
-  - {fileID: 8300000, guid: 6122f4915267146438127deb12fdf606, type: 3}
+  - {fileID: 8300000, guid: 9199c908b4f36bd4ba5997b8dc214897, type: 3}
   - {fileID: 8300000, guid: 95d63cd033beb144bb3c72456c171986, type: 3}
   badEndingMusic: {fileID: 8300000, guid: 0749ea158abcb0148bcbe93604e8926d, type: 3}
   forgeMusic: {fileID: 8300000, guid: 87e3b1b9403c3004bbaea8a22d49e598, type: 3}

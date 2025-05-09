@@ -55,6 +55,14 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+        /*if(Input.GetKey(KeyCode.Backspace)) {
+            if(GameData.layer != 6) {
+
+                LayerChangeTo(GameData.layer + 1,false);
+            } else {
+                LayerChangeTo(1,false);
+            }
+        }*/
         UpdatePlayerOffset();
         UpdateGameDataToPublic();
     }
@@ -73,6 +81,11 @@ public class GameManager : MonoBehaviour
             SaveManager.Load(MenuData.loadGameSlot);
             this.GetComponent<GameManager>().UpdateEachGrid();
         } else {
+            Debug.Log("新游戏");
+            //this.LayerChangeTo(1);
+            GameData.npcEncounteredLayer12 = new int[6] { -1,-1,-1,-1,-1,-1 };
+            GameData.npcEncounteredLayer34 = new int[6] { -1,-1,-1,-1,-1,-1 };
+            GameData.npcEncounteredLayer56 = new int[6] { -1,-1,-1,-1,-1,-1 };
             this.GetComponent<UIManager>().GoDialog();
             this.GetComponent<DialogManager>().ReadDialog(0,GameData.layer);
         }
@@ -143,8 +156,9 @@ public class GameManager : MonoBehaviour
         LayerChangeTo(layerTo,false);
     }
     public void LayerChangeTo(int layerTo, bool isInherit) {
-        if(this.GetComponent<UIManager>().State != UIManager.UIState.STAT) return;
+        //if(this.GetComponent<UIManager>().State != UIManager.UIState.STAT) return;
         this.GetComponent<UIManager>().GoState(UIManager.UIState.STANDBY);
+        Debug.Log("层数改变到" + layerTo);
         GameData.layer = layerTo;
         GameData.eventEncounter = 0;
         /*
@@ -152,6 +166,7 @@ public class GameManager : MonoBehaviour
         GameData.defeatSHDPJ = 0;
         GameData.isEventUsed = false;*/
         if (!isInherit) {
+            Debug.Log("不继承数据");
             switch (layerTo) {
                 case 1:
                     PlayerStatChange(100,5,5,0,0,0,0,0);
@@ -451,7 +466,7 @@ public class GameManager : MonoBehaviour
             switch (GameData.layer) {
                 case 1:
                 case 2:
-                    dialogStat = GameData.GetRandomNumberExclude(0,4,GameData.npcEncounteredLayer12);
+                    dialogStat = GameData.GetRandomNumberExclude(0,5,GameData.npcEncounteredLayer12);
                     for(int i = 0;i < GameData.npcEncounteredLayer12.Length;i++) {
                         if(GameData.npcEncounteredLayer12[i] == -1 ) {
                             GameData.npcEncounteredLayer12[i] = dialogStat;
@@ -460,7 +475,7 @@ public class GameManager : MonoBehaviour
                     break;
                 case 3:
                 case 4:
-                    dialogStat = GameData.GetRandomNumberExclude(0,4,GameData.npcEncounteredLayer34);
+                    dialogStat = GameData.GetRandomNumberExclude(0,9,GameData.npcEncounteredLayer34);
                     Debug.Log("NPC对话" + dialogStat);
                     for (int i = 0;i < GameData.npcEncounteredLayer34.Length;i++) {
                         if (GameData.npcEncounteredLayer34[i] == -1) {
@@ -471,7 +486,7 @@ public class GameManager : MonoBehaviour
                     break;
                 case 5:
                 case 6:
-                    dialogStat = GameData.GetRandomNumberExclude(0,4,GameData.npcEncounteredLayer56);
+                    dialogStat = GameData.GetRandomNumberExclude(0,6,GameData.npcEncounteredLayer56);
                     for (int i = 0;i < GameData.npcEncounteredLayer56.Length;i++) {
                         if (GameData.npcEncounteredLayer56[i] == -1) {
                             GameData.npcEncounteredLayer56[i] = dialogStat;
