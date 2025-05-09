@@ -19815,10 +19815,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6baa0fa2c1b36ba469e6e43e92e9d5af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossFullHp: 1000
-  bossHp: 1000
-  bossAtk: 10
-  bossDef: 0
+  bossFullHp: 500
+  bossHp: 500
+  bossAtk: 580
+  bossDef: 50
   bossHpSlider: {fileID: 1797914173}
   gameManager: {fileID: 1211369217}
   bossObject: {fileID: 622502130}

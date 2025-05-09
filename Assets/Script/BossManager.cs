@@ -4,10 +4,10 @@ using System;
 
 public class BossManager : MonoBehaviour
 {
-    public int bossFullHp = 1000;
-    public int bossHp = 1000;
-    public int bossAtk = 10;
-    public int bossDef = 0;
+    public int bossFullHp = 500;
+    public int bossHp = 500;
+    public int bossAtk = 580;
+    public int bossDef = 50;
     public Slider bossHpSlider;
     public GameObject gameManager;
     public GameObject bossObject;
