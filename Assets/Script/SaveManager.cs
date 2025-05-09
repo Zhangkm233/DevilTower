@@ -23,6 +23,7 @@ public class PlayerData
     public int[] tarotEquip; 
     public float sfxVolume;
     public float bgmVolume;
+    public bool isCompleteGame = false;
 
     public bool isDeathBuff = false;
     public string lastMonsterName;
@@ -37,10 +38,12 @@ public class PlayerData
     public void ReadForeverDataFromGame() {
         sfxVolume = GameData.sfxVolume;
         bgmVolume = GameData.bgmVolume;
+        isCompleteGame = MenuData.isCompleteGame;
     }
     public void WriteForeverDataToGame() {
         GameData.sfxVolume = sfxVolume;
         GameData.bgmVolume = bgmVolume;
+        MenuData.isCompleteGame = isCompleteGame;
     }
     public void ReadDataFromGame() {
         tarotUnlock = GameData.tarotUnlock;
@@ -111,6 +114,9 @@ public static class SaveManager
     public static void Delete() {
         if (File.Exists(filePath)) {
             File.Delete(filePath);
+            Debug.Log("Delete:" + filePath);
+        } else {
+            Debug.LogWarning("Save file not found in " + filePath);
         }
     }
     public static void Save(int saveIndex) {
@@ -138,7 +144,14 @@ public static class SaveManager
             Debug.LogWarning("Save file not found in " + foreverFilePath);
         }
     }
-
+    public static void DeleteForeverData() {
+        if (File.Exists(foreverFilePath)) {
+            File.Delete(foreverFilePath);
+            Debug.Log("Delete:" + foreverFilePath);
+        } else {
+            Debug.LogWarning("Save file not found in " + foreverFilePath);
+        }
+    }
     public static void Save(){
 
         PlayerData data = new PlayerData();

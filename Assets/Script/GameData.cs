@@ -28,8 +28,8 @@ public static class GameData
 
     public static int saveSlotChoose = 0;
 
-    public static float sfxVolume = 0.4f;
-    public static float bgmVolume = 0f;
+    public static float sfxVolume = 0.5f;
+    public static float bgmVolume = 0.5f;
 
     public static string lastMonsterName = string.Empty;
     public static bool isDeathBuff = false;

@@ -15,6 +15,7 @@ public class TarotCard : MonoBehaviour
     public GameObject cardDescribeText;
     public TarotsDataObject tarotsDataObject;
     public Sprite lockSprite;
+    public GameObject audioManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,6 +41,36 @@ public class TarotCard : MonoBehaviour
             this.GetComponent<SpriteRenderer>().sprite = tarotsDataObject.tarotsData[cardIndex].sprite;
             this.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
         }
+        Material material = GetComponent<SpriteRenderer>().material;
+        switch (cardIndex) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+                material.renderQueue = 3000;
+                break;
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+                material.renderQueue = 3001;
+                break;
+            case 14:
+            case 15:
+            case 16:
+            case 17:
+            case 18:
+            case 19:
+            case 20:
+                material.renderQueue = 3002;
+                break;
+        }
     }
     // Update is called once per frame
     void Update()
@@ -58,6 +89,7 @@ public class TarotCard : MonoBehaviour
         }
         if (!isEquiping) {
             TarotAnimHandler.instance.selectTarot(this);
+            audioManager.GetComponent<AudioManager>().PlayDef();
             return;
         }
     }

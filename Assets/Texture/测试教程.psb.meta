@@ -97,8 +97,8 @@ ScriptedImporter:
   layeredSpriteImportData:
   - name: "\u56FE\u5C42 13"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 1.2972145, y: 1.4514948}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -119,8 +119,8 @@ ScriptedImporter:
     spritePosition: {x: 505, y: 919}
   - name: "\u56FE\u5C42 12"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 1.6651155, y: 1.559779}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -141,8 +141,8 @@ ScriptedImporter:
     spritePosition: {x: 657, y: 996}
   - name: "\u56FE\u5C42 11"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 1.628202, y: 1.7384766}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -163,8 +163,8 @@ ScriptedImporter:
     spritePosition: {x: 593, y: 1016}
   - name: "\u56FE\u5C42 10"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 1.3333551, y: 1.9465045}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -185,8 +185,8 @@ ScriptedImporter:
     spritePosition: {x: 517, y: 982}
   - name: "\u56FE\u5C42 9"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 1.2990947, y: 1.7303954}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -207,8 +207,8 @@ ScriptedImporter:
     spritePosition: {x: 351, y: 907}
   - name: "\u56FE\u5C42 8"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 1.8128068, y: 1.7793162}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -229,8 +229,8 @@ ScriptedImporter:
     spritePosition: {x: 592, y: 1055}
   - name: "\u56FE\u5C42 20"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 1.6012074, y: 1.877509}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -251,8 +251,8 @@ ScriptedImporter:
     spritePosition: {x: 677, y: 1055}
   - name: "\u56FE\u5C42 7"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 1.2912197, y: 1.570419}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -273,8 +273,8 @@ ScriptedImporter:
     spritePosition: {x: 357, y: 962}
   - name: "\u56FE\u5C42 19"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 2.0575979, y: 1.887904}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -295,8 +295,8 @@ ScriptedImporter:
     spritePosition: {x: 687, y: 1019}
   - name: "\u56FE\u5C42 6"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 1.6051143, y: 1.6499403}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -317,8 +317,8 @@ ScriptedImporter:
     spritePosition: {x: 651, y: 1009}
   - name: "\u56FE\u5C42 5"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 1.2808852, y: 1.9756378}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -339,8 +339,8 @@ ScriptedImporter:
     spritePosition: {x: 386, y: 1019}
   - name: "\u56FE\u5C42 18"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 1.3083494, y: 1.8105069}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -361,8 +361,8 @@ ScriptedImporter:
     spritePosition: {x: 516, y: 1018}
   - name: "\u56FE\u5C42 16"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 1.3699312, y: 1.8031862}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
@@ -383,13 +383,13 @@ ScriptedImporter:
     spritePosition: {x: 499, y: 998}
   - name: "\u56FE\u5C42 2"
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
-    alignment: 0
+    pivot: {x: 1.2724136, y: 1.7881975}
+    alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
     rect:
       serializedVersion: 2
-      x: 4
+      x: 5
       y: 403
       width: 833
       height: 297

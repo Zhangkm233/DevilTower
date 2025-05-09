@@ -91,7 +91,7 @@ public class MenuProfileManager : MonoBehaviour
         index1 += monsterIndex;
         string[] lines1 = System.IO.File.ReadAllLines(monsFilePath1);
         if (index1 < lines1.Length) {
-            monsDescribe1.text = lines1[index1];
+            monsDescribe1.text = "\u00A0\u00A0\u00A0\u00A0" + lines1[index1];
         } else {
             monsDescribe1.text = "Ã»ÓÐÃèÊö";
         }
@@ -111,7 +111,7 @@ public class MenuProfileManager : MonoBehaviour
         string[] lines2 = System.IO.File.ReadAllLines(monsFilePath2);
         if (index2 < lines2.Length)
         {
-            monsDescribe2.text = lines2[index2];
+            monsDescribe2.text = "\u00A0\u00A0\u00A0\u00A0" + lines2[index2];
         }
         else
         {
@@ -133,7 +133,7 @@ public class MenuProfileManager : MonoBehaviour
         string[] lines3 = System.IO.File.ReadAllLines(monsFilePath3);
         if (index3 < lines3.Length)
         {
-            monsDescribe3.text = lines3[index3];
+            monsDescribe3.text = "\u00A0\u00A0\u00A0\u00A0" + lines3[index3];
         }
         else
         {

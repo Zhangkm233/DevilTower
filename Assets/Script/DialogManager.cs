@@ -192,6 +192,17 @@ public class DialogManager : MonoBehaviour
             "卡牌教学   2" => illustrationSprites[24],
             _ => null,
         };
+        if(dialogName.text == "操作交互   1" || dialogName.text == "操作交互   2" || dialogName.text == "操作交互   3" || dialogName.text == "操作交互   4" ||
+            dialogName.text == "操作交互   5" || dialogName.text == "操作交互   6" || dialogName.text == "操作交互   7" || dialogName.text == "战斗教学   1"
+            || dialogName.text == "战斗教学   2" || dialogName.text == "战斗教学   3" || dialogName.text == "战斗教学   4" || dialogName.text == "战斗教学   5"
+            || dialogName.text == "卡牌教学   1" || dialogName.text == "卡牌教学   2") {
+            dialogIllustrationObject.GetComponent<RectTransform>().localPosition = new Vector2(0f,350f);
+            dialogIllustrationShadowObject.SetActive(false);
+        } else {
+            dialogIllustrationObject.GetComponent<RectTransform>().localPosition = new Vector3(515f,594f,0f);
+            dialogIllustrationShadowObject.GetComponent<RectTransform>().localPosition = new Vector3(515f,594f,0f);
+            dialogIllustrationShadowObject.SetActive(true);
+        }
         if (illuImage.sprite == null) {
             illuImage.gameObject.SetActive(false);
             dialogIllustrationShadowObject.SetActive(false);

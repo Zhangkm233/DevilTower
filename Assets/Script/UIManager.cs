@@ -11,7 +11,7 @@ using static Grid;
 public class UIManager : MonoBehaviour
 {
     public enum UIState {
-        STAT,DIALOG,DICTIONARY,SHOP,FORGE,EVENT,TAROT,STANDBY,SETTING,FAIL,BOSS,CG
+        STAT,DIALOG,DICTIONARY,SHOP,FORGE,EVENT,TAROT,STANDBY,SETTING,FAIL,BOSS,CG,TIPS
     };
     public enum sentenceState
     {
@@ -50,6 +50,7 @@ public class UIManager : MonoBehaviour
     public GameObject failMain;
     public GameObject bossMain;
     public GameObject bossBar;
+    public GameObject tipsMain;
     [Header("Manager")]
     public GameObject audioManager;
     public GameObject[] haloSlots;
@@ -79,20 +80,36 @@ public class UIManager : MonoBehaviour
         switch (GameData.layer) {
             case 1:
                 temp += "魔女隐居之地";
+                ColorUtility.TryParseHtmlString("#FFA000",out Color Color1);
+                layerStat.color = Color1;
                 break;
             case 2:
                 temp += "倒吊人的阵枢之座";
+                ColorUtility.TryParseHtmlString("#FFFD98",out Color Color2);
+                layerStat.color = Color2;
                 break;
             case 3:
+                //00FFF4
+                ColorUtility.TryParseHtmlString("#00FFF4",out Color Color3);
+                layerStat.color = Color3;
                 temp += "月亮教会";
                 break;
             case 4:
+                //FFDCDB
+                ColorUtility.TryParseHtmlString("#FFDCDB",out Color Color4);
+                layerStat.color = Color4;
                 temp += "狂猎的驻扎地";
                 break;
             case 5:
+                //5FFF55
+                ColorUtility.TryParseHtmlString("#5FFF55",out Color Color5);
+                layerStat.color = Color5;
                 temp += "灵魂坟场";
                 break;
             case 6:
+                //FE5959
+                ColorUtility.TryParseHtmlString("#FE5959",out Color Color6);
+                layerStat.color = Color6;
                 temp += "征服者广场";
                 break;
         }
@@ -435,7 +452,9 @@ public class UIManager : MonoBehaviour
         GoState(UIState.SETTING);
         audioManager.GetComponent<AudioManager>().InitialVolume();
     }
-
+    public void GoTips() {
+        GoState(UIState.TIPS);
+    }
     public void EndTarot() {
         //执行塔罗牌的选择时效果
         //阶段开始时的效果
@@ -523,6 +542,12 @@ public class UIManager : MonoBehaviour
         if (uistate != UIState.BOSS) {
             bossMain.SetActive(false);
             bossBar.SetActive(false);
+        }
+        if (uistate == UIState.TIPS) {
+            tipsMain.SetActive(true);
+        }
+        if (uistate != UIState.TIPS) {
+            tipsMain.SetActive(false);
         }
     }
     public void Cheat() {

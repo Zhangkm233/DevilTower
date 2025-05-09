@@ -84,7 +84,7 @@ public class MenuButtonManager : MonoBehaviour
             obj.SetActive(false);
         }
         galleyPanel.GetComponent<GalleryManager>().initialAllMusic();
-        galleyPanel.GetComponent<GalleryManager>().ChangeState(0);
+        galleyPanel.GetComponent<GalleryManager>().ChangeState(GalleryManager.GalleryState.Tarot);
         galleyPanel.GetComponent<GalleryManager>().ChangeInteractableOfButtons(); 
         //galleyPanel.GetComponent<GalleryManager>().ResetAllButtonPos();
     }
@@ -105,7 +105,13 @@ public class MenuButtonManager : MonoBehaviour
     public void SaveForeverData() {
         SaveManager.SaveForeverData();
     }
-
+    
+    public void ClearAllData() {
+        SaveManager.DeleteForeverData();
+        for (int i = 0;i < 5;i++) {
+            SaveManager.Delete(i);
+        }
+    }
     public IEnumerator FadeAndLoadScene(string sceneTitle) {
         // ½¥°µÐ§¹û
         float elapsedTime = 0f;

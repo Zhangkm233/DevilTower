@@ -25,14 +25,14 @@ public class SaveSlotManager : MonoBehaviour
             saveDescribe1.GetComponent<Text>().text += "\n锻造次数：" + data.forgeTime.ToString();
             saveDescribe1.GetComponent<Text>().text += "\n当前金币：" + data.gold.ToString();
             string temp = "";
-            for (int i = 0;i<data.tarotEquip.Length;i++) {
+            for (int i = 0;i < data.tarotEquip.Length;i++) {
                 if (data.tarotEquip[i] != -1) {
                     temp += NumToTarot(data.tarotEquip[i]) + " ";
                 }
             }
-            if(temp != "") {
+            if (temp != "") {
                 saveDescribe1.GetComponent<Text>().text += "\n塔罗牌：" + temp;
-            } 
+            }
             this.GetComponent<Button>().interactable = true;
         } else {
             Debug.Log("Save file not found in " + filePath);
@@ -49,5 +49,8 @@ public class SaveSlotManager : MonoBehaviour
     public string NumToTarot(int num) {
         return tarotsDataObject.tarotsData[num].cardName;
     }
-
+    public void Delete() {
+        SaveManager.Delete(saveSlotIndex);
+        this.UpdateSaveSlotData();
+    }
 }

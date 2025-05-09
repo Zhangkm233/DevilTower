@@ -29,12 +29,17 @@ public class BossManager : MonoBehaviour
             bossHp = 0;
             //结束战斗
             for(int i = 0; i < GameData.tarotEquip.Length;i++) {
-                if (GameData.tarotEquip[i] != -1 || GameData.tarotEquip[i] != 0) {
+                if (GameData.tarotEquip[i] != -1 && GameData.tarotEquip[i] != 0) {
+                    MenuData.isCompleteGame = true;
+                    SaveManager.SaveForeverData();
+
                     StartCoroutine(gameManager.GetComponent<UIManager>().FadeAndLoadScene("GoodEnd"));
                     Debug.Log("good end");
                     return;
                 }
             }
+            MenuData.isCompleteGame = true;
+            SaveManager.SaveForeverData();
             StartCoroutine(gameManager.GetComponent<UIManager>().FadeAndLoadScene("TrueEnd"));
         }
         //给我一拳
@@ -45,7 +50,7 @@ public class BossManager : MonoBehaviour
             GameData.playerHp = 0;
             //结束战斗
             //StartCoroutine(gameManager.GetComponent<UIManager>().FadeAndLoadScene("BadEnd"));
-            gameManager.GetComponent<UIManager>().GoFail();
+            StartCoroutine(gameManager.GetComponent<UIManager>().FadeAndLoadScene("BadEnd"));
         }
 
         updateBossDataToUI();

@@ -174,7 +174,8 @@ MonoBehaviour:
   cardDescribeName: {fileID: 0}
   cardDescribeText: {fileID: 0}
   tarotsDataObject: {fileID: 11400000, guid: 6bb3eed9deaa6424cb3b0b238b27533a, type: 2}
-  lockSprite: {fileID: 0}
+  lockSprite: {fileID: 3002345244299916390, guid: c88199997315b3d4f8888fed37df8a9f, type: 3}
+  audioManager: {fileID: 0}
 --- !u!61 &7395220504982018347
 BoxCollider2D:
   m_ObjectHideFlags: 0
